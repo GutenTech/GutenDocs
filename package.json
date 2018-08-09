@@ -4,8 +4,9 @@
   "description": "API Generator Using JSDoc Parser",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "lint": "eslint \"./**/*.js\"",
+    "pretest": "npm run lint",
+    "test": "echo \"No tests\""
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,12 @@
     "url": "https://github.com/GutenTech/GutenDocs/issues"
   },
   "homepage": "https://github.com/GutenTech/GutenDocs#readme",
-  "dependencies": {
-    "eslint": "5.3.0"
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0"
   }
 }
