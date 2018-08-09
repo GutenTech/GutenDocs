@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "8.11.3"
+ - "8"
 
-  script:
-  - npm run lint
-  - npm test
+script:
+ - npm run lint
+ - npm test
