@@ -1,12 +1,7 @@
 language: node_js
 language: node_js
 node_js:
-<<<<<<< HEAD
  - "8"
-=======
-  - '0.8'
-  - '0.10'
->>>>>>> added the markdown files and deleted circleci stuff
 
 script:
  - npm run lint
