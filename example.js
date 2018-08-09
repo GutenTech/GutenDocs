@@ -1,1 +1,0 @@
-var helloWorld = 5;
