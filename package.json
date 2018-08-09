@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"./**/*.js\"",
-    "pretest": "npm run lint",
     "test": "echo \"No tests\""
   },
   "repository": {
@@ -18,7 +17,10 @@
     "url": "https://github.com/GutenTech/GutenDocs/issues"
   },
   "homepage": "https://github.com/GutenTech/GutenDocs#readme",
-  "dependencies": {},
+  "dependencies": {
+    "acorn": "^5.7.1",
+    "doctrine": "^2.1.0"
+  },
   "devDependencies": {
     "eslint": "4.19.1",
     "eslint-config-airbnb": "17.0.0",
