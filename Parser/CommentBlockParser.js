@@ -10,9 +10,17 @@ const saveTags = (tagsArray) => {
   });
 };
 
+/**
+ * @description A function that will parse a JSdoc Block of Comments using Doctrine
+ * @param comments {[]} An array of JSDoc Comment Blocks that have been extracted from a JS File.  Upon parsing will be saved as tags that are then written to an external file.
+ * @param name {string} Will need to be modified take in a name string for the function name that the comment block relates to.
+ * @return n/a
+ */
+
 const parseComments = (commentsArray) => {
   const tags = [];
   commentsArray.forEach((comment) => {
+    //This may need to be modified to take in a name
     const funcName = comment.name;
     const commentObj = doctrine.parse(comment.comment, { unwrap: true });
     const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
@@ -24,6 +32,11 @@ const parseComments = (commentsArray) => {
   });
   saveTags(tags);
 };
+
+/**
+ * @description Temp placeholder function to extract JSDoc comment blocks to send to the parseComments function.
+
+*/
 
 const getJSDocs = (fileText) => {
   const comments = [];
