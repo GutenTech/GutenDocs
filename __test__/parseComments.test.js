@@ -1,9 +1,10 @@
 const parseComments = require('../Parser/commentBlockParser.js');
 
-describe(parseComments, () => {
+describe('parseComments', () => {
+  parseComments.getJSDocs('hello');
   it('should be true', () => expect(true).toEqual(true));
 });
 
-describe(parseComments, () => {
+describe('parseComments', () => {
   it('should be true', () => expect(true).toEqual(true));
 });
