@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"./**/*.js\"",
-    "test": "set NODE_ENV=test&& jest --watch"
+    "watchtest": "set NODE_ENV=test&& jest --watch",
+    "test": "jest --maxWorkers=4 --detectOpenHandles"
   },
   "repository": {
     "type": "git",

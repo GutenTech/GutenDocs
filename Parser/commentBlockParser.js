@@ -48,13 +48,13 @@ const getJSDocs = (fileText) => {
   });
   parseComments(comments);
 };
+// fs.readFile('./parserSample.js', (err, data) => {
+//   if (err) {
+//     throw err;
+//   } else {
+//     getJSDocs(data.toString());
+//   }
+// });
 
-fs.readFile('./parserSample.js', (err, data) => {
-  if (err) {
-    throw err;
-  } else {
-    getJSDocs(data.toString());
-  }
-});
-
-module.exports = parseComments;
+exports.getJSDocs = getJSDocs;
+exports.parseComments = parseComments;
