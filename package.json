@@ -19,7 +19,9 @@
   "homepage": "https://github.com/GutenTech/GutenDocs#readme",
   "dependencies": {
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "acorn": "^5.7.1",
+    "doctrine": "^2.1.0"
   },
   "devDependencies": {
     "eslint": "4.19.1",
