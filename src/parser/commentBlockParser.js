@@ -35,3 +35,4 @@ const parseComments = (commentsArray) => {
 };
 
 exports.parseComments = parseComments;
+
