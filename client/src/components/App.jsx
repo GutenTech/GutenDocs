@@ -30,7 +30,7 @@ export default class App extends Component {
             <p>Welcome!</p>
             <button onClick ={this.switchParamHandler.bind(this,'mcsteezy')}>Switch Name</button>
             <MockData>
-             name = {this.state.params[0].param}
+             param = {this.state.params[0].param}
              food= {this.state.params[0].food}
              click={this.switchNameHandler.bind(this,'wompwomp')}>
              My Hobbies: enjoying life!
