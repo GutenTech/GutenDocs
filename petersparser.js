@@ -15,11 +15,11 @@ const parseComments = (commentsArray) => {
   commentsArray.forEach((comment) => {
     const funcName = comment.name;
     const commentObj = doctrine.parse(comment.comment, { unwrap: true });
-    const descriptions = commentObj.tags.filter(tag => tag.title === 'description');
+    const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
     commentObj.name = funcName;
-    descriptions.forEach(description =>
-      commentObj.description = commentObj.description += description
-    )
+    descriptionTags.forEach(((descriptionTag) => {
+      commentObj.description = commentObj.description.concat(' \n').concat(descriptionTag.description);
+    }));
     tags.push(commentObj);
   });
   saveTags(tags);
