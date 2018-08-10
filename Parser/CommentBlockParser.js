@@ -37,7 +37,7 @@ const getJSDocs = (fileText) => {
   parseComments(comments);
 };
 
-fs.readFile('./petersexample.js', (err, data) => {
+fs.readFile('./parserSample.js', (err, data) => {
   if (err) {
     throw err;
   } else {
