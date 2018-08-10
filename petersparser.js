@@ -2,21 +2,39 @@ const acorn = require('acorn');
 const fs = require('fs');
 const doctrine = require('doctrine');
 
-let tags;
+const saveTags = (tagsArray) => {
+  fs.writeFile('./tags.json', JSON.stringify(tagsArray), (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+};
+
+const parseComments = (commentsArray) => {
+  const tags = [];
+  commentsArray.forEach((comment) => {
+    const funcName = comment.name;
+    const commentObj = doctrine.parse(comment.comment, { unwrap: true });
+    const descriptions = commentObj.tags.filter(tag => tag.title === 'description');
+    commentObj.name = funcName;
+    descriptions.forEach(description =>
+      commentObj.description = commentObj.description += description
+    )
+    tags.push(commentObj);
+  });
+  saveTags(tags);
+};
 
 const getJSDocs = (fileText) => {
+  const comments = [];
   acorn.parse(fileText, {
     onComment: (b, t) => {
       if (b) {
-        tags = doctrine.parse(t, { unwrap: true });
-        fs.writeFile('./tags.json', JSON.stringify(tags), (err) => {
-          if (err) {
-            throw err;
-          }
-        });
+        comments.push({ comment: t, name: 'name' });
       }
     },
   });
+  parseComments(comments);
 };
 
 fs.readFile('./petersexample.js', (err, data) => {
@@ -26,3 +44,5 @@ fs.readFile('./petersexample.js', (err, data) => {
     getJSDocs(data.toString());
   }
 });
+
+module.exports = parseComments;
