@@ -20,6 +20,8 @@
   "dependencies": {
     "acorn": "^5.7.1",
     "doctrine": "^2.1.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "jest": "^23.4.2",
@@ -33,5 +35,7 @@
     "setupTestFrameworkScriptFile": "./test_setup.js",
     "verbose": true,
     "testURL": "http://localhost/"
+    "eslint-plugin-react": "7.10.0",
+    "webpack": "^4.16.5"
   }
 }
