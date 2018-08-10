@@ -1,4 +1,4 @@
-const parser = require('../Parser/commentBlockParser.js');
+const parser = require('../src/parser/commentBlockParser.js');
 
 describe('parseComments', () => {
   parser.getJSDocs('hello');

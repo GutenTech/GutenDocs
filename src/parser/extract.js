@@ -20,7 +20,7 @@ const extract = (address) => {
         if (p.type === tokTypes._function) {
           a.name = parseExpressionAt(content, d).id.name;
         } else if (p.type === tokTypes._const) {
-          a.name = p.parseVarStatement(p.startNode());
+          a.name = p.parseVarStatement(p.startNode()).declarations[0].id.name;
         } else {
           a.name = p.parseStatement().declarations[0].id.name;
         }

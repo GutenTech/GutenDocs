@@ -1,4 +1,4 @@
-const extract = require('../src/extract.js');
+const extract = require('../src/parser/extract.js');
 
 test('Single comment test', () => {
   const address = './mockData/singleComment.js';
