@@ -10,6 +10,11 @@ export default class App extends React.Component {
   }
 }
 
+  componentDidMount ();{
+    this.setState({parsedData: 'hello'})
+    console.log('new state is:', this.state.parsedData)
+  }
+
   render() {
     return (
         <div className="App">
