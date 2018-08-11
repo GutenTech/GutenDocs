@@ -9,3 +9,4 @@ mockData
 .travis.yml
 test_setup.js
 webpack.config.js
+__tests__
