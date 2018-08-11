@@ -17,9 +17,17 @@ const saveTags = (tagsArray) => {
  */
 
 const parseComments = (commentsArray) => {
+  if (!(commentsArray instanceof Array) || commentsArray === undefined) {
+    throw new TypeError('Parse comments should recieve and array of comments');
+  }
   const tags = [];
   commentsArray.forEach((comment) => {
-    // This may need to be modified to take in a name
+    if (!(comment instanceof Object)) {
+      throw new TypeError('Array passed to parseComments should contain strings');
+    }
+    if (comment.comment === undefined || comment.name === undefined) {
+      throw new TypeError('Each object in the passed in Array should have a a key of "comment" and "name"');
+    }
     const funcName = comment.name;
     const commentObj = doctrine.parse(comment.comment, {
       unwrap: true,
@@ -32,6 +40,7 @@ const parseComments = (commentsArray) => {
     tags.push(commentObj);
   });
   saveTags(tags);
+  return tags;
 };
 
 exports.parseComments = parseComments;
