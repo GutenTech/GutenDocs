@@ -3,6 +3,15 @@ const extract = require('./extract.js');
 const block = require('./commentBlockParser.js');
 
 
+
+const saveData = (data, path) => {
+  fs.writeFile(path, JSON.stringify(data), (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+};
+
 /**
   * @description This function will scan a file and parse jsdoc block
   * and return the correct parsed output.  Only testing on a single js
@@ -10,13 +19,11 @@ const block = require('./commentBlockParser.js');
 */
 
 const test = () => {
-  const fileName = 'output123.txt';
-  const path = '../../client/dist';
-  
+  const path = '../../client/dist/parsedData.json';
+
   const out1 = extract.extract('../../mockData/multipleComments.js');
   const out2 = block.blockParser(out1);
-  //console.log(JSON.parse(out2));
-  //fs.writeFileSync(fileName, finalParsedOutput);
+  saveData(out2, path);
 };
 
-test ();
+test();
