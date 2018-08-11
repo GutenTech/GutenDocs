@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import Entry from './Entry.jsx';
 import sampleData from '../../dist/parsedData.js';
+/* import sampleData from './parsedData.js'; */
 
-export default class App extends React.Component { 
-  constructor () {
+
+export default class App extends React.Component {
+  constructor() {
     super();
     this.state = {
       parsedData: null
-    }
+    };
   }
-}
+
 
   componentDidMount() {
-   console.log('component has mounted:');
-   console.log(sampleData.exampleData);
+    console.log('component has mounted:');
+    console.log(exampleData);
   }
 
   render() {
@@ -23,7 +25,7 @@ export default class App extends React.Component {
           GutenTech
         </h1>
         <p>
-          <Entry name={this.state.parsedData}/>
+          hello
         </p>
           Switch Name
       </div>

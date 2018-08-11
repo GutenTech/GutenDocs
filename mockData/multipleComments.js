@@ -1,8 +1,8 @@
 /**
- * Sample function No Webpack Compile4
+ * Sample function No Webpack Compile6
  * @constructor
- * @param {number} a  First multiplier4
- * @param {number} b  Second multiplier4
+ * @param {number} a  First multiplier6
+ * @param {number} b  Second multiplier6
  * @return
  */
 
@@ -11,10 +11,10 @@ function mul4(a, b) {
 }
 
 /**
- * Sample function No Webpack Compile4
+ * Sample function No Webpack Compile6
  * @constructor
- * @param {number} a  Numerator4
- * @param {number} b  Denominator4
+ * @param {number} a  Numerator6
+ * @param {number} b  Denominator6
  * @return
  */
 
