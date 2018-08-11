@@ -7,7 +7,7 @@ const block = require('./commentBlockParser.js');
 */
 
 const saveData = (data, path) => {
-  fs.writeFile(path, `window.exampleData = ${JSON.stringify(data)}`, (err) => {
+  fs.writeFile(path, `const exampleData = ${JSON.stringify(data)} \n module.exports.exampleData = exampleData`, (err) => {
     if (err) {
       throw err;
     }
