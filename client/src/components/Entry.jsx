@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default const Entry = (props) => {
-    return(
-        <div>
-            <p>This {props.name} is {props.description}</p>
-        </div>
-    )
-};
+const Entry =  props => (
+  <div>
+    <p>
+     {props.name}
+    </p>
+  </div>
+);
+
+export default Entry;
