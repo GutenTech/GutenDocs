@@ -11,7 +11,8 @@
     "lint": "eslint \"./**/*.js\"",
     "watchTest": "set NODE_ENV=test&& jest --watch",
     "test": "jest --maxWorkers=4 --detectOpenHandles",
-    "build-dev": "webpack -p --progress"
+    "build-dev": "webpack -p --progress",
+    "testGuten": "gutendocs"
   },
   "repository": {
     "type": "git",
