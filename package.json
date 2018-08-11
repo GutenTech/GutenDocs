@@ -26,21 +26,21 @@
   "homepage": "https://github.com/GutenTech/GutenDocs#readme",
   "dependencies": {
     "acorn": "^5.7.1",
+    "doctrine": "^2.1.0"
+  },
+  "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "doctrine": "^2.1.0",
+    "jest": "23.2.0",
+    "eslint": "4.19.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0"
-  },
-  "devDependencies": {
-    "jest": "23.2.0",
-    "eslint": "4.19.1",
+    "webpack-cli": "^3.1.0",
     "eslint-config-airbnb": "17.0.0",
     "eslint-plugin-import": "2.13.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
