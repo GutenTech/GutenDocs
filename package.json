@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "API Generator Using JSDoc Parser",
   "main": "index.js",
+  "bin": {
+    "gutendocs": "./bin/cli.js",
+    "gutenDocs": "./bin/cli.js"
+  },
   "scripts": {
     "lint": "eslint \"./**/*.js\"",
     "watchTest": "set NODE_ENV=test&& jest --watch",
