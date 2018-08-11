@@ -40,7 +40,7 @@ const parseComments = (commentsArray) => {
     tags.push(commentObj);
   });
   saveTags(tags);
-  return tags;
+  return JSON.stringify(tags);
 };
 
-module.exports.parseComments = parseComments;
+module.exports.blockParser = parseComments;
