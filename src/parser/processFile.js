@@ -7,7 +7,7 @@ const block = require('./commentBlockParser.js');
 */
 
 const saveData = (data, path) => {
-  fs.writeFile(path, JSON.stringify(data), (err) => {
+  fs.writeFile(path, `window.exampleData = ${JSON.stringify(data)}`, (err) => {
     if (err) {
       throw err;
     }
@@ -21,7 +21,7 @@ const saveData = (data, path) => {
 */
 
 const executeDataParse = () => {
-  const path = '../../client/dist/parsedData.json';
+  const path = '../../client/dist/parsedData.js';
 
   const out1 = extract.extract('../../mockData/multipleComments.js');
   const out2 = block.blockParser(out1);
