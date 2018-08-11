@@ -1,4 +1,4 @@
-const { parseComments } = require('../src/parser/commentBlockParser.js');
+const parseComments = require('../src/parser/commentBlockParser.js');
 
 describe('parseComments', () => {
   it('should be a function', () => expect(parseComments).toBeInstanceOf(Function));

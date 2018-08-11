@@ -42,4 +42,4 @@ const parseComments = (commentsArray) => {
   return (tags);
 };
 
-module.exports.blockParser = parseComments;
+module.exports = parseComments;
