@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Entry =  props => (
+const Entry =  () => (
   <div>
     <p>
-     {props.name}
     </p>
   </div>
 );
