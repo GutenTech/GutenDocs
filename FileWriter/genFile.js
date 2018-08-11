@@ -9,7 +9,7 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
-//Generate Index.js File
+/* Generate Index.js File */
 index.genIndex();
 
 
