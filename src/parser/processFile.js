@@ -1,6 +1,6 @@
 const fs = require('fs');
 const extract = require('./extract.js');
-const block = require('./commentBlockParser.js');
+const parseComments = require('./commentBlockParser.js');
 
 /**
   * @description This function will save the data temporarily to the client/dist folder
@@ -23,8 +23,8 @@ const saveData = (data, path) => {
 const executeDataParse = () => {
   const path = '../../client/dist/parsedData.js';
 
-  const out1 = extract.extract('../../mockData/multipleComments.js');
-  const out2 = block.blockParser(out1);
+  const out1 = extract('../../mockData/multipleComments.js');
+  const out2 = parseComments(out1);
   saveData(out2, path);
 };
 

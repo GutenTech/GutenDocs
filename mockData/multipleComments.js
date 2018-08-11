@@ -1,23 +1,23 @@
 /**
- * Sample function No Webpack Compile6
+ * Sample function
  * @constructor
- * @param {number} a  First multiplier6
- * @param {number} b  Second multiplier6
+ * @param {number} a  First multiplier
+ * @param {number} b  Second multiplier
  * @return
  */
 
-function mul4(a, b) {
+function mul(a, b) {
   return a * b;
 }
 
 /**
- * Sample function No Webpack Compile6
+ * Sample function
  * @constructor
- * @param {number} a  Numerator6
- * @param {number} b  Denominator6
+ * @param {number} a  Numerator
+ * @param {number} b  Denominator
  * @return
  */
 
-function div4(a, b) {
+function div(a, b) {
   return a / b;
 }
