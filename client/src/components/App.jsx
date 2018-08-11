@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Entry from './Entry.jsx';
-import extract from '../../../src/parser/processFile.js';
+import myData from '../../dist/parsedData.js';
 
 export default class App extends React.Component { 
   constructor () {
@@ -12,8 +12,8 @@ export default class App extends React.Component {
 }
 
   componentDidMount() {
-    const sampleData = test.test();
-    this.setState({parsedData: sampleData})
+   console.log('component has mounted:');
+   console.log(exampleData);
   }
 
   render() {

@@ -1,5 +1,5 @@
 /**
- * Sample function
+ * Sample function No Webpack Compile
  * @constructor
  * @param {number} a  First multiplier
  * @param {number} b  Second multiplier
@@ -11,7 +11,7 @@ function mul(a, b) {
 }
 
 /**
- * Sample function
+ * Sample function No Webpack Compile2
  * @constructor
  * @param {number} a  Numerator
  * @param {number} b  Denominator
