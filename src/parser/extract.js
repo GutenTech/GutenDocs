@@ -31,4 +31,4 @@ const extract = (address) => {
   return result;
 };
 
-module.exports = extract;
+module.exports.extract = extract;

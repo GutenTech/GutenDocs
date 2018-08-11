@@ -43,4 +43,4 @@ const parseComments = (commentsArray) => {
   return tags;
 };
 
-exports.parseComments = parseComments;
+module.exports.parseComments = parseComments;
