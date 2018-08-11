@@ -11,15 +11,9 @@ export default class App extends React.Component {
   }
 }
 
-<<<<<<< HEAD
-  componentDidMount ();{
-    this.setState({parsedData: 'hello'})
-    console.log('new state is:', this.state.parsedData)
-=======
   componentDidMount() {
     const sampleData = test.test();
     this.setState({parsedData: sampleData})
->>>>>>> Modify Webpack Config for FS File System and Add Processesor File
   }
 
   render() {
