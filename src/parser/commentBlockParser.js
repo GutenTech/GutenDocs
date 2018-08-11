@@ -38,7 +38,7 @@ const parseComments = (commentsArray) => {
     }));
     tags.push(commentObj);
   });
-  //saveTags(tags);
+  /* saveTags(tags); */
   return (tags);
 };
 
