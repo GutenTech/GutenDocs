@@ -2,7 +2,9 @@ const fs = require('fs');
 const extract = require('./extract.js');
 const block = require('./commentBlockParser.js');
 
-
+/**
+  * @description This function will save the data temporarily to the client/dist folder
+*/
 
 const saveData = (data, path) => {
   fs.writeFile(path, JSON.stringify(data), (err) => {
@@ -18,7 +20,7 @@ const saveData = (data, path) => {
   * file for now.
 */
 
-const test = () => {
+const executeDataParse = () => {
   const path = '../../client/dist/parsedData.json';
 
   const out1 = extract.extract('../../mockData/multipleComments.js');
@@ -26,4 +28,4 @@ const test = () => {
   saveData(out2, path);
 };
 
-test();
+executeDataParse();
