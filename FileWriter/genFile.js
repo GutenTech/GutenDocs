@@ -1,4 +1,5 @@
 var fs = require('fs');
+var index = require('./genIndex.js');
 
 /* If it doesn't Exist, Generate a gutenDocs folder */
 
@@ -7,6 +8,12 @@ const dir = './gutenDocs';
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
+
+//Generate Index.js File
+index.genIndex();
+
+
+
 
 
 // const genIndexFile = function (data) {
@@ -34,4 +41,3 @@ if (!fs.existsSync(dir)) {
 //     stream.end();
 //   });
 // }
-
