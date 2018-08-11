@@ -1,6 +1,6 @@
 {
   "name": "gutendocs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "API Generator Using JSDoc Parser",
   "main": "index.js",
   "bin": {
