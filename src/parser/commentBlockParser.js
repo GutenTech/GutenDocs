@@ -18,7 +18,7 @@ const saveTags = (tagsArray) => {
 
 const parseComments = (commentsArray) => {
   if (!(commentsArray instanceof Array) || commentsArray === undefined) {
-    throw new TypeError('Parse comments should recieve and array of comments');
+    throw new TypeError('Parse comments should receive and array of comments');
   }
   const tags = [];
   commentsArray.forEach((comment) => {
