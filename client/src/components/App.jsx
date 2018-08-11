@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Entry from './Entry.jsx';
+import utils from '../../../utils.js';
 
 export default class App extends React.Component { 
   constructor () {
