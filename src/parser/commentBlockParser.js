@@ -1,13 +1,13 @@
 const fs = require('fs');
 const doctrine = require('doctrine');
 
-const saveTags = (tagsArray) => {
-  fs.writeFile('./tags.json', JSON.stringify(tagsArray), (err) => {
-    if (err) {
-      throw err;
-    }
-  });
-};
+// const saveTags = (tagsArray) => {
+//   fs.writeFile('./tags.json', JSON.stringify(tagsArray), (err) => {
+//     if (err) {
+//       throw err;
+//     }
+//   });
+// };
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
@@ -39,8 +39,8 @@ const parseComments = (commentsArray) => {
     }));
     tags.push(commentObj);
   });
-  saveTags(tags);
-  return JSON.stringify(tags);
+  //saveTags(tags);
+  return (tags);
 };
 
 module.exports.blockParser = parseComments;
