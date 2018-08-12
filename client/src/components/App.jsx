@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Entry from './Entry.jsx';
-import sampleData from '../../dist/parsedData.js';
-/* import sampleData from './parsedData.js'; */
-
+import('./parsedData.js').then(result => console.log(result.default.exampleData));
 
 export default class App extends React.Component {
   constructor() {
@@ -12,11 +10,6 @@ export default class App extends React.Component {
     };
   }
 
-
-  componentDidMount() {
-    console.log('component has mounted:');
-    console.log(exampleData);
-  }
 
   render() {
     return (

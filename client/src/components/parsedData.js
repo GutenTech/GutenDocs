@@ -1,2 +1,2 @@
 const exampleData = [] 
-module.exports.exampleData = exampleData
+module.exports.exampleData = exampleData;

@@ -7,7 +7,21 @@ const parseComments = require('./commentBlockParser.js');
 */
 
 const saveData = (data, path) => {
-  fs.writeFile(path, `window.exampleData = ${JSON.stringify(data)}`, (err) => {
+  fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+
+    /***/ "./client/src/components/parsedData.js":
+    /*!*********************************************!*\
+      !*** ./client/src/components/parsedData.js ***!
+      \*********************************************/
+    /*! no static exports found */
+    /***/ (function(module, exports, __webpack_require__) {
+    
+    "use strict";
+    eval(\`\n\nvar exampleData = ${JSON.stringify(data)};\nmodule.exports.exampleData = exampleData;\n\n//# sourceURL=webpack:///./client/src/components/parsedData.js?\`);
+
+    /***/ })
+    
+    }]);`, (err) => {
     if (err) {
       throw err;
     }
@@ -21,7 +35,7 @@ const saveData = (data, path) => {
 */
 
 const executeDataParse = () => {
-  const path = '../../client/dist/parsedData.js';
+  const path = '../../client/dist/0.bundle.js';
 
   const out1 = extract('../../mockData/multipleComments.js');
   const out2 = parseComments(out1);
