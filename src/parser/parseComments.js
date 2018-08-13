@@ -1,12 +1,13 @@
 const doctrine = require('doctrine');
+const fs = require('fs');
 
-// const saveTags = (tagsArray) => {
-//   fs.writeFile('./tags.json', JSON.stringify(tagsArray), (err) => {
-//     if (err) {
-//       throw err;
-//     }
-//   });
-// };
+const saveTags = (tagsArray, address = "./tags.json") => {
+  fs.writeFile(address, JSON.stringify(tagsArray), (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+};
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
@@ -15,11 +16,11 @@ const doctrine = require('doctrine');
  * @return n/a
  */
 
-const parseComments = (commentsArray) => {
+const parseComments = (commentsArray, address) => {
+  const tags = [];
   if (!(commentsArray instanceof Array) || commentsArray === undefined) {
     throw new TypeError('Parse comments should receive and array of comments');
   }
-  const tags = [];
   commentsArray.forEach((comment) => {
     if (!(comment instanceof Object)) {
       throw new TypeError('Array passed to parseComments should contain strings');
@@ -38,7 +39,7 @@ const parseComments = (commentsArray) => {
     }));
     tags.push(commentObj);
   });
-  /* saveTags(tags); */
+  // saveTags(tags, address);
   return (tags);
 };
 

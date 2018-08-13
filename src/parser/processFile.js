@@ -1,10 +1,10 @@
 const fs = require('fs');
 const extract = require('./extract.js');
-const parseComments = require('./commentBlockParser.js');
+const parseComments = require('./parseComments.js');
 
 /**
-  * @description This function will save the data temporarily to the client/dist folder
-*/
+ * @description This function will save the data temporarily to the client/dist folder
+ */
 
 const saveData = (data, path) => {
   fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
@@ -29,10 +29,10 @@ const saveData = (data, path) => {
 };
 
 /**
-  * @description This function will scan a file and parse jsdoc block
-  * and return the correct parsed output.  Only testing on a single js
-  * file for now.
-*/
+ * @description This function will scan a file and parse jsdoc block
+ * and return the correct parsed output.  Only testing on a single js
+ * file for now.
+ */
 
 const executeDataParse = () => {
   const path = '../../client/dist/0.bundle.js';
