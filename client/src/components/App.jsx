@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Entry from './Entry.jsx';
 import { isRegExp } from 'util';
 
-
 export default class App extends React.Component {
   constructor() {
     super();
@@ -12,10 +11,10 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    import('./parsedData.js').then(result => this.setState({parsedData: result.default.exampleData }));
+    import('./parsedData.js').then(result => this.setState({parsedData: result.default.APIdata }))
   }
 
-  render() {
+  render(){
     if(this.state.parsedData === null) {
       return(<div></div>)
     } else {
