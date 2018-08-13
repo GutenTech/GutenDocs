@@ -3,16 +3,17 @@
 const {
   exec,
 } = require('child_process');
-const extract = require('../src/parser/extract.js');
-const parseComments = require('../src/parser/parseComments.js');
-
-var argv = require('yargs').option('all', {
+/*eslint-disable */
+const argv = require('yargs').option('all', {
   alias: 'a',
-  default: false
+  default: false,
 }).option('verbose', {
   alias: 'v',
-  default: false
+  default: false,
 }).argv;
+/* eslint-enable */
+const extract = require('../src/parser/extract.js');
+const parseComments = require('../src/parser/parseComments.js');
 
 let input = argv.all ? './' : argv._[0];
 
