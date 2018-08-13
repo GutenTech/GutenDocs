@@ -1,8 +1,27 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
 
-const saveTags = (tagsArray, address = "./tags.json") => {
-  fs.writeFile(address, JSON.stringify(tagsArray), (err) => {
+const saveTags = (data, path = "./tags.json") => {
+  // fs.writeFile(address, JSON.stringify(data), (err) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+  // });
+  fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+
+    /***/ "./client/src/components/parsedData.js":
+    /*!*********************************************!*\
+      !*** ./client/src/components/parsedData.js ***!
+      \*********************************************/
+    /*! no static exports found */
+    /***/ (function(module, exports, __webpack_require__) {
+    
+    "use strict";
+    eval(\`\n\nvar exampleData = ${JSON.stringify(data)};\nmodule.exports.exampleData = exampleData;\n\n//# sourceURL=webpack:///./client/src/components/parsedData.js?\`);
+
+    /***/ })
+    
+    }]);`, (err) => {
     if (err) {
       throw err;
     }
@@ -39,7 +58,7 @@ const parseComments = (commentsArray, address) => {
     }));
     tags.push(commentObj);
   });
-  // saveTags(tags, address);
+  saveTags(tags, address);
   return (tags);
 };
 
