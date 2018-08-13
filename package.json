@@ -29,7 +29,8 @@
     "doctrine": "^2.1.0",
     "glob": "^7.1.2",
     "klaw": "^3.0.0",
-    "node-dir": "^0.1.17"
+    "node-dir": "^0.1.17",
+    "yargs": "^12.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -37,11 +38,9 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "eslint": "4.19.1",
-    "eslint-config-airbnb": "17.0.0",
-    "eslint-plugin-import": "2.13.0",
-    "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.10.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.13.0",
     "jest": "23.2.0",
     "json-loader": "^0.5.7",
     "react": "^16.4.2",
