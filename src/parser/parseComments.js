@@ -1,12 +1,12 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
 
-const saveTags = (data, path = "./tags.json") => {
-  // fs.writeFile(address, JSON.stringify(data), (err) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-  // });
+/**
+ * @description This function will save the data to the client/dist folder
+ */
+const saveTags = (data, path) => {
+  const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
+  /*eslint-disable */
   fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
     /***/ "./client/src/components/parsedData.js":
@@ -17,11 +17,12 @@ const saveTags = (data, path = "./tags.json") => {
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
-    eval(\`\n\nvar exampleData = ${JSON.stringify(data)};\nmodule.exports.exampleData = exampleData;\n\n//# sourceURL=webpack:///./client/src/components/parsedData.js?\`);
+    eval(\`\n\nvar APIdata = ${dataToSave};\nmodule.exports.APIdata = APIdata;\n\n//# sourceURL=webpack:///./client/src/components/parsedData.js?\`);
 
     /***/ })
     
     }]);`, (err) => {
+      /* eslint-enable */
     if (err) {
       throw err;
     }
@@ -30,11 +31,10 @@ const saveTags = (data, path = "./tags.json") => {
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
- * @param comments {[]} An array of JSDoc Comment Blocks that have been extracted from a JS File.
- * @param name {string} Will need to be modified take in a name string.
+ * @param commentsArray {[]} An array of JSDoc Comment Blocks structured in AST.
+ * @param address {string} The path that the file should be saved to.
  * @return n/a
  */
-
 const parseComments = (commentsArray, address) => {
   const tags = [];
   if (!(commentsArray instanceof Array) || commentsArray === undefined) {
@@ -54,7 +54,10 @@ const parseComments = (commentsArray, address) => {
     const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
     commentObj.name = funcName;
     descriptionTags.forEach(((descriptionTag) => {
-      commentObj.description = commentObj.description.concat(' \n').concat(descriptionTag.description);
+      if (commentObj.description !== '') {
+        commentObj.description = commentObj.description.concat('\n');
+      }
+      commentObj.description = commentObj.description.concat(descriptionTag.description);
     }));
     tags.push(commentObj);
   });
