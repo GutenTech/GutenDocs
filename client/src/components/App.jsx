@@ -23,12 +23,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>
-            GutenTech
-        </h1>
-        <h1>
-          {
-            configData
-          }
+          {/*eslint-disable*/}
+          <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
+          {/* eslint-enable */}
+          <div style={configData.banner ? { display: 'none' } : {}} />
+
+          GutenDocs
+
+          <div />
         </h1>
         {
           parsedData.map(func => (
