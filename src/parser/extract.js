@@ -69,8 +69,8 @@ const extract = (arr, exclude) => Promise.all(arr.map(x => globParse(x))).then((
   return Promise.all(paths.map(path => walk(path))).then(result => [].concat(...result));
 });
 
-extract(['**/*.js']).then(x => console.log(x));
-extract(['extract.js']).then(x => console.log(x));
-extract(['./']).then(x => console.log(x));
+//extract(['**/*.js']).then(x => console.log(x));
+//extract(['extract.js']).then(x => console.log(x));
+//extract(['./']).then(x => console.log(x));
 
 module.exports = extract;

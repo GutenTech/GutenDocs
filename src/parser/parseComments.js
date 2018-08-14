@@ -36,7 +36,7 @@ const saveTags = (data, path) => {
  * @return n/a
  */
 const parseComments = (commentsArray, address) => {
-  //console.log('input to parse comments', commentsArray);
+  //console.log('input to parse comments', commentsArray[1].content);
 
   const tags = [];
   if (!(commentsArray instanceof Array) || commentsArray === undefined) {
@@ -52,12 +52,12 @@ const parseComments = (commentsArray, address) => {
 
     const funcName = comment.fileName;
 
-    //console.log('DOCTINRE SEND', comment.content[index].comment);
+    console.log('PRE-DOCTINRE SEND', comment.content[index]);
     const commentObj = doctrine.parse(comment.content[index].comment, {
       unwrap: true,
     });
     
-    console.log('HELLO 1', commentObj.tags);
+    //console.log('HELLO 1', commentObj.tags);
     const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
  
     //console.log('HELLO 2', descriptionTags);  
