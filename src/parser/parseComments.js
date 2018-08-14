@@ -57,9 +57,10 @@ const parseComments = (commentsArray, address) => {
       unwrap: true,
     });
     
-    console.log('HELLO 2', commentObj);
+    console.log('HELLO 1', commentObj.tags);
     const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
-    
+ 
+    //console.log('HELLO 2', descriptionTags);  
     commentObj.name = funcName;
     
     descriptionTags.forEach(((descriptionTag) => {
