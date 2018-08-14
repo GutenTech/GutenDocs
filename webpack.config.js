@@ -10,13 +10,20 @@ module.exports = {
     path: DIST_DIR,
   },
   module: {
-    rules: [{
-      test: /\.jsx?/,
-      include: SRC_DIR,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
+    rules: [
+      {
+        test: /\.jsx?/,
+        include: SRC_DIR,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
       },
-    }],
+      {
+        test: /\.json/,
+        type: 'javascript/auto',
+        use: [require.resolve('json-loader')],
+      },
+    ],
   },
 };

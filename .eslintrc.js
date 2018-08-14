@@ -5,11 +5,9 @@ module.exports = {
     "no-underscore-dangle": "off",
   },
   "env": {
-    "jest": true
+    "node": true,
+    "browser": true,
+    "jest": true,
   },
   "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module",
-    "allowImportExportEverywhere": true,
-  }
 };
