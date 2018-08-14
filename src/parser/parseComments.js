@@ -22,7 +22,7 @@ const saveTags = (data, path) => {
     /***/ })
     
     }]);`, (err) => {
-      /* eslint-enable */
+    /* eslint-enable */
     if (err) {
       throw err;
     }
@@ -35,44 +35,48 @@ const saveTags = (data, path) => {
  * @param address {string} The path that the file should be saved to.
  * @return n/a
  */
-const parseComments = (commentsArray, address) => {
-  //console.log('input to parse comments', commentsArray[1].content);
-
-  const tags = [];
-  if (!(commentsArray instanceof Array) || commentsArray === undefined) {
+const parseComments = (filesArray, address) => {
+  // console.log('input to parse comments', filesArray);
+  if (!(filesArray instanceof Array)) {
     throw new TypeError('Parse comments should receive and array of comments');
   }
-  commentsArray.forEach((comment, index) => {
-    if (!(comment instanceof Object)) {
+  const files = [];
+  filesArray.forEach((file, index) => {
+    // console.log("commentforEach", comment, comment.content)
+    if (!(file instanceof Object)) {
       throw new TypeError('Array passed to parseComments should contain strings');
     }
-    if (comment.content === undefined || comment.fileName === undefined) {
+    if (file.content === undefined || file.name === undefined) {
       throw new TypeError('Each object in the passed in Array should have a a key of "comment" and "name"');
     }
+    // const funcName = comment.fileName;
+    const fileContent = G(file.content);
+    fileContent.fileName = file.name;
+    files.push(fileContent);
+    // console.log("tag", tags[1]);
+  });
+  saveTags(files, address);
+}
 
-    const funcName = comment.fileName;
 
-    console.log('PRE-DOCTINRE SEND', comment.content[index]);
-    const commentObj = doctrine.parse(comment.content[index].comment, {
+const G = function (tagArray) {
+  const tags = {
+    content: [],
+  };
+  tagArray.forEach(x => {
+    const fileObj = doctrine.parse(x.comment, {
       unwrap: true,
     });
-    
-    //console.log('HELLO 1', commentObj.tags);
-    const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
- 
-    //console.log('HELLO 2', descriptionTags);  
-    commentObj.name = funcName;
-    
+    fileObj.name = x.name;
+    const descriptionTags = fileObj.tags.filter(tag => tag.title === 'description');
     descriptionTags.forEach(((descriptionTag) => {
-      if (commentObj.description !== '') {
-        commentObj.description = commentObj.description.concat('\n');
+      if (fileObj.description !== '') {
+        fileObj.description = fileObj.description.concat('\n');
       }
-      commentObj.description = commentObj.description.concat(descriptionTag.description);
+      fileObj.description = fileObj.description.concat(descriptionTag.description);
     }));
-    tags.push(commentObj);
+    tags.content.push(fileObj);
   });
-  saveTags(tags, address);
-  return (tags);
+  return tags;
 };
-
 module.exports = parseComments;
