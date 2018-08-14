@@ -72,5 +72,5 @@ const extract = (arr, exclude) => Promise.all(arr.map(x => globParse(x))).then((
 //extract(['**/*.js']).then(x => console.log(x));
 //extract(['extract.js']).then(x => console.log(x));
 //extract(['./']).then(x => console.log(x));
-
+//It's Correct!!
 module.exports = extract;
