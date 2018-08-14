@@ -3,9 +3,13 @@ module.exports = {
   "rules": {
     "eol-last": "off",
     "no-underscore-dangle": "off",
-    "allowImportExportEverywhere": true
   },
   "env": {
     "jest": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
   }
 };

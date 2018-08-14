@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Entry from './Entry.jsx';
-import { isRegExp } from 'util';
-
-export default class App extends React.Component {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -11,14 +8,14 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    import('./parsedData.js').then(result => this.setState({parsedData: result.default.APIdata }))
+    import('./parsedData.js').then(result => this.setState( { parsedData: result.default.APIdata } ));
   }
 
-  render(){
-    if(this.state.parsedData === null) {
-      return(<div></div>)
-    } else {
-      return (
+  render() {
+    if (this.state.parsedData === null) {
+      return (<div></div>);
+    }
+    return (
         <div className="App">
           <h1>
             GutenTech
@@ -30,11 +27,10 @@ export default class App extends React.Component {
                   <h2>{func.name}</h2>
                   <h3>{func.description}</h3>
                 </div>
-                )
+              );
             })
-          }
-        </div>
-      );
-    }
+        }
+      </div>
+    );
   }
 }
