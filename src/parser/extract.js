@@ -9,7 +9,10 @@ const dir = require('node-dir');
 const glob = require('glob');
 
 const extract = (path, exclude) => {
-  const result = [];
+  return new Promise ((resolve, reject) => {
+  
+  let result = [];
+  
   if (glob.hasMagic(path)) {
     console.log("glob");
     glob(path, (err, files) => {
@@ -44,7 +47,7 @@ const extract = (path, exclude) => {
           resolve(tag);
         }))).then((x) => {
           console.log(x);
-          return x;
+          resolve(x);
         });
       }
     })
@@ -87,11 +90,13 @@ const extract = (path, exclude) => {
         next(); // next file
       }
     }, () => {
-      console.log(result);
-      return result;
+      console.log('extract result:', result);
+      result = [1,2,3];
+      resolve(result);
     });
-  }
+  }})
 };
 // extract("**/*.js");
+//extract('./');
 
 module.exports = extract;
