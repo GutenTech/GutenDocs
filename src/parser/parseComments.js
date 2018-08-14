@@ -9,10 +9,9 @@ const errors = require('./errors.js');
 
 const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
-
   fs.writeFile(path, wp.parseCommentsTemplate(dataToSave), (err) => {
     if (err) {
-      throw err;
+      console.log(err);
     }
   });
 };
