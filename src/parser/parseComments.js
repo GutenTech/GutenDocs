@@ -37,12 +37,12 @@ const saveTags = (data, path) => {
  */
 const parseComments = (commentsArray, address) => {
   //console.log('input to parse comments', commentsArray);
-  
+
   const tags = [];
   if (!(commentsArray instanceof Array) || commentsArray === undefined) {
     throw new TypeError('Parse comments should receive and array of comments');
   }
-  commentsArray.forEach((comment) => {
+  commentsArray.forEach((comment, index) => {
     if (!(comment instanceof Object)) {
       throw new TypeError('Array passed to parseComments should contain strings');
     }
@@ -51,12 +51,13 @@ const parseComments = (commentsArray, address) => {
     }
 
     const funcName = comment.fileName;
-    
-    console.log('DOCTINRE SEND', comment.content);
-    const commentObj = doctrine.parse(comment.comment, {
+
+    //console.log('DOCTINRE SEND', comment.content[index].comment);
+    const commentObj = doctrine.parse(comment.content[index].comment, {
       unwrap: true,
     });
     
+    console.log('HELLO 2', commentObj);
     const descriptionTags = commentObj.tags.filter(tag => tag.title === 'description');
     
     commentObj.name = funcName;
