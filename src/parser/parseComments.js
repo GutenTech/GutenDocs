@@ -9,16 +9,16 @@ const saveTags = (data, path) => {
   /*eslint-disable */
   fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-    /***/ "./client/src/components/parsedData.js":
-    /*!*********************************************!*\
-      !*** ./client/src/components/parsedData.js ***!
-      \*********************************************/
+    /***/ "./client/src/components/parsedData.json":
+    /*!***********************************************!*\
+      !*** ./client/src/components/parsedData.json ***!
+      \***********************************************/
     /*! no static exports found */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
-    eval(\`\n\nvar APIdata = ${dataToSave};\nmodule.exports.APIdata = APIdata;\n\n//# sourceURL=webpack:///./client/src/components/parsedData.js?\`);
-
+    eval(\`\n\nmodule.exports = ${dataToSave};\n\n//# sourceURL=webpack:///./client/src/components/parsedData.json?\`);
+    
     /***/ })
     
     }]);`, (err) => {
