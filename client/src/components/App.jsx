@@ -1,4 +1,6 @@
+/* eslint-disable */
 import React, { Component } from 'react';
+/* eslint-enable */
 export default class App extends Component {
   constructor() {
     super();
@@ -8,28 +10,31 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    import('./parsedData.js').then(result => this.setState( { parsedData: result.default.APIdata } ));
+    import('./parsedData.js').then(result => this.setState({ parsedData: result.default.APIdata }));
   }
 
   render() {
-    if (this.state.parsedData === null) {
-      return (<div></div>);
+    const { parsedData } = this.state;
+    if (parsedData === null) {
+      return (<div />);
     }
     return (
-        <div className="App">
-          <h1>
+      <div className="App">
+        <h1>
             GutenTech
-          </h1>
-          {
-            this.state.parsedData.map((func, index) => {
-              return (
-                <div key = {index}>
-                  <h2>{func.name}</h2>
-                  <h3>{func.description}</h3>
-                </div>
-              );
-            })
-        }
+        </h1>
+        {
+          parsedData.map(func => (
+            <div>
+              <h2>
+                {func.name}
+              </h2>
+              <h3>
+                {func.description}
+              </h3>
+            </div>
+          ))
+      }
       </div>
     );
   }
