@@ -1,6 +1,7 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
 const wp = require('./webpackTemplates.js');
+const errors = require('./errors.js');
 
 /**
  * @description This function will save the data to the client/dist folder
@@ -13,6 +14,7 @@ const saveTags = (data, path) => {
     if (err) { throw err; }
   });
 };
+
 
 const procDesc = (descriptionTagArray) => {
   let description = '\n';
@@ -44,9 +46,8 @@ const processFile = (tagArray) => {
  * @return n/a
  */
 const parseComments = (filesArray, address) => {
-  if (!(filesArray instanceof Array)) {
-    throw new TypeError('Parse comments should receive and array of comments');
-  }
+  errors.parseCommentsArrayErr(filesArray);
+
   const files = [];
   filesArray.forEach((file) => {
     if (!(file instanceof Object)) {
