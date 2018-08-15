@@ -35,9 +35,8 @@ const processFile = (tagArray) => {
   tagArray.forEach(x => {
     const fileObj = doctrine.parse(x.comment, { unwrap: true,});
     fileObj.name = x.name;
-    const descriptionTags = fileObj.tags.filter(tag => tag.title === 'description');
-
-    descriptionTags.forEach(((descriptionTag) => {
+    
+    fileObj.tags.filter(tag => tag.title === 'description').forEach(((descriptionTag) => {
       if (fileObj.description !== '') {
         fileObj.description = fileObj.description.concat('\n');
       }
