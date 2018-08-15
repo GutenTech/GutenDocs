@@ -6,7 +6,7 @@ const fillBlanksWithDefaults = (assignedSettings) => {
 };
 
 const updateConfig = (path) => {
-  const pathToConfigBundle = path.concat('/resources/1.bundle.js');
+  const pathToConfigBundle = path.concat('/1.bundle.js');
   const pathToConfigJSON = path.concat('gutenConfig.json');
   let configSettings = fs.readFileSync(pathToConfigJSON);
   configSettings = fillBlanksWithDefaults(configSettings);
