@@ -9,3 +9,5 @@
  * @description one fish two fish red fish blue fish
  * @description hello dolly
  */
+
+const dark = message => console.log(message);
