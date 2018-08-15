@@ -4,7 +4,7 @@
 
 ## Team
 
-- **Product Owner**: product Owner
+- **Product Owner**: Uday Trivedi
 - **Scrum Master**: Peter Gierke
 - **Development Team Members**: YuqiZhu, David Parks
 
@@ -36,10 +36,12 @@ gutendocs --init
 ```sh
 gutendocs <filename>
 ```
+
 > To generate an API from JSDocs of a multiple .js/.jsx files:
 ```sh
 gutendocs <filename> <filename> <filename> <filename>
 ```
+
 > To generate an API from JSDocs of a all .js/.jsx files in current directory and subdirectories:
 ```sh
 gutendocs --all
@@ -67,7 +69,8 @@ gutendocs --info
 
 > Customize the theme of the API:
 ```sh
-edit styles.css or the gutenConfig.json
+edit styles.css or the gutenConfig.json and run:
+gutendocs --config
 ```
 
 ## Requirements
