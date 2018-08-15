@@ -29,19 +29,32 @@ const saveTags = (data, path) => {
   });
 };
 
+const procDesc = (descriptionTagArray) => {
+  let description = '';
+
+  descriptionTagArray.forEach((descriptionTag) => {
+    if (description !== '') {
+      description = description.concat('\n');
+    } 
+    description = description.concat(descriptionTag.description);
+  });
+  return description;
+}
+
 
 const processFile = (tagArray) => {
   const tags = { content: [], };
   tagArray.forEach(x => {
     const fileObj = doctrine.parse(x.comment, { unwrap: true,});
     fileObj.name = x.name;
-    
-    fileObj.tags.filter(tag => tag.title === 'description').forEach(((descriptionTag) => {
-      if (fileObj.description !== '') {
-        fileObj.description = fileObj.description.concat('\n');
-      }
-      fileObj.description = fileObj.description.concat(descriptionTag.description);
-    }));
+
+    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'));
+    // fileObj.tags.filter(tag => tag.title === 'description').forEach(((descriptionTag) => {
+    //   if (fileObj.description !== '') {
+    //     fileObj.description = fileObj.description.concat('\n');
+    //   }
+    //   fileObj.description = fileObj.description.concat(descriptionTag.description);
+    // }));
     tags.content.push(fileObj);
   });
   return tags;
