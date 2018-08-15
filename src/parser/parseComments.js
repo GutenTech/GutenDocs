@@ -1,6 +1,5 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
-
 /**
  * @description This function will save the data to the client/dist folder
  */
@@ -54,6 +53,7 @@ const parseComments = (filesArray, address) => {
     fileContent.fileName = file.name;
     files.push(fileContent);
   });
+  console.log('file', files);
   saveTags(files, address);
 }
 
