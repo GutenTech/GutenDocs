@@ -1,6 +1,6 @@
 # GutenDocs
 
-> API Generator using JSDoc comment data
+> CLI to generate APIs by parsing JSDoc comments from you .js and .jsx files
 
 ## Team
 
