@@ -64,7 +64,7 @@ const walk = (x) => {
 };
 
 const extract = (arr, exclude) => Promise.all(arr.map(x => globParse(x))).then((x) => {
-  // console.log("extract", x);
+  console.log("extract", x);
   const paths = [].concat(...x);
   return Promise.all(paths.map(path => walk(path))).then(result => [].concat(...result));
 });

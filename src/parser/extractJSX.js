@@ -25,6 +25,7 @@ const acornParse = (content, tagContent) => {
       if (b && t[0] === '*') {
         const a = {};
         a.comment = t;
+        console.log(a);
         const p = new Parser(undefined, content, d);
         p.nextToken();
         if (p.type === tokTypes._function) {
@@ -37,7 +38,7 @@ const acornParse = (content, tagContent) => {
         tagContent.push(a);
       }
     },
-  });
+  }, {plugins: { jsx: true }});
 };
 
 const walk = (x) => {
@@ -59,13 +60,13 @@ const walk = (x) => {
         reject(err);
       })
       .on('end', () => {
+        console.log('final result', result);
         resolve(result);
       });
   });
 };
 
 const extract = (arr, exclude) => Promise.all(arr.map(x => globParse(x))).then((x) => {
-  // console.log("extract", x);
   const paths = [].concat(...x);
   return Promise.all(paths.map(path => walk(path))).then(result => [].concat(...result));
 });
@@ -74,4 +75,6 @@ const extract = (arr, exclude) => Promise.all(arr.map(x => globParse(x))).then((
 //extract(['extract.js']).then(x => console.log(x));
 //extract(['./']).then(x => console.log(x));
 //It's Correct!!
+//extract(['parseComments.js']);
+extract(['test.jsx']);
 module.exports = extract;
