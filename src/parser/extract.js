@@ -8,7 +8,7 @@ const fs = require('fs');
 const glob = require('glob');
 const klaw = require('klaw');
 const path = require('path');
-const ROOT = require('../utils.js').findRoot();
+const ROOT = require('../utils.js').findRC()[1];
 
 const globParse = path => new Promise((resolve, reject) => glob(path, {
   dot: true,
