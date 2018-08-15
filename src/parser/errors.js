@@ -17,3 +17,4 @@ const parseCommentsFileErr = (file) => {
 
 
 module.exports.parseCommentsArrayErr = parseCommentsArrayErr;
+module.exports.parseCommentsFileErr = parseCommentsFileErr;
