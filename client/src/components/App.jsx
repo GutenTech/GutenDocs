@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import Sidebarr from './SideBar.jsx';
+// import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
 const getConfig = () => import('./configData.json');
@@ -47,10 +48,11 @@ export default class App extends Component {
                 {
                   file.content.map(func => (
                     <div>
-                      <h2>
+                      <Sidebarr/>
+                      <h2 style = {{marginLeft: 240, marginTop: 80}}>
                         {`${func.name} function`}
                       </h2>
-                      <h3>
+                      <h3 style ={{marginLeft: 240, marginTop: 80}}>
                         {func.description}
                       </h3>
                     </div>
