@@ -11,7 +11,7 @@ const generateAPIFrame = (path, saveDir) => {
     updateConfig(path.concat(saveDir));
   } else {
     /* eslint-disable-next-line no-console */
-    console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --refresh"');
+    console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
 };
 
