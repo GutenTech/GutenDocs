@@ -2,7 +2,6 @@ node_modules
 .DS_Store
 package-lock.json
 .vscode
-client
 mockData
 .eslintignore
 .eslintrc
@@ -10,3 +9,5 @@ mockData
 test_setup.js
 webpack.config.js
 __tests__
+.gutenrc
+GutenApi
