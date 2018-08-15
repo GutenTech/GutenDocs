@@ -29,6 +29,26 @@ const saveTags = (data, path) => {
   });
 };
 
+
+const processFile = (tagArray) => {
+  const tags = { content: [], };
+  tagArray.forEach(x => {
+    const fileObj = doctrine.parse(x.comment, { unwrap: true,});
+    fileObj.name = x.name;
+    const descriptionTags = fileObj.tags.filter(tag => tag.title === 'description');
+
+    descriptionTags.forEach(((descriptionTag) => {
+      if (fileObj.description !== '') {
+        fileObj.description = fileObj.description.concat('\n');
+      }
+      fileObj.description = fileObj.description.concat(descriptionTag.description);
+    }));
+    tags.content.push(fileObj);
+  });
+  return tags;
+};
+
+
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
  * @param commentsArray {[]} An array of JSDoc Comment Blocks structured in AST.
@@ -40,7 +60,7 @@ const parseComments = (filesArray, address) => {
     throw new TypeError('Parse comments should receive and array of comments');
   }
   const files = [];
-  filesArray.forEach((file, index) => {
+  filesArray.forEach((file) => {
     if (!(file instanceof Object)) {
       throw new TypeError('Array passed to parseComments should contain strings');
     }
@@ -54,25 +74,4 @@ const parseComments = (filesArray, address) => {
   saveTags(files, address);
 }
 
-
-const processFile = function (tagArray) {
-  const tags = {
-    content: [],
-  };
-  tagArray.forEach(x => {
-    const fileObj = doctrine.parse(x.comment, {
-      unwrap: true,
-    });
-    fileObj.name = x.name;
-    const descriptionTags = fileObj.tags.filter(tag => tag.title === 'description');
-    descriptionTags.forEach(((descriptionTag) => {
-      if (fileObj.description !== '') {
-        fileObj.description = fileObj.description.concat('\n');
-      }
-      fileObj.description = fileObj.description.concat(descriptionTag.description);
-    }));
-    tags.content.push(fileObj);
-  });
-  return tags;
-};
 module.exports = parseComments;
