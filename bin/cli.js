@@ -4,15 +4,15 @@ const fs = require('fs');
 const {
   argv,
 } = require('yargs').option('all', {
-  alias: 'a',
-  default: false,
-}).option('verbose', {
-  alias: 'v',
-  default: false,
-}).option('init', {
-  alias: 'i',
-  default: false,
-})
+    alias: 'a',
+    default: false,
+  }).option('verbose', {
+    alias: 'v',
+    default: false,
+  }).option('init', {
+    alias: 'i',
+    default: false,
+  })
   .option('refresh', {
     alias: 'r',
     default: false,
@@ -36,7 +36,9 @@ const parseComments = require('../src/parser/parseComments.js');
 const generateAPIFrame = require('../src/generateAPIFrame.js');
 const refreshAPI = require('../src/refreshAPI.js');
 const updateConfig = require('../src/updateConfig.js');
-const { findRC } = require('../src/utils.js');
+const {
+  findRC
+} = require('../src/utils.js');
 
 const input = argv.all ? ['./'] : argv._;
 if (argv.init) {

@@ -7,7 +7,9 @@ const findRC = (cb) => {
   while (rcpath === false && path.dirname(targetPath) !== '/') {
     const results = fs.readdirSync(targetPath).filter(file => file === '.gutenrc');
     rcpath = results.length !== 0;
-    if (!rcpath) { targetPath = path.dirname(targetPath); }
+    if (!rcpath) {
+      targetPath = path.dirname(targetPath);
+    }
   }
   if (rcpath === true) {
     const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc'));
@@ -46,3 +48,18 @@ const generateFilesaveArray = (myPath, filePath, saveDir) => {
 };
 module.exports.generateFilesaveArray = generateFilesaveArray;
 module.exports.findRC = findRC;
+const findRoot = () => {
+  let rcpath = false;
+  let targetPath = __dirname;
+  while (rcpath === false && path.dirname(targetPath) !== '/') {
+    const results = fs.readdirSync(targetPath).filter(file => file === '.gutenrc');
+    rcpath = results.length !== 0;
+    if (!rcpath) {
+      targetPath = path.dirname(targetPath);
+    }
+  }
+  return rcpath ? targetPath.concat('/.gutenrc') : __dirname;
+};
+
+module.exports.findRC = findRC;
+module.exports.findRoot = findRoot;
