@@ -46,8 +46,6 @@ const generateFilesaveArray = (myPath, filePath, saveDir) => {
   const outPutPath = filePath.concat('/').concat(saveDir);
   filesToWrite.forEach(file => fs.writeFileSync(outPutPath.concat(file[1]), file[0]));
 };
-module.exports.generateFilesaveArray = generateFilesaveArray;
-module.exports.findRC = findRC;
 const findRoot = () => {
   let rcpath = false;
   let targetPath = __dirname;
@@ -61,5 +59,6 @@ const findRoot = () => {
   return rcpath ? targetPath.concat('/.gutenrc') : __dirname;
 };
 
+module.exports.generateFilesaveArray = generateFilesaveArray;
 module.exports.findRC = findRC;
 module.exports.findRoot = findRoot;

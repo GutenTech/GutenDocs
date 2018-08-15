@@ -63,8 +63,8 @@ if (argv.init) {
       updateConfig(pathData[0].concat('/').concat(pathData[1]));
     } else {
       const address = `${pathData[0].concat('/').concat(pathData[1])}/resources/0.bundle.js`;
-      const exclude = fs.readFileSync(`${pathData[0]}/.gutenignore`, 'utf8').split('\n');
-      extract(input, exclude).then((data) => {
+      // const exclude = fs.readFileSync(`${pathData[0]}/.gutenignore`, 'utf8').split('\n');
+      extract(input).then((data) => {
         parseComments(data, address);
       });
     }
