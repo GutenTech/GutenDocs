@@ -1,13 +1,23 @@
+#folders
 node_modules
-.DS_Store
+GutenApi
+mockData
+client/src/
+
+#config settings
 package-lock.json
 .vscode
-mockData
 .eslintignore
-.eslintrc
+.eslintrc.js
 .travis.yml
-test_setup.js
 webpack.config.js
+.gutenrc.
+.gitignore
+
+#filetypes
+.DS_Store
+
+#testing files
+test_setup.js
 __tests__
-.gutenrc
-GutenApi
+
