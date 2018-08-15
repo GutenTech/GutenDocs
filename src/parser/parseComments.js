@@ -2,8 +2,6 @@ const doctrine = require('doctrine');
 const fs = require('fs');
 const wp = require('./webpackTemplates.js');
 
-const _throw = (err) => { throw err; };
-
 /**
  * @description This function will save the data to the client/dist folder
  */
@@ -12,7 +10,7 @@ const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
 
   fs.writeFile(path, wp.x(dataToSave), (err) => {
-    err ? _throw(err) : null;
+    if (err) { throw err; }
   });
 };
 
@@ -62,6 +60,6 @@ const parseComments = (filesArray, address) => {
     files.push(fileContent);
   });
   saveTags(files, address);
-}
+};
 
 module.exports = parseComments;
