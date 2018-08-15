@@ -7,6 +7,7 @@ const {
 const fs = require('fs');
 const glob = require('glob');
 const klaw = require('klaw');
+const path = require('path');
 
 const globParse = path => new Promise((resolve, reject) => glob(path, {
   dot: true,
@@ -44,7 +45,7 @@ const walk = (x) => {
   return new Promise((resolve, reject) => {
     klaw(x)
       .on('data', (item) => {
-        if (!item.stats.isDirectory()) {
+        if (!item.stats.isDirectory() && ['.js', 'jsx'].includes(path.extname(item.path))) {
           const tag = {
             content: [],
             name: item.path,
