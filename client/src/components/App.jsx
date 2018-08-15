@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
 const getConfig = () => import('./configData.json');
+const path = require('path');
 
 export default class App extends Component {
   constructor() {
@@ -33,15 +34,28 @@ export default class App extends Component {
           <div />
         </h1>
         {
-          parsedData.map(func => (
-            <div>
+          parsedData.map(file => (
+            <React.Fragment>
               <h2>
-                {func.name}
+                {
+                  `Functions in the file ${path.basename(file.fileName)}`
+                }
               </h2>
-              <h3>
-                {func.description}
-              </h3>
-            </div>
+              <div>
+                {
+                  file.content.map(func => (
+                    <div>
+                      <h2>
+                        {`${func.name} function`}
+                      </h2>
+                      <h3>
+                        {func.description}
+                      </h3>
+                    </div>
+                  ))
+                }
+              </div>
+            </React.Fragment>
           ))
       }
       </div>
