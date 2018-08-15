@@ -6,7 +6,7 @@
 
 - **Product Owner**: Uday Trivedi
 - **Scrum Master**: Peter Gierke
-- **Development Team Members**: YuqiZhu, David Parks
+- **Development Team Members**: Yuqi Zhu, David Park
 
 ## Table of Contents
 
