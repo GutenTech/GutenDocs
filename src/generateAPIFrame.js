@@ -1,4 +1,5 @@
 const fs = require('fs');
+const updateConfig = require('./updateConfig.js');
 
 const generateAPIFrame = (path, saveDir) => {
   if (!fs.existsSync(path.concat('.gutenrc'))) {
@@ -18,6 +19,7 @@ const generateAPIFrame = (path, saveDir) => {
     filesToWrite.forEach(file => fs.writeFileSync(path.concat(saveDir).concat(file[1]), file[0]));
 
     fs.writeFileSync(path.concat('.gutenrc'), `{ "apiDir": "${saveDir}" }`);
+    updateConfig(path.concat(saveDir));
   } else {
     console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --refresh"');
   }

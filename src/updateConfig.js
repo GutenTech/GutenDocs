@@ -1,16 +1,17 @@
 const fs = require('fs');
 
-const pathToConfigBundle = '../../client/dist/1.bundle.js';
-const pathToConfigJSON = '../../client/dist/gutenConfig.json';
-
 const fillBlanksWithDefaults = (assignedSettings) => {
   const mergedSettings = Object.assign(assignedSettings, {});
   return mergedSettings;
 };
 
 const updateConfig = (path) => {
-  let configSettings = fs.readFileSync(path);
+  const pathToConfigBundle = path.concat('/1.bundle.js');
+  const pathToConfigJSON = path.concat('gutenConfig.json');
+
+  let configSettings = fs.readFileSync(pathToConfigJSON);
   configSettings = fillBlanksWithDefaults(configSettings);
+
   /* eslint-disable */
   const fileToWrite = `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
@@ -28,9 +29,7 @@ const updateConfig = (path) => {
     
     }]);`;
     /* eslint-enable */
-
   fs.writeFileSync(pathToConfigBundle, fileToWrite);
 };
-updateConfig(pathToConfigJSON);
 
 module.exports = updateConfig;

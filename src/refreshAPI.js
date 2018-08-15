@@ -10,11 +10,11 @@ const generateAPIFrame = (path, saveDir) => {
   filesToWrite.push([fs.readFileSync(myPath.concat('/client/dist/1.bundle.js')), '1.bundle.js']);
   filesToWrite.push([fs.readFileSync(myPath.concat('/client/dist/gutenConfig.json')), 'gutenConfig.json']);
 
-  if (!fs.existsSync(path.concat(saveDir))) {
-    fs.mkdirSync(path.concat(saveDir));
+  if (!fs.existsSync(path.concat('/').concat(saveDir))) {
+    fs.mkdirSync(path.concat('/').concat(saveDir));
   }
 
-  filesToWrite.forEach(file => fs.writeFileSync(path.concat(saveDir).concat(file[1]), file[0]));
+  filesToWrite.forEach(file => fs.writeFileSync(path.concat('/').concat(saveDir).concat(file[1]), file[0]));
 };
 
 module.exports = generateAPIFrame;
