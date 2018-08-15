@@ -36,7 +36,6 @@ const saveTags = (data, path) => {
  * @return n/a
  */
 const parseComments = (filesArray, address) => {
-  // console.log('input to parse comments', filesArray);
   if (!(filesArray instanceof Array)) {
     throw new TypeError('Parse comments should receive and array of comments');
   }
