@@ -48,7 +48,7 @@ const parseComments = (filesArray, address) => {
     if (file.content === undefined || file.name === undefined) {
       throw new TypeError('Each object in input Array must have "comment" & "name" properties');
     }
-    const fileContent = G(file.content);
+    const fileContent = processFile(file.content);
     fileContent.fileName = file.name;
     files.push(fileContent);
   });
@@ -56,7 +56,7 @@ const parseComments = (filesArray, address) => {
 }
 
 
-const G = function (tagArray) {
+const processFile = function (tagArray) {
   const tags = {
     content: [],
   };
