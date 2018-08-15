@@ -2,46 +2,19 @@ const doctrine = require('doctrine');
 const fs = require('fs');
 const wp = require('./webpackTemplates.js');
 
+const _throw = err => {throw err;}
+
 /**
  * @description This function will save the data to the client/dist folder
  */
 
 const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
+   
   fs.writeFile(path, wp.x(dataToSave), (err) => {
-    if (err) {
-      throw err;
-    }
+    err ? _throw(err) : console.log('Parsed Data Can Now Be Viewed In Your Index.html File');
   });
 };
-
-
-
-
-// const saveTags = (data, path) => {
-//   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
-//   /*eslint-disable */
-//   fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
-
-//     /***/ "./client/src/components/parsedData.json":
-//     /*!***********************************************!*\
-//       !*** ./client/src/components/parsedData.json ***!
-//       \***********************************************/
-//     /*! no static exports found */
-//     /***/ (function(module, exports, __webpack_require__) {
-    
-//     "use strict";
-//     eval(\`\n\nmodule.exports = ${dataToSave};\n\n//# sourceURL=webpack:///./client/src/components/parsedData.json?\`);
-    
-//     /***/ })
-    
-//     }]);`, (err) => {
-//     /* eslint-enable */
-//     if (err) {
-//       throw err;
-//     }
-//   });
-// };
 
 const procDesc = (descriptionTagArray) => {
   let description = '\n';
