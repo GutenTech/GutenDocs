@@ -3,6 +3,7 @@ const fs = require('fs');
 /**
  * @description This function will save the data to the client/dist folder
  */
+
 const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
   /*eslint-disable */
@@ -41,19 +42,16 @@ const parseComments = (filesArray, address) => {
   }
   const files = [];
   filesArray.forEach((file, index) => {
-    // console.log("commentforEach", comment, comment.content)
     if (!(file instanceof Object)) {
       throw new TypeError('Array passed to parseComments should contain strings');
     }
     if (file.content === undefined || file.name === undefined) {
-      throw new TypeError('Each object in the passed in Array should have a a key of "comment" and "name"');
+      throw new TypeError('Each object in input Array must have "comment" & "name" properties');
     }
-    // const funcName = comment.fileName;
     const fileContent = G(file.content);
     fileContent.fileName = file.name;
     files.push(fileContent);
   });
-  console.log('file', files);
   saveTags(files, address);
 }
 
