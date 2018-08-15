@@ -9,6 +9,7 @@ const helpTxt = () => {
     gutendocs --all               parse all js and jsx files in and above current directory
     gutendocs --refresh           refresh the files in the gutendocs api folder to virgin state
     gutendocs --version           logs the current version of gutendocs
+    gutendocs --config            updates the API styles to reflect the lastest update of config
     `);
 };
 

@@ -57,11 +57,10 @@ if (argv.init) {
       console.log('You have not initialized gutendocs in any dirctory below current directory.  Call "gutendocs --init"');
     } else if (argv.refresh) {
       refreshAPI(pathData[0], pathData[1]);
-      updateConfig(pathData[0].concat('/').concat(pathData[1]));
     } else if (argv.config) {
       updateConfig(pathData[0].concat('/').concat(pathData[1]));
     } else {
-      const address = `${pathData[0].concat('/').concat(pathData[1])}0.bundle.js`;
+      const address = `${pathData[0].concat('/').concat(pathData[1])}/resources/0.bundle.js`;
       const exclude = fs.readFileSync(`${pathData[0]}/.gutenignore`, 'utf8').split('\n');
       extract(input, exclude).then((data) => {
         parseComments(data, address);
