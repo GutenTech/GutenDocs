@@ -11,10 +11,7 @@ const parseCommentsFileErr = (file) => {
   if (file.content === undefined || file.name === undefined) {
     throw new TypeError('Each object in input Array must have "comment" & "name" properties');
   }
-}
-
-
-
+};
 
 module.exports.parseCommentsArrayErr = parseCommentsArrayErr;
 module.exports.parseCommentsFileErr = parseCommentsFileErr;
