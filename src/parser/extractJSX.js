@@ -3,11 +3,11 @@ const {
   parseExpressionAt,
   Parser,
   tokTypes,
-} = require('acorn');
+} = require('acorn-jsx');
 const fs = require('fs');
 const glob = require('glob');
 const klaw = require('klaw');
-var acornJSX = require('acorn-jsx');
+//var acornJSX = require('acorn-jsx');
 
 const globParse = path => new Promise((resolve, reject) => glob(path, {
   dot: true,
