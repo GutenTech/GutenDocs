@@ -11,6 +11,9 @@ const findRC = (cb) => {
       targetPath = path.dirname(targetPath);
     }
   }
+  if (cb === undefined) {
+    return rcpath ? targetPath : __dirname;
+  }
   if (rcpath === true) {
     const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc'));
     const gutenfolder = JSON.parse(gutenrc).apiDir;
@@ -46,6 +49,7 @@ const generateFilesaveArray = (myPath, filePath, saveDir) => {
   const outPutPath = filePath.concat('/').concat(saveDir);
   filesToWrite.forEach(file => fs.writeFileSync(outPutPath.concat(file[1]), file[0]));
 };
+
 const findRoot = () => {
   let rcpath = false;
   let targetPath = __dirname;
@@ -56,7 +60,7 @@ const findRoot = () => {
       targetPath = path.dirname(targetPath);
     }
   }
-  return rcpath ? targetPath.concat('/.gutenrc') : __dirname;
+  return rcpath ? targetPath : __dirname;
 };
 
 module.exports.generateFilesaveArray = generateFilesaveArray;

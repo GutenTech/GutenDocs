@@ -26,6 +26,7 @@
   "homepage": "https://github.com/GutenTech/GutenDocs#readme",
   "dependencies": {
     "acorn": "^5.7.1",
+    "acorn-jsx": "^4.1.1",
     "doctrine": "^2.1.0",
     "glob": "^7.1.2",
     "klaw": "^3.0.0",
