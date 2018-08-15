@@ -23,7 +23,7 @@ const generateFilesaveArray = (myPath, filePath, saveDir) => {
   let nextPath = myPath.concat('/client/dist/styles.css');
   filesToWrite.push([fs.readFileSync(nextPath), 'styles.css']);
   nextPath = myPath.concat('/client/dist/index.html');
-  filesToWrite.push([fs.readFileSync(nextPath), 'gutenapi.html']);
+  filesToWrite.push([fs.readFileSync(nextPath), 'index.html']);
   nextPath = myPath.concat('/client/dist/resources/bundle.js');
   filesToWrite.push([fs.readFileSync(nextPath), 'resources/bundle.js']);
   nextPath = myPath.concat('/client/dist/resources/0.bundle.js');
