@@ -6,3 +6,5 @@ bundle.js
 *.bundle.js
 0.bundle.js
 1.bundle.js
+.gutenrc
+GutenAPI
