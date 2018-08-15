@@ -2,7 +2,7 @@ const doctrine = require('doctrine');
 const fs = require('fs');
 const wp = require('./webpackTemplates.js');
 
-const _throw = err => {throw err;}
+const _throw = (err) => { throw err; };
 
 /**
  * @description This function will save the data to the client/dist folder
@@ -10,33 +10,31 @@ const _throw = err => {throw err;}
 
 const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
-   
+
   fs.writeFile(path, wp.x(dataToSave), (err) => {
-    err ? _throw(err) : console.log('Parsed Data Can Now Be Viewed In Your Index.html File');
+    err ? _throw(err) : null;
   });
 };
 
 const procDesc = (descriptionTagArray) => {
   let description = '\n';
-  
+
   descriptionTagArray.forEach((descriptionTag) => {
     description = description.concat(descriptionTag.description);
   });
-  
   return description;
-}
+};
 
 
 const processFile = (tagArray) => {
-  const tags = { content: [], };
-  
-  tagArray.forEach(x => {
-    const fileObj = doctrine.parse(x.comment, { unwrap: true,});
+  const tags = { content: [] };
+
+  tagArray.forEach((x) => {
+    const fileObj = doctrine.parse(x.comment, { unwrap: true });
     fileObj.name = x.name;
     fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'));
     tags.content.push(fileObj);
   });
-  
   return tags;
 };
 
