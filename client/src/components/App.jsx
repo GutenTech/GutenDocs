@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import Sidebarr from './SideBar.jsx';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
 const getConfig = () => import('./configData.json');
