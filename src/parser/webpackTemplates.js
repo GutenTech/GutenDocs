@@ -17,7 +17,7 @@
 //   }]);`
 
 
-const x = (dataToSave) => {
+const parseCommentsTemplate = (dataToSave) => {
   return `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
     /***/ "./client/src/components/parsedData.json":
@@ -35,4 +35,4 @@ const x = (dataToSave) => {
     }]);`
 }
 
-  module.exports.x = x;
+  module.exports.parseCommentsTemplate = parseCommentsTemplate;
