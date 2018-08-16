@@ -1,6 +1,6 @@
 const parseComments = require('../src/parser/parseComments.js');
 
-const testOutputLocation = '../../mockData/outputFromTest.js';
+const testOutputLocation = '../../mockData/outputFrom.js';
 
 describe('parseComments', () => {
   it('should be a function', () => expect(parseComments).toBeInstanceOf(Function));
@@ -15,90 +15,88 @@ describe('parseComments', () => {
     }])).toThrowError());
 
   it('should turn a array of comments into AST objects containing info about the comment',
-    () => expect(parseComments([
-      {
-        content:
-        [
-          { comment: '*\n * @description sample description\n ', name: 'someFxnName' },
-        ],
-        name: '../src/parser/test.js',
-      },
-    ], testOutputLocation))
-      .toEqual([
-        {
-          content: [
-            { description: 'sample description', tags: [{ title: 'description', description: 'sample description' }], name: 'someFxnName' }],
-          fileName: '../src/parser/test.js',
-        }]));
+    () => expect(parseComments([{
+      content: [{
+        comment: '*\n * @description sample description\n ',
+        name: 'someFxnName'
+      }, ],
+      name: '../src/parser/test.js',
+    }, ], testOutputLocation))
+    .toEqual([{
+      content: [{
+        description: 'sample description',
+        tags: [{
+          title: 'description',
+          description: 'sample description'
+        }],
+        name: 'someFxnName'
+      }],
+      fileName: '../src/parser/test.js',
+    }]));
 
   it('should turn a array of comments with tags into AST objects containing info about the comment including an array of tags', () => expect(parseComments(
-    [
-      {
-        content: [
-          {
-            comment: '*\n * @description sample description\n ',
-            name: 'someFxnName',
-          },
-          {
-            comment: '*\n * @description sample description2\n ',
-            name: 'someFxnName2',
-          }],
-        name: '../src/parser/test.js',
-      }], testOutputLocation,
-  )).toEqual(
-    [
-      {
-        content:
-        [{
-          description: 'sample description',
-          tags: [{
-            title: 'description',
-            description: 'sample description',
-          }],
+    [{
+      content: [{
+          comment: '*\n * @description sample description\n ',
           name: 'someFxnName',
-        }, {
-          description: 'sample description2',
-          tags: [{ title: 'description', description: 'sample description2' }],
+        },
+        {
+          comment: '*\n * @description sample description2\n ',
           name: 'someFxnName2',
+        }
+      ],
+      name: '../src/parser/test.js',
+    }], testOutputLocation,
+  )).toEqual(
+    [{
+      content: [{
+        description: 'sample description',
+        tags: [{
+          title: 'description',
+          description: 'sample description',
         }],
-        fileName: '../src/parser/test.js',
+        name: 'someFxnName',
+      }, {
+        description: 'sample description2',
+        tags: [{
+          title: 'description',
+          description: 'sample description2'
+        }],
+        name: 'someFxnName2',
       }],
+      fileName: '../src/parser/test.js',
+    }],
   ));
 
   it('should add any tags of description to the description key of the object', () => expect(parseComments(
-    [
-      {
-        content: [
-          {
-            comment: '*\n * blank description\n * @description sample description\n ',
-            name: 'someFxnName',
-          }, {
-            comment: '*\n * @description sample description2\n ',
-            name: 'someFxnName2',
-          }],
-        name: '../src/parser/test.js',
-      }], testOutputLocation,
-  )).toEqual(
-    [
-      {
-        content: [
-          {
-            description: 'blank description\nsample description',
-            tags: [
-              {
-                title: 'description',
-                description: 'sample description',
-              }],
-            name: 'someFxnName',
-          }, {
-            description: 'sample description2',
-            tags: [{
-              title: 'description',
-              description: 'sample description2',
-            }],
-            name: 'someFxnName2',
-          }],
-        fileName: '../src/parser/test.js',
+    [{
+      content: [{
+        comment: '*\n * blank description\n * @description sample description\n ',
+        name: 'someFxnName',
+      }, {
+        comment: '*\n * @description sample description2\n ',
+        name: 'someFxnName2',
       }],
+      name: '../src/parser/test.js',
+    }], testOutputLocation,
+  )).toEqual(
+    [{
+      content: [{
+        description: 'blank description\nsample description',
+        tags: [{
+          title: 'description',
+          description: 'sample description',
+        }],
+        name: 'someFxnName',
+      }, {
+        description: 'sample description2',
+        tags: [{
+          title: 'description',
+          description: 'sample description2',
+        }],
+        name: 'someFxnName2',
+      }],
+      fileName: '../src/parser/test.js',
+    }],
   ));
 });
