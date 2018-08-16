@@ -10,7 +10,8 @@ const generateAPIFrame = (path, saveDir) => {
     fs.writeFileSync(path.concat('.gutenrc'), `{ "apiDir": "${saveDir}" }`);
     updateConfig(path.concat(saveDir));
   } else {
-    console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --refresh"');
+    /* eslint-disable-next-line no-console */
+    console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
 };
 

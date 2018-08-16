@@ -1,32 +1,52 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
+const wp = require('./webpackTemplates.js');
+const errors = require('./errors.js');
+
 /**
  * @description This function will save the data to the client/dist folder
  */
+
 const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
-  /*eslint-disable */
-  fs.writeFile(path, `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-    /***/ "./client/src/components/parsedData.json":
-    /*!***********************************************!*\
-      !*** ./client/src/components/parsedData.json ***!
-      \***********************************************/
-    /*! no static exports found */
-    /***/ (function(module, exports, __webpack_require__) {
-    
-    "use strict";
-    eval(\`\n\nmodule.exports = ${dataToSave};\n\n//# sourceURL=webpack:///./client/src/components/parsedData.json?\`);
-    
-    /***/ })
-    
-    }]);`, (err) => {
-    /* eslint-enable */
+  fs.writeFile(path, wp.parseCommentsTemplate(dataToSave), (err) => {
     if (err) {
       throw err;
     }
   });
 };
+
+
+const procDesc = (descriptionTagArray, fileObjDesc) => {
+  let description = fileObjDesc;
+
+  descriptionTagArray.forEach((descriptionTag) => {
+    if (fileObjDesc !== '') {
+      description = description.concat('\n');
+    }
+    description = description.concat(descriptionTag.description);
+  });
+  return description;
+};
+
+
+const processFile = (tagArray) => {
+  const tags = {
+    content: []
+  };
+
+  tagArray.forEach((x) => {
+    const fileObj = doctrine.parse(x.comment, {
+      unwrap: true
+    });
+    fileObj.name = x.name;
+    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
+    tags.content.push(fileObj);
+  });
+  return tags;
+};
+
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
@@ -35,47 +55,17 @@ const saveTags = (data, path) => {
  * @return n/a
  */
 const parseComments = (filesArray, address) => {
-  // console.log('input to parse comments', filesArray);
-  if (!(filesArray instanceof Array)) {
-    throw new TypeError('Parse comments should receive and array of comments');
-  }
+  errors.parseCommentsArrayErr(filesArray);
+
   const files = [];
-  filesArray.forEach((file, index) => {
-    // console.log("commentforEach", comment, comment.content)
-    if (!(file instanceof Object)) {
-      throw new TypeError('Array passed to parseComments should contain strings');
-    }
-    if (file.content === undefined || file.name === undefined) {
-      throw new TypeError('Each object in the passed in Array should have a a key of "comment" and "name"');
-    }
-    // const funcName = comment.fileName;
-    const fileContent = G(file.content);
+  filesArray.forEach((file) => {
+    errors.parseCommentsFileErr(file);
+    const fileContent = processFile(file.content);
     fileContent.fileName = file.name;
     files.push(fileContent);
   });
-  // console.log('file', files);
   saveTags(files, address);
-}
-
-
-const G = function (tagArray) {
-  const tags = {
-    content: [],
-  };
-  tagArray.forEach(x => {
-    const fileObj = doctrine.parse(x.comment, {
-      unwrap: true,
-    });
-    fileObj.name = x.name;
-    const descriptionTags = fileObj.tags.filter(tag => tag.title === 'description');
-    descriptionTags.forEach(((descriptionTag) => {
-      if (fileObj.description !== '') {
-        fileObj.description = fileObj.description.concat('\n');
-      }
-      fileObj.description = fileObj.description.concat(descriptionTag.description);
-    }));
-    tags.content.push(fileObj);
-  });
-  return tags;
+  return files;
 };
+
 module.exports = parseComments;
