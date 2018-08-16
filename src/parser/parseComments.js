@@ -61,6 +61,7 @@ const parseComments = (filesArray, address) => {
     files.push(fileContent);
   });
   saveTags(files, address);
+  return files;
 };
 
 module.exports = parseComments;
