@@ -54,6 +54,8 @@ const generateFilesaveArray = (absPath, dirName) => {
   }
 
   filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file[1]), file[0]));
+
+  // fs.writeFileSync(APIdir.concat(.gutenrc), file[0]);
 };
 
 module.exports.generateFilesaveArray = generateFilesaveArray;
