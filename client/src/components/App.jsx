@@ -23,6 +23,7 @@ export default class App extends Component {
     const { parsedData, configData } = this.state;
     return (
       <div className="App">
+      {console.log(parsedData)}
         <h1>
           {/*eslint-disable*/}
           <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />

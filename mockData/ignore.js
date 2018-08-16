@@ -1,3 +1,14 @@
+// This is a line comment
+function sum(a, b) {
+  return a + b;
+}
+
+/* This is a block comment
+ */
+function sub(a, b) {
+  return a - b;
+}
+
 /**
  * Sample function
  * @constructor
@@ -8,16 +19,4 @@
 
 function mul(a, b) {
   return a * b;
-}
-
-/**
- * Sample function
- * @constructor
- * @param {number} a  Numerator
- * @param {number} b  Denominator
- * @return
- */
-
-function div(a, b) {
-  return a / b;
 }

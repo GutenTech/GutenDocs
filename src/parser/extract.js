@@ -8,9 +8,13 @@ const fs = require('fs');
 const glob = require('glob');
 const klaw = require('klaw');
 const path = require('path');
-const ROOT = require('../utils.js').findRoot();
+const {
+  Walker,
+} = require('ignore-walk');
+const ROOT = require('../utils.js').findRC();
 
-const globParse = path => new Promise((resolve, reject) => glob(path, {
+
+const globParse = address => new Promise((resolve, reject) => glob(address, {
   dot: true,
 }, (err, files) => {
   if (err) {
@@ -41,38 +45,46 @@ const acornParse = (content, tagContent) => {
   });
 };
 
-const walk = (x) => {
-  const result = [];
+const exclude = (address) => {
+  const options = {
+    path: ROOT,
+    ignoreFiles: ['.gutenignore', 1],
+  };
   return new Promise((resolve, reject) => {
-    klaw(x)
-      .on('data', (item) => {
-        if (!item.stats.isDirectory() && ['.js', 'jsx'].includes(path.extname(item.path))) {
-          const tag = {
-            content: [],
-            name: path.relative(ROOT, item.path),
-          };
-          const content = fs.readFileSync(item.path, 'utf8');
-          acornParse(content, tag.content);
-          result.push(tag);
-        }
-      })
-      .on('error', (err) => {
-        reject(err);
-      })
-      .on('end', () => {
-        resolve(result);
-      });
+    const walk = new Walker(options).on('done', resolve).on('error', reject);
+    const relAddress = path.relative(ROOT, address);
+    const rule = `*\n!${relAddress}/**/*\n!${relAddress}`;
+    walk.onReadIgnoreFile(1, rule, () => {});
+    walk.start();
   });
 };
 
-const extract = (arr, exclude) => Promise.all(arr.map(x => globParse(x))).then((x) => {
-  // console.log("extract", x);
+const walk = (x) => {
+  const result = [];
+  return exclude(x).then(list => new Promise((resolve, reject) => klaw(x)
+    .on('data', (item) => {
+      if (!item.stats.isDirectory() && ['.js', 'jsx'].includes(path.extname(item.path)) && list.includes(path.relative(ROOT, item.path))) {
+        const tag = {
+          content: [],
+          name: path.relative(ROOT, item.path),
+        };
+        const content = fs.readFileSync(item.path, 'utf8');
+        acornParse(content, tag.content);
+        result.push(tag);
+      }
+    })
+    .on('error', (err) => {
+      reject(err);
+    })
+    .on('end', () => {
+      resolve(result);
+    })));
+};
+
+
+const extract = arr => Promise.all(arr.map(x => globParse(x))).then((x) => {
   const paths = [].concat(...x);
-  return Promise.all(paths.map(path => walk(path))).then(result => [].concat(...result));
+  return Promise.all(paths.map(address => walk(address))).then(result => [].concat(...result));
 });
 
-//extract(['**/*.js']).then(x => console.log(x));
-//extract(['extract.js']).then(x => console.log(x));
-//extract(['./']).then(x => console.log(x));
-//It's Correct!!
 module.exports = extract;

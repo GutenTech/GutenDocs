@@ -53,7 +53,7 @@ const parseComments = (filesArray, address) => {
     fileContent.fileName = file.name;
     files.push(fileContent);
   });
-  console.log('file', files);
+  // console.log('file', files);
   saveTags(files, address);
 }
 
