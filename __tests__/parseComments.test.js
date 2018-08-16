@@ -1,6 +1,7 @@
 const parseComments = require('../src/parser/parseComments.js');
 
-const testOutputLocation = './mockData/outputFromTest.js';
+const testOutputLocation = '../../mockData/outputFromTest.js';
+
 describe('parseComments', () => {
   it('should be a function', () => expect(parseComments).toBeInstanceOf(Function));
   it('should throw error on a string', () => expect(() => parseComments('hello')).toThrowError());
