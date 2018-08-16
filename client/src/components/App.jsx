@@ -23,6 +23,8 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
+    const { bulma } = configData;
+    console.log(this.state);
     return (
       <div className="App">
       {console.log(parsedData)}
@@ -31,8 +33,8 @@ export default class App extends Component {
           <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
           {/* eslint-enable */}
           <div style={configData.banner ? { display: 'none' } : {}} />
-
           GutenDocs
+          <div className={bulma.example}>Hello</div>
 
           <div />
         </h1>
@@ -48,7 +50,6 @@ export default class App extends Component {
                 {
                   file.content.map(func => (
                     <div>
-                      <Sidebarr/>
                       <h2 style = {{marginLeft: 240, marginTop: 80}}>
                         {`${func.name} function`}
                       </h2>
