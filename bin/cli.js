@@ -57,7 +57,7 @@ yargs.option({
 
 yargs.parse(process.argv.slice(2), (err, argv, output) => {
   const pathData = findRC();
-  const address = pathData ? `${pathData[0].concat('/').concat(pathData[1])}0.bundle.js` : undefined;
+  const address = pathData ? `${pathData.absPath.concat(pathData.dirName)}0.bundle.js` : undefined;
   // Output error if something unexpected happened
   if (err) {
     console.error(output); /* eslint-disable-line no-console */
@@ -94,7 +94,7 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       /* eslint-disable-next-line no-console */
       console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
     } else {
-      updateConfig(pathData[0].concat('/').concat(pathData[1]));
+      updateConfig(pathData.absPath.concat(pathData.dirName));
     }
   }
 
@@ -104,7 +104,7 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       /* eslint-disable-next-line no-console */
       console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
     } else {
-      // const exclude = fs.readFileSync(`${pathData[0]}/.gutenignore`, 'utf8').split('\n');
+      // const exclude = fs.readFileSync(`${pathData.absPath}/.gutenignore`, 'utf8').split('\n');
       extract(['./']).then((data) => {
         parseComments(data, address);
       });
@@ -117,7 +117,7 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       /* eslint-disable-next-line no-console */
       console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
     } else {
-      refreshAPI(pathData[0], pathData[1]);
+      refreshAPI(pathData.absPath, pathData.dirName);
     }
   }
 
