@@ -4,11 +4,16 @@
     "height":"300"
   },
   "banner":{
-    "src":"./imgs/gutendocslogo.png",
+    "src":"./imgs/gutenDocsLogo.png",
     "alt":"Guten Docs",
     "height":"100",
     "width":"300"
-  }, 
+  },
+  "hello":{
+    "greeting": "container",
+    "marginLeft": "500"
+  },
+
   "bulma":{
     "example": "subtitle-is-2"
   }
