@@ -17,7 +17,7 @@ const saveTags = (data, path) => {
 
 
 const procDesc = (descriptionTagArray) => {
-  let description = '\n';
+  let description = '';
 
   descriptionTagArray.forEach((descriptionTag) => {
     description = description.concat(descriptionTag.description);
