@@ -31,6 +31,7 @@ export default class App extends Component {
     const { bulma } = configData;
     console.log(this.state);
     return (
+<<<<<<< HEAD
       <Router>
         <div className="App">
           <h1 className="logo">
@@ -72,6 +73,41 @@ export default class App extends Component {
         }
         </div>
     </Router>
+=======
+      <div className="App">
+      {console.log(parsedData)}
+        <h1>
+          {/*eslint-disable*/}
+          <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
+          {/* eslint-enable */} 
+        </h1>
+        {
+          parsedData.map(file => (
+            <React.Fragment>
+              <h2>
+                {
+                  `Functions in the file ${path.basename(file.fileName)}`
+                }
+              </h2>
+              <div>
+                {
+                  file.content.map(func => (
+                    <div>
+                      <h2>
+                        {`${func.name} function`}
+                      </h2>
+                      <h3>
+                        {func.description}
+                      </h3>
+                    </div>
+                  ))
+                }
+              </div>
+            </React.Fragment>
+          ))
+      }
+      </div>
+>>>>>>> demo stuff
     );
   }
 }
