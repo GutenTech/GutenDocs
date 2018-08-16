@@ -16,10 +16,13 @@ const saveTags = (data, path) => {
 };
 
 
-const procDesc = (descriptionTagArray) => {
-  let description = '';
+const procDesc = (descriptionTagArray, fileObjDesc) => {
+  let description = fileObjDesc;
 
   descriptionTagArray.forEach((descriptionTag) => {
+    if (fileObjDesc !== '') {
+      description = description.concat('\n');
+    }
     description = description.concat(descriptionTag.description);
   });
   return description;
@@ -32,7 +35,7 @@ const processFile = (tagArray) => {
   tagArray.forEach((x) => {
     const fileObj = doctrine.parse(x.comment, { unwrap: true });
     fileObj.name = x.name;
-    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'));
+    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
     tags.content.push(fileObj);
   });
   return tags;
