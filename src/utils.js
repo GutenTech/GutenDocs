@@ -35,9 +35,8 @@ const generateFilesaveArray = (myPath, filePath, saveDir) => {
   nextPath = myPath.concat('/client/dist/gutenConfig.json');
   filesToWrite.push([fs.readFileSync(nextPath), 'gutenConfig.json']);
   nextPath = myPath.concat('/client/dist/imgs');
-  console.log(nextPath);
   const images = fs.readdirSync(nextPath);
-  images.forEach(img => filesToWrite.push([fs.readFileSync(nextPath).concat(img), 'imgs/'.concat(img)]));
+  images.forEach(img => filesToWrite.push([fs.readFileSync(nextPath.concat('/').concat(img)), 'imgs/'.concat(img)]));
 
   const APIdir = filePath.concat('/').concat(saveDir);
   if (!fs.existsSync(APIdir)) {
