@@ -53,12 +53,7 @@ const parseComments = (filesArray, address) => {
 
   const files = [];
   filesArray.forEach((file) => {
-    if (!(file instanceof Object)) {
-      throw new TypeError('Array passed to parseComments should contain strings');
-    }
-    if (file.content === undefined || file.name === undefined) {
-      throw new TypeError('Each object in input Array must have "comment" & "name" properties');
-    }
+    errors.parseCommentsFileErr(file);
     const fileContent = processFile(file.content);
     fileContent.fileName = file.name;
     files.push(fileContent);
