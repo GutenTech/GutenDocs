@@ -83,7 +83,22 @@ describe('parseComments', () => {
       {
         content: [
           {
-            description: 'blank description\nsample description', 
+            description: 'blank description\nsample description',
             tags: [
-              {"title":"description","description":"sample description"}],"name":"someFxnName"},{"description":"sample description2","tags":[{"title":"description","description":"sample description2"}],"name":"someFxnName2"}],"fileName":"../src/parser/test.js"}]));
+              {
+                title: 'description',
+                description: 'sample description',
+              }],
+            name: 'someFxnName',
+          }, {
+            description: 'sample description2',
+            tags: [{
+              title: 'description',
+              description: 'sample description2',
+            }],
+            name: 'someFxnName2',
+          }],
+        fileName: '../src/parser/test.js',
+      }],
+  ));
 });
