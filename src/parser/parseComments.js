@@ -49,6 +49,7 @@ const processFile = (tagArray) => {
  * @return n/a
  */
 const parseComments = (filesArray, address) => {
+  console.log('parsecomments addy', address);
   errors.parseCommentsArrayErr(filesArray);
 
   const files = [];

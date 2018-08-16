@@ -54,7 +54,7 @@ yargs.option({
 
 yargs.parse(process.argv.slice(2), (err, argv, output) => {
   const pathData = findRC();
-  const address = pathData ? `${pathData[0].concat('/').concat(pathData[1])}/0.bundle.js` : undefined;
+  const address = pathData ? `${pathData[0].concat('/').concat(pathData[1])}0.bundle.js` : undefined;
 
   // Output error if something unexpected happened
   if (err) {
