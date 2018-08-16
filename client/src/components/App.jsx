@@ -18,7 +18,8 @@ export default class App extends Component {
 
   componentDidMount() {
     getData().then(data => this.setState({ parsedData: data.default }));
-    getConfig().then(data => this.setState({ configData: data.default }));
+    getConfig().then(data => {console.log(data)
+      this.setState({ configData: data.default })});
   }
 
   render() {
