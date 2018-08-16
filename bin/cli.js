@@ -1,6 +1,9 @@
 #!/usr/bin/env node
+
 const fs = require('fs');
-const { exec } = require('child_process');
+const {
+  exec
+} = require('child_process');
 const yargs = require('yargs');
 const pjson = require('../package.json');
 const extract = require('../src/parser/extract.js');

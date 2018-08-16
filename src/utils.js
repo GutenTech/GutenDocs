@@ -11,7 +11,6 @@ const findRC = () => {
       targetPath = path.dirname(targetPath);
     }
   }
-
   if (rcpath === true) {
     const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc'));
     const gutenfolder = JSON.parse(gutenrc).apiDir;

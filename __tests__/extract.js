@@ -7,12 +7,12 @@ test('Single comment test', () => {
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
       name: 'mul',
     }],
-    name: ""
+    name: 'mockData/singleComment.js',
   }];
   expect.assertions(1);
   return extract(address).then((received) => {
     expect(received).toEqual(expected);
-  })
+  });
 });
 
 test('Multiple comments test', () => {
@@ -25,7 +25,7 @@ test('Multiple comments test', () => {
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  Numerator\n * @param {number} b  Denominator\n * @return\n ',
       name: 'div',
     }],
-    name: ""
+    name: 'mockData/subFolder/multipleComments.js',
   }];
   expect.assertions(1);
   return extract(address).then((received) => {
@@ -40,12 +40,27 @@ test('Declare function as a const', () => {
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
       name: 'mul',
     }],
-    name: "",
+    name: 'mockData/constFunction.js',
   }];
   expect.assertions(1);
   return extract(address).then((received) => {
     expect(received).toEqual(expected);
-  })
+  });
+});
+
+test('Arrow Function test', () => {
+  const address = ['./mockData/subFolder/moreFolder/arrowExpression.js'];
+  const expected = [{
+    content: [{
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
+      name: 'mul',
+    }],
+    name: 'mockData/subFolder/moreFolder/arrowExpression.js',
+  }];
+  expect.assertions(1);
+  return extract(address).then((received) => {
+    expect(received).toEqual(expected);
+  });
 });
 
 test('should work for a folder and only process js and jsx file', () => {
@@ -58,25 +73,52 @@ test('should work for a folder and only process js and jsx file', () => {
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  Numerator\n * @param {number} b  Denominator\n * @return\n ',
       name: 'div',
     }],
-    name: ""
+    name: 'mockData/subFolder/multipleComments.js',
+  }, {
+    content: [{
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
+      name: 'mul',
+    }],
+    name: 'mockData/subFolder/moreFolder/arrowExpression.js',
   }];
   expect.assertions(1);
   return extract(address).then((received) => {
     expect(received).toEqual(expected);
-  })
+  });
 });
 
 test('should work for glob pattern', () => {
-  const address = ['../mockData/*.js'];
+  const address = ['./mockData/**/*.js'];
   const expected = [{
     content: [{
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
       name: 'mul',
     }],
-    name: "",
+    name: 'mockData/constFunction.js',
+  }, {
+    content: [{
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
+      name: 'mul',
+    }],
+    name: 'mockData/singleComment.js',
+  }, {
+    content: [{
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
+      name: 'mul',
+    }],
+    name: 'mockData/subFolder/moreFolder/arrowExpression.js',
+  }, {
+    content: [{
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
+      name: 'mul',
+    }, {
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  Numerator\n * @param {number} b  Denominator\n * @return\n ',
+      name: 'div',
+    }],
+    name: 'mockData/subFolder/multipleComments.js',
   }];
   expect.assertions(1);
   return extract(address).then((received) => {
     expect(received).toEqual(expected);
-  })
+  });
 });
