@@ -18,7 +18,7 @@ const globParse = path => new Promise((resolve, reject) => glob(path, {
   }
 }));
 
-const acornParse = (content, tagContent) => {
+const acornParse = (content /* tagContent */) => {
   parse(content, {
     plugins: {
       jsx: true,
@@ -65,13 +65,12 @@ const walk = (x) => {
         reject(err);
       })
       .on('end', () => {
-        console.log('final result', result);
         resolve(result);
       });
   });
 };
 
-const extract = (arr) => Promise.all(arr.map(x => globParse(x))).then((x) => {
+const extract = arr => Promise.all(arr.map(x => globParse(x))).then((x) => {
   const paths = [].concat(...x);
   return Promise.all(paths.map(path => walk(path))).then(result => [].concat(...result));
 });

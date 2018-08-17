@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const {
-  exec
+  exec,
 } = require('child_process');
 const yargs = require('yargs');
 const pjson = require('../package.json');

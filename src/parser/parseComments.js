@@ -11,7 +11,7 @@ const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
   fs.writeFile(path, wp.parseCommentsTemplate(dataToSave), (err) => {
     if (err) {
-      console.log(err);
+      console.log(err); /* eslint-disable-line no-console */
     }
   });
 };
@@ -32,12 +32,12 @@ const procDesc = (descriptionTagArray, fileObjDesc) => {
 
 const processFile = (tagArray) => {
   const tags = {
-    content: []
+    content: [],
   };
 
   tagArray.forEach((x) => {
     const fileObj = doctrine.parse(x.comment, {
-      unwrap: true
+      unwrap: true,
     });
     fileObj.name = x.name;
     fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);

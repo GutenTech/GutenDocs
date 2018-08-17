@@ -8,6 +8,8 @@
 - **Scrum Master**: Peter Gierke
 - **Development Team Members**: Yuqi Zhu, David Park
 
+> This product is currently in development.  We would love any feedback from anyone making use of GutenDocs while it is under development.  Email us at gutentechdevs@gmail.com.
+
 ## Table of Contents
 
 1. [Usage](#Usage)

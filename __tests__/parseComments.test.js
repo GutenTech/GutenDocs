@@ -1,6 +1,9 @@
+const fs = require('fs');
 const parseComments = require('../src/parser/parseComments.js');
 
-const testOutputLocation = '../../mockData/outputFrom.js';
+const testOutputLocation = './mockData/outputFrom.js';
+
+afterAll(() => fs.unlinkSync(testOutputLocation));
 
 describe('parseComments', () => {
   it('should be a function', () => expect(parseComments).toBeInstanceOf(Function));
@@ -18,32 +21,32 @@ describe('parseComments', () => {
     () => expect(parseComments([{
       content: [{
         comment: '*\n * @description sample description\n ',
-        name: 'someFxnName'
-      }, ],
-      name: '../src/parser/test.js',
-    }, ], testOutputLocation))
-    .toEqual([{
-      content: [{
-        description: 'sample description',
-        tags: [{
-          title: 'description',
-          description: 'sample description'
-        }],
-        name: 'someFxnName'
+        name: 'someFxnName',
       }],
-      fileName: '../src/parser/test.js',
-    }]));
+      name: '../src/parser/test.js',
+    }], testOutputLocation))
+      .toEqual([{
+        content: [{
+          description: 'sample description',
+          tags: [{
+            title: 'description',
+            description: 'sample description',
+          }],
+          name: 'someFxnName',
+        }],
+        fileName: '../src/parser/test.js',
+      }]));
 
   it('should turn a array of comments with tags into AST objects containing info about the comment including an array of tags', () => expect(parseComments(
     [{
       content: [{
-          comment: '*\n * @description sample description\n ',
-          name: 'someFxnName',
-        },
-        {
-          comment: '*\n * @description sample description2\n ',
-          name: 'someFxnName2',
-        }
+        comment: '*\n * @description sample description\n ',
+        name: 'someFxnName',
+      },
+      {
+        comment: '*\n * @description sample description2\n ',
+        name: 'someFxnName2',
+      },
       ],
       name: '../src/parser/test.js',
     }], testOutputLocation,
@@ -60,7 +63,7 @@ describe('parseComments', () => {
         description: 'sample description2',
         tags: [{
           title: 'description',
-          description: 'sample description2'
+          description: 'sample description2',
         }],
         name: 'someFxnName2',
       }],
