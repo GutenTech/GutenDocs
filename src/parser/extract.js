@@ -3,7 +3,7 @@ const {
   parseExpressionAt,
   Parser,
   tokTypes,
-} = require('acorn');
+} = require('acorn-jsx');
 const fs = require('fs');
 const glob = require('glob');
 const klaw = require('klaw');
@@ -25,11 +25,19 @@ const globParse = address => new Promise((resolve, reject) => glob(address, {
 
 const acornParse = (content, tagContent) => {
   parse(content, {
+    plugins: {
+      jsx: true,
+    },
+    allowImportExportEverywhere: true,
     onComment: (b, t, s, d) => {
       if (b && t[0] === '*') {
         const a = {};
         a.comment = t;
-        const p = new Parser(undefined, content, d);
+        const p = new Parser({
+          plugins: {
+            jsx: true,
+          },
+        }, content, d);
         p.nextToken();
         if (p.type === tokTypes._function) {
           a.name = parseExpressionAt(content, d).id.name;
@@ -62,7 +70,7 @@ const walk = (x) => {
   const result = [];
   return exclude(x).then(list => new Promise((resolve, reject) => klaw(x)
     .on('data', (item) => {
-      if (!item.stats.isDirectory() && ['.js', 'jsx'].includes(path.extname(item.path)) && list.includes(path.relative(ROOT, item.path))) {
+      if (!item.stats.isDirectory() && ['.js', '.jsx'].includes(path.extname(item.path)) && list.includes(path.relative(ROOT, item.path))) {
         const tag = {
           content: [],
           name: path.relative(ROOT, item.path),
