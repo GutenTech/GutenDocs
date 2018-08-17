@@ -1,29 +1,9 @@
 const fs = require('fs');
+const utils = require('../src/utils.js');
 const extract = require('../src/parser/extract.js');
 
 fs.writeFileSync = jest.fn();
-// const generateAPIFrame = require('./../src/generateAPIFrame.js');
-
-// const TestFolderName = 'JestTestApi/';
-// let OriginalRCFileContent;
-// if (fs.existsSync('./gutenrc.json')) {
-//   OriginalRCFileContent = fs.readFileSync('./gutenrc.json');
-// }
-// generateAPIFrame('./'.concat('/'), TestFolderName);
-// jest.mock('fs');
-// jest.mock('../src/utils.js');
-
-// const findRC = jest.fn();
-
-// const { findRC } = require('../src/utils.js');
-
-// findRC.absPath = jest.fn();
-
-// findRC.mockReturnValue({ absPath: './' });
-// const a = new findRC();
-// const b = {};
-// const bound = myMock.bind(b);
-// bound();
+utils.findRC = { absPath: './' };
 
 test('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
