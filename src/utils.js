@@ -22,6 +22,7 @@ const findRC = () => {
 const generateFilesaveArray = (absPath, dirName) => {
   const filesToWrite = [];
   const srcPath = path.dirname(__dirname).concat('/');
+  console.log(srcPath);
   let nextPath = srcPath.concat('client/dist/styles.css');
   filesToWrite.push([fs.readFileSync(nextPath), 'styles.css']);
   nextPath = srcPath.concat('client/dist/index.html');
