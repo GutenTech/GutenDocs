@@ -10,7 +10,6 @@ import { NavHashLink as NavLink } from 'react-router-hash-link';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
 const getConfig = () => import('./configData.json');
-const path = require('path');
 
 export default class App extends Component {
   constructor() {
@@ -28,8 +27,6 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
-    const { bulma } = configData;
-    console.log(this.state);
     return (
       <Router>
         <div className="App">
@@ -38,16 +35,19 @@ export default class App extends Component {
             <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
             {/* eslint-enable */}
           </h1>
-          <div className = "download">
-            <button id="npm"><i class="fa fa-download"></i> npm Download</button>
+          <div className="download">
+            <button type="button" id="npm">
+              <i className="fa fa-download" />
+              npm Download
+            </button>
           </div>
-          <div className = "starter">
-            <Intro/>
+          <div className="starter">
+            <Intro />
           </div>
           {
             parsedData.map(file => (
               <React.Fragment>
-                
+
                 {/* <h2>
                   {
                     `Functions in the file ${path.basename(file.fileName)}`
@@ -56,7 +56,7 @@ export default class App extends Component {
                 <div>
                   {
                     file.content.map(func => (
-                      <div className = "body">
+                      <div className="body">
                         <h2>
                           {`${func.name} function`}
                         </h2>
@@ -71,7 +71,7 @@ export default class App extends Component {
             ))
         }
         </div>
-    </Router>
+      </Router>
     );
   }
 }
