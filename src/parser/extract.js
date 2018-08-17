@@ -11,6 +11,7 @@ const path = require('path');
 const {
   Walker,
 } = require('ignore-walk');
+
 const ROOT = require('../utils.js').findRC().absPath;
 
 const globParse = address => new Promise((resolve, reject) => glob(address, {
