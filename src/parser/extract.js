@@ -51,7 +51,7 @@ const exclude = (address) => {
   };
   return new Promise((resolve, reject) => {
     const walk = new Walker(options).on('done', resolve).on('error', reject);
-    const relAddress = process.env.TEST ? '../../mockData' : path.relative(ROOT, address);
+    const relAddress = path.relative(ROOT, address);
     const rule = `*\n!${relAddress}/**/*\n!${relAddress}`;
     walk.onReadIgnoreFile(1, rule, () => {});
     walk.start();
