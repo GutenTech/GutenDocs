@@ -5,7 +5,7 @@ node_modules
 #config
 package-lock.json
 .vscode
-.gutenrc
+.gutenrc.json
 
 #filetypes
 .DS_Store
