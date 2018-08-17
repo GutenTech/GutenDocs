@@ -1,4 +1,29 @@
+const fs = require('fs');
 const extract = require('../src/parser/extract.js');
+
+fs.writeFileSync = jest.fn();
+// const generateAPIFrame = require('./../src/generateAPIFrame.js');
+
+// const TestFolderName = 'JestTestApi/';
+// let OriginalRCFileContent;
+// if (fs.existsSync('./gutenrc.json')) {
+//   OriginalRCFileContent = fs.readFileSync('./gutenrc.json');
+// }
+// generateAPIFrame('./'.concat('/'), TestFolderName);
+// jest.mock('fs');
+// jest.mock('../src/utils.js');
+
+// const findRC = jest.fn();
+
+// const { findRC } = require('../src/utils.js');
+
+// findRC.absPath = jest.fn();
+
+// findRC.mockReturnValue({ absPath: './' });
+// const a = new findRC();
+// const b = {};
+// const bound = myMock.bind(b);
+// bound();
 
 test('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
@@ -15,7 +40,7 @@ test('Single comment test', () => {
   });
 });
 
-xtest('Multiple comments test', () => {
+test('Multiple comments test', () => {
   const address = ['./mockData/subFolder/multipleComments.js'];
   const expected = [{
     content: [{
@@ -33,7 +58,7 @@ xtest('Multiple comments test', () => {
   });
 });
 
-xtest('Declare function as a const', () => {
+test('Declare function as a const', () => {
   const address = ['./mockData/constFunction.js'];
   const expected = [{
     content: [{
@@ -48,7 +73,7 @@ xtest('Declare function as a const', () => {
   });
 });
 
-xtest('Arrow Function test', () => {
+test('Arrow Function test', () => {
   const address = ['./mockData/subFolder/moreFolder/arrowExpression.js'];
   const expected = [{
     content: [{
@@ -137,3 +162,7 @@ xtest('should work for glob pattern', () => {
     expect(received).toEqual(expected);
   });
 });
+
+// fs.unlinkSync('./'.concat(TestFolderName));
+
+// if (OriginalRCFileContent) fs.writeFileSync('.gutenrc.json', OriginalRCFileContent);

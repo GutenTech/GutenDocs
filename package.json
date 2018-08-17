@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "lint": "eslint --ext .jsx --ext .js .",
-    "watchTest": "set NODE_ENV=test&& jest --watch",
+    "watchTest": "jest --watch",
     "test": "jest --maxWorkers=4 --detectOpenHandles",
     "build-dev": "webpack --mode development && gutendocs --reset",
     "react-dev": "webpack --mode development --watch"
