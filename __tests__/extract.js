@@ -1,6 +1,6 @@
 const extract = require('../src/parser/extract.js');
 
-test('Single comment test', () => {
+xtest('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
   const expected = [{
     content: [{
@@ -15,7 +15,7 @@ test('Single comment test', () => {
   });
 });
 
-test('Multiple comments test', () => {
+xtest('Multiple comments test', () => {
   const address = ['./mockData/subFolder/multipleComments.js'];
   const expected = [{
     content: [{
@@ -33,7 +33,7 @@ test('Multiple comments test', () => {
   });
 });
 
-test('Declare function as a const', () => {
+xtest('Declare function as a const', () => {
   const address = ['./mockData/constFunction.js'];
   const expected = [{
     content: [{
@@ -48,7 +48,7 @@ test('Declare function as a const', () => {
   });
 });
 
-test('Arrow Function test', () => {
+xtest('Arrow Function test', () => {
   const address = ['./mockData/subFolder/moreFolder/arrowExpression.js'];
   const expected = [{
     content: [{
