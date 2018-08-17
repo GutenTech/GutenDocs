@@ -20,4 +20,5 @@ webpack.config.js
 #testing files
 test_setup.js
 __tests__
+travisbuild.sh
 
