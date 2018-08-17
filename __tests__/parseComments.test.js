@@ -21,33 +21,28 @@ describe('parseComments', () => {
         name: 'someFxnName',
       }],
       name: '../src/parser/test.js',
-    }], testOutputLocation))
-      .toEqual([{
-        content: [{
-          description: 'sample description',
-          tags: [{
-            title: 'description',
-            description: 'sample description',
-          }],
-          name: 'someFxnName',
-        }],
-        fileName: '../src/parser/test.js',
-      }]));
-
-  it('should turn a array of comments with tags into AST objects containing info about the comment including an array of tags', () => expect(parseComments(
-    [{
+    }], testOutputLocation)).toEqual([{
       content: [{
-        comment: '*\n * @description sample description\n ',
+        description: 'sample description',
+        tags: [{
+          title: 'description',
+          description: 'sample description',
+        }],
         name: 'someFxnName',
-      },
-      {
-        comment: '*\n * @description sample description2\n ',
-        name: 'someFxnName2',
-      },
-      ],
-      name: '../src/parser/test.js',
-    }], testOutputLocation,
-  )).toEqual(
+      }],
+      fileName: '../src/parser/test.js',
+    }]));
+
+  it('should turn a array of comments with tags into AST objects containing info about the comment including an array of tags', () => expect(parseComments([{
+    content: [{
+      comment: '*\n * @description sample description\n ',
+      name: 'someFxnName',
+    }, {
+      comment: '*\n * @description sample description2\n ',
+      name: 'someFxnName2',
+    }],
+    name: '../src/parser/test.js',
+  }], testOutputLocation)).toEqual(
     [{
       content: [{
         description: 'sample description',
