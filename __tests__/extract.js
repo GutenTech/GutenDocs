@@ -98,7 +98,7 @@ test('should work for a folder and only process js and jsx file', () => {
   });
 });
 
-xtest('should work for jsx', () => {
+test('should work for jsx', () => {
   const address = ['./mockData/arrowExpression.jsx'];
   const expected = [{
     content: [{
@@ -113,7 +113,7 @@ xtest('should work for jsx', () => {
   });
 });
 
-xtest('should work for glob pattern', () => {
+test('should work for glob pattern', () => {
   const address = ['./mockData/**/*.js'];
   const expected = [{
     content: [{
