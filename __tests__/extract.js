@@ -1,9 +1,15 @@
-const fs = require('fs');
-const utils = require('../src/utils.js');
+// const fs = require('fs');
+// const { findRC } = require('../src/utils.js');
 const extract = require('../src/parser/extract.js');
 
-fs.writeFileSync = jest.fn();
-utils.findRC = { absPath: './' };
+
+// module.lib.baz = jest.fn(() => 'bar');
+
+
+// fs.writeFileSync = jest.fn();
+// utils.findRC = { absPath: 'asdfasdfasdfsdf' };
+// const findRC = jest.fn();
+// findRC.mockReturnValue({ absPath: 'asdfasdfasdf' });
 
 test('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
@@ -68,7 +74,7 @@ test('Arrow Function test', () => {
   });
 });
 
-xtest('should work for a folder and only process js and jsx file', () => {
+test('should work for a folder and only process js and jsx file', () => {
   const address = ['./mockData/subFolder'];
   const expected = [{
     content: [{
