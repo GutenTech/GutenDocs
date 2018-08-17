@@ -1,15 +1,6 @@
-// const fs = require('fs');
-// const { findRC } = require('../src/utils.js');
 const extract = require('../src/parser/extract.js');
 
-
-// module.lib.baz = jest.fn(() => 'bar');
-
-
-// fs.writeFileSync = jest.fn();
-// utils.findRC = { absPath: 'asdfasdfasdfsdf' };
-// const findRC = jest.fn();
-// findRC.mockReturnValue({ absPath: 'asdfasdfasdf' });
+jest.mock('../src/utils.js');
 
 test('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
