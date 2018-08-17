@@ -13,3 +13,4 @@ package-lock.json
 #files
 bundle.js
 *.bundle.js
+outputFromTest.js

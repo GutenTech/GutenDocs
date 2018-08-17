@@ -1,9 +1,6 @@
-const fs = require('fs');
 const parseComments = require('../src/parser/parseComments.js');
 
-const testOutputLocation = './mockData/outputFrom.js';
-
-afterAll(() => fs.unlinkSync(testOutputLocation));
+const testOutputLocation = './mockData/outputFromTest.js';
 
 describe('parseComments', () => {
   it('should be a function', () => expect(parseComments).toBeInstanceOf(Function));
