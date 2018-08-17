@@ -1,7 +1,7 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
-const wp = require('./webpackTemplates.js');
-const errors = require('./errors.js');
+const wp = require('./utils/webpackTemplates.js');
+const errors = require('./utils/errors.js');
 
 /**
  * @description This function will save the data to the client/dist folder
