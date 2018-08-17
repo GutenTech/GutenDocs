@@ -1,6 +1,6 @@
 const extract = require('../src/parser/extract.js');
 
-xtest('Single comment test', () => {
+test('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
   const expected = [{
     content: [{
