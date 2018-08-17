@@ -5,7 +5,8 @@ node_js:
 script:
  - npm run lint
  - npm test
- - travisbuild.sh
+
  
 env:
  - ROOT="../../mockData"
+ - ITEMPATH=""
