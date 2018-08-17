@@ -63,7 +63,7 @@ test('Arrow Function test', () => {
   });
 });
 
-test('should work for a folder and only process js and jsx file', () => {
+xtest('should work for a folder and only process js and jsx file', () => {
   const address = ['./mockData/subFolder'];
   const expected = [{
     content: [{
@@ -87,7 +87,7 @@ test('should work for a folder and only process js and jsx file', () => {
   });
 });
 
-test('should work for glob pattern', () => {
+xtest('should work for glob pattern', () => {
   const address = ['./mockData/**/*.js'];
   const expected = [{
     content: [{
