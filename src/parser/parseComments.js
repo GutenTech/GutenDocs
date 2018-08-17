@@ -36,6 +36,7 @@ const processFile = (file) => {
     });
     fileObj.name = x.name;
     procDesc(fileObj);
+    // fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
     tags.content.push(fileObj);
   });
   return tags;

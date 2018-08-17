@@ -15,6 +15,7 @@ const {
   findRC,
   replaceTheRCFile,
 } = require('../src/utils.js');
+const execSorts = require( '../sorters/execSorts.js' );
 
 yargs.usage(`$0 ${
   pjson.version
@@ -150,6 +151,7 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       if (missingFiles.length === 0) {
         extract(argv._).then((data) => {
           parseComments(data, address);
+          execSorts();
         });
       }
     }
