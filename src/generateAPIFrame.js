@@ -3,10 +3,10 @@ const updateConfig = require('./updateConfig.js');
 const { generateFilesaveArray } = require('./utils.js');
 
 const generateAPIFrame = (relPath, dirName) => {
-  if (!fs.existsSync(relPath.concat('.gutenrc'))) {
+  if (!fs.existsSync(relPath.concat('.gutenrc.json'))) {
     const absPath = fs.realpathSync(relPath).concat('/');
     generateFilesaveArray(absPath, dirName);
-    fs.writeFileSync(absPath.concat('.gutenrc'), `{ "apiDir": "${dirName}" }`);
+    fs.writeFileSync(absPath.concat('.gutenrc.json'), `{ "apiDir": "${dirName}" }`);
     updateConfig(absPath.concat(dirName));
   } else {
     /* eslint-disable-next-line no-console */

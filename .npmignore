@@ -11,7 +11,7 @@ package-lock.json
 .eslintrc.js
 .travis.yml
 webpack.config.js
-.gutenrc.
+.gutenrc.json
 .gitignore
 
 #filetypes

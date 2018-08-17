@@ -5,14 +5,14 @@ const findRC = () => {
   let rcpath = false;
   let targetPath = fs.realpathSync('./');
   while (rcpath === false && targetPath !== path.dirname(targetPath)) {
-    const results = fs.readdirSync(targetPath).filter(file => file === '.gutenrc');
+    const results = fs.readdirSync(targetPath).filter(file => file === '.gutenrc.json');
     rcpath = results.length !== 0;
     if (!rcpath) {
       targetPath = path.dirname(targetPath);
     }
   }
   if (rcpath === true) {
-    const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc'));
+    const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc.json'));
     const gutenfolder = JSON.parse(gutenrc).apiDir;
     return { absPath: targetPath.concat('/'), dirName: gutenfolder };
   }
@@ -54,8 +54,6 @@ const generateFilesaveArray = (absPath, dirName) => {
   }
 
   filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file[1]), file[0]));
-
-  // fs.writeFileSync(APIdir.concat(.gutenrc), file[0]);
 };
 
 module.exports.generateFilesaveArray = generateFilesaveArray;

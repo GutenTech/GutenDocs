@@ -13,8 +13,8 @@ const updateConfig = (APIdir) => {
   if (!fs.existsSync(pathToConfigBundle)) {
     /* eslint-disable-next-line no-console */
     console.log(`Write Error:
-    The folder specified in the .gutenrc file seems to be missing.  
-    Update .gutenrc to match your API folder if you have changed the folder name,
+    The folder specified in the .gutenrc.json file seems to be missing.  
+    Update .gutenrc.json to match your API folder if you have changed the folder name,
     or call "gutendocs --reset" if and only if you have accidentally deleted it 
     and would like it to be reset to the original state.`);
   } else {
