@@ -87,6 +87,21 @@ xtest('should work for a folder and only process js and jsx file', () => {
   });
 });
 
+xtest('should work for jsx', () => {
+  const address = ['./mockData/arrowExpression.jsx'];
+  const expected = [{
+    content: [{
+      comment: '*\n * @description displays the info about the field\n * @param props.data.fieldName the name of the field\n * @param props.data.notes the notes on the field\n ',
+      name: 'FieldInfo',
+    }],
+    name: 'mockData/arrowExpression.jsx',
+  }];
+  expect.assertions(1);
+  return extract(address).then((received) => {
+    expect(received).toEqual(expected);
+  });
+});
+
 xtest('should work for glob pattern', () => {
   const address = ['./mockData/**/*.js'];
   const expected = [{
