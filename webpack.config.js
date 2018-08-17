@@ -43,14 +43,17 @@ module.exports = {
       //   test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
       //   loader: "url-loader?limit=10000&mimetype=image/svg+xml"
       // },
-      // {
-      //   test: /\.css$/, loader: 'style-loader!css-loader'
-      // },
+      {
+        test: /\.css$/, loader: 'style-loader!css-loader',
+      },
       {
         test: /\.json/,
         type: 'javascript/auto',
         use: [require.resolve('json-loader')],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
 };
