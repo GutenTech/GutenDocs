@@ -8,12 +8,12 @@ const yargs = require('yargs');
 const pjson = require('../package.json');
 const extract = require('../src/parser/extract.js');
 const parseComments = require('../src/parser/parseComments.js');
-const generateAPIFrame = require('../src/generateAPIFrame.js');
-const refreshAPI = require('../src/refreshAPI.js');
-const updateConfig = require('../src/updateConfig.js');
 const {
   findRC,
-  replaceTheRCFile,
+  refreshFile,
+  updateConfig,
+  refreshAPI,
+  generateAPIFrame,
 } = require('../src/utils.js');
 const { execSorts } = require('../src/sorters/execSorts.js');
 const { saveTags } = require('../src/parser/saveTags.js');
@@ -105,7 +105,7 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
   }
 
   if (pathData.err === 'corruptJSON') {
-    replaceTheRCFile(pathData);
+    refreshFile(pathData, '.gutenrc.json', 'client/dist/.gutenRCTemplate.json');
     return;
   }
 
