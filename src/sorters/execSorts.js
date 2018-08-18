@@ -5,9 +5,12 @@ const { sortBySection } = require('./sortBySection.js');
 const execSorts = (ast) => {
   // extract an array of files to be sorted
   // const sortFiles = gutenrc.skeleton.sortByOrder;
-  //console.log(ast);
+  // console.log(ast);
   // execute a piping function sequence here
-  sortBySection(ast, gutenrc.skeleton.sortBySections.sections, 1);
+  const sectionName = gutenrc.skeleton.sortBySections.sections;
+  const priority = 1;
+  const catchAll = gutenrc.skeleton.sortBySections.catchAllSection;
+  sortBySection(ast, sectionName, priority, catchAll);
 };
 
 module.exports.execSorts = execSorts;

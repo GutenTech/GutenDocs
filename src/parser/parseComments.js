@@ -28,6 +28,12 @@ const procDesc = (fileObj) => {
 
 const processFile = (file) => {
   errors.parseCommentsFileErr(file);
+/**
+ * @description catchAll descritpiton
+ * @param tagArray {[]} catchall param
+ * @return catchall return
+ */
+const processFile = (tagArray) => {
   const tags = {
     content: [],
     fileName: file.name,
