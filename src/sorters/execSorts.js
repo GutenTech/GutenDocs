@@ -7,7 +7,7 @@ const execSorts = (ast) => {
   // const sortFiles = gutenrc.skeleton.sortByOrder;
   //console.log(ast);
   // execute a piping function sequence here
-  sortBySection(ast, gutenrc.skeleton.sortBySections.sections);
+  sortBySection(ast, gutenrc.skeleton.sortBySections.sections, 1);
 };
 
 module.exports.execSorts = execSorts;
