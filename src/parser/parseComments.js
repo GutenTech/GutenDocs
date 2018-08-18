@@ -26,8 +26,6 @@ const procDesc = (fileObj) => {
   fileObj.description = fileObj.tags.reduce((acc, tag) => (tag.title === 'description' ? acc + d + tag.description : acc), '');
 };
 
-const processFile = (file) => {
-  errors.parseCommentsFileErr(file);
 /**
  * @description catchAll descritpiton
  * @param tagArray {[]} catchall param
@@ -36,19 +34,19 @@ const processFile = (file) => {
 const processFile = (tagArray) => {
   const tags = {
     content: [],
-    fileName: file.name,
   };
-  file.content.forEach((x) => {
+
+  tagArray.forEach((x) => {
     const fileObj = doctrine.parse(x.comment, {
       unwrap: true,
     });
     fileObj.name = x.name;
-    procDesc(fileObj);
-    /* fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description); */
+    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
     tags.content.push(fileObj);
   });
   return tags;
 };
+
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
