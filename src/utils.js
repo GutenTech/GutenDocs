@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const inquirer = require('inquirer');
 
 const findRC = () => {
   let rcpath = false;
@@ -12,11 +13,23 @@ const findRC = () => {
     }
   }
   if (rcpath === true) {
+    let parsingError = false;
     const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc.json'));
-    const gutenfolder = JSON.parse(gutenrc).apiDir;
+    let gutenfolder;
+    try {
+      gutenfolder = JSON.parse(gutenrc).apiDir;
+    } catch (error) {
+      parsingError = true;
+    }
+    if (parsingError) {
+      return { absPath: targetPath.concat('/'), err: 'corruptJSON' };
+    }
+    if (gutenfolder === undefined) {
+      return { absPath: 'missing' };
+    }
     return { absPath: targetPath.concat('/'), dirName: gutenfolder };
   }
-  return false;
+  return { absPath: 'unintialized' };
 };
 
 const generateFilesaveArray = (absPath, dirName) => {
@@ -56,5 +69,62 @@ const generateFilesaveArray = (absPath, dirName) => {
   filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file[1]), file[0]));
 };
 
+const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, original) => {
+  if (err) console.log(err); /* eslint-disable-line no-console */
+  return fs.writeFile(destination, original, (writeErr) => {
+    if (writeErr) throw writeErr;
+    if (cb !== undefined) {
+      cb();
+    }
+  });
+});
+
+const replaceTheRCFile = (pathData) => {
+  /* eslint-disable-next-line no-console */
+  const RCFile = pathData.absPath.concat('.gutenrc.json');
+  const srcPath = path.dirname(__dirname).concat('/');
+  /* eslint-disable-next-line no-console */
+  console.log('Your .gutenrc.json file seems to no longer be a valid json file.');
+  const corruptJSONPrompt = [
+    {
+      type: 'confirm', name: 'deleteRC', message: 'Can I erase the existing file and replace it with the default settings?', default: false,
+    },
+  ];
+  const confirmDeletePrompt = [
+    {
+      type: 'list',
+      name: 'method',
+      message: `You could loose the information currently in the file.
+      Are you sure you want to overwrite it?`,
+      choices: [
+        'I changed my mind, dont delete my .gutenrc.json',
+        'Save a copy as .gutenrc.backup',
+        'Just overwrite it.',
+      ],
+    },
+  ];
+
+  inquirer
+    .prompt(corruptJSONPrompt)
+    .then((answer) => {
+      if (answer.deleteRC === true) {
+        inquirer
+          .prompt(confirmDeletePrompt)
+          .then((how) => {
+            if (how.method === 'I changed my mind, dont delete my .gutenrc.json') {
+              // do nothing
+            } else if (how.method === 'Save a copy as .gutenrc.backup') {
+              copyFile(RCFile, '.gutenrc.backup', () => {
+                copyFile(srcPath.concat('client/dist/.gutenRCTemplate.json'), RCFile);
+              });
+            } else if (how.method === 'Just overwrite it.') {
+              copyFile(srcPath.concat('client/dist/.gutenRCTemplate'), RCFile);
+            }
+          });
+      }
+    });
+};
+
+module.exports.replaceTheRCFile = replaceTheRCFile;
 module.exports.generateFilesaveArray = generateFilesaveArray;
 module.exports.findRC = findRC;

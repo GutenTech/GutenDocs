@@ -11,7 +11,7 @@ const path = require('path');
 const {
   Walker,
 } = require('ignore-walk');
-const ROOT = require('../utils.js').findRC().absPath;
+const { findRC } = require('../utils.js');
 
 const globParse = address => new Promise((resolve, reject) => glob(address, {
   dot: true,
@@ -52,7 +52,7 @@ const acornParse = (content, tagContent) => {
   });
 };
 
-const exclude = (address) => {
+const exclude = (address, ROOT) => {
   const options = {
     path: ROOT,
     ignoreFiles: ['.gutenignore', 1],
@@ -66,9 +66,9 @@ const exclude = (address) => {
   });
 };
 
-const walk = (x) => {
+const walk = (x, ROOT) => {
   const result = [];
-  return exclude(x).then(list => new Promise((resolve, reject) => klaw(x)
+  return exclude(x, ROOT).then(list => new Promise((resolve, reject) => klaw(x)
     .on('data', (item) => {
       if (!item.stats.isDirectory() && ['.js', '.jsx'].includes(path.extname(item.path)) && list.includes(path.relative(ROOT, item.path))) {
         const tag = {
@@ -90,8 +90,10 @@ const walk = (x) => {
 
 
 const extract = arr => Promise.all(arr.map(x => globParse(x))).then((x) => {
+  const ROOT = findRC().absPath;
   const paths = [].concat(...x);
-  return Promise.all(paths.map(address => walk(address))).then(result => [].concat(...result));
+  return Promise.all(paths.map(address => walk(address, ROOT)))
+    .then(result => [].concat(...result));
 });
 
 module.exports = extract;
