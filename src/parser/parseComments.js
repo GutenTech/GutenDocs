@@ -1,6 +1,8 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
-const { parseCommentsTemplate } = require('./utils/webpackTemplates.js');
+const {
+  parseCommentsTemplate,
+} = require('./utils/webpackTemplates.js');
 const errors = require('./utils/errors.js');
 
 /**
@@ -16,36 +18,28 @@ const saveTags = (data, path) => {
   });
 };
 
-
-const procDesc = (descriptionTagArray, fileObjDesc) => {
-  let description = fileObjDesc;
-
-  descriptionTagArray.forEach((descriptionTag) => {
-    if (fileObjDesc !== '') {
-      description = description.concat('\n');
-    }
-    description = description.concat(descriptionTag.description);
-  });
-  return description;
+const procDesc = (fileObj) => {
+  const d = fileObj.description ? `${fileObj.description}\n` : '';
+  // eslint-disable-next-line no-param-reassign
+  fileObj.description = fileObj.tags.reduce((acc, tag) => (tag.title === 'description' ? acc + d + tag.description : acc), '');
 };
 
-
-const processFile = (tagArray) => {
+const processFile = (file) => {
+  errors.parseCommentsFileErr(file);
   const tags = {
     content: [],
+    fileName: file.name,
   };
-
-  tagArray.forEach((x) => {
+  file.content.forEach((x) => {
     const fileObj = doctrine.parse(x.comment, {
       unwrap: true,
     });
     fileObj.name = x.name;
-    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
+    procDesc(fileObj);
     tags.content.push(fileObj);
   });
   return tags;
 };
-
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
@@ -53,18 +47,56 @@ const processFile = (tagArray) => {
  * @param address {string} The path that the file should be saved to.
  * @return n/a
  */
+
 const parseComments = (filesArray, address) => {
   errors.parseCommentsArrayErr(filesArray);
-
-  const files = [];
-  filesArray.forEach((file) => {
-    errors.parseCommentsFileErr(file);
-    const fileContent = processFile(file.content);
-    fileContent.fileName = file.name;
-    files.push(fileContent);
-  });
+  const files = filesArray.reduce((acc, f) => acc.push(processFile(f)) && acc, []);
   saveTags(files, address);
   return files;
 };
 
 module.exports = parseComments;
+
+
+// const procDesc = (descriptionTagArray, fileObjDesc) => {
+//   let description = fileObjDesc;
+
+//   descriptionTagArray.forEach((descriptionTag) => {
+//     if (fileObjDesc !== '') {
+//       description = description.concat('\n');
+//     }
+//     description = description.concat(descriptionTag.description);
+//   });
+//   return description;
+// };
+// const processFile = (file) => {
+// const tags = {
+//     content: [],
+//     fileName: file.name,
+//   };
+
+//   file.forEach((x) => {
+//       const fileObj = doctrine.parse(x.comment, {
+//           unwrap: true,
+//         });
+//         console.log("fileobj", fileObj);
+//         fileObj.name = x.name;
+//         fileObj.description = procDesc(fileObj.tags.filter(tag =>
+//           tag.title === 'description'), fileObj.description);
+//         tags.content.push(fileObj);
+//       });
+//       return tags;
+//     };
+//     const parseComments = (filesArray, address) => {
+//         errors.parseCommentsArrayErr(filesArray);
+
+// const files = [];
+// filesArray.forEach((file) => {
+//     errors.parseCommentsFileErr(file);
+//     const fileContent = processFile(file.content);
+//     fileContent.fileName = file.name;
+//     files.push(fileContent);
+//   });
+//   saveTags(files, address);
+//   return files;
+// };
