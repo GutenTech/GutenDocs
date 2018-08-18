@@ -15,7 +15,7 @@ const {
   findRC,
   replaceTheRCFile,
 } = require('../src/utils.js');
-const execSorts = require( '../sorters/execSorts.js' );
+const { execSorts } = require('../src/sorters/execSorts.js');
 
 yargs.usage(`$0 ${
   pjson.version
