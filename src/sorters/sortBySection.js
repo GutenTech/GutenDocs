@@ -1,16 +1,16 @@
-/* eslint-disable */
-
-const sortBySection = (ast, sectionTag, priority) => {
-  //const sectionName = sectionTag.slice(1);
-  sectionName = 'section';
+const sortBySection = (ast, sectionTag, priority, catchAllSection) => {
+  const sectionName = sectionTag.slice(1);
   ast.forEach((file) => {
-    //check if comment block has matching section tag in file's content array
     file.content.forEach((docBlock) => {
-      docBlock.tags.forEach((tag) => {
+      docBlock.tags.forEach((tag, index) => {
         if (tag.title === sectionName) {
-          //we have found a matching section tag name, assign header/priority
+          /* eslint-disable */
           docBlock.header = tag.description;
           docBlock.priority = priority;
+        } else if (index === docBlock.tags - 1 && tag.title !== sectionName) {
+          // If section not detected, assign catchAll section (only if defined)
+          docBlock.header = catchAllSection === '' ? undefined : catchAllSection;
+          /* eslint-enable */
         }
       });
     });
