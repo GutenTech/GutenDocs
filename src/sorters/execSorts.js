@@ -14,8 +14,7 @@ const execSorts = (ast) => {
   
   const sectionName = gutenrc.skeleton.sortBySections.sections;
   const priority = 1;
-  const catchAll = gutenrc.skeleton.sortBySections.catchAllSection;
-  return sortBySection(ast, sectionName, priority, catchAll);
+  return sortBySection(ast, sectionName, priority);
 };
 
 module.exports.execSorts = execSorts;

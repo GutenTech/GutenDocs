@@ -39,7 +39,7 @@ const sortBySection = (ast, sectionTag, priority) => {
       });
     });
   });
-  //console.log(JSON.stringify(ast));
+  // console.log(JSON.stringify(ast));
   return ast;
 };
 

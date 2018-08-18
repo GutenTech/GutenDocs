@@ -27,6 +27,7 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
+    console.log(parsedData);
     return (
       <Router>
         <div className="App">
