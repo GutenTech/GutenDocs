@@ -3,7 +3,8 @@
   "skeleton":{
     "sortByOrder": ["sortBySections"],
     "sortBySections": {
-      "sections":"@section"
+      "sections":"@section",
+      "catchAllSection": "misc"
     }
   }
 } 
