@@ -13,6 +13,7 @@ const refreshAPI = require('../src/refreshAPI.js');
 const updateConfig = require('../src/updateConfig.js');
 const {
   findRC,
+  replaceTheRCFile,
 } = require('../src/utils.js');
 
 yargs.usage(`$0 ${
@@ -86,48 +87,53 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
         console.log(result); /* eslint-disable-line no-console */
       }
     }));
+    return;
   }
 
   // update the config file
   if (argv.config) {
-    if (pathData === false) {
+    if (typeof pathData === 'string') {
       /* eslint-disable-next-line no-console */
-      console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
+      console.log('pathData');
     } else {
       updateConfig(pathData.absPath.concat(pathData.dirName));
     }
+    return;
+  }
+
+  if (pathData.absPath === 'unintialized ') {
+    /* eslint-disable-next-line no-console */
+    console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
+    return;
+  }
+
+  if (pathData.absPath === 'missing') {
+    /* eslint-disable-next-line no-console */
+    console.log('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be.');
+    return;
+  }
+
+  if (pathData.err === 'corruptJSON') {
+    replaceTheRCFile(pathData);
+    return;
   }
 
   // parse all files in directory and all subdirectories
   if (argv.all) {
-    if (pathData === false) {
-      /* eslint-disable-next-line no-console */
-      console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
-    } else {
-      // const exclude = fs.readFileSync(`${pathData.absPath}/.gutenignore`, 'utf8').split('\n');
-      extract(['./']).then((data) => {
-        parseComments(data, address);
-      });
-    }
+    extract(['./']).then((data) => {
+      parseComments(data, address);
+    });
+    return;
   }
 
   // reset the files to the way they were when initialize
   if (argv.reset) {
-    if (pathData === false) {
-      /* eslint-disable-next-line no-console */
-      console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
-    } else {
-      refreshAPI(pathData.absPath, pathData.dirName);
-    }
+    refreshAPI(pathData.absPath, pathData.dirName);
+    return;
   }
 
   // if user supplied files parse them
   if (argv._.length > 0) {
-    if (pathData === false) {
-      /* eslint-disable-next-line no-console */
-      console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
-    }
-
     // if the gutendocs has been intialized
     if (pathData !== false) {
       const missingFiles = [];
