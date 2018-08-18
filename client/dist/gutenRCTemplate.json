@@ -1,0 +1,9 @@
+{ 
+  "apiDir": "GutenApi/",
+  "skeleton":{
+    "sortByOrder": ["sortBySections"],
+    "sortBySections": {
+      "sections":"@section"
+    }
+  }
+} 
