@@ -1,9 +1,13 @@
-const gutenrc = require('../../.gutenrc.json');
+// const gutenrc = require('../../.gutenrc.json');
+const { sortBySection } = require('./sortBySection.js');
 
 
 const execSorts = (ast) => {
-  //console.log(gutenrc);
-  console.log(gutenrc.skeleton.sortByOrder);
+  // extract an array of files to be sorted
+  // const sortFiles = gutenrc.skeleton.sortByOrder;
+
+  // execute a piping function sequence here
+  sortBySection();
 };
 
 module.exports.execSorts = execSorts;
