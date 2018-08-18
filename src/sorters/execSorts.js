@@ -11,3 +11,13 @@ const execSorts = (ast) => {
 };
 
 module.exports.execSorts = execSorts;
+
+/* eslint-disable */
+/*
+
+Current Notes:
+  The latest custom tag will overwrite earlier custom tags (like CSS rules),
+  this allows the user to easily reassign
+
+
+*/
