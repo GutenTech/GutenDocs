@@ -7,6 +7,7 @@ const errors = require('./utils/errors.js');
 
 /**
  * @description This function will save the data to the client/dist folder
+ * @section SOmething here
  */
 
 const saveTags = (data, path) => {
@@ -46,6 +47,7 @@ const processFile = (file) => {
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
  * @param commentsArray {[]} An array of JSDoc Comment Blocks structured in AST.
  * @param address {string} The path that the file should be saved to.
+ * @section SOmething here
  * @return n/a
  */
 

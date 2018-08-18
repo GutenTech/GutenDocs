@@ -1,8 +1,20 @@
+/* eslint-disable */
+
 const sortBySection = (ast, sectionTag) => {
+  //const sectionName = sectionTag.slice(1);
+  sectionName = 'section';
 
   ast.forEach((file) => {
-    console.log(file.fileName);
-    console.log(file.content)
+    //console.log(file.fileName);
+    //console.log(file.content)
+    
+    //check each comment block and see if it has a section tag in that file's content array
+    file.content.forEach((docBlock) => {
+      docBlock.tags.forEach((tagName) => {
+        if (tagName.title === sectionName) {console.log('found!', sectionName)}
+      });
+    });
+  
   });
 };
 
