@@ -82,7 +82,6 @@ const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, origin
 const replaceTheRCFile = (pathData) => {
   /* eslint-disable-next-line no-console */
   const RCFile = pathData.absPath.concat('.gutenrc.json');
-  const srcPath = path.dirname(__dirname).concat('/');
   /* eslint-disable-next-line no-console */
   console.log('Your .gutenrc.json file seems to no longer be a valid json file.');
   const corruptJSONPrompt = [
@@ -94,7 +93,7 @@ const replaceTheRCFile = (pathData) => {
     {
       type: 'list',
       name: 'method',
-      message: `You could loose the information currently in the file.
+      message: `You could lose the information currently in the file.
       Are you sure you want to overwrite it?`,
       choices: [
         'I changed my mind, dont delete my .gutenrc.json',
@@ -114,11 +113,11 @@ const replaceTheRCFile = (pathData) => {
             if (how.method === 'I changed my mind, dont delete my .gutenrc.json') {
               // do nothing
             } else if (how.method === 'Save a copy as .gutenrc.backup') {
-              copyFile(RCFile, '.gutenrc.backup', () => {
-                copyFile(srcPath.concat('client/dist/.gutenRCTemplate.json'), RCFile);
+              copyFile(RCFile, pathData.absPath.concat('.gutenrc.backup'), () => {
+                copyFile(pathData.absPath.concat('client/dist/.gutenRCTemplate.json'), RCFile);
               });
             } else if (how.method === 'Just overwrite it.') {
-              copyFile(srcPath.concat('client/dist/.gutenRCTemplate'), RCFile);
+              copyFile(pathData.absPath.concat('client/dist/.gutenRCTemplate'), RCFile);
             }
           });
       }
