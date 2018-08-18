@@ -44,7 +44,7 @@ const processFile = (tagArray) => {
     });
     fileObj.name = x.name;
     procDesc(fileObj);
-    // fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
+    /* fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description); */
     tags.content.push(fileObj);
   });
   return tags;
@@ -66,47 +66,3 @@ const parseComments = (filesArray, address) => {
 };
 
 module.exports = parseComments;
-
-
-// const procDesc = (descriptionTagArray, fileObjDesc) => {
-//   let description = fileObjDesc;
-
-//   descriptionTagArray.forEach((descriptionTag) => {
-//     if (fileObjDesc !== '') {
-//       description = description.concat('\n');
-//     }
-//     description = description.concat(descriptionTag.description);
-//   });
-//   return description;
-// };
-// const processFile = (file) => {
-// const tags = {
-//     content: [],
-//     fileName: file.name,
-//   };
-
-//   file.forEach((x) => {
-//       const fileObj = doctrine.parse(x.comment, {
-//           unwrap: true,
-//         });
-//         console.log("fileobj", fileObj);
-//         fileObj.name = x.name;
-//         fileObj.description = procDesc(fileObj.tags.filter(tag =>
-//           tag.title === 'description'), fileObj.description);
-//         tags.content.push(fileObj);
-//       });
-//       return tags;
-//     };
-//     const parseComments = (filesArray, address) => {
-//         errors.parseCommentsArrayErr(filesArray);
-
-// const files = [];
-// filesArray.forEach((file) => {
-//     errors.parseCommentsFileErr(file);
-//     const fileContent = processFile(file.content);
-//     fileContent.fileName = file.name;
-//     files.push(fileContent);
-//   });
-//   saveTags(files, address);
-//   return files;
-// };
