@@ -5,28 +5,32 @@
  * @param ast {[]} The AST with parsed information
  * @param sectionTag {string} The matcher section tag to be searched for
  * @param priority {number} The priority in which the sorting fxn was called in pipe
- * @param catchAllSection {string} catchAllSection, if defined (and not a blank string)
- * will file sections that are not labeled
+ * @return ast {[]} Return the AST formatted to have priority and headers according to sections
  */
 
 
-const sortBySection = (ast, sectionTag, priority, catchAllSection) => {
+const sortBySection = (ast, sectionTag, priority) => {
+  if (!(ast instanceof Array)) {
+    throw new TypeError('sortBySection Error: Must receive an Array of Parsed Data');
+  }
+
+  if (!(sectionTag instanceof String)) {
+    throw new TypeError('sortBySection Error: Section Tag Must Be In String Format');
+  }
+
+  if (!(priority instanceof Number)) {
+    throw new TypeError('sortBySection Error: priority must be of type "Number"');
+  }
+
   const sectionName = sectionTag.slice(1);
   ast.forEach((file) => {
     file.content.forEach((docBlock) => {
-      docBlock.tags.forEach((tag, index) => {
+      docBlock.tags.forEach((tag) => {
         if (tag.title === sectionName) {
           /* eslint-disable */
           docBlock.header = tag.description;
           docBlock.priority = priority;
-        } else if (index === docBlock.tags.length - 1 && tag.title !== sectionName) {
-          // If section not detected yet, assign catchAll section and priority (only if defined)
-          if (docBlock.header === undefined && docBlock.priority === undefined) {
-            // increase priority by one to place catchAll Section at end, as no more sorts later 
-            docBlock.priority = catchAllSection === '' ? undefined : priority + 1;
-            docBlock.header = catchAllSection === '' ? undefined : catchAllSection;
-            /* eslint-enable */
-          }
+          /* eslint-enable */
         }
       });
     });

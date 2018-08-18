@@ -1,6 +1,10 @@
 const gutenrc = require('../../.gutenrc.json');
 const { sortBySection } = require('./sortBySection.js');
 
+/**
+ * @description Execute various sorting functions
+ * @param ast {[]} The AST with parsed information
+ */
 
 const execSorts = (ast) => {
   // extract an array of files to be sorted
