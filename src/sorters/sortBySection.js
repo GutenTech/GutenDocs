@@ -11,16 +11,20 @@
 
 const sortBySection = (ast, sectionTag, priority) => {
   if (!(ast instanceof Array)) {
-    throw new TypeError('sortBySection Error: Must receive an Array of Parsed Data');
+    throw new TypeError('sortBySection Error: Must Receive Parsed Data as an Array');
   }
 
-  if (!(sectionTag instanceof String)) {
-    throw new TypeError('sortBySection Error: Section Tag Must Be In String Format');
+  if ((ast.length === 0)) {
+    throw new TypeError('sortBySection Error: Parsed Data Array Must Contain Values');
   }
 
-  if (!(priority instanceof Number)) {
-    throw new TypeError('sortBySection Error: priority must be of type "Number"');
-  }
+  // if (!(typeof (sectionTag) !== 'string')) {
+  //   throw new TypeError('sortBySection Error: Section Tag Must Be In String Format');
+  // }
+
+  // if (!(priority instanceof Number)) {
+  //   throw new TypeError('sortBySection Error: priority must be of type "Number"');
+  // }
 
   const sectionName = sectionTag.slice(1);
   ast.forEach((file) => {
@@ -35,7 +39,7 @@ const sortBySection = (ast, sectionTag, priority) => {
       });
     });
   });
-  console.log(JSON.stringify(ast));
+  //console.log(JSON.stringify(ast));
   return ast;
 };
 
