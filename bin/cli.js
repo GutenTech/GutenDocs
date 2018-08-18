@@ -90,17 +90,6 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
     return;
   }
 
-  // update the config file
-  if (argv.config) {
-    if (typeof pathData === 'string') {
-      /* eslint-disable-next-line no-console */
-      console.log('pathData');
-    } else {
-      updateConfig(pathData.absPath.concat(pathData.dirName));
-    }
-    return;
-  }
-
   if (pathData.absPath === 'unintialized ') {
     /* eslint-disable-next-line no-console */
     console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
@@ -115,6 +104,12 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
 
   if (pathData.err === 'corruptJSON') {
     replaceTheRCFile(pathData);
+    return;
+  }
+
+  // update the config file
+  if (argv.config) {
+    updateConfig(pathData.absPath.concat(pathData.dirName));
     return;
   }
 
