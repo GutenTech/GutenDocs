@@ -116,10 +116,16 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
 
   // parse all files in directory and all subdirectories
   if (argv.all) {
-    extract(['./']).then((data) => {
-      parseComments(data, address);
-    });
-    return;
+    if (pathData === false) {
+      /* eslint-disable-next-line no-console */
+      console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
+    } else {
+      // const exclude = fs.readFileSync(`${pathData.absPath}/.gutenignore`, 'utf8').split('\n');
+      extract(['./']).then((data) => {
+        const ast = parseComments(data, address);
+        execSorts(ast);
+      });
+    }
   }
 
   // reset the files to the way they were when initialize
@@ -150,8 +156,8 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       // No invalid file paths supplied.  Parse the files.
       if (missingFiles.length === 0) {
         extract(argv._).then((data) => {
-          parseComments(data, address);
-          execSorts();
+          const ast = parseComments(data, address);
+          execSorts(ast);
         });
       }
     }
