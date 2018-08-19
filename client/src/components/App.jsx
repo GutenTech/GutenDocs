@@ -6,6 +6,8 @@ import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
+import SideBar from './SideBar.jsx';
+import Test1 from './Test1';
 // import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
@@ -41,8 +43,10 @@ export default class App extends Component {
               npm Download
             </button>
           </div>
+          <SideBar />
           <div className="starter">
             <Intro />
+            <Test1 />
           </div>
           {
             parsedData.map(file => (
