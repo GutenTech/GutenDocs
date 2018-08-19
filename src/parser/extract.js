@@ -68,6 +68,7 @@ const exclude = (address, ROOT) => {
 
 const walk = (searchPath, ROOT) => {
   const result = [];
+  let badFile = false;
   let fileCount = 0;
   const unReadableFiles = [];
   return exclude(searchPath, ROOT).then(list => new Promise((resolve, reject) => klaw(searchPath)
@@ -82,6 +83,7 @@ const walk = (searchPath, ROOT) => {
           acornParse(content, tag.content);
         } catch (error) {
           unReadableFiles.push(path.basename(item.path));
+          badFile = true;
         }
         fileCount += 1;
         process.stdout.clearLine();
@@ -89,7 +91,10 @@ const walk = (searchPath, ROOT) => {
         process.stdout.write(`Files Processed: ${fileCount}`);
         process.stdout.cursorTo(25);
         process.stdout.write(item.path.replace(ROOT, './').slice(0, 60));
-        result.push(tag);
+        if (!badFile) {
+          result.push(tag);
+        }
+        badFile = false;
       }
     })
     .on('error', (err) => {
