@@ -66,9 +66,10 @@ const exclude = (address, ROOT) => {
   });
 };
 
-const walk = (x, ROOT) => {
+const walk = (fileName, ROOT) => {
   const result = [];
-  return exclude(x, ROOT).then(list => new Promise((resolve, reject) => klaw(x)
+  console.log(fileName);
+  return exclude(fileName, ROOT).then(list => new Promise((resolve, reject) => klaw(fileName)
     .on('data', (item) => {
       if (!item.stats.isDirectory() && ['.js', '.jsx'].includes(path.extname(item.path)) && list.includes(path.relative(ROOT, item.path))) {
         const tag = {
