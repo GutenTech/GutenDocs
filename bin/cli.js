@@ -92,7 +92,7 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
     return;
   }
 
-  if (pathData.absPath === 'unintialized ') {
+  if (pathData.absPath === 'unintialized') {
     /* eslint-disable-next-line no-console */
     console.log('You have not initialized gutendocs.  Call "gutendocs --init"');
     return;
