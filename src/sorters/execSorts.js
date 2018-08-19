@@ -1,4 +1,5 @@
-const gutenrc = require('../../.gutenrc.json');
+const fs = require('fs');
+const { findRC } = require('../utils.js');
 const { sortBySection } = require('./sortBySection.js');
 
 /**
@@ -11,7 +12,9 @@ const execSorts = (ast) => {
   // const sortFiles = gutenrc.skeleton.sortByOrder;
   // console.log(ast);
   // execute a piping function sequence here
-  const sectionName = gutenrc.skeleton.sortBySections.sections;
+  const pathData = findRC();
+  const gutenRC = fs.readdirSync(pathData.absPath.concat('./gutenrc.json'));
+  const sectionName = gutenRC.skeleton.sortBySections.sections;
   const priority = 1;
   return sortBySection(ast, sectionName, priority);
 };
