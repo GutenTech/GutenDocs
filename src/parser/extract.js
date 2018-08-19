@@ -68,6 +68,7 @@ const exclude = (address, ROOT) => {
 
 const walk = (searchPath, ROOT) => {
   const result = [];
+  let fileCount = 0;
   const unReadableFiles = [];
   return exclude(searchPath, ROOT).then(list => new Promise((resolve, reject) => klaw(searchPath)
     .on('data', (item) => {
@@ -82,6 +83,10 @@ const walk = (searchPath, ROOT) => {
         } catch (error) {
           unReadableFiles.push(path.basename(item.path));
         }
+        fileCount += 1;
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        process.stdout.write(`Files Processed: ${fileCount}`);
         result.push(tag);
       }
     })
@@ -90,11 +95,15 @@ const walk = (searchPath, ROOT) => {
     })
     .on('end', () => {
       resolve(result);
+      process.stdout.write("\n");
       if (unReadableFiles.length !== 0) {
         /* eslint-disable-next-line no-console */
-        console.log('The following files were unparable, and ommited from parsing:');
+        console.log(`${unReadableFiles.lenth} files were unpasable, and ommited from parsing:`);
         /* eslint-disable-next-line no-console */
         unReadableFiles.forEach(fileName => console.log(fileName));
+      } else {
+        /* eslint-disable-next-line no-console */
+        console.log('No unignored .js or .jsx files were unparsable');
       }
     })));
 };
