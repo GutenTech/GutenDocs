@@ -1,1 +1,12 @@
-{ "apiDir": "GutenApi/" }
+{ 
+  "apiDir": "GutenApi/",
+  "skeleton":{
+    "sortByOrder": ["sortBySections", "sortByFileStructure"],
+    "sortBySections": {
+      "sections":"@section"
+    },
+    "sortByFileStructure": {
+      
+    }
+  }
+} 
