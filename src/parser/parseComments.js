@@ -1,8 +1,6 @@
 const doctrine = require('doctrine');
 const fs = require('fs');
-const {
-  parseCommentsTemplate,
-} = require('./utils/webpackTemplates.js');
+const { parseCommentsTemplate } = require('./utils/webpackTemplates.js');
 const errors = require('./utils/errors.js');
 
 /**
@@ -20,10 +18,17 @@ const saveTags = (data, path) => {
   });
 };
 
-const procDesc = (fileObj) => {
-  const d = fileObj.description ? `${fileObj.description}\n` : '';
-  // eslint-disable-next-line no-param-reassign
-  fileObj.description = fileObj.tags.reduce((acc, tag) => (tag.title === 'description' ? acc + d + tag.description : acc), '');
+
+const procDesc = (descriptionTagArray, fileObjDesc) => {
+  let description = fileObjDesc;
+
+  descriptionTagArray.forEach((descriptionTag) => {
+    if (fileObjDesc !== '') {
+      description = description.concat('\n');
+    }
+    description = description.concat(descriptionTag.description);
+  });
+  return description;
 };
 
 /**
@@ -55,10 +60,16 @@ const processFile = (tagArray) => {
  * @section section name 2
  * @return n/a
  */
-
 const parseComments = (filesArray, address) => {
   errors.parseCommentsArrayErr(filesArray);
-  const files = filesArray.reduce((acc, f) => acc.push(processFile(f)) && acc, []);
+
+  const files = [];
+  filesArray.forEach((file) => {
+    errors.parseCommentsFileErr(file);
+    const fileContent = processFile(file.content);
+    fileContent.fileName = file.name;
+    files.push(fileContent);
+  });
   saveTags(files, address);
   return files;
 };
