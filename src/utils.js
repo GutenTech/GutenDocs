@@ -113,7 +113,7 @@ const refreshFile = (pathData, fileName, source) => {
       Are you sure you want to overwrite it?`,
       choices: [
         `I changed my mind, dont delete my ${fileName}`,
-        `Save a copy as ${fileName}`,
+        `Save a backup file for your current version of ${fileName}`,
         'Just overwrite it.',
       ],
     },
