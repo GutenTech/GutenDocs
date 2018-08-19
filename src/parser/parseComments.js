@@ -10,6 +10,8 @@ const errors = require('./utils/errors.js');
  */
 
 const saveTags = (data, path) => {
+  // TODO : i think there needs to be another escape handling added here to be 
+  // TODOv: able to parse comments that contain backticks
   const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
   fs.writeFile(path, parseCommentsTemplate(dataToSave), (err) => {
     if (err) {
