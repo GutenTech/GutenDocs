@@ -87,6 +87,8 @@ const walk = (searchPath, ROOT) => {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
         process.stdout.write(`Files Processed: ${fileCount}`);
+        process.stdout.cursorTo(25);
+        process.stdout.write(item.path.replace(ROOT, './').slice(0, 60));
         result.push(tag);
       }
     })
