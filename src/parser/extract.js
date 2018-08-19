@@ -95,7 +95,7 @@ const walk = (searchPath, ROOT) => {
     })
     .on('end', () => {
       resolve(result);
-      process.stdout.write("\n");
+      process.stdout.write('\n');
       if (unReadableFiles.length !== 0) {
         /* eslint-disable-next-line no-console */
         console.log(`${unReadableFiles.lenth} files were unpasable, and ommited from parsing:`);
