@@ -92,16 +92,8 @@ const walk = (x, ROOT) => {
 const extract = arr => Promise.all(arr.map(x => globParse(x))).then((x) => {
   const ROOT = findRC().absPath;
   const paths = [].concat(...x);
-  if (ROOT.charAt(0) === '/') {
-    return Promise.all(paths.map((address) => {
-      /* eslint-disable */
-      console.log(address);
-      return walk(address, ROOT);
-    }))
-      .then(result => [].concat(...result));
-  }
-  return 'error';
-  // console.log('Need to impliment missing rc file function here');
+  return Promise.all(paths.map(address => walk(address, ROOT)))
+    .then(result => [].concat(...result));
 });
 
 module.exports = extract;
