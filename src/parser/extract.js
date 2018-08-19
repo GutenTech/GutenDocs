@@ -66,10 +66,10 @@ const exclude = (address, ROOT) => {
   });
 };
 
-const walk = (fileName, ROOT) => {
+const walk = (searchPath, ROOT) => {
   const result = [];
-  console.log(fileName);
-  return exclude(fileName, ROOT).then(list => new Promise((resolve, reject) => klaw(fileName)
+  const unReadableFiles = [];
+  return exclude(searchPath, ROOT).then(list => new Promise((resolve, reject) => klaw(searchPath)
     .on('data', (item) => {
       if (!item.stats.isDirectory() && ['.js', '.jsx'].includes(path.extname(item.path)) && list.includes(path.relative(ROOT, item.path))) {
         const tag = {
@@ -77,7 +77,11 @@ const walk = (fileName, ROOT) => {
           name: path.relative(ROOT, item.path),
         };
         const content = fs.readFileSync(item.path, 'utf8');
-        acornParse(content, tag.content);
+        try {
+          acornParse(content, tag.content);
+        } catch (error) {
+          unReadableFiles.push(path.basename(item.path));
+        }
         result.push(tag);
       }
     })
@@ -86,6 +90,12 @@ const walk = (fileName, ROOT) => {
     })
     .on('end', () => {
       resolve(result);
+      if (unReadableFiles.length !== 0) {
+        /* eslint-disable-next-line no-console */
+        console.log('The following files were unparable, and ommited from parsing:');
+        /* eslint-disable-next-line no-console */
+        unReadableFiles.forEach(fileName => console.log(fileName));
+      }
     })));
 };
 
