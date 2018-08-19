@@ -13,7 +13,7 @@ const execSorts = (ast) => {
   // console.log(ast);
   // execute a piping function sequence here
   const pathData = findRC();
-  const gutenRC = fs.readdirSync(pathData.absPath.concat('./gutenrc.json'));
+  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
   const sectionName = gutenRC.skeleton.sortBySections.sections;
   const priority = 1;
   return sortBySection(ast, sectionName, priority);
