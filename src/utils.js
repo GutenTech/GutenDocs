@@ -130,7 +130,7 @@ const refreshFile = (pathData, fileName, source) => {
               // do nothing
             } else if (how.method === `Save a copy as ${fileName}`) {
               const backupName = findValidBackupName(pathData.absPath, fileName);
-              copyFile(RCFile, backupName, () => {
+              copyFile(RCFile, pathData.absPath.concat(backupName), () => {
                 copyFile(pathData.absPath
                   .concat(source), RCFile);
               });
