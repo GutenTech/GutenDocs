@@ -1,5 +1,6 @@
 const { sortBySection } = require('../src/sorters/sortBySection.js');
 
+jest.mock('../src/utils.js');
 
 describe('sortBySection.js foundational tests', () => {
   it('should be a function', () => expect(sortBySection).toBeInstanceOf(Function));
