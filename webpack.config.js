@@ -51,6 +51,10 @@ module.exports = {
         type: 'javascript/auto',
         use: [require.resolve('json-loader')],
       },
+      {
+        test: /\.png$/,
+        use: 'file-loader',
+      },
     ],
   },
   resolve: {
