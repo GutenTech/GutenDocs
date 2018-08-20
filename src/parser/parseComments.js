@@ -1,25 +1,5 @@
 const doctrine = require('doctrine');
-const fs = require('fs');
-const { parseCommentsTemplate } = require('./utils/webpackTemplates.js');
 const errors = require('./utils/errors.js');
-
-/**
- * @description This function will save the data to the client/dist folder
- * @section Heading1
- * @section Heading2
- */
-
-const saveTags = (data, path) => {
-  // TODO : i think there needs to be another escape handling added here to be
-  // TODOv: able to parse comments that contain backticks
-  const dataToSave = JSON.stringify(data).replace(/\\n/g, '\\\\n');
-  fs.writeFile(path, parseCommentsTemplate(dataToSave), (err) => {
-    if (err) {
-      console.log(err); /* eslint-disable-line no-console */
-    }
-  });
-};
-
 
 const procDesc = (descriptionTagArray, fileObjDesc) => {
   let description = fileObjDesc;
@@ -62,7 +42,7 @@ const processFile = (tagArray) => {
  * @section section name 2
  * @return n/a
  */
-const parseComments = (filesArray, address) => {
+const parseComments = (filesArray) => {
   errors.parseCommentsArrayErr(filesArray);
 
   const files = [];
@@ -72,7 +52,6 @@ const parseComments = (filesArray, address) => {
     fileContent.fileName = file.name;
     files.push(fileContent);
   });
-  saveTags(files, address);
   return files;
 };
 
