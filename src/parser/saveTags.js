@@ -11,12 +11,28 @@ const saveTags = (data, path) => {
 };
 
 const cleanAST = (ast) => {
-  // console.log('this ast is', JSON.stringify(ast));
+  const commentBlocks = [];
 
-  //iterate through each file
   ast.forEach((file) =>{
-    console.log('FileName====>>>>', file.fileName);
+    file.content.forEach((commentBlock) => {
+      const updatedCommentBlock = {};
+      updatedCommentBlock.description = commentBlock.description;
+      updatedCommentBlock.tags = commentBlock.tags;
+      updatedCommentBlock.name = commentBlock.name;   
+      updatedCommentBlock.header = undefined;
+      updatedCommentBlock.priority = undefined;
+      // commentBlocks.push(updatedCommentBlock);
+      console.log(file.fileName);      
+      // commentBlocks.push({
+      //   description: commentBlock.description,
+      //   tags: commentBlock.tags,
+      //   name: commentBlock.name,
+      //   path: 
+      // });
+    });
   });
+
+  return commentBlocks;
 };
 
 module.exports.saveTags = saveTags;
