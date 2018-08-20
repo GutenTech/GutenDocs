@@ -110,7 +110,7 @@ const walk = (searchPath, ROOT) => {
         unReadableFiles.forEach(fileName => console.log(fileName));
       } else {
         /* eslint-disable-next-line no-console */
-        console.log('No unignored .js or .jsx files were unparsable');
+        console.log('All .js and .jsx files were parsed (except those indicated in the ignore file');
       }
     })));
 };
