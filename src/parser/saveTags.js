@@ -10,4 +10,14 @@ const saveTags = (data, path) => {
   });
 };
 
+const cleanAST = (ast) => {
+  // console.log('this ast is', JSON.stringify(ast));
+
+  //iterate through each file
+  ast.forEach((file) =>{
+    console.log('FileName====>>>>', file.fileName);
+  });
+};
+
 module.exports.saveTags = saveTags;
+module.exports.cleanAST = cleanAST;
