@@ -124,8 +124,9 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       // const exclude = fs.readFileSync(`${pathData.absPath}/.gutenignore`, 'utf8').split('\n');
       extract(['./']).then((data) => {
         const ast = parseComments(data, address);
-        const dataToWrite = execSorts(ast);
-        saveTags(dataToWrite, address);
+        cleanAST(ast);
+        // const dataToWrite = execSorts(ast);
+        // saveTags(dataToWrite, address);
       });
     }
   }
