@@ -25,7 +25,7 @@
     position:relative;
     overflow: auto;
     bottom: 0px;
-    background-color:#d9d9d9;
+    background-color:#888e94;
     width: 100%;
     text-align: center;
 }
@@ -40,6 +40,7 @@
     color: white;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     background: #B2B2FF;
+    overflow-y: ;
 }
 
 .wrapper {
@@ -50,7 +51,8 @@
 
 #sidebar {
     border-radius: 0px;
-    border: 8px solid #B2B2FF;
+    border: 0px solid #fff;
+    box-shadow: 10px 0px 10px #B2B2FF90;
     background:linear-gradient(142deg, rgb(251, 251, 253), rgb(214, 214, 240));
     width: 200px;
     position: fixed;
@@ -60,6 +62,7 @@
     z-index: 999;
     transition: all 0.3s;
     margin-bottom: 100px;
+    overflow-y: auto;
 }
 
 #sidebar.active {
