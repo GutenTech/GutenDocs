@@ -158,7 +158,8 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       // No invalid file paths supplied.  Parse the files.
       if (missingFiles.length === 0) {
         extract(argv._).then((data) => {
-          const ast = parseComments(data, address);
+          const rawAST = parseComments(data, address);
+          const ast = cleanAST(rawAST);
           const dataToWrite = execSorts(ast);
           saveTags(dataToWrite, address);
         });
