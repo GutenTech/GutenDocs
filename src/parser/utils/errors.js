@@ -4,6 +4,11 @@ const parseCommentsArrayErr = (filesArray) => {
   }
 };
 
+/**
+ * @description error test description
+ * @param someparam {[]} some ereror tst param
+ */
+
 const parseCommentsFileErr = (file) => {
   if (!(file instanceof Object)) {
     throw new TypeError('Array passed to parseComments should contain strings');

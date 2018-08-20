@@ -5,6 +5,8 @@ const { sortBySection } = require('./sortBySection.js');
 /**
  * @description Execute various sorting functions
  * @param ast {[]} The AST with parsed information
+ * @return ats {[]} The AST "sorted" with appropriate headers and priorities
+ * assigned to it.
  */
 
 const execSorts = (ast) => {
@@ -19,14 +21,44 @@ const execSorts = (ast) => {
   return sortBySection(ast, sectionName, priority);
 };
 
+
+/**
+ * @description This will cleanup the incoming AST structure
+ * @param ast {[]} The AST with parsed information
+ * @return commentBlocks {[]} Return an array of commentBlock objects.Each object
+ * will be in the following format as an object:
+ *
+ *                                  {
+ *                                    header: (string or undefined),
+ *                                    priority: (number or undefined),
+ *                                    description: (string),
+ *                                    tags: ([
+ *                                            {
+ *                                              title: (string),
+ *                                              description: (string)
+ *                                            }
+ *                                          ])
+ *                                  }
+ */
+
+const cleanAST = (ast) => {
+  const commentBlocks = [];
+
+  ast.forEach((file) => {
+    file.content.forEach((commentBlock) => {
+      commentBlocks.push({
+        header: undefined,
+        priority: undefined,
+        description: commentBlock.description,
+        tags: commentBlock.tags,
+        name: commentBlock.name,
+        pathName: file.fileName,
+      });
+    });
+  });
+
+  return commentBlocks;
+};
+
 module.exports.execSorts = execSorts;
-
-/* eslint-disable */
-/*
-
-Current Notes:
-  The latest custom tag will overwrite earlier custom tags (like CSS rules),
-  this allows the user to easily reassign
-
-
-*/
+module.exports.cleanAST = cleanAST;
