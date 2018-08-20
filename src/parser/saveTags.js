@@ -10,34 +10,4 @@ const saveTags = (data, path) => {
   });
 };
 
-const cleanAST = (ast) => {
-  const commentBlocks = [];
-
-  ast.forEach((file) =>{
-    file.content.forEach((commentBlock) => {
-      // const updatedCommentBlock = {};
-      // updatedCommentBlock.description = commentBlock.description;
-      // updatedCommentBlock.tags = commentBlock.tags;
-      // updatedCommentBlock.name = commentBlock.name;   
-      // updatedCommentBlock.header = undefined;
-      // updatedCommentBlock.priority = undefined;  
-      commentBlocks.push({
-        header: undefined,
-        priority: undefined,
-        description: commentBlock.description,
-        tags: commentBlock.tags,
-        name: commentBlock.name,
-        pathName: file.fileName,
-      });
-    });
-  });
-  
-  for (let i = 0; i < commentBlocks.length; i++) {
-    console.log('*************************');
-    console.log(commentBlocks[i]);
-  }
-  return commentBlocks;
-};
-
 module.exports.saveTags = saveTags;
-module.exports.cleanAST = cleanAST;

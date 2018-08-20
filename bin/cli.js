@@ -15,8 +15,8 @@ const {
   refreshAPI,
   generateAPIFrame,
 } = require('../src/utils.js');
-const { execSorts } = require('../src/sorters/execSorts.js');
-const { saveTags, cleanAST } = require('../src/parser/saveTags.js');
+const { execSorts, cleanAST } = require('../src/sorters/execSorts.js');
+const { saveTags } = require('../src/parser/saveTags.js');
 
 yargs.usage(`$0 ${
   pjson.version
