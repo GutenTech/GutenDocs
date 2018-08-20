@@ -123,7 +123,8 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
     } else {
       // const exclude = fs.readFileSync(`${pathData.absPath}/.gutenignore`, 'utf8').split('\n');
       extract(['./']).then((data) => {
-        const ast = parseComments(data, address);
+        const rawAST = parseComments(data, address);
+        const ast = cleanAST(rawAST);
         const dataToWrite = execSorts(ast);
         saveTags(dataToWrite, address);
       });
