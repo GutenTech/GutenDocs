@@ -7,7 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
 import Header from './Header';
-import HeaderLogo from './HeaderLogo';
 import SideBar from './SideBar.jsx';
 import Test1 from './Test1';
 // import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
