@@ -6,6 +6,10 @@ import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
+import Header from './Header';
+import HeaderLogo from './HeaderLogo';
+import SideBar from './SideBar.jsx';
+import Test1 from './Test1';
 // import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
@@ -35,14 +39,17 @@ export default class App extends Component {
             <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
             {/* eslint-enable */}
           </h1>
+          <Header />
           <div className="download">
             <button type="button" id="npm">
               <i className="fa fa-download" />
               npm Download
             </button>
           </div>
+          <SideBar />
           <div className="starter">
             <Intro />
+            <Test1 />
           </div>
           {
             parsedData.map(file => (
@@ -57,7 +64,7 @@ export default class App extends Component {
                   {
                     file.content.map(func => (
                       <div className="body">
-                        <h2>
+                        <h2 id="atName">
                           {`${func.name} function`}
                         </h2>
                         <p>
