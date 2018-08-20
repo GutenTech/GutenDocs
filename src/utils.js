@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
+const inquirerOptions = require('./inquirerOptions.js');
 
 const findRC = () => {
   let rcpath = false;
@@ -95,46 +96,25 @@ const findValidBackupName = (location, baseName) => {
 const refreshFile = (pathData, fileName, source) => {
   /* eslint-disable-next-line no-console */
   const RCFile = pathData.absPath.concat(fileName);
-  /* eslint-disable-next-line no-console */
-  console.log(`Your ${fileName} file seems to no longer be a valid file.`);
-  const corruptFilePrompt = [
-    {
-      type: 'confirm',
-      name: 'delete',
-      message: 'Can I erase the existing file and replace it with the default?',
-      default: false,
-    },
-  ];
-  const confirmDeletePrompt = [
-    {
-      type: 'list',
-      name: 'method',
-      message: `You could lose the information currently in the file.
-      Are you sure you want to overwrite it?`,
-      choices: [
-        `I changed my mind, dont delete my ${fileName}`,
-        `Save a backup file for your current version of ${fileName}`,
-        'Just overwrite it.',
-      ],
-    },
-  ];
+  const corruptFilePrompt = inquirerOptions.corruptFilePrompt(fileName);
+  const confirmDeletePrompt = inquirerOptions.confirmDeletePrompt(fileName);
 
   inquirer
     .prompt(corruptFilePrompt)
     .then((answer) => {
       if (answer.delete === true) {
         inquirer
-          .prompt(confirmDeletePrompt)
+          .prompt(confirmDeletePrompt.questions)
           .then((how) => {
-            if (how.method === `I changed my mind, dont delete my ${fileName}`) {
+            if (how.method === confirmDeletePrompt.options[0]) {
               // do nothing
-            } else if (how.method === `Save a copy as ${fileName}`) {
+            } else if (how.method === confirmDeletePrompt.options[1]) {
               const backupName = findValidBackupName(pathData.absPath, fileName);
               copyFile(RCFile, pathData.absPath.concat(backupName), () => {
                 copyFile(pathData.absPath
                   .concat(source), RCFile);
               });
-            } else if (how.method === 'Just overwrite it.') {
+            } else if (how.method === confirmDeletePrompt.options[2]) {
               copyFile(pathData.absPath.concat(source), RCFile);
             }
           });
