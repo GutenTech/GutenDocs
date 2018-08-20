@@ -1,6 +1,9 @@
 import React from 'react';
 import ScrollArea from 'react-scrollbar';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+//very messy looking here, will be cleaned up
+//samples that will be fixed
+//hardcoded atm in this branch, wil be mapped
 
 const SideBar = () => (
  <div className="wrapper">
@@ -8,6 +11,7 @@ const SideBar = () => (
         <div id="header">
             <h5>GutenDocs</h5><br/>
         </div>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." ></input>
         <ul className="list-unstyled components">
             <li className="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Getting Started</a>
@@ -27,64 +31,13 @@ const SideBar = () => (
                 </ul>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="#">Top of the Page</a>
             </li>
             <li>
-                <a href="#">Portfolio</a>
+             <AnchorLink offset={() => 100} href='#things'>Things</AnchorLink>
             </li>
             <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-             <AnchorLink offset={() => 10} href='#things'>Things</AnchorLink>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
+             <AnchorLink offset={() => 100} href='#atName'>Name</AnchorLink>
             </li>
         </ul>
 
@@ -93,3 +46,31 @@ const SideBar = () => (
 );
 
 export default SideBar;
+
+
+// class SideBar extends React.Component {
+//     constructor(){
+//       super();
+//       this.state ={
+//         parsedData: [],
+//         input: '',
+//       }
+//     }
+//     onChangeHandler(e){
+//       this.setState({
+//         input: e.target.value,
+//       })
+//     }
+//     render (){
+//         const list = this.state.parsedData
+//           .filter(d => this.state.input === '' || d.includes(this.state.input))
+//           .map((d, index) => <li key={index}>{d}</li>);
+//       return (<div>
+//         <input value={this.state.input} type="text" onChange={this.onChangeHandler.bind(this)}/>
+//           <ul>{list}</ul>
+//         </div>      
+//      );
+//     }
+//   }
+
+// export default SideBar;

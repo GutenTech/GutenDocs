@@ -1,7 +1,3 @@
-html {
-background-color:  #f7f7f7;
-}
-
 .logo {
     margin-top: 100px;
     margin-left: 265px;
@@ -12,6 +8,7 @@ background-color:  #f7f7f7;
     font-family: 'Times New Roman', Times, serif;
     margin-left: 265px;
     margin-top: 8px;
+    overflow: auto;
 }
 
 .starter {
@@ -62,6 +59,7 @@ background-color:  #f7f7f7;
     height: 100vh;
     z-index: 999;
     transition: all 0.3s;
+    margin-bottom: 100px;
 }
 
 #sidebar.active {
@@ -150,3 +148,45 @@ a {
     overflow: auto;
     border-top-left-radius: 15px;
 }
+
+/* header */
+.headerlogo {
+    width: 765px;
+    margin: 0 auto;
+    margin-top: -75px;
+    margin-right: 50px;
+    padding-bottom: 30px;
+  }
+  
+  #gutendocs {
+    font-size: 8em;
+    font-family: 'IM Fell Great Primer';
+    position: relative;
+    color: black;
+  }
+
+  #gutendocs:before {
+    content: attr(data);
+    position: absolute;
+    left: -0.03em;
+    top: 0.03em;
+    color: #ccc;
+    background: black url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAFUlEQVQIW2NkQAKMIPZ/IGAEAWQZAE5lBATogF4qAAAAAElFTkSuQmCC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-color: black;
+    -webkit-background-color: black;
+    z-index: -1; 
+  }
+
+  /* search bar */
+  #myInput {
+    background-image: url('https://www.w3schools.com/css/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: -120px;
+  }
