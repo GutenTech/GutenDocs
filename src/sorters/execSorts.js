@@ -28,17 +28,12 @@ const execSorts = (commentBlocks) => {
  * @return commentBlocks {[]} Return an array of commentBlock objects.Each object
  * will be in the following format as an object:
  *
- *                                  {
- *                                    header: (string or undefined),
- *                                    priority: (number or undefined),
- *                                    description: (string),
- *                                    tags: ([
- *                                            {
- *                                              title: (string),
- *                                              description: (string)
- *                                            }
- *                                          ])
- *                                  }
+ *  {
+ *   header: (string or undefined),
+ *   priority: (number or undefined),
+ *   description: (string),
+ *   tags: [{title: (string), description: (string)}]
+ *  }
  */
 
 const cleanAST = (ast) => {
