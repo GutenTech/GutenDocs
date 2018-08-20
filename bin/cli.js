@@ -16,7 +16,7 @@ const {
   generateAPIFrame,
 } = require('../src/utils.js');
 const { execSorts } = require('../src/sorters/execSorts.js');
-const { saveTags } = require('../src/parser/saveTags.js');
+const { saveTags, cleanAST } = require('../src/parser/saveTags.js');
 
 yargs.usage(`$0 ${
   pjson.version
@@ -159,8 +159,9 @@ yargs.parse(process.argv.slice(2), (err, argv, output) => {
       if (missingFiles.length === 0) {
         extract(argv._).then((data) => {
           const ast = parseComments(data, address);
-          const dataToWrite = execSorts(ast);
-          saveTags(dataToWrite, address);
+          cleanAST(ast);
+          // const dataToWrite = execSorts(ast);
+          // saveTags(dataToWrite, address);
         });
       }
     }
