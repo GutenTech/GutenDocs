@@ -9,37 +9,41 @@
  */
 
 
-const sortBySection = (ast, sectionTag, priority) => {
-  if (!(ast instanceof Array)) {
-    throw new TypeError('sortBySection Error: Must Receive Parsed Data as an Array');
-  }
+// const sortBySection = (ast, sectionTag, priority) => {
+//   if (!(ast instanceof Array)) {
+//     throw new TypeError('sortBySection Error: Must Receive Parsed Data as an Array');
+//   }
 
-  if ((ast.length === 0)) {
-    throw new TypeError('sortBySection Error: Parsed Data Array Must Contain Values');
-  }
+//   if ((ast.length === 0)) {
+//     throw new TypeError('sortBySection Error: Parsed Data Array Must Contain Values');
+//   }
 
-  // if (!(typeof (sectionTag) !== 'string')) {
-  //   throw new TypeError('sortBySection Error: Section Tag Must Be In String Format');
-  // }
+//   // if (!(typeof (sectionTag) !== 'string')) {
+//   //   throw new TypeError('sortBySection Error: Section Tag Must Be In String Format');
+//   // }
 
-  // if (!(priority instanceof Number)) {
-  //   throw new TypeError('sortBySection Error: priority must be of type "Number"');
-  // }
+//   // if (!(priority instanceof Number)) {
+//   //   throw new TypeError('sortBySection Error: priority must be of type "Number"');
+//   // }
 
-  const sectionName = sectionTag.slice(1);
-  ast.forEach((file) => {
-    file.content.forEach((docBlock) => {
-      docBlock.tags.forEach((tag) => {
-        if (tag.title === sectionName) {
-          /* eslint-disable */
-          docBlock.header = tag.description;
-          docBlock.priority = priority;
-          /* eslint-enable */
-        }
-      });
-    });
-  });
-  return ast;
+//   const sectionName = sectionTag.slice(1);
+//   ast.forEach((file) => {
+//     file.content.forEach((docBlock) => {
+//       docBlock.tags.forEach((tag) => {
+//         if (tag.title === sectionName) {
+//           /* eslint-disable */
+//           docBlock.header = tag.description;
+//           docBlock.priority = priority;
+//           /* eslint-enable */
+//         }
+//       });
+//     });
+//   });
+//   return ast;
+// };
+
+const sortBySection = (commentBlocks, sectionTag, priority) => {
+
 };
 
 module.exports.sortBySection = sortBySection;

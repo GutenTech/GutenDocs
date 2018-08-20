@@ -4,12 +4,12 @@ const { sortBySection } = require('./sortBySection.js');
 
 /**
  * @description Execute various sorting functions
- * @param ast {[]} The AST with parsed information
+ * @param commentBlocks {[]} The Cleaned AST with parsed information
  * @return ats {[]} The AST "sorted" with appropriate headers and priorities
  * assigned to it.
  */
 
-const execSorts = (ast) => {
+const execSorts = (commentBlocks) => {
   // extract an array of files to be sorted
   // const sortFiles = gutenrc.skeleton.sortByOrder;
   // console.log(ast);
@@ -18,7 +18,7 @@ const execSorts = (ast) => {
   const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
   const sectionName = gutenRC.skeleton.sortBySections.sections;
   const priority = 1;
-  return sortBySection(ast, sectionName, priority);
+  return sortBySection(commentBlocks, sectionName, priority);
 };
 
 
