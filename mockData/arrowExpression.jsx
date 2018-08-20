@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /* eslint-enable */
 
 /**
- * @description \\\\\\`displays\\\\\` the info about the field
+ * @description displays the info about the field
  * @param props.data.fieldName the name of the field
  * @param props.data.notes the notes on the field
  */
