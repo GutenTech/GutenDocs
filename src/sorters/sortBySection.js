@@ -43,7 +43,22 @@
 // };
 
 const sortBySection = (commentBlocks, sectionTag, priority) => {
+  const sectionName = sectionTag.slice(1);
 
+  commentBlocks.forEach((block) => {
+    if (block.header === undefined && block.priority === undefined) {
+      block.tags.forEach((tag) => {
+        if (tag.title === sectionName) {
+          /* eslint-disable */
+          block.header = sectionName;
+          block.priority = priority;
+          /* eslint-enable */
+        }
+      });
+    }
+  });
+
+  return commentBlocks;
 };
 
 module.exports.sortBySection = sortBySection;
