@@ -2,13 +2,12 @@
  * @description A function that will assign the classification headings based upon
  * whether or not end-user has specified a custom tag.  catchAllSection is option
  * see params below.
- * @param data {[]} 
- * @return ast {[]} Return the AST formatted to have priority and headers according to sections
+ * @param data {[]} Receive [ast-array, priority-number, options-object]
+ * @return updatedData {[]} [ast-array, priority-number, options-object]
  */
 
 const sortBySection = (data) => {
-  const commentBlocks = data[0];
-  const priority = data[1];
+  const commentBlocks = data[0]; const priority = data[1];
   const sectionName = data[2].sectionTag.slice(1);
 
   commentBlocks.forEach((block) => {
