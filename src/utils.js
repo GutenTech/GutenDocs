@@ -23,14 +23,24 @@ const findRC = () => {
       parsingError = true;
     }
     if (parsingError) {
-      return { absPath: targetPath.concat('/'), err: 'corruptJSON' };
+      return {
+        absPath: targetPath.concat('/'),
+        err: 'corruptJSON'
+      };
     }
     if (gutenfolder === undefined) {
-      return { absPath: 'missing' };
+      return {
+        absPath: 'missing'
+      };
     }
-    return { absPath: targetPath.concat('/'), dirName: gutenfolder };
+    return {
+      absPath: targetPath.concat('/'),
+      dirName: gutenfolder
+    };
   }
-  return { absPath: 'unintialized' };
+  return {
+    absPath: 'unintialized'
+  };
 };
 
 const generateFilesaveArray = (absPath, dirName) => {
@@ -131,7 +141,8 @@ const fillBlanksWithDefaults = (assignedSettings, defaultSettings) => {
 const updateConfig = (APIdir) => {
   const pathToConfigBundle = APIdir.concat('1.bundle.js');
   const pathToConfigJSON = APIdir.concat('gutenConfig.json');
-  if (!fs.existsSync(pathToConfigBundle)) {
+  if (!fs.existsSync(APIdir)) {
+    // if (!fs.existsSync(pathToConfigBundle)) {
     /* eslint-disable-next-line no-console */
     console.log(`Write Error:
     The folder specified in the .gutenrc.json file seems to be missing.  
@@ -159,7 +170,7 @@ const updateConfig = (APIdir) => {
       /***/ })
       
       }]);`;
-      /* eslint-enable */
+    /* eslint-enable */
     fs.writeFileSync(pathToConfigBundle, fileToWrite);
   }
 };
@@ -175,7 +186,9 @@ const generateAPIFrame = (relPath, dirName) => {
     const absPath = fs.realpathSync(relPath).concat('/');
     generateFilesaveArray(absPath, dirName);
     const templateRC = fs.readFileSync(srcPath.concat('client/dist/.gutenRCTemplate.json'));
-    const mergedRC = Object.assign(JSON.parse(templateRC), { apiDir: dirName });
+    const mergedRC = Object.assign(JSON.parse(templateRC), {
+      apiDir: dirName
+    });
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC));
     updateConfig(absPath.concat(dirName));
   } else {
