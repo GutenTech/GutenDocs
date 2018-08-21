@@ -1,9 +1,13 @@
 /**
  * @description An internal helper function that processes and checks if a header/priority exist
  * @param header {{string}} The value to be set as the header
- * 
- * @return updatedData {[]} [ast-array, priority-number, options-object]
+ * @param priority {{number}} The value to be set as the priority
+ * @return n/a as Array is passed by reference.
  */
+
+ const _processBlocks = (header, priority) {
+   
+ }
 
 
 /**
