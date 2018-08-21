@@ -26,14 +26,14 @@ yargs.usage(`$0 ${pjson.version}
 yargs.command(['init [file]', 'i'], 'initialize gutendocs', {}, (argv) => {
   generateAPIFrame('./', argv.file || 'GutenApi/');
 });
-yargs.command(['reset', 'r'], 'updates the API styles from gutenConfig.json', {},
+yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {},
   () => {
     const pathData = findRC();
     if (pathData) {
       refreshAPI(pathData.absPath, pathData.dirName);
     }
   });
-yargs.command('$0', 'generate the documentation', {
+yargs.command('$0', 'Parse all file in dir and subdir', {
   all: {
     alias: 'a',
     describe: 'parse all js/jsx files in target path',
@@ -56,7 +56,7 @@ yargs.command('$0', 'generate the documentation', {
     });
   }
 });
-yargs.command(['config', 'c'], 'initialize gutendocs', {},
+yargs.command(['config', 'c'], 'update rendered API with gutenConfig settings', {},
   () => {
     const pathData = findRC();
     if (pathData) {
