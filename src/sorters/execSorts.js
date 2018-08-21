@@ -10,19 +10,10 @@ const { ...sortFxnsObj } = require('./sorters.js');
  * assigned to it.
  */
 
-const execSorts = (commentBlocks) => {
-  // extract an array of files to be sorted
-  // const sortFiles = gutenrc.skeleton.sortByOrder;
-  // console.log(ast);
-  // execute a piping function sequence here
+const execSorts = (ast) => {
   const pathData = getRC();
-  var testa = (x) => {console.log(x); return x++;};
-  var testb = (x) => {console.log(x); return x++;};
-  var testc = () => {console.log(x); return x++;};
-  
-  var pipe = R.pipe(testa, testb, testc);
-  pipe(1);
-  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
+  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json'))); 
+  // options will contain sorting options for particular functions.  In this case: sectionSort
   const options = { sectionTag: gutenRC.skeleton.sortBySection.sections };
   const sortFxns = [];
   gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));
