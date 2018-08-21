@@ -1,7 +1,3 @@
-html {
-background-color:  #f7f7f7;
-}
-
 .logo {
     margin-top: 100px;
     margin-left: 265px;
@@ -12,6 +8,7 @@ background-color:  #f7f7f7;
     font-family: 'Times New Roman', Times, serif;
     margin-left: 265px;
     margin-top: 8px;
+    overflow: auto;
 }
 
 .starter {
@@ -28,7 +25,171 @@ background-color:  #f7f7f7;
     position:relative;
     overflow: auto;
     bottom: 0px;
-    background-color:#d9d9d9;
+    background-color:#888e94;
     width: 100%;
     text-align: center;
 }
+
+/* sidebar */
+#header {
+    letter-spacing: 2px;
+    text-decoration: underline;
+    text-align: center;
+    font-weight: -50;
+    line-height: 1.2;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    background: #B2B2FF;
+    overflow-y: ;
+}
+
+.wrapper {
+    overflow-y: scroll;
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    border-radius: 0px;
+    border: 0px solid #fff;
+    box-shadow: 10px 0px 10px #B2B2FF90;
+    background:linear-gradient(142deg, rgb(251, 251, 253), rgb(214, 214, 240));
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    transition: all 0.3s;
+    margin-bottom: 100px;
+    overflow-y: auto;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: black;
+}
+
+a, a:hover, a:focus {
+    color:#FFFFFF;
+    text-decoration: underline;
+}
+
+.sidebar-header {
+    padding: 20px;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #939393;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #D3D3D3;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #7b9fcc;
+}
+
+a {
+    color: black;
+}
+
+.list-unstyled components {
+    overflow: auto;
+    border-top-left-radius: 15px;
+}
+
+/* header */
+.headerlogo {
+    width: 765px;
+    margin: 0 auto;
+    margin-top: -75px;
+    margin-right: 50px;
+    padding-bottom: 30px;
+  }
+  
+  #gutendocs {
+    font-size: 8em;
+    font-family: 'IM Fell Great Primer';
+    position: relative;
+    color: black;
+  }
+
+  #gutendocs:before {
+    content: attr(data);
+    position: absolute;
+    left: -0.03em;
+    top: 0.03em;
+    color: #ccc;
+    background: black url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAFUlEQVQIW2NkQAKMIPZ/IGAEAWQZAE5lBATogF4qAAAAAElFTkSuQmCC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-color: black;
+    -webkit-background-color: black;
+    z-index: -1; 
+  }
+
+  /* search bar */
+  #myInput {
+    background-image: url('https://www.w3schools.com/css/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: -120px;
+  }

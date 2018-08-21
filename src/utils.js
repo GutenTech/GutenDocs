@@ -25,21 +25,21 @@ const findRC = () => {
     if (parsingError) {
       return {
         absPath: targetPath.concat('/'),
-        err: 'corruptJSON'
+        err: 'corruptJSON',
       };
     }
     if (gutenfolder === undefined) {
       return {
-        absPath: 'missing'
+        absPath: 'missing',
       };
     }
     return {
       absPath: targetPath.concat('/'),
-      dirName: gutenfolder
+      dirName: gutenfolder,
     };
   }
   return {
-    absPath: 'unintialized'
+    absPath: 'unintialized',
   };
 };
 
@@ -187,7 +187,7 @@ const generateAPIFrame = (relPath, dirName) => {
     generateFilesaveArray(absPath, dirName);
     const templateRC = fs.readFileSync(srcPath.concat('client/dist/.gutenRCTemplate.json'));
     const mergedRC = Object.assign(JSON.parse(templateRC), {
-      apiDir: dirName
+      apiDir: dirName,
     });
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC));
     updateConfig(absPath.concat(dirName));
