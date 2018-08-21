@@ -6,8 +6,18 @@
  * @return updatedData {[]} [ast-array, priority-number, options-object]
  */
 
+
+/**
+ * @description A function that will assign the classification headings based upon
+ * whether or not end-user has specified a custom tag.  catchAllSection is option
+ * see params below.
+ * @param data {[]} Receive [ast-array, priority-number, options-object]
+ * @return updatedData {[]} [ast-array, priority-number, options-object]
+ */
+
 const sortBySection = (data) => {
-  const commentBlocks = data[0]; const sectionName = data[2].sectionTag.slice(1);
+  const commentBlocks = data[0]; 
+  const sectionName = data[2].sectionTag.slice(1);
 
   commentBlocks.forEach((block) => {
     if (block.header === undefined && block.priority === undefined) {
@@ -27,8 +37,7 @@ const sortBySection = (data) => {
 
 /**
  * @description A function that will assign the classification headings based upon
- * whether or not end-user has specified a custom tag.  catchAllSection is option
- * see params below.
+ * the filename of the comment block
  * @param ast {[]} The AST with parsed information
  * @param sectionTag {string} The matcher section tag to be searched for
  * @param priority {number} The priority in which the sorting fxn was called in pipe
