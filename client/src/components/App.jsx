@@ -15,8 +15,8 @@ const getData = () => import('./parsedData.json');
 const getConfig = () => import('./configData.json');
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       parsedData: undefined,
       configData: undefined,
@@ -48,7 +48,7 @@ export default class App extends Component {
               npm Download
             </button>
           </div>
-          <SideBar />
+          <SideBar {...this.state} />
           <div className="starter">
             <Intro text={configData.introTxt} />
             <Test1 />
