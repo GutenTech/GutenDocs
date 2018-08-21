@@ -18,8 +18,8 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      parsedData: [],
-      configData: [],
+      parsedData: undefined,
+      configData: undefined,
     };
   }
 
@@ -30,7 +30,6 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
-    console.log(parsedData, configData);
     if (parsedData === undefined || configData === undefined) {
       return (<div>Loading</div>);
     }
