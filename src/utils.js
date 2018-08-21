@@ -3,7 +3,59 @@ const path = require('path');
 const inquirer = require('inquirer');
 const inquirerOptions = require('./inquirerOptions.js');
 
-const findRC = () => {
+const findValidBackupName = (location, baseName) => {
+  const backupExt = path.extname(baseName);
+  let backupName = path.basename(baseName, backupExt).concat('.backup');
+  let filecount = 0;
+  if (fs.existsSync(location.concat(backupName).concat(backupExt))) {
+    while (fs.existsSync(location.concat(backupName).concat(filecount).concat(backupExt))) {
+      filecount += 1;
+    }
+    backupName = backupName.concat(filecount.toString());
+  }
+  return backupName.concat(backupExt);
+};
+
+const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, original) => {
+  if (err) console.log(err); /* eslint-disable-line no-console */
+  return fs.writeFile(destination, original, (writeErr) => {
+    if (writeErr) throw writeErr;
+    if (cb !== undefined) {
+      cb();
+    }
+  });
+});
+
+const refreshFile = (pathData, fileName, source) => {
+  /* eslint-disable-next-line no-console */
+  const RCFile = pathData.concat(fileName);
+  const corruptFilePrompt = inquirerOptions.corruptFilePrompt(fileName);
+  const confirmDeletePrompt = inquirerOptions.confirmDeletePrompt(fileName);
+
+  inquirer
+    .prompt(corruptFilePrompt)
+    .then((answer) => {
+      if (answer.delete === true) {
+        inquirer
+          .prompt(confirmDeletePrompt.questions)
+          .then((how) => {
+            if (how.method === confirmDeletePrompt.options[0]) {
+              // do nothing
+            } else if (how.method === confirmDeletePrompt.options[1]) {
+              const backupName = findValidBackupName(pathData, fileName);
+              copyFile(RCFile, pathData.concat(backupName), () => {
+                copyFile(pathData
+                  .concat(source), RCFile);
+              });
+            } else if (how.method === confirmDeletePrompt.options[2]) {
+              copyFile(pathData.concat(source), RCFile);
+            }
+          });
+      }
+    });
+};
+
+const returnRC = () => {
   let rcpath = false;
   let targetPath = fs.realpathSync('./');
   while (rcpath === false && targetPath !== path.dirname(targetPath)) {
@@ -14,33 +66,40 @@ const findRC = () => {
     }
   }
   if (rcpath === true) {
-    let parsingError = false;
     const gutenrc = fs.readFileSync(targetPath.concat('/.gutenrc.json'));
     let gutenfolder;
     try {
       gutenfolder = JSON.parse(gutenrc).apiDir;
     } catch (error) {
-      parsingError = true;
-    }
-    if (parsingError) {
-      return {
-        absPath: targetPath.concat('/'),
-        err: 'corruptJSON',
-      };
+      // throw new TypeError('Invalid JSON');
+      refreshFile(targetPath.concat('/'), '.gutenrc.json', 'client/dist/.gutenRCTemplate.json');
+      return false;
     }
     if (gutenfolder === undefined) {
-      return {
-        absPath: 'missing',
-      };
+      throw new TypeError('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be.');
     }
     return {
       absPath: targetPath.concat('/'),
       dirName: gutenfolder,
     };
   }
-  return {
-    absPath: 'unintialized',
-  };
+  throw new TypeError('You have not initialized gutendocs.  Call "gutendocs --init"');
+};
+
+const findRC = () => {
+  let pathData;
+  let success = true;
+  try {
+    pathData = returnRC();
+  } catch (err) {
+    success = false;
+    /* eslint-disable-next-line no-console */
+    console.log(err);
+  }
+  if (success) {
+    return pathData;
+  }
+  return false;
 };
 
 const generateFilesaveArray = (absPath, dirName) => {
@@ -78,58 +137,6 @@ const generateFilesaveArray = (absPath, dirName) => {
   }
 
   filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file[1]), file[0]));
-};
-
-const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, original) => {
-  if (err) console.log(err); /* eslint-disable-line no-console */
-  return fs.writeFile(destination, original, (writeErr) => {
-    if (writeErr) throw writeErr;
-    if (cb !== undefined) {
-      cb();
-    }
-  });
-});
-
-const findValidBackupName = (location, baseName) => {
-  const backupExt = path.extname(baseName);
-  let backupName = path.basename(baseName, backupExt).concat('.backup');
-  let filecount = 0;
-  if (fs.existsSync(location.concat(backupName).concat(backupExt))) {
-    while (fs.existsSync(location.concat(backupName).concat(filecount).concat(backupExt))) {
-      filecount += 1;
-    }
-    backupName = backupName.concat(filecount.toString());
-  }
-  return backupName.concat(backupExt);
-};
-
-const refreshFile = (pathData, fileName, source) => {
-  /* eslint-disable-next-line no-console */
-  const RCFile = pathData.absPath.concat(fileName);
-  const corruptFilePrompt = inquirerOptions.corruptFilePrompt(fileName);
-  const confirmDeletePrompt = inquirerOptions.confirmDeletePrompt(fileName);
-
-  inquirer
-    .prompt(corruptFilePrompt)
-    .then((answer) => {
-      if (answer.delete === true) {
-        inquirer
-          .prompt(confirmDeletePrompt.questions)
-          .then((how) => {
-            if (how.method === confirmDeletePrompt.options[0]) {
-              // do nothing
-            } else if (how.method === confirmDeletePrompt.options[1]) {
-              const backupName = findValidBackupName(pathData.absPath, fileName);
-              copyFile(RCFile, pathData.absPath.concat(backupName), () => {
-                copyFile(pathData.absPath
-                  .concat(source), RCFile);
-              });
-            } else if (how.method === confirmDeletePrompt.options[2]) {
-              copyFile(pathData.absPath.concat(source), RCFile);
-            }
-          });
-      }
-    });
 };
 
 const fillBlanksWithDefaults = (assignedSettings, defaultSettings) => {
