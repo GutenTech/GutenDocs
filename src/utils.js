@@ -189,7 +189,7 @@ const generateAPIFrame = (relPath, dirName) => {
     const mergedRC = Object.assign(JSON.parse(templateRC), {
       apiDir: dirName,
     });
-    fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC));
+    fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC, null, 4));
     updateConfig(absPath.concat(dirName));
   } else {
     /* eslint-disable-next-line no-console */
