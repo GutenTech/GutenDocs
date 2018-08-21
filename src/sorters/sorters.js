@@ -1,8 +1,7 @@
 /**
- * @description A function that will assign the classification headings based upon
- * whether or not end-user has specified a custom tag.  catchAllSection is option
- * see params below.
- * @param data {[]} Receive [ast-array, priority-number, options-object]
+ * @description An internal helper function that processes and checks if a header/priority exist
+ * @param header {{string}} The value to be set as the header
+ * 
  * @return updatedData {[]} [ast-array, priority-number, options-object]
  */
 
