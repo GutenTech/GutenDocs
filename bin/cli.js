@@ -6,7 +6,6 @@ const extract = require('../src/parser/extract.js');
 const parseComments = require('../src/parser/parseComments.js');
 const {
   findRC,
-  refreshFile,
   updateConfig,
   refreshAPI,
   generateAPIFrame,
