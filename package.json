@@ -68,6 +68,7 @@
     "popper.js": "^1.14.4",
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-anchor-link-smooth-scroll": "^1.0.11",
     "react-dom": "^16.4.2",

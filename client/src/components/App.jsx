@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 // import Sidebarr from './SideBar.jsx';
-import Intro from './GettingStarted.jsx';
+import Intro from './Intro.jsx';
 import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -38,7 +38,7 @@ export default class App extends Component {
             <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
             {/* eslint-enable */}
           </h1>
-          <Header />
+          <Header text={configData.introTxt} />
           <div className="download">
             <button type="button" id="npm">
               <i className="fa fa-download" />
