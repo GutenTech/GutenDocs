@@ -24,7 +24,7 @@ const execSorts = (commentBlocks) => {
   pipe(1);
   const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
 
-  const options = {sectionTag: gutenRC.skeleton.sortBySections.sections}
+  const options = {sectionTag: gutenRC.skeleton.sortBySection.sections}
   const sorterFxns = [];
   gutenRC.skeleton.sortByOrder.forEach(fxn => sorterFxns.push(sortingFxns[fxn]));
 

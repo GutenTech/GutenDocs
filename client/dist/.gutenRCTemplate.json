@@ -1,9 +1,9 @@
 { 
   "apiDir": "GutenApi/",
   "skeleton":{
-    "sortByOrder": ["sortBySections", "sortByFileStructure"],
-    "sortBySections": {
-      "sections":"@section"
+    "sortByOrder": ["sortBySection", "sortByFiles"],
+    "sortBySection": {
+      "section":"@section"
     },
     "sortByFileStructure": {
       
