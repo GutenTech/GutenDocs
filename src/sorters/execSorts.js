@@ -31,17 +31,10 @@ const execSorts = (commentBlocks) => {
   const sorterFxns = [];
   gutenRC.skeleton.sortByOrder.forEach(fxn => sorterFxns.push(sortingFxns[fxn]));
 
-  const initData = [ast, 1, options];
-  return sortArr2[0](data);
+  const sortPipe = R.pipe(...sortingFxns);
+  return sortPipe([ast, 1, options]);
 
 
-  // const sortPipe = R.pipe(...);
-  // return sortPipe(ast);
-
-
-  //const sectionTag = gutenRC.skeleton.sortBySections.sections;
-  //const priority = 1;
-  //return sortBySection(commentBlocks, priority, sectionTag);
 };
 
 

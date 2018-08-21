@@ -8,7 +8,11 @@
  * @return ast {[]} Return the AST formatted to have priority and headers according to sections
  */
 
-const sortBySection = (commentBlocks, priority, sectionTag) => {
+const sortBySection = (data) => {
+  const commentBlocks = data[0];
+  const priority = data[1];
+  const options = data[2];
+  
   const sectionName = sectionTag.slice(1);
 
   commentBlocks.forEach((block) => {
@@ -42,7 +46,7 @@ const sortByFiles = (data) => {
   const commentBlocks = data[0];
   const priority = data[1];
   const options = data[2];
-  
+
   const sectionName = sectionTag.slice(1);
 
   commentBlocks.forEach((block) => {
