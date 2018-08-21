@@ -30,7 +30,6 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
-    console.log("appJSX", parsedData, configData);
     return (
       <Router>
         <div className="App">
@@ -52,29 +51,15 @@ export default class App extends Component {
             <Test1 />
           </div>
           {
-            parsedData.map(file => (
-              <React.Fragment>
-
-                {/* <h2>
-                  {
-                    `Functions in the file ${path.basename(file.fileName)}`
-                  }
-                </h2> */}
-                <div>
-                  {
-                    file.content.map(func => (
-                      <div className="body">
-                        <h2 id="atName">
-                          {`${func.name} function`}
-                        </h2>
-                        <p>
-                          {func.description}
-                        </p>
-                      </div>
-                    ))
-                  }
-                </div>
-              </React.Fragment>
+            parsedData.map(comment => (
+              <div className="body">
+                <h2 id="atName">
+                  {`${comment.name} function`}
+                </h2>
+                <p>
+                  {comment.description}
+                </p>
+              </div>
             ))
           }
         </div>

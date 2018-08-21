@@ -13,7 +13,7 @@ const SideBar = () => (
         <h5>GutenDocs</h5>
         <br />
       </div>
-      <input type="text" id="myInput" onKeyUp="myFunction()" placeholder="Search..." />
+      <input type="text" id="myInput" placeholder="Search..." />
       <ul className="list-unstyled components">
         <li className="active">
           <a
