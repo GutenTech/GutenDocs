@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { getRC } = require('../utils.js');
+const R = require('ramda');
 const { sortBySection } = require('./sortBySection.js');
 
 /**
@@ -15,6 +16,12 @@ const execSorts = (commentBlocks) => {
   // console.log(ast);
   // execute a piping function sequence here
   const pathData = getRC();
+  var testa = (x) => {console.log(x); return x++;};
+  var testb = (x) => {console.log(x); return x++;};
+  var testc = () => {console.log(x); return x++;};
+  
+  var pipe = R.pipe(testa, testb, testc);
+  pipe(1);
   const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
   const sectionName = gutenRC.skeleton.sortBySections.sections;
   const priority = 1;
