@@ -17,7 +17,7 @@ const findValidBackupName = (location, baseName) => {
 };
 
 const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, original) => {
-  if (err) console.log(err); /* eslint-disable-line no-console */
+  if (err) console.log(err);
   return fs.writeFile(destination, original, (writeErr) => {
     if (writeErr) throw writeErr;
     if (cb !== undefined) {
@@ -27,7 +27,6 @@ const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, origin
 });
 
 const refreshFile = (pathData, fileName, source) => {
-  /* eslint-disable-next-line no-console */
   const RCFile = pathData.concat(fileName);
   const corruptFilePrompt = inquirerOptions.corruptFilePrompt(fileName);
   const confirmDeletePrompt = inquirerOptions.confirmDeletePrompt(fileName);
@@ -94,6 +93,7 @@ const findRC = () => {
   } catch (err) {
     success = false;
     /* eslint-disable-next-line no-console */
+    console.log(err.lineNumber);
     console.log(err);
   }
   if (success) {
@@ -102,41 +102,40 @@ const findRC = () => {
   return false;
 };
 
+const filterFiles = (file, dirPath, toIgnore) => {
+  const fieslToIgnore = toIgnore || ['.DS_Store'];
+  if (fieslToIgnore.includes(file)) return false;
+  if (fs.lstatSync(dirPath.concat(file)).isDirectory()) return false;
+  return true;
+};
+
 const generateFilesaveArray = (absPath, dirName) => {
   const filesToWrite = [];
-  const srcPath = path.dirname(__dirname).concat('/');
-  let nextPath = srcPath.concat('client/dist/styles.css');
-  filesToWrite.push([fs.readFileSync(nextPath), 'styles.css']);
-  nextPath = srcPath.concat('client/dist/index.html');
-  filesToWrite.push([fs.readFileSync(nextPath), 'index.html']);
-  nextPath = srcPath.concat('client/dist/bundle.js');
-  filesToWrite.push([fs.readFileSync(nextPath), 'bundle.js']);
-  nextPath = srcPath.concat('client/dist/0.bundle.js');
-  filesToWrite.push([fs.readFileSync(nextPath), '0.bundle.js']);
-  nextPath = srcPath.concat('client/dist/1.bundle.js');
-  filesToWrite.push([fs.readFileSync(nextPath), '1.bundle.js']);
-  nextPath = srcPath.concat('client/dist/gutenConfig.json');
-  filesToWrite.push([fs.readFileSync(nextPath), 'gutenConfig.json']);
-  nextPath = srcPath.concat('client/dist/imgs/');
-  const images = fs.readdirSync(nextPath);
-  images.forEach(img => filesToWrite.push([fs.readFileSync(nextPath.concat(img)), 'imgs/'.concat(img)]));
+  const srcPath = path.dirname(__dirname).concat('/client/dist/');
+  const srcFiles = fs.readdirSync(srcPath).filter(file => filterFiles(file, srcPath));
+  srcFiles.forEach(file => filesToWrite.push(
+    {
+      content: fs.readFileSync(srcPath.concat(file)),
+      writePath: file,
+    },
+  ));
+
+  const imgPath = srcPath.concat('imgs/');
+  const images = fs.readdirSync(imgPath).filter(file => filterFiles(file, imgPath));
+  images.forEach(img => filesToWrite.push(
+    {
+      content: fs.readFileSync(imgPath.concat(img)),
+      writePath: 'imgs/'.concat(img),
+    },
+  ));
 
   const APIdir = absPath.concat(dirName);
-  if (!fs.existsSync(APIdir)) {
-    fs.mkdirSync(APIdir);
-  }
-
-  const resourceDir = APIdir.concat('resources/');
-  if (!fs.existsSync(resourceDir)) {
-    fs.mkdirSync(resourceDir);
-  }
+  if (!fs.existsSync(APIdir)) fs.mkdirSync(APIdir);
 
   const imgDir = APIdir.concat('imgs/');
-  if (!fs.existsSync(imgDir)) {
-    fs.mkdirSync(imgDir);
-  }
+  if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
 
-  filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file[1]), file[0]));
+  filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file.writePath), file.content));
 };
 
 const fillBlanksWithDefaults = (assignedSettings, defaultSettings) => {
@@ -149,8 +148,6 @@ const updateConfig = (APIdir) => {
   const pathToConfigBundle = APIdir.concat('1.bundle.js');
   const pathToConfigJSON = APIdir.concat('gutenConfig.json');
   if (!fs.existsSync(APIdir)) {
-    // if (!fs.existsSync(pathToConfigBundle)) {
-    /* eslint-disable-next-line no-console */
     console.log(`Write Error:
     The folder specified in the .gutenrc.json file seems to be missing.  
     Update .gutenrc.json to match your API folder if you have changed the folder name,
@@ -199,7 +196,6 @@ const generateAPIFrame = (relPath, dirName) => {
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC, null, 2));
     updateConfig(absPath.concat(dirName));
   } else {
-    /* eslint-disable-next-line no-console */
     console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
 };
