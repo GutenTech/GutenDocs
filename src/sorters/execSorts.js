@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { getRC } = require('../utils.js');
 const R = require('ramda');
-const { ...sortingFxns } = require('./sorters.js');
+const { ...sortFxnsObj } = require('./sorters.js');
 
 /**
  * @description Execute various sorting functions
@@ -23,18 +23,11 @@ const execSorts = (commentBlocks) => {
   var pipe = R.pipe(testa, testb, testc);
   pipe(1);
   const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
-
-  const options = { 
-    sectionTag: gutenRC.skeleton.sortBySection.sections 
-  };
-
-  const sorterFxns = [];
-  gutenRC.skeleton.sortByOrder.forEach(fxn => sorterFxns.push(sortingFxns[fxn]));
-
-  const sortPipe = R.pipe(...sortingFxns);
+  const options = { sectionTag: gutenRC.skeleton.sortBySection.sections };
+  const sortFxns = [];
+  gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));
+  const sortPipe = R.pipe(...sortFxns);
   return sortPipe([ast, 1, options]);
-
-
 };
 
 
