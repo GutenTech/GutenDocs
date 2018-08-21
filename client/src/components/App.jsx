@@ -30,6 +30,10 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
+    console.log(parsedData, configData);
+    if (parsedData === undefined || configData === undefined) {
+      return (<div>Loading</div>);
+    }
     return (
       <Router>
         <div className="App">
@@ -38,7 +42,7 @@ export default class App extends Component {
             <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
             {/* eslint-enable */}
           </h1>
-          <Header text={configData.introTxt} />
+          <Header />
           <div className="download">
             <button type="button" id="npm">
               <i className="fa fa-download" />
@@ -47,7 +51,7 @@ export default class App extends Component {
           </div>
           <SideBar />
           <div className="starter">
-            <Intro />
+            <Intro text={configData.introTxt} />
             <Test1 />
           </div>
           {
