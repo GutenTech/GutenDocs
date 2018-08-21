@@ -27,6 +27,7 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
+    console.log("appJSX", parsedData, configData);
     return (
       <Router>
         <div className="App">
@@ -69,7 +70,7 @@ export default class App extends Component {
                 </div>
               </React.Fragment>
             ))
-        }
+          }
         </div>
       </Router>
     );
