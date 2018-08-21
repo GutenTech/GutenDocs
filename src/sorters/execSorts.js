@@ -18,7 +18,8 @@ const execSorts = (ast) => {
   const sortFxns = [];
   gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));
   const sortPipe = R.pipe(...sortFxns);
-  return sortPipe([ast, 1, options]);
+  // results will be in the format [ast, priority number, and options]. Only need ast.
+  return sortPipe([ast, 1, options])[0];
 };
 
 
