@@ -9,6 +9,13 @@
     "height":"100",
     "width":"300"
   },
+  "introTxt": {
+    "gettingStarted": "gettings started",
+    "installation": "installation",
+    "examples": "examples",
+    "support": "support",
+    "FAQ": "faq"
+  },
   "hello":{
     "greeting": "container",
     "marginLeft": "500"
