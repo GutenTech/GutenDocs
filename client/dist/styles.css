@@ -40,7 +40,6 @@
     color: white;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     background: #B2B2FF;
-    overflow-y: ;
 }
 
 .wrapper {
@@ -54,11 +53,11 @@
     border: 0px solid #fff;
     box-shadow: 10px 0px 10px #B2B2FF90;
     background:linear-gradient(142deg, rgb(251, 251, 253), rgb(214, 214, 240));
-    width: 200px;
+    width: 15%;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 96.6vh;
     z-index: 999;
     transition: all 0.3s;
     margin-bottom: 100px;
@@ -81,14 +80,14 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
     }
     #sidebar.active {
         margin-left: 0;
     }
-}
+} */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
@@ -107,7 +106,7 @@ p {
 }
 
 a, a:hover, a:focus {
-    color:#FFFFFF;
+    color:rgb(113, 75, 116);
     text-decoration: underline;
 }
 
@@ -120,7 +119,7 @@ a, a:hover, a:focus {
 }
 
 #sidebar ul p {
-    color: #fff;
+    color: rgb(155, 120, 153);
     padding: 10px;
 }
 
@@ -130,7 +129,7 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #939393;
+    color: rgb(155, 120, 153);
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
