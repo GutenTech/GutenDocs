@@ -58,19 +58,3 @@ const cleanAST = (ast) => {
 
 module.exports.execSorts = execSorts;
 module.exports.cleanAST = cleanAST;
-
-/* eslint-disable */
-
-// var testa = (x) => {console.log(x); return ++x;};
-// var testb = (x) => {console.log(x); return ++x;};
-// var testc = (x) => {console.log(x); return ++x;};
-
-// var arr = [testa, testb, testc]
-
-// var pipe = R.pipe(...arr);
-// pipe(4);
-
-    // extract an array of files to be sorted
-  // const sortFiles = gutenrc.skeleton.sortByOrder;
-  // console.log(ast);
-  // execute a piping function sequence here
