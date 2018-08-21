@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { getRC } = require('../utils.js');
 const R = require('ramda');
-const { sortBySection } = require('./sortBySection.js');
+const { ...sortingFxns } = require('./sorters.js');
 
 /**
  * @description Execute various sorting functions
@@ -23,9 +23,21 @@ const execSorts = (commentBlocks) => {
   var pipe = R.pipe(testa, testb, testc);
   pipe(1);
   const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
-  const sectionName = gutenRC.skeleton.sortBySections.sections;
-  const priority = 1;
-  return sortBySection(commentBlocks, sectionName, priority);
+
+  const options = {sectionTag: gutenRC.skeleton.sortBySections.sections}
+  const sorterFxns = [];
+  gutenRC.skeleton.sortByOrder.forEach(fxn => sorterFxns.push(sortingFxns[fxn]));
+
+  return sortArr2[0]([ast, 1, { section: '@section' }]);
+
+
+  // const sortPipe = R.pipe(...);
+  // return sortPipe(ast);
+
+
+  //const sectionTag = gutenRC.skeleton.sortBySections.sections;
+  //const priority = 1;
+  //return sortBySection(commentBlocks, priority, sectionTag);
 };
 
 
@@ -64,3 +76,19 @@ const cleanAST = (ast) => {
 
 module.exports.execSorts = execSorts;
 module.exports.cleanAST = cleanAST;
+
+/* eslint-disable */
+
+// var testa = (x) => {console.log(x); return ++x;};
+// var testb = (x) => {console.log(x); return ++x;};
+// var testc = (x) => {console.log(x); return ++x;};
+
+// var arr = [testa, testb, testc]
+
+// var pipe = R.pipe(...arr);
+// pipe(4);
+
+    // extract an array of files to be sorted
+  // const sortFiles = gutenrc.skeleton.sortByOrder;
+  // console.log(ast);
+  // execute a piping function sequence here
