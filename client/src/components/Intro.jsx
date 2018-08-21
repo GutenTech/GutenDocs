@@ -22,7 +22,6 @@ const Intro = ({ text }) => (
     <p>
       {text.examples}
     </p>
-    <img src="./imgs/example.png" alt="dunno" width="100" height="50" />
     <br />
     <br />
     <h2>Support</h2>
