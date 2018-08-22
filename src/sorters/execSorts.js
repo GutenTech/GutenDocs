@@ -17,7 +17,17 @@ const execSorts = (ast) => {
     catchAllTag: gutenRC.skeleton.catchAll.section,
   };
   const sortFxns = [];
-  gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));
+  gutenRC.skeleton.sortByOrder.forEach((fxn) => {
+    if (sortFxnsObj[fxn] !== undefined) sortFxns.push(sortFxnsObj[fxn]);
+    else {
+      /* eslint-ignore-next-line */
+      console.log('\nComment Sorting Error:\n'
+      + '******************\n'
+      + `${fxn} is not a function.\nRemove it from .gutenrc.skelete.sortBtOrder array.`
+      + '  Continuing to parse without it.\n'
+      + '******************');
+    }
+  });
   const sortPipe = R.pipe(...sortFxns);
   // results will be in the format [ast, priority number, and options]. Only need ast.
   return (sortPipe([ast, 1, options])[0]);
