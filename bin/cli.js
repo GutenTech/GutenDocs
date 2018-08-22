@@ -60,7 +60,7 @@ yargs.command('$0', 'Parse all file in dir and subdir', {
 (argv) => {
   const gutenrc = getRC();
   if (gutenrc) {
-    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.dirName)}0.bundle.js` : undefined;
+    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
     const input = argv.all ? ['./'] : argv._;
     extract(input).then((data) => {
       const rawAST = parseComments(data, address);
