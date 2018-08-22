@@ -29,7 +29,8 @@ class SideBar extends React.Component {
           <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch} />
           <ul className="list-unstyled components">
             <li>
-              <a href="#home">Home</a>
+              {/* just leaving ahref here as a # to reference top of page for the time being */}
+              <a href="#">Home</a>
             </li>
             <li>
               <AnchorLink offset={() => 100} href="#things">Things</AnchorLink>
@@ -175,7 +176,7 @@ export default SideBar;
 //       return (<div>
 //         <input value={this.state.input} type="text" onChange={this.onChangeHandler.bind(this)}/>
 //           <ul>{list}</ul>
-//         </div>      
+//         </div>
 //      );
 //     }
 //   }

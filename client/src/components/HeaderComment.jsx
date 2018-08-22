@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+<<<<<<< HEAD
 import SidebarFuncEntry from './SidebarFuncEntry';
 /* eslint-enable */
 
@@ -33,6 +34,23 @@ const HeaderComment = ({ parsedData }) => {
       }
     </ul>);
 };
+=======
+/* eslint-enable */
+const HeaderComment = ({ parsedData }) => (
+  <ul>
+    {parsedData.map((comment, index) => (
+      <li className="sideHeader" key={index}>
+        <h5>{comment.header}</h5>
+        <AnchorLink
+          offset={() => 100}
+          href="#"
+        >
+          {comment.name}
+        </AnchorLink>
+      </li>))}
+  </ul>
+);
+>>>>>>> logo is aligned and header and name are functioning on the sidebar
 
 HeaderComment.propTypes = {
   /* eslint-disable-next-line */

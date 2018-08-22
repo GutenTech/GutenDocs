@@ -40,12 +40,6 @@ export default class App extends Component {
             {/* eslint-enable */}
           </h1>
           <Header />
-          <div className="download">
-            <button type="button" id="npm">
-              <i className="fa fa-download" />
-              npm Download
-            </button>
-          </div>
           <SideBar parsedData={parsedData} />
           <div className="starter">
             <Intro text={configData.introTxt} />
