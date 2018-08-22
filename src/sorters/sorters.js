@@ -47,9 +47,9 @@ const catchAll = (data) => {
       block.priority = data[1];
     }
     // Assign a unique ID key for reactMapping
+    reactMapKey += 1;
     block.id = reactMapKey;
     /* eslint-enable */
-    reactMapKey += 1;
   });
 
   return [commentBlocks, data[1] + 1, data[2]];
