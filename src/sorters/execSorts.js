@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { getRC } = require('../utils.js');
 const R = require('ramda');
+const { getRC } = require('../utils.js');
 const { ...sortFxnsObj } = require('./sorters.js');
 
 /**
