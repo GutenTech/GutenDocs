@@ -11,8 +11,9 @@ const { ...sortFxnsObj } = require('./sorters.js');
  */
 
 const execSorts = (ast) => {
+  console.log('hello');
   const pathData = getRC();
-  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json'))); 
+  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
   // options will contain sorting options for particular functions.  In this case: sectionSort
   const options = { sectionTag: gutenRC.skeleton.sortBySection.section };
   const sortFxns = [];
