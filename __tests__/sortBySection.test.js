@@ -1,4 +1,4 @@
-const { sortBySection } = require('../src/sorters/sortBySection.js');
+const { sortBySection } = require('../src/sorters/sorters.js');
 
 jest.mock('../src/utils.js');
 
