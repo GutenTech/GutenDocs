@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const {
-  exec
+  exec,
 } = require('child_process');
 const yargs = require('yargs');
 const pjson = require('../package.json');
@@ -56,30 +56,28 @@ yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {},
       refreshAPI(gutenrc);
     }
   });
-
 yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subdir', {
-    all: {
-      alias: 'a',
-      describe: 'parse all js/jsx files in target path',
-    },
-    watch: {
-      alias: 'w',
-      describe: 'update GutenApi folder automatically',
-    },
+  all: {
+    alias: 'a',
+    describe: 'parse all js/jsx files in target path',
   },
-  (argv) => {
-    const gutenrc = getRC();
-    if (gutenrc) {
-      const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
-      const input = argv.all ? ['./'] : argv._;
-      extract(input).then((data) => {
-        const rawAST = parseComments(data, address);
-        const ast = cleanAST(rawAST);
-        const dataToWrite = execSorts(ast);
-        saveTags(dataToWrite, address);
-      });
-    }
-  });
+  watch: {
+    alias: 'w',
+    describe: 'update GutenApi folder automatically',
+  },
+}, (argv) => {
+  const gutenrc = getRC();
+  if (gutenrc) {
+    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
+    const input = argv.all ? ['./'] : argv._;
+    extract(input).then((data) => {
+      const rawAST = parseComments(data, address);
+      const ast = cleanAST(rawAST);
+      const dataToWrite = execSorts(ast);
+      saveTags(dataToWrite, address);
+    });
+  }
+});
 
 yargs.command(['config', 'c'], 'update rendered API with gutenConfig settings', {},
   () => {
@@ -90,21 +88,20 @@ yargs.command(['config', 'c'], 'update rendered API with gutenConfig settings', 
   });
 
 yargs.command(['verbosity [level]', 'verbose [level]'], 'Set verbosity level [0-5]', {
-    global: {
-      alias: 'g',
-      describe: 'set the default verbosity for gutendocs',
-    },
+  global: {
+    alias: 'g',
+    describe: 'set the default verbosity for gutendocs',
   },
-  (argv) => {
-    const gutenrc = getRC();
-    if (Object.prototype.hasOwnProperty.call(argv, 'g')) { // needed hasOwnProperty because 0 is falsy
-      setVerbosity(argv.global, gutenrc, true);
-      return;
-    }
-    if (gutenrc) {
-      setVerbosity(argv.level, gutenrc);
-    }
-  });
+}, (argv) => {
+  const gutenrc = getRC();
+  if (Object.prototype.hasOwnProperty.call(argv, 'g')) { // needed hasOwnProperty because 0 is falsy
+    setVerbosity(argv.global, gutenrc, true);
+    return;
+  }
+  if (gutenrc) {
+    setVerbosity(argv.level, gutenrc);
+  }
+});
 
 yargs.command(['info'], 'Get info about the package', {},
   () => {
@@ -144,28 +141,27 @@ yargs.command(['version'], 'See version information', {},
 // TODO left this in for development purposes so people could still use it the way they have been
 // TODO should be removed when the above is uncommented.
 yargs.command('$0', 'Parse all file in dir and subdir', {
-    all: {
-      alias: 'a',
-      describe: 'parse all js/jsx files in target path',
-    },
-    watch: {
-      alias: 'w',
-      describe: 'update GutenApi folder automatically',
-    },
+  all: {
+    alias: 'a',
+    describe: 'parse all js/jsx files in target path',
   },
-  (argv) => {
-    const gutenrc = getRC();
-    if (gutenrc) {
-      const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
-      const input = argv.all ? ['./'] : argv._;
-      extract(input).then((data) => {
-        const rawAST = parseComments(data, address);
-        const ast = cleanAST(rawAST);
-        const dataToWrite = execSorts(ast);
-        saveTags(dataToWrite, address);
-      });
-    }
-  });
+  watch: {
+    alias: 'w',
+    describe: 'update GutenApi folder automatically',
+  },
+}, (argv) => {
+  const gutenrc = getRC();
+  if (gutenrc) {
+    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
+    const input = argv.all ? ['./'] : argv._;
+    extract(input).then((data) => {
+      const rawAST = parseComments(data, address);
+      const ast = cleanAST(rawAST);
+      const dataToWrite = execSorts(ast);
+      saveTags(dataToWrite, address);
+    });
+  }
+});
 
 try {
   yargs.parse();
