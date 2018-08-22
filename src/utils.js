@@ -265,6 +265,25 @@ const generateAPIFrame = (relPath, apiDir) => {
   updateConfig({ absPath, apiDir });
 };
 
+const setVerbosity = (level, gutenrc, globally) => {
+  if (typeof level === 'number' && level >= 0 && level <= 5) {
+    let newSettings = gutenrc;
+    newSettings.verbosity = level;
+    newSettings = JSON.stringify(newSettings, null, 2);
+    fs.writeFileSync(gutenrc.absPath.concat('.gutenrc.json'), newSettings);
+    if (globally) {
+      const pathToGlobal = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
+      let globalSettings = JSON.parse(fs.readFileSync(pathToGlobal));
+      globalSettings.verbosity = level;
+      globalSettings = JSON.stringify(globalSettings, null, 2);
+      fs.writeFileSync(pathToGlobal, globalSettings);
+    }
+    return;
+  }
+  throw new Error('Verbosity level must be a number from 0 to 5');
+};
+
+module.exports.setVerbosity = setVerbosity;
 module.exports.generateAPIFrame = generateAPIFrame;
 module.exports.refreshAPI = refreshAPI;
 module.exports.refreshFile = refreshFile;
