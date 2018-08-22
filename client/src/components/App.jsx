@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import Intro from './Intro.jsx';
 import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link';
-import { NavHashLink as NavLink } from 'react-router-hash-link';
 import Header from './Header';
 import SideBar from './SideBar.jsx';
 import Test1 from './Test1';
@@ -48,7 +46,7 @@ export default class App extends Component {
               npm Download
             </button>
           </div>
-          <SideBar {...this.state} />
+          <SideBar parsedData={parsedData} />
           <div className="starter">
             <Intro text={configData.introTxt} />
             <Test1 />
