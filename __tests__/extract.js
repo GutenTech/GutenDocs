@@ -71,17 +71,17 @@ test('should work for a folder and only process js and jsx file', () => {
     content: [{
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
       name: 'mul',
+    }],
+    name: 'mockData/subFolder/moreFolder/arrowExpression.js',
+  }, {
+    content: [{
+      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
+      name: 'mul',
     }, {
       comment: '*\n * Sample function\n * @constructor\n * @param {number} a  Numerator\n * @param {number} b  Denominator\n * @return\n ',
       name: 'div',
     }],
     name: 'mockData/subFolder/multipleComments.js',
-  }, {
-    content: [{
-      comment: '*\n * Sample function\n * @constructor\n * @param {number} a  First multiplier\n * @param {number} b  Second multiplier\n * @return\n ',
-      name: 'mul',
-    }],
-    name: 'mockData/subFolder/moreFolder/arrowExpression.js',
   }];
   expect.assertions(1);
   return extract(address).then((received) => {

@@ -7,7 +7,7 @@ package-lock.json
 .vscode
 .gutenrc.json
 .gutenrc
-
+.gutenignore
 #filetypes
 .DS_Store
 
