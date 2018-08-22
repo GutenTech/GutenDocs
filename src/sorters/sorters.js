@@ -5,7 +5,8 @@
  * @return n/a as Array is passed by reference.
  */
 
- const _processBlocks = (commentBlocks, headerName, priority) {
+const _processBlocks = (commentBlocks, headerName, priority, matchKey) => {
+
   commentBlocks.forEach((block) => {
     if (block.header === undefined && block.priority === undefined) {
       block.tags.forEach((tag) => {
@@ -18,7 +19,7 @@
       });
     }
   });
- }
+};
 
 
 /**
