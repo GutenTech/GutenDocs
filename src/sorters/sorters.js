@@ -5,7 +5,6 @@
  * @param data {[]} Receive [ast-array, priority-number, options-object]
  * @return updatedData {[]} [ast-array, priority-number, options-object]
  */
-
 const sortBySection = (data) => {
   const commentBlocks = data[0];
   const sectionName = data[2].sectionTag.slice(1);
@@ -27,15 +26,11 @@ const sortBySection = (data) => {
 };
 
 /**
- * @description A function that will assign the classification headings based upon
- * the filename of the comment block
- * @param ast {[]} The AST with parsed information
- * @param sectionTag {string} The matcher section tag to be searched for
- * @param priority {number} The priority in which the sorting fxn was called in pipe
- * @return ast {[]} Return the AST formatted to have priority and headers according to sections
- */
-
-
+  * @description A function that will assign a general header name to unclassified
+  * comment blocks
+  * @param {[]} data Receive [ast-array, priority-number, options-object]
+  * @return ast {[]} Return the AST formatted to have priority and headers according to sections
+  */
 const catchAll = (data) => {
   const commentBlocks = data[0];
   let reactMapKey = 0;
@@ -57,3 +52,4 @@ const catchAll = (data) => {
 
 module.exports.sortBySection = sortBySection;
 module.exports.catchAll = catchAll;
+module.exports.
