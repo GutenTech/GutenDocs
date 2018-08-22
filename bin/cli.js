@@ -127,7 +127,7 @@ yargs.command(['version'], 'See version information', {},
 // TODO could probably be written without exec but I couldn't figure out how
 // yargs.command('$0', 'See usage information', {},
 //   () => {
-//     exec('guten help', (npmErr, results) => {
+//     exec('gutendocs help', (npmErr, results) => {
 //       if (npmErr) {
 //         throw new Error('Something went wrong running "gutendocs help",'
 //         + 'try it explicitly yourself');
