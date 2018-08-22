@@ -1,18 +1,6 @@
 const doctrine = require('doctrine');
 const errors = require('./utils/errors.js');
 
-const procDesc = (descriptionTagArray, fileObjDesc) => {
-  let description = fileObjDesc;
-
-  descriptionTagArray.forEach((descriptionTag) => {
-    if (fileObjDesc !== '') {
-      description = description.concat('\n');
-    }
-    description = description.concat(descriptionTag.description);
-  });
-  return description;
-};
-
 /**
  * @description catchAll descritpiton
  * @param tagArray {[]} catchall param
@@ -28,7 +16,6 @@ const processFile = (tagArray) => {
       unwrap: true,
     });
     fileObj.name = x.name;
-    // fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
     tags.content.push(fileObj);
   });
   return tags;
