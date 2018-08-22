@@ -53,7 +53,7 @@ export default class App extends Component {
           </div>
           {
             parsedData.map(comment => (
-              <div className="body">
+              <div className="body" key={comment.id}>
                 <h2 id="atName">
                   {`${comment.name} function`}
                 </h2>

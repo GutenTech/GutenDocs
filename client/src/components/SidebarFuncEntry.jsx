@@ -8,7 +8,7 @@ const SidebarFuncEntry = ({ comment }) => (
   <li>
     <AnchorLink
       offset={() => 100}
-      href="#{comment.id}"
+      href={`#${comment.id}`}
     >
       {comment.name}
     </AnchorLink>
