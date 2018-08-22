@@ -183,7 +183,7 @@ const generateFilesaveArray = (destination, dirName) => {
 
   const APIdir = destination.concat(dirName);
   if (fs.existsSync(APIdir)) {
-    const BackupDirName = findValidBackupName(path.dirname(destination), dirName);
+    const BackupDirName = findValidBackupName(destination, dirName);
     fs.renameSync(APIdir, destination.concat(BackupDirName));
   }
 
