@@ -50,6 +50,17 @@ const catchAll = (data) => {
   return [commentBlocks, data[1] + 1, data[2]];
 };
 
+/**
+  * @description A function that will assign a general header name based on fileName
+  * @param {[]} data Receive [ast-array, priority-number, options-object]
+  * @return ast {[]} Return the AST formatted to have priority and headers according to sections
+  */
+const sortByFileName = (data) => {
+  /* Function implementation goes here */
+  const commentBlocks = data[0];
+  return [commentBlocks, data[1] + 1, data[2]];
+};
+
 module.exports.sortBySection = sortBySection;
 module.exports.catchAll = catchAll;
-module.exports.
+module.exports.sortByFileName = sortByFileName;
