@@ -250,8 +250,8 @@ const refreshAPI = (gutenrc) => {
  */
 const generateAPIFrame = (relPath, apiDir) => {
   const srcPath = path.dirname(__dirname).concat('/');
+  const absPath = fs.realpathSync(relPath).concat('/');
   if (!fs.existsSync(relPath.concat('.gutenrc.json'))) {
-    const absPath = fs.realpathSync(relPath).concat('/');
     generateFilesaveArray(absPath, apiDir);
     const templateRC = fs.readFileSync(srcPath.concat('client/dist/.gutenRCTemplate.json'));
     const mergedRC = Object.assign(JSON.parse(templateRC), {
@@ -262,7 +262,7 @@ const generateAPIFrame = (relPath, apiDir) => {
   } else {
     throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
-  updateConfig({ relPath, apiDir });
+  updateConfig({ absPath, apiDir });
 };
 
 module.exports.generateAPIFrame = generateAPIFrame;
