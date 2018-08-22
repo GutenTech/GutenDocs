@@ -14,7 +14,7 @@ const execSorts = (ast) => {
   const pathData = getRC();
   const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('/.gutenrc.json')));
   // options will contain sorting options for particular functions.  In this case: sectionSort
-  const options = { 
+  const options = {
     sectionTag: gutenRC.skeleton.sortBySection.section,
     catchAllTag: gutenRC.skeleton.catchAll.section,
   };
