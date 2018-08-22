@@ -33,7 +33,9 @@ const execSorts = (ast) => {
  *   header: (string or undefined),
  *   priority: (number or undefined),
  *   description: (string),
- *   tags: [{title: (string), description: (string)}]
+ *   tags: [{title: (string), description: (string)}],
+ *   name: commentBlock.name,
+ *   pathName: file.fileName
  *  }
  */
 
