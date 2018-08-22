@@ -2,8 +2,8 @@
  * @description A function that will assign the classification headings based upon
  * whether or not end-user has specified a custom tag.  catchAllSection is option
  * see params below.
- * @param data {[]} Receive [ast-array, priority-number, options-object]
- * @return updatedData {[]} [ast-array, priority-number, options-object]
+ * @param {[]} data Receive [ast-array, priority-number, options-object]
+ * @return {[]} updatedData [ast-array, priority-number, options-object]
  */
 const sortBySection = (data) => {
   const commentBlocks = data[0];
@@ -29,7 +29,7 @@ const sortBySection = (data) => {
   * @description A function that will assign a general header name to unclassified
   * comment blocks
   * @param {[]} data Receive [ast-array, priority-number, options-object]
-  * @return ast {[]} Return the AST formatted to have priority and headers according to sections
+  * @return {[]} ast Return the AST formatted to have priority and headers according to sections
   */
 const catchAll = (data) => {
   const commentBlocks = data[0];
@@ -53,7 +53,7 @@ const catchAll = (data) => {
 /**
   * @description A function that will assign a general header name based on fileName
   * @param {[]} data Receive [ast-array, priority-number, options-object]
-  * @return ast {[]} Return the AST formatted to have priority and headers according to sections
+  * @return {[]} ast Return the AST formatted to have priority and headers according to sections
   */
 const sortByFileName = (data) => {
   /* Function implementation goes here */
