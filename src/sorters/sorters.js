@@ -7,7 +7,8 @@
  */
 
 const sortBySection = (data) => {
-  const commentBlocks = data[0]; 
+  const commentBlocks = data[0];
+  console.log('data input', data);
   const sectionName = data[2].sectionTag.slice(1);
 
   commentBlocks.forEach((block) => {
@@ -38,25 +39,23 @@ const sortBySection = (data) => {
 
 const sortByFiles = (data) => {
   const commentBlocks = data[0];
-  const priority = data[1];
-  const options = data[2];
+  
+  console.log('in sort by files function');
 
-  const sectionName = sectionTag.slice(1);
+  // commentBlocks.forEach((block) => {
+  //   if (block.header === undefined && block.priority === undefined) {
+  //     block.tags.forEach((tag) => {
+  //       if (tag.title === sectionName) {
+  //         /* eslint-disable */
+  //         block.header = sectionName;
+  //         block.priority = priority;
+  //         /* eslint-enable */
+  //       }
+  //     });
+  //   }
+  // });
 
-  commentBlocks.forEach((block) => {
-    if (block.header === undefined && block.priority === undefined) {
-      block.tags.forEach((tag) => {
-        if (tag.title === sectionName) {
-          /* eslint-disable */
-          block.header = sectionName;
-          block.priority = priority;
-          /* eslint-enable */
-        }
-      });
-    }
-  });
-
-  return commentBlocks;
+  return [commentBlocks, data[1] + 1, data[2]];
 };
 
 module.exports.sortBySection = sortBySection;
