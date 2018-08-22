@@ -1,28 +1,4 @@
 /**
- * @description An internal helper function that processes and checks if a header/priority exist
- * @param header {{string}} The value to be set as the header
- * @param priority {{number}} The value to be set as the priority
- * @return n/a as Array is passed by reference.
- */
-
-const _processBlocks = (commentBlocks, headerName, priority, matchKey) => {
-
-  commentBlocks.forEach((block) => {
-    if (block.header === undefined && block.priority === undefined) {
-      block.tags.forEach((tag) => {
-        if (tag.title === headerName) {
-          /* eslint-disable */
-          block.header = headerName;
-          block.priority = priority;
-          /* eslint-enable */
-        }
-      });
-    }
-  });
-};
-
-
-/**
  * @description A function that will assign the classification headings based upon
  * whether or not end-user has specified a custom tag.  catchAllSection is option
  * see params below.
