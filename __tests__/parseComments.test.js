@@ -14,7 +14,7 @@ describe('parseComments', () => {
       comment: '',
     }])).toThrowError());
 
-  it('should turn a array of comments into AST objects containing info about the comment',
+  xit('should turn a array of comments into AST objects containing info about the comment',
     () => expect(parseComments([{
       content: [{
         comment: '*\n * @description sample description\n ',
@@ -33,7 +33,7 @@ describe('parseComments', () => {
       fileName: '../src/parser/test.js',
     }]));
 
-  it('should turn a array of comments with tags into AST objects containing info about the comment including an array of tags', () => expect(parseComments([{
+  xit('should turn a array of comments with tags into AST objects containing info about the comment including an array of tags', () => expect(parseComments([{
     content: [{
       comment: '*\n * @description sample description\n ',
       name: 'someFxnName',
@@ -63,7 +63,7 @@ describe('parseComments', () => {
     }],
   ));
 
-  it('should add any tags of description to the description key of the object', () => expect(parseComments(
+  xit('should add any tags of description to the description key of the object', () => expect(parseComments(
     [{
       content: [{
         comment: '*\n * blank description\n * @description sample description\n ',
