@@ -28,7 +28,7 @@ const processFile = (tagArray) => {
       unwrap: true,
     });
     fileObj.name = x.name;
-    fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
+    // fileObj.description = procDesc(fileObj.tags.filter(tag => tag.title === 'description'), fileObj.description);
     tags.content.push(fileObj);
   });
   return tags;

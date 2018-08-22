@@ -15,7 +15,7 @@ const sortBySection = (data) => {
       block.tags.forEach((tag) => {
         if (tag.title === sectionName) {
           /* eslint-disable */
-          block.header = sectionName;
+          block.header = tag.description;
           block.priority = data[1];
           /* eslint-enable */
         }
