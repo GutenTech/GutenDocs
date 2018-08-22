@@ -3,12 +3,14 @@
   "skeleton": {
     "sortByOrder": [
       "sortBySection",
-      "sortByFiles"
+      "catchAll"
     ],
     "sortBySection": {
       "section": "@section"
     },
-    "sortByFileStructure": {}
+    "catchAll": {
+      "section": "Miscellaneous"
+    }
   },
   "verbosity": 1
 }
