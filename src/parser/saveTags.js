@@ -1,6 +1,13 @@
 const fs = require('fs');
 const { parseCommentsTemplate } = require('./utils/webpackTemplates.js');
 
+
+/**
+ * @description Will write the cleaned and sorted AST tree to a bundle.js file
+ * @param {[]} data the ast cleaned tree
+ * @param {string} path the path to write the data too
+ * @return n/a
+ */
 const saveTags = (data, path) => {
   const dataToSave = JSON.stringify(data)
     .replace(/(?<!\\)(?:\\\\)*\\n/g, '\\\\n`') // replaces \n where there is odd number of \ with a \\n
