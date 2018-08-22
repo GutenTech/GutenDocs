@@ -8,7 +8,6 @@
 
 const sortBySection = (data) => {
   const commentBlocks = data[0];
-  console.log('data input', data);
   const sectionName = data[2].sectionTag.slice(1);
 
   commentBlocks.forEach((block) => {
@@ -17,7 +16,7 @@ const sortBySection = (data) => {
         if (tag.title === sectionName) {
           /* eslint-disable */
           block.header = sectionName;
-          block.priority = priority;
+          block.priority = data[1];
           /* eslint-enable */
         }
       });
@@ -40,7 +39,7 @@ const sortBySection = (data) => {
 const sortByFiles = (data) => {
   const commentBlocks = data[0];
   
-  console.log('in sort by files function');
+  //console.log('in sort by files function');
 
   // commentBlocks.forEach((block) => {
   //   if (block.header === undefined && block.priority === undefined) {
