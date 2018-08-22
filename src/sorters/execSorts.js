@@ -1,18 +1,16 @@
-const fs = require('fs');
 const R = require('ramda');
 const { getRC } = require('../utils.js');
 const { ...sortFxnsObj } = require('./sorters.js');
 
 /**
  * @description Execute various sorting functions
- * @param ast {[]} The Cleaned AST with parsed information
- * @return ast {[]} The AST "sorted" with appropriate headers and priorities
+ * @param {[]} ast The Cleaned with parsed information
+ * @return {[]} ast The AST "sorted" with appropriate headers and priorities
  * assigned to it.
  */
 
 const execSorts = (ast) => {
-  const pathData = getRC();
-  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('/.gutenrc.json')));
+  const gutenRC = getRC();
   // options will contain sorting options for particular functions.  In this case: sectionSort
   const options = {
     sectionTag: gutenRC.skeleton.sortBySection.section,
@@ -28,10 +26,9 @@ const execSorts = (ast) => {
 
 /**
  * @description This will cleanup the incoming AST structure
- * @param ast {[]} The AST with parsed information
- * @return commentBlocks {[]} Return an array of commentBlock objects.Each object
- * will be in the following format as an object:
- *
+ * @param {[]} ast The AST with parsed information
+ * @return {[]} commentBlocks Return an array of commentBlock objects.
+ * @example return
  *  {
  *   header: (string or undefined),
  *   priority: (number or undefined),
