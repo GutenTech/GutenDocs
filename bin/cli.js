@@ -3,7 +3,7 @@
 const { exec } = require('child_process');
 const yargs = require('yargs');
 const pjson = require('../package.json');
-const gloablSettings = require('../client/dist/.gutenRCTemplate.json');
+const globalSettings = require('../client/dist/.gutenRCTemplate.json');
 const extract = require('../src/parser/extract.js');
 const parseComments = require('../src/parser/parseComments.js');
 const {
@@ -27,7 +27,7 @@ const errorHandler = (err) => {
     gutenrc = getRC();
   } catch (error) {
     gutenrc = {};
-    gutenrc.verbosity = gloablSettings.verbosity;
+    gutenrc.verbosity = globalSettings.verbosity;
   }
   /* eslint-disable-next-line no-console */
   if (gutenrc.verbosity === 0) console.log(err.message);
