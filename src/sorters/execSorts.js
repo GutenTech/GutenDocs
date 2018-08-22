@@ -4,7 +4,7 @@ const { ...sortFxnsObj } = require('./sorters.js');
 
 /**
  * @description Execute various sorting functions
- * @param {[]} ast The Cleaned with parsed information
+ * @param {[]} ast The Cleaned AST with parsed information
  * @return {[]} ast The AST "sorted" with appropriate headers and priorities
  * assigned to it.
  */
