@@ -34,10 +34,8 @@
     "acorn": "^5.7.1",
     "acorn-jsx": "^4.1.1",
     "doctrine": "^2.1.0",
-    "glob": "^7.1.2",
     "ignore-walk": "^3.0.1",
     "inquirer": "^6.1.0",
-    "klaw": "^3.0.0",
     "ramda": "^0.25.0",
     "user": "0.0.0",
     "yargs": "^12.0.1"

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-const { exec } = require('child_process');
+const {
+  exec,
+} = require('child_process');
 const yargs = require('yargs');
 const pjson = require('../package.json');
 const globalSettings = require('../client/dist/.gutenRCTemplate.json');
@@ -32,7 +34,7 @@ const errorHandler = (err) => {
   /* eslint-disable-next-line no-console */
   if (gutenrc.verbosity === 0) console.log(err.message);
   /* eslint-disable-next-line no-console */
-  else if (gutenrc.verbosity === 1)console.log(err);
+  else if (gutenrc.verbosity === 1) console.log(err);
   /* eslint-disable-next-line no-console */
   else console.log(err);
 };
@@ -54,7 +56,6 @@ yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {},
       refreshAPI(gutenrc);
     }
   });
-
 yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subdir', {
   all: {
     alias: 'a',
@@ -64,8 +65,7 @@ yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subd
     alias: 'w',
     describe: 'update GutenApi folder automatically',
   },
-},
-(argv) => {
+}, (argv) => {
   const gutenrc = getRC();
   if (gutenrc) {
     const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
@@ -92,8 +92,7 @@ yargs.command(['verbosity [level]', 'verbose [level]'], 'Set verbosity level [0-
     alias: 'g',
     describe: 'set the default verbosity for gutendocs',
   },
-},
-(argv) => {
+}, (argv) => {
   const gutenrc = getRC();
   if (Object.prototype.hasOwnProperty.call(argv, 'g')) { // needed hasOwnProperty because 0 is falsy
     setVerbosity(argv.global, gutenrc, true);
@@ -150,8 +149,7 @@ yargs.command('$0', 'Parse all file in dir and subdir', {
     alias: 'w',
     describe: 'update GutenApi folder automatically',
   },
-},
-(argv) => {
+}, (argv) => {
   const gutenrc = getRC();
   if (gutenrc) {
     const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
