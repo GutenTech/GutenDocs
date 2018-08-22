@@ -1,6 +1,9 @@
 /* eslint-disable */
 import React from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import HeaderComment from './HeaderComment.jsx';
+import Header from './Header';
+import PropTypes from 'prop-types';
 /* eslint-enable */
 // very messy looking here, will be cleaned up
 // samples that will be fixed
@@ -55,52 +58,46 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 
 class SideBar extends React.Component {
-    construcutor(props) {
-        super(props);
-        this.state = {
-          search: ""
-        }
-      }
-      updateSearch(e) {
-          this.setState({search: event.target.value.substr(0,25)});
-    };
-    const parsedData = this.props.parsedData
-    const headers = parsedData.map((comments, index) =>
-      <ul className="list-unstyled components">
-        <li className="headerComment" key={index}> 
-          <AnchorLink offset={() => 100}    
-            href={comments.header || "#"}>{comments.header}
-          </AnchorLink>
-        </li>
-        <li className="nameComment" key={index}> 
-          <AnchorLink offset={() => 100}    
-            href={comments.name || "#"}>{comments.name}
-          </AnchorLink>
-        </li>
-      </ul>
-    );
+  constructor(props) {
+    super(props);
+    // this.state = {
+    //   search: ""
+    // };
+  }
+
+    // updateSearch = (event) => {
+    //   this.setState({search: event.target.value.substr(0,25)});
+    // };
+
     render() {
-        return (
-            <div className="wrapper">
-                <nav id="sidebar">
-                    <div id="header">
-                        <h5>GutenDocs</h5><br/>
-                    </div>
-                    <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch.bind(this)} ></input>
-                    <ul className="list-unstyled components">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li>
-                        <AnchorLink offset={() => 100} href='#things'>Things</AnchorLink>
-                        </li>
-                    </ul>
-                    {headers}
-                </nav>
+      console.log(this.props);
+      const { parsedData } = this.props;
+      return (
+        <div className="wrapper">
+          <nav id="sidebar">
+            <div id="header">
+              <h5>GutenDocs</h5>
+              <br />
             </div>
-        )
+            <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch.bind(this)} />
+            <ul className="list-unstyled components">
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <AnchorLink offset={() => 100} href="#things">Things</AnchorLink>
+              </li>
+              <HeaderComment parsedData={parsedData} />
+            </ul>
+          </nav>
+        </div>
+      );
     }
 }
+
+SideBar.propTypes = {
+  parsedData: PropTypes.string.isRequired,
+};
 
 export default SideBar;
 
@@ -149,3 +146,22 @@ export default SideBar;
 //     </li>
 // </ul>
 // </li>
+
+
+
+
+
+
+
+
+
+// class SideBar extends React.Component {
+//   construcutor(props) {
+//     super(props);
+// this.state = {
+//   search: ""
+// }
+//     }
+//     updateSearch = (e) => {
+//     this.setState({search: event.target.value.substr(0,25)});
+//     };
