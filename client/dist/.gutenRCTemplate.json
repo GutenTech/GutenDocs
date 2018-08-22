@@ -8,6 +8,9 @@
     "sortBySection": {
       "section": "@section"
     },
+    "sortByFileName": {
+      "includeExtension": false
+    },
     "catchAll": {
       "section": "Miscellaneous"
     }
