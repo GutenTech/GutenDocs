@@ -57,34 +57,50 @@ const acornParse = (content, tagContent) => {
 };
 
 const extract = arr => exclude(arr).then((list) => {
-  const ROOT = getRC().absPath;
+  const gutenrc = getRC();
   const badFiles = [];
-  const result = list.map((f) => {
+  const result = list.map((file, fileCount) => {
     const tag = {
       content: [],
-      name: f,
+      name: file,
     };
-    const content = fs.readFileSync(`${path.dirname(ROOT)}/${f}`, 'utf8');
+    const content = fs.readFileSync(`${path.dirname(gutenrc.absPath)}/${file}`, 'utf8');
     try {
       acornParse(content, tag.content);
     } catch (e) {
-      badFiles.push(f);
+      badFiles.push(file);
+      if (gutenrc.verbosity >= 4) {
+        /* eslint-disable */
+        console.log(`\n\nError processing ${file}\n**********`);
+        console.log(e);
+        console.log('**********\n');
+        /* eslint-enable */
+      } else if (gutenrc.verbosity >= 3) {
+        /* eslint-disable-next-line no-console */
+        console.log(`\n\nError processing ${file}\n**********\n${e.message}\n**********\n`);
+      }
+    }
+    if (gutenrc.verbosity >= 2) {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      process.stdout.write(`Files Processed: ${fileCount}`);
+      process.stdout.cursorTo(25);
+      process.stdout.write(file.slice(0, 60));
     }
     return tag;
   });
   /* eslint-disable-next-line no-console */
   console.log(`Files Processed: ${list.length}`);
-  if (badFiles.length !== 0) {
+  if (badFiles.length !== 0 && gutenrc.verbosity >= 2) {
     /* eslint-disable-next-line no-console */
-    console.log(`The following ${badFiles.length} files were unparsable`);
+    console.log(`\n\nThe following ${badFiles.length} files were unparsable\n***********`);
     /* eslint-disable-next-line no-console */
-    // badFiles.forEach(fileName => console.log(fileName));
+    badFiles.forEach(fileName => console.log(fileName));
+  } else if (badFiles.length !== 0 && gutenrc.verbosity >= 1) {
+    /* eslint-disable-next-line no-console */
+    console.log(`${badFiles.length} files were unparsable`);
   }
-  // process.stdout.clearLine();
-  // process.stdout.cursorTo(0);
-  // process.stdout.write(`Files Processed: ${fileCount}`);
-  // process.stdout.cursorTo(25);
-  // process.stdout.write(item.path.replace(ROOT, './').slice(0, 60));
+
   return new Promise(resolve => resolve(result));
 });
 
