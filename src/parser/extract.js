@@ -11,7 +11,7 @@ const path = require('path');
 const {
   Walker,
 } = require('ignore-walk');
-const { findRC } = require('../utils.js');
+const { getRC } = require('../utils.js');
 
 const globParse = address => new Promise((resolve, reject) => glob(address, {
   dot: true,
@@ -117,7 +117,7 @@ const walk = (searchPath, ROOT) => {
 
 
 const extract = arr => Promise.all(arr.map(x => globParse(x))).then((x) => {
-  const ROOT = findRC().absPath;
+  const ROOT = getRC().absPath;
   const paths = [].concat(...x);
   return Promise.all(paths.map(address => walk(address, ROOT)))
     .then(result => [].concat(...result));

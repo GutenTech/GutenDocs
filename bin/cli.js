@@ -5,7 +5,7 @@ const pjson = require('../package.json');
 const extract = require('../src/parser/extract.js');
 const parseComments = require('../src/parser/parseComments.js');
 const {
-  findRC,
+  getRC,
   updateConfig,
   refreshAPI,
   generateAPIFrame,
@@ -18,6 +18,20 @@ const {
   saveTags,
 } = require('../src/parser/saveTags.js');
 
+const errorHandler = (err) => {
+  let gutenrc;
+  try {
+    gutenrc = getRC();
+  } catch (error) {
+    gutenrc = {};
+    gutenrc.verbosity = 0;
+  }
+  /* eslint-disable-next-line no-console */
+  if (gutenrc.verbosity === 1) console.log(err.message);
+  /* eslint-disable-next-line no-console */
+  else if (gutenrc.verbosity === 0) console.log(err);
+};
+
 yargs.usage(`$0 ${pjson.version}
   Usage: $0 [options] <TargetPathPattern...>
          $0 <option> 
@@ -28,9 +42,9 @@ yargs.command(['init [file]', 'i'], 'initialize gutendocs', {}, (argv) => {
 });
 yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {},
   () => {
-    const pathData = findRC();
-    if (pathData) {
-      refreshAPI(pathData.absPath, pathData.dirName);
+    const gutenrc = getRC();
+    if (gutenrc) {
+      refreshAPI(gutenrc);
     }
   });
 yargs.command('$0', 'Parse all file in dir and subdir', {
@@ -44,9 +58,9 @@ yargs.command('$0', 'Parse all file in dir and subdir', {
   },
 },
 (argv) => {
-  const pathData = findRC();
-  if (pathData) {
-    const address = pathData ? `${pathData.absPath.concat(pathData.dirName)}0.bundle.js` : undefined;
+  const gutenrc = getRC();
+  if (gutenrc) {
+    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.dirName)}0.bundle.js` : undefined;
     const input = argv.all ? ['./'] : argv._;
     extract(input).then((data) => {
       const rawAST = parseComments(data, address);
@@ -58,10 +72,14 @@ yargs.command('$0', 'Parse all file in dir and subdir', {
 });
 yargs.command(['config', 'c'], 'update rendered API with gutenConfig settings', {},
   () => {
-    const pathData = findRC();
-    if (pathData) {
-      updateConfig(pathData.absPath.concat(pathData.dirName));
+    const gutenrc = getRC();
+    if (gutenrc) {
+      updateConfig(gutenrc);
     }
   });
 
-return yargs.argv;
+try {
+  yargs.parse();
+} catch (err) {
+  errorHandler(err);
+}
