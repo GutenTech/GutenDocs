@@ -38,7 +38,6 @@ const sortBySection = (data) => {
 
 const sortByFiles = (data) => {
   const commentBlocks = data[0];
-  
   /*
     Function Will Be Implemented
   */
