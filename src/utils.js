@@ -149,7 +149,7 @@ const getRC = () => {
  * @return { boolean } indicates whether or not this is a file of interest
  */
 const filterFiles = (file, dirPath, toIgnore) => {
-  const fieslToIgnore = toIgnore || ['.DS_Store'];
+  const fieslToIgnore = toIgnore || ['.DS_Store', '.gutenRCTemplate.json'];
   if (fieslToIgnore.includes(file)) return false;
   if (fs.lstatSync(dirPath.concat(file)).isDirectory()) return false;
   return true;
