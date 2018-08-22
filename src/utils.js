@@ -159,8 +159,9 @@ const filterFiles = (file, dirPath, toIgnore) => {
  * by copying them from the gutendocs client folder
  * @param { string } destination the path to the directory the API folder should be made in
  * @param { string } dirName the name of the folder the API dir should have
+ * @param { boolean } backup whether or not to make a backup folder
  */
-const generateFilesaveArray = (destination, dirName) => {
+const generateFilesaveArray = (destination, dirName, backup) => {
   const filesToWrite = [];
   const srcPath = path.dirname(__dirname).concat('/client/dist/');
   const srcFiles = fs.readdirSync(srcPath).filter(file => filterFiles(file, srcPath));
@@ -181,12 +182,12 @@ const generateFilesaveArray = (destination, dirName) => {
   ));
 
   const APIdir = destination.concat(dirName);
-  if (fs.existsSync(APIdir)) {
+  if (fs.existsSync(APIdir) && backup) {
     const BackupDirName = findValidBackupName(destination, dirName);
     fs.renameSync(APIdir, destination.concat(BackupDirName));
+    fs.mkdirSync(APIdir);
   }
 
-  fs.mkdirSync(APIdir);
 
   const imgDir = APIdir.concat('imgs/');
   if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
@@ -237,9 +238,10 @@ const updateConfig = (gutenrc) => {
 /**
  * refreshes the API with all the settings to the defauts
  * @param { {} } gutenrc the gutenrc object the defines the users settings
+ * @param { boolean } backup whether or not to make a backup folder
  */
-const refreshAPI = (gutenrc) => {
-  generateFilesaveArray(gutenrc.absPath, gutenrc.apiDir);
+const refreshAPI = (gutenrc, backup) => {
+  generateFilesaveArray(gutenrc.absPath, gutenrc.apiDir, backup);
   updateConfig(gutenrc);
 };
 

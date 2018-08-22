@@ -49,13 +49,19 @@ yargs.command(['init [file]', 'i'], 'initialize gutendocs', {}, (argv) => {
   generateAPIFrame('./', argv.file || 'GutenApi/');
 });
 
-yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {},
-  () => {
-    const gutenrc = getRC();
-    if (gutenrc) {
-      refreshAPI(gutenrc);
-    }
-  });
+yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {
+  backup: {
+    alias: 'b',
+    describe: 'create a backup copy before resetting the folder',
+  },
+},
+(argv) => {
+  const gutenrc = getRC();
+  if (gutenrc) {
+    refreshAPI(gutenrc, argv.backup);
+  }
+});
+
 yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subdir', {
   all: {
     alias: 'a',
