@@ -31,6 +31,8 @@ const errorHandler = (err) => {
   /* eslint-disable-next-line no-console */
   if (gutenrc.verbosity === 0) console.log(err.message);
   /* eslint-disable-next-line no-console */
+  else if (gutenrc.verbosity === 1)console.log(err);
+  /* eslint-disable-next-line no-console */
   else console.log(err);
 };
 
