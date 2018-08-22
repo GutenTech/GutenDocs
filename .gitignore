@@ -1,6 +1,7 @@
 #folders
 GutenApi
 node_modules
+GutenApi.*
 
 #config
 package-lock.json

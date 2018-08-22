@@ -16,18 +16,14 @@
     margin-top: 8px;
 }
 
-.download {
-    text-align: center;
-    margin-bottom: 95px;
-}
-
 #footer {
     position:relative;
     overflow: auto;
     bottom: 0px;
-    background-color:#888e94;
+    /* background-color:#888e94; */
     width: 100%;
     text-align: center;
+    font-weight: 1000;
 }
 
 /* sidebar */
@@ -57,7 +53,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 96.6vh;
+    height: 100%;
     z-index: 999;
     transition: all 0.3s;
     margin-bottom: 100px;
@@ -155,9 +151,9 @@ a {
 .headerlogo {
     width: 765px;
     margin: 0 auto;
-    margin-top: -75px;
+    margin-top: -240px;
     margin-right: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 80px;
   }
   
   #gutendocs {
