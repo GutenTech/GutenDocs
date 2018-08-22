@@ -11,6 +11,9 @@
     "sortByFileName": {
       "includeExtension": false
     },
+    "sortByParentDirectoryName": {
+      "targetDepth": 1
+    },
     "catchAll": {
       "section": "Miscellaneous"
     }

@@ -15,6 +15,7 @@ const execSorts = (ast) => {
   const options = {
     sectionTag: gutenRC.skeleton.sortBySection.section,
     catchAllTag: gutenRC.skeleton.catchAll.section,
+    sortByParentDirectoryName: gutenRC.skeleton.sortByParentDirectoryName.targetDepth,
   };
   const sortFxns = [];
   gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));

@@ -65,17 +65,23 @@ const sortByFileName = (data) => {
 
 
 const sortByParentDirectoryName = (data) => {
-  const [commentBlocks, priority] = data;
-
+  const [commentBlocks, priority, options] = data;
+  const targetdepth = options.sortByParentDirectoryName;
+  const alteredCommentsArray = [];
   commentBlocks.forEach((block) => {
     const alteredBlock = Object.assign({}, block);
     if (block.header === undefined && block.priority === undefined) {
-      alteredBlock.header = path.basename(path.dirname(block.pathName));
+      let targetFolder = block.pathName;
+      for (let depth = targetdepth; depth > 0; depth -= 1) {
+        targetFolder = path.dirname(targetFolder);
+      }
+      alteredBlock.header = path.basename(targetFolder);
       alteredBlock.priority = priority;
     }
+    alteredCommentsArray.push(alteredBlock);
   });
 
-  return [commentBlocks, data[1] + 1, data[2]];
+  return [alteredCommentsArray, data[1] + 1, data[2]];
 };
 
 module.exports.sortByParentDirectoryName = sortByParentDirectoryName;
