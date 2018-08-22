@@ -38,18 +38,18 @@ const sortBySection = (data) => {
 
 const catchAll = (data) => {
   const commentBlocks = data[0];
-  let reactMapKey = 1;
+  let reactMapKey = 0;
 
   commentBlocks.forEach((block) => {
-    /* eslint-disable */
-    block.id = reactMapKey;
-    /* eslint-enable */
-    reactMapKey += 1;
     if (block.header === undefined && block.priority === undefined) {
       /* eslint-disable */
       block.header = data[2].catchAllTag;
-      /* eslint-enable */
+      block.priority = data[1];
     }
+    // Assign a unique ID key for reactMapping
+    block.id = reactMapKey;
+    /* eslint-enable */
+    reactMapKey += 1;
   });
 
   return [commentBlocks, data[1] + 1, data[2]];
