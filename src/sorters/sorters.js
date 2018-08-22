@@ -39,20 +39,9 @@ const sortBySection = (data) => {
 const sortByFiles = (data) => {
   const commentBlocks = data[0];
   
-  //console.log('in sort by files function');
-
-  // commentBlocks.forEach((block) => {
-  //   if (block.header === undefined && block.priority === undefined) {
-  //     block.tags.forEach((tag) => {
-  //       if (tag.title === sectionName) {
-  //         /* eslint-disable */
-  //         block.header = sectionName;
-  //         block.priority = priority;
-  //         /* eslint-enable */
-  //       }
-  //     });
-  //   }
-  // });
+  /*
+    Function Will Be Implemented
+  */
 
   return [commentBlocks, data[1] + 1, data[2]];
 };
