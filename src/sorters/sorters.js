@@ -5,8 +5,19 @@
  * @return n/a as Array is passed by reference.
  */
 
- const _processBlocks = (header, priority) {
-   
+ const _processBlocks = (commentBlocks, headerName, priority) {
+  commentBlocks.forEach((block) => {
+    if (block.header === undefined && block.priority === undefined) {
+      block.tags.forEach((tag) => {
+        if (tag.title === headerName) {
+          /* eslint-disable */
+          block.header = headerName;
+          block.priority = priority;
+          /* eslint-enable */
+        }
+      });
+    }
+  });
  }
 
 
