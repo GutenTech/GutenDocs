@@ -23,7 +23,6 @@ const sortBySection = (data) => {
       });
     }
   });
-
   return [commentBlocks, data[1] + 1, data[2]];
 };
 
@@ -60,6 +59,14 @@ const catchAll = (data) => {
 const sortByFileName = (data) => {
   /* Function implementation goes here */
   const commentBlocks = data[0];
+  commentBlocks.forEach((block) => {
+    if (block.header === undefined && block.priority === undefined) {
+      /* eslint-disable */
+      block.header = path.basename(block.pathName);
+      block.priority = data[1];
+      /* eslint-enable */
+    }
+  });
   return [commentBlocks, data[1] + 1, data[2]];
 };
 
