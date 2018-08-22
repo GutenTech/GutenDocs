@@ -36,14 +36,24 @@ const sortBySection = (data) => {
  */
 
 
-const sortByFiles = (data) => {
+const catchAll = (data) => {
   const commentBlocks = data[0];
-  /*
-    Function Will Be Implemented
-  */
+  let reactMapKey = 1;
+
+  commentBlocks.forEach((block) => {
+    /* eslint-disable */
+    block.id = reactMapKey;
+    /* eslint-enable */
+    reactMapKey += 1;
+    if (block.header === undefined && block.priority === undefined) {
+      /* eslint-disable */
+      block.header = data[2].catchAllTag;
+      /* eslint-enable */
+    }
+  });
 
   return [commentBlocks, data[1] + 1, data[2]];
 };
 
 module.exports.sortBySection = sortBySection;
-module.exports.sortByFiles = sortByFiles;
+module.exports.catchAll = catchAll;
