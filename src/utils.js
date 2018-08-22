@@ -92,7 +92,7 @@ const refreshFile = (oldFile, source, additionsToTemplate) => {
                 ),
               );
             } else if (how.method === confirmDeletePrompt.options[2]) {
-              copyFile(pathData.concat(source), oldFile);
+              copyFile(pathData.concat(source), oldFile, additionsToTemplate);
             }
           });
       }
