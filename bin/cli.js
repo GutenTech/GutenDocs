@@ -66,6 +66,7 @@ yargs.command('$0', 'Parse all file in dir and subdir', {
       const rawAST = parseComments(data, address);
       const ast = cleanAST(rawAST);
       const dataToWrite = execSorts(ast);
+      console.log(address);
       saveTags(dataToWrite, address);
     });
   }
