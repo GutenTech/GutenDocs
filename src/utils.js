@@ -187,7 +187,9 @@ const generateFilesaveArray = (destination, dirName, backup) => {
     fs.renameSync(APIdir, destination.concat(BackupDirName));
     fs.mkdirSync(APIdir);
   }
-
+  if (!fs.existsSync(APIdir)) {
+    fs.mkdirSync(APIdir);
+  }
 
   const imgDir = APIdir.concat('imgs/');
   if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
