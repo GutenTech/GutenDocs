@@ -1,3 +1,5 @@
+const path = require('path');
+
 /**
  * @description A function that will assign the classification headings based upon
  * whether or not end-user has specified a custom tag.  catchAllSection is option
@@ -61,6 +63,22 @@ const sortByFileName = (data) => {
   return [commentBlocks, data[1] + 1, data[2]];
 };
 
+
+const sortByParentDirectoryName = (data) => {
+  const [commentBlocks, priority] = data;
+
+  commentBlocks.forEach((block) => {
+    const alteredBlock = Object.assign({}, block);
+    if (block.header === undefined && block.priority === undefined) {
+      alteredBlock.header = path.basename(path.dirname(block.pathName));
+      alteredBlock.priority = priority;
+    }
+  });
+
+  return [commentBlocks, data[1] + 1, data[2]];
+};
+
+module.exports.sortByParentDirectoryName = sortByParentDirectoryName;
 module.exports.sortBySection = sortBySection;
 module.exports.catchAll = catchAll;
 module.exports.sortByFileName = sortByFileName;
