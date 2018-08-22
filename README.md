@@ -31,7 +31,7 @@ npm install -g gutendocs
 > From within the root directory of the repo you want to generate an API for:
 
 ```sh
-gutendocs --init
+gutendocs init
 ```
 
 > To generate an API from JSDocs of a single .js/.jsx file:
@@ -51,7 +51,7 @@ gutendocs --all
 
 > To restore the API to the original state run this at the same level or subdirectory of init location:
 ```sh
-gutendocs --reset
+gutendocs reset
 ```
 
 > To restore the API to the original state run this at the same level or subdirectory of init location:
@@ -61,7 +61,7 @@ gutendocs --help
 
 > To update API with settings from gutenConfig.json:
 ```sh
-gutendocs --config
+gutendocs config
 ```
 
 > To get latest version information:
@@ -72,7 +72,7 @@ gutendocs --info
 > Customize the theme of the API:
 ```sh
 edit styles.css or the gutenConfig.json and run:
-gutendocs --config
+gutendocs config
 ```
 
 ## Requirements

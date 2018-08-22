@@ -8,12 +8,11 @@ const {
   Walker,
 } = require('ignore-walk');
 const {
-  findRC,
+  getRC,
 } = require('../utils.js');
 
 const exclude = (arr) => {
-  const ROOT = path.dirname(findRC().absPath.slice(0, -1));
-  console.log(ROOT);
+  const ROOT = path.dirname(getRC().absPath.slice(0, -1));
   const options = {
     path: ROOT,
     ignoreFiles: ['.gutenignore', 1],
@@ -27,7 +26,6 @@ const exclude = (arr) => {
       }
       return `${r}\n!${relPath}/**/*.js\n!${relPath}/**/*.jsx`;
     }, '*');
-    // walk.onReadIgnoreFile('.gutenignore', rule, () => {});
     walk.onReadIgnoreFile(1, rule, () => {});
     walk.start();
   });
@@ -59,7 +57,7 @@ const acornParse = (content, tagContent) => {
 };
 
 const extract = arr => exclude(arr).then((list) => {
-  const ROOT = findRC().absPath;
+  const ROOT = getRC().absPath;
   const badFiles = [];
   const result = list.map((f) => {
     const tag = {

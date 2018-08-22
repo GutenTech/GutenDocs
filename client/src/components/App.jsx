@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 // import Sidebarr from './SideBar.jsx';
-import Intro from './GettingStarted.jsx';
+import Intro from './Intro.jsx';
 import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -18,8 +18,8 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      parsedData: [],
-      configData: [],
+      parsedData: undefined,
+      configData: undefined,
     };
   }
 
@@ -30,6 +30,9 @@ export default class App extends Component {
 
   render() {
     const { parsedData, configData } = this.state;
+    if (parsedData === undefined || configData === undefined) {
+      return (<div>Loading</div>);
+    }
     return (
       <Router>
         <div className="App">
@@ -47,7 +50,7 @@ export default class App extends Component {
           </div>
           <SideBar />
           <div className="starter">
-            <Intro />
+            <Intro text={configData.introTxt} />
             <Test1 />
           </div>
           {

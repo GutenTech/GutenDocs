@@ -1,24 +1,25 @@
 const fs = require('fs');
-const { findRC } = require('../utils.js');
-const { sortBySection } = require('./sortBySection.js');
+const R = require('ramda');
+const { getRC } = require('../utils.js');
+const { ...sortFxnsObj } = require('./sorters.js');
 
 /**
  * @description Execute various sorting functions
- * @param commentBlocks {[]} The Cleaned AST with parsed information
- * @return ats {[]} The AST "sorted" with appropriate headers and priorities
+ * @param ast {[]} The Cleaned AST with parsed information
+ * @return ast {[]} The AST "sorted" with appropriate headers and priorities
  * assigned to it.
  */
 
-const execSorts = (commentBlocks) => {
-  // extract an array of files to be sorted
-  // const sortFiles = gutenrc.skeleton.sortByOrder;
-  // console.log(ast);
-  // execute a piping function sequence here
-  const pathData = findRC();
-  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('.gutenrc.json')));
-  const sectionName = gutenRC.skeleton.sortBySections.sections;
-  const priority = 1;
-  return sortBySection(commentBlocks, sectionName, priority);
+const execSorts = (ast) => {
+  const pathData = getRC();
+  const gutenRC = JSON.parse(fs.readFileSync(pathData.absPath.concat('/.gutenrc.json')));
+  // options will contain sorting options for particular functions.  In this case: sectionSort
+  const options = { sectionTag: gutenRC.skeleton.sortBySection.section };
+  const sortFxns = [];
+  gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));
+  const sortPipe = R.pipe(...sortFxns);
+  // results will be in the format [ast, priority number, and options]. Only need ast.
+  return (sortPipe([ast, 1, options])[0]);
 };
 
 

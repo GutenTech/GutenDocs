@@ -1,3 +1,3 @@
-const findRC = () => ({ absPath: './', dirName: 'GutenApi' });
+const getRC = () => ({ absPath: './', dirName: 'GutenApi' });
 
-module.exports.findRC = findRC;
+module.exports.getRC = getRC;
