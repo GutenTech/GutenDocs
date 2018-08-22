@@ -265,12 +265,20 @@ const generateAPIFrame = (relPath, apiDir) => {
   updateConfig({ absPath, apiDir });
 };
 
+/**
+ * Sets the verbosity level in the local and sometimes the global settings
+ * @param { number } level the desired verbosity level
+ * @param { {} } gutenrc the local gutenRC settings
+ * @param { boolean } globally whether or not the global settings should also be set
+ */
 const setVerbosity = (level, gutenrc, globally) => {
   if (typeof level === 'number' && level >= 0 && level <= 5) {
-    let newSettings = gutenrc;
-    newSettings.verbosity = level;
-    newSettings = JSON.stringify(newSettings, null, 2);
-    fs.writeFileSync(gutenrc.absPath.concat('.gutenrc.json'), newSettings);
+    if (gutenrc) {
+      let newSettings = gutenrc;
+      newSettings.verbosity = level;
+      newSettings = JSON.stringify(newSettings, null, 2);
+      fs.writeFileSync(gutenrc.absPath.concat('.gutenrc.json'), newSettings);
+    }
     if (globally) {
       const pathToGlobal = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
       let globalSettings = JSON.parse(fs.readFileSync(pathToGlobal));
