@@ -132,7 +132,7 @@ const getRC = () => {
       return false;
     }
     if (gutenfolder === undefined) {
-      throw new Error('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be. Either add a key of apiDir with a value of the name of your api folder or delete the RC file and reinitialize.  WARNING!!!!! This will erase any work you have done in the folder.');
+      throw new Error('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be. Either add a key of apiDir with a value of the name of your api folder or delete the RC file and reinitialize.  A backup of your Api Folder will be created as [folderName].backup#.');
     }
     const RCTemplatePath = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
     return fillBlanksWithDefaults(RCTemplatePath, gutenrc);
@@ -182,7 +182,12 @@ const generateFilesaveArray = (destination, dirName) => {
   ));
 
   const APIdir = destination.concat(dirName);
-  if (!fs.existsSync(APIdir)) fs.mkdirSync(APIdir);
+  if (fs.existsSync(APIdir)) {
+    const BackupDirName = findValidBackupName(destination, dirName);
+    fs.renameSync(APIdir, BackupDirName);
+  }
+
+  fs.mkdirSync(APIdir);
 
   const imgDir = APIdir.concat('imgs/');
   if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
@@ -202,7 +207,7 @@ const updateConfig = (gutenrc) => {
     throw new Error('Write Error:'
     + 'The folder specified in the .gutenrc.json file seems to be missing.'
     + 'Update .gutenrc.json to match your API folder if you have changed the folder name,'
-    + 'or call "gutendocs --reset" if and only if you have accidentally deleted it'
+    + 'or call "gutendocs reset" if and only if you have accidentally deleted it'
     + 'and would like it to be reset to the original state.');
   } else {
     let configSettings = fs.readFileSync(pathToConfigJSON);
