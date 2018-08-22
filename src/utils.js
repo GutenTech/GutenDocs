@@ -262,7 +262,7 @@ const generateAPIFrame = (relPath, apiDir) => {
   } else {
     throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
-  updateConfig({ absPath, apiDir });
+  updateConfig({ relPath, apiDir });
 };
 
 module.exports.generateAPIFrame = generateAPIFrame;
