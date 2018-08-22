@@ -248,20 +248,21 @@ const refreshAPI = (gutenrc) => {
  * @param { string } relPath the directory that the user wants to make the APIDir
  * @param { string } dirName the desired name of the APIDir
  */
-const generateAPIFrame = (relPath, dirName) => {
+const generateAPIFrame = (relPath, apiDir) => {
   const srcPath = path.dirname(__dirname).concat('/');
   if (!fs.existsSync(relPath.concat('.gutenrc.json'))) {
     const absPath = fs.realpathSync(relPath).concat('/');
-    generateFilesaveArray(absPath, dirName);
+    generateFilesaveArray(absPath, apiDir);
     const templateRC = fs.readFileSync(srcPath.concat('client/dist/.gutenRCTemplate.json'));
     const mergedRC = Object.assign(JSON.parse(templateRC), {
-      apiDir: dirName,
+      apiDir,
       absPath,
     });
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC, null, 2));
   } else {
     throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
+  updateConfig({ relPath, apiDir });
 };
 
 module.exports.generateAPIFrame = generateAPIFrame;
