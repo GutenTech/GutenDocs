@@ -48,7 +48,6 @@ const copyFile = (source, destination, modifier, cb) => fs.readFile(source, (err
   if (err) throw new Error(err);
   let fileToWrite = original.toString();
   if (typeof modifier === 'function') fileToWrite = modifier(original);
-  // if (typeof fileToWrite === 'object') fileToWrite = JSON.stringify(fileToWrite, null, 2);
   return fs.writeFile(destination, fileToWrite, (writeErr) => {
     if (writeErr) throw writeErr;
     if (cb !== undefined) {
@@ -123,7 +122,7 @@ const getRC = () => {
         'client/dist/.gutenRCTemplate.json',
         file => JSON.stringify(
           Object.assign(
-            { absPath: targetPath },
+            { absPath: targetPath.concat('/') },
             JSON.parse(file),
           ),
           null,
