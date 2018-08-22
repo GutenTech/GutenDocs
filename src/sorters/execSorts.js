@@ -18,7 +18,6 @@ const execSorts = (ast) => {
     sectionTag: gutenRC.skeleton.sortBySection.section,
     catchAllTag: gutenRC.skeleton.catchAll.section,
   };
-  console.log('catch all tag:', options.catchAllTag);
   const sortFxns = [];
   gutenRC.skeleton.sortByOrder.forEach(fxn => sortFxns.push(sortFxnsObj[fxn]));
   const sortPipe = R.pipe(...sortFxns);
