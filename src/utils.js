@@ -3,6 +3,29 @@ const path = require('path');
 const inquirer = require('inquirer');
 const inquirerOptions = require('./inquirerOptions.js');
 
+/**
+ * Returns a object with the defaults added to the assigned settings.
+ * Userful for making sure that whenever the user has deleted settings from their
+ * copy that the defaults are still available.
+ * @param { string } defaultSettingsPath path to orignal file with defaults
+ * @param { {} } assignedSettings settings imported from the users settings
+ */
+
+const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
+  const defaultConfig = fs.readFileSync(defaultSettingsPath);
+  const mergedSettings = Object.assign(JSON.parse(assignedSettings), JSON.parse(defaultConfig));
+  return mergedSettings;
+};
+
+/**
+ * Finds the next unused name in the directory to save a backup file
+ * @param { string } location the path to the directory of intesting
+ * @param { string } baseName the original name of the file being backed up
+ * @example findValidBackupName('somePath', exam.js) returns exam.backup.js
+ * @example findValidBackupName('somePath', exam.js) returns exam.backup0.js
+ * @example findValidBackupName('somePath', exam.js) returns exam.backup1.js
+ * @return string
+ */
 const findValidBackupName = (location, baseName) => {
   const backupExt = path.extname(baseName);
   let backupName = path.basename(baseName, backupExt).concat('.backup');
@@ -15,10 +38,18 @@ const findValidBackupName = (location, baseName) => {
   }
   return backupName.concat(backupExt);
 };
-
-const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, original) => {
-  if (err) console.log(err);
-  return fs.writeFile(destination, original, (writeErr) => {
+/**
+ * Copys a files from source to destination and then executes a callback
+ * @param { string } source path to the file you want to copy
+ * @param { string } destination path to copy destination
+ * @param { string } cb callback function to execute upon completion
+ */
+const copyFile = (source, destination, modifier, cb) => fs.readFile(source, (err, original) => {
+  if (err) throw new Error(err);
+  let fileToWrite = original.toString();
+  if (typeof modifier === 'function') fileToWrite = modifier(original);
+  // if (typeof fileToWrite === 'object') fileToWrite = JSON.stringify(fileToWrite, null, 2);
+  return fs.writeFile(destination, fileToWrite, (writeErr) => {
     if (writeErr) throw writeErr;
     if (cb !== undefined) {
       cb();
@@ -26,8 +57,16 @@ const copyFile = (absPath, destination, cb) => fs.readFile(absPath, (err, origin
   });
 });
 
-const refreshFile = (pathData, fileName, source) => {
-  const RCFile = pathData.concat(fileName);
+/**
+ * Overwrites target file with specified file contents
+ * Prompts the user to make sure the want to complete this operations before doing it
+ * If the user confirms then asks the user if they want to save a backup of current file
+ * @param { string } pathData path to file to overwrite
+ * @param { string } source path to source file to copy to pathData
+ */
+const refreshFile = (oldFile, source, additionsToTemplate) => {
+  const fileName = path.basename(oldFile);
+  const pathData = path.dirname(oldFile).concat('/');
   const corruptFilePrompt = inquirerOptions.corruptFilePrompt(fileName);
   const confirmDeletePrompt = inquirerOptions.confirmDeletePrompt(fileName);
 
@@ -42,19 +81,29 @@ const refreshFile = (pathData, fileName, source) => {
               // do nothing
             } else if (how.method === confirmDeletePrompt.options[1]) {
               const backupName = findValidBackupName(pathData, fileName);
-              copyFile(RCFile, pathData.concat(backupName), () => {
-                copyFile(pathData
-                  .concat(source), RCFile);
-              });
+              copyFile(
+                oldFile,
+                pathData.concat(backupName),
+                null,
+                () => copyFile(
+                  pathData.concat(source),
+                  oldFile,
+                  additionsToTemplate,
+                ),
+              );
             } else if (how.method === confirmDeletePrompt.options[2]) {
-              copyFile(pathData.concat(source), RCFile);
+              copyFile(pathData.concat(source), oldFile);
             }
           });
       }
     });
 };
-
-const returnRC = () => {
+/**
+ * Finds the closet gutenRC.json file at or above current directory and
+ * returns the JSON Object containing the users settings merged with the defaults
+ * @return { {} } contents of .gutenRC.json
+ */
+const getRC = () => {
   let rcpath = false;
   let targetPath = fs.realpathSync('./');
   while (rcpath === false && targetPath !== path.dirname(targetPath)) {
@@ -70,38 +119,35 @@ const returnRC = () => {
     try {
       gutenfolder = JSON.parse(gutenrc).apiDir;
     } catch (error) {
-      // throw new TypeError('Invalid JSON');
-      refreshFile(targetPath.concat('/'), '.gutenrc.json', 'client/dist/.gutenRCTemplate.json');
+      refreshFile(targetPath.concat('/.gutenrc.json'),
+        'client/dist/.gutenRCTemplate.json',
+        file => JSON.stringify(
+          Object.assign(
+            { absPath: targetPath },
+            JSON.parse(file),
+          ),
+          null,
+          2,
+        ));
       return false;
     }
     if (gutenfolder === undefined) {
-      throw new TypeError('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be.');
+      throw new Error('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be. Either add a key of apiDir with a value of the name of your api folder or delete the RC file and reinitialize.  WARNING!!!!! This will erase any work you have done in the folder.');
     }
-    return {
-      absPath: targetPath.concat('/'),
-      dirName: gutenfolder,
-    };
+    const RCTemplatePath = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
+    return fillBlanksWithDefaults(RCTemplatePath, gutenrc);
   }
-  throw new TypeError('You have not initialized gutendocs.  Call "gutendocs --init"');
+  throw new Error('You have not initialized gutendocs.  Call "gutendocs init"');
 };
 
-const findRC = () => {
-  let pathData;
-  let success = true;
-  try {
-    pathData = returnRC();
-  } catch (err) {
-    success = false;
-    /* eslint-disable-next-line no-console */
-    console.log(err.lineNumber);
-    console.log(err);
-  }
-  if (success) {
-    return pathData;
-  }
-  return false;
-};
-
+/**
+ * Function used to test a filename as to whether or not we want to include it
+ * Used when filtering a list of files that were read using fs.readDir
+ * @param { string } file name of the file being checked
+ * @param { string } dirPath directory of the files being checked
+ * @param { [] } toIgnore array of filenames to ignore
+ * @return { boolean } indicates whether or not this is a file of interest
+ */
 const filterFiles = (file, dirPath, toIgnore) => {
   const fieslToIgnore = toIgnore || ['.DS_Store'];
   if (fieslToIgnore.includes(file)) return false;
@@ -109,7 +155,13 @@ const filterFiles = (file, dirPath, toIgnore) => {
   return true;
 };
 
-const generateFilesaveArray = (absPath, dirName) => {
+/**
+ * Generates the files needed to have a gutendocs API
+ * by copying them from the gutendocs client folder
+ * @param { string } destination the path to the directory the API folder should be made in
+ * @param { string } dirName the name of the folder the API dir should have
+ */
+const generateFilesaveArray = (destination, dirName) => {
   const filesToWrite = [];
   const srcPath = path.dirname(__dirname).concat('/client/dist/');
   const srcFiles = fs.readdirSync(srcPath).filter(file => filterFiles(file, srcPath));
@@ -129,7 +181,7 @@ const generateFilesaveArray = (absPath, dirName) => {
     },
   ));
 
-  const APIdir = absPath.concat(dirName);
+  const APIdir = destination.concat(dirName);
   if (!fs.existsSync(APIdir)) fs.mkdirSync(APIdir);
 
   const imgDir = APIdir.concat('imgs/');
@@ -138,25 +190,24 @@ const generateFilesaveArray = (absPath, dirName) => {
   filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file.writePath), file.content));
 };
 
-const fillBlanksWithDefaults = (assignedSettings, defaultSettings) => {
-  const defaultConfig = fs.readFileSync(defaultSettings);
-  const mergedSettings = Object.assign(JSON.parse(assignedSettings), JSON.parse(defaultConfig));
-  return mergedSettings;
-};
-
-const updateConfig = (APIdir) => {
-  const pathToConfigBundle = APIdir.concat('1.bundle.js');
-  const pathToConfigJSON = APIdir.concat('gutenConfig.json');
-  if (!fs.existsSync(APIdir)) {
-    console.log(`Write Error:
-    The folder specified in the .gutenrc.json file seems to be missing.  
-    Update .gutenrc.json to match your API folder if you have changed the folder name,
-    or call "gutendocs --reset" if and only if you have accidentally deleted it 
-    and would like it to be reset to the original state.`);
+/**
+ * Updates the config guten api to have all the config settings from gutenCofig.json
+ * @param { {} } gutenrc the rc file for gutendocs
+ */
+const updateConfig = (gutenrc) => {
+  const GutenAPIDir = gutenrc.absPath.concat(gutenrc.apiDir);
+  const pathToConfigBundle = GutenAPIDir.concat('1.bundle.js');
+  const pathToConfigJSON = GutenAPIDir.concat('gutenConfig.json');
+  if (!fs.existsSync(GutenAPIDir)) {
+    throw new Error('Write Error:'
+    + 'The folder specified in the .gutenrc.json file seems to be missing.'
+    + 'Update .gutenrc.json to match your API folder if you have changed the folder name,'
+    + 'or call "gutendocs --reset" if and only if you have accidentally deleted it'
+    + 'and would like it to be reset to the original state.');
   } else {
     let configSettings = fs.readFileSync(pathToConfigJSON);
     const defaultFileLoc = path.dirname(__dirname).concat('/client/dist/gutenConfig.json');
-    configSettings = fillBlanksWithDefaults(configSettings, defaultFileLoc);
+    configSettings = fillBlanksWithDefaults(defaultFileLoc, configSettings);
 
     /* eslint-disable */
     const fileToWrite = `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
@@ -179,11 +230,20 @@ const updateConfig = (APIdir) => {
   }
 };
 
-const refreshAPI = (absPath, dirName) => {
-  generateFilesaveArray(absPath, dirName);
-  updateConfig(absPath.concat(dirName));
+/**
+ * refreshes the API with all the settings to the defauts
+ * @param { {} } gutenrc the gutenrc object the defines the users settings
+ */
+const refreshAPI = (gutenrc) => {
+  generateFilesaveArray(gutenrc.absPath, gutenrc.apiDir);
+  updateConfig(gutenrc);
 };
 
+/**
+ * Generates a API folder as well as a gutenRC file
+ * @param { string } relPath the directory that the user wants to make the APIDir
+ * @param { string } dirName the desired name of the APIDir
+ */
 const generateAPIFrame = (relPath, dirName) => {
   const srcPath = path.dirname(__dirname).concat('/');
   if (!fs.existsSync(relPath.concat('.gutenrc.json'))) {
@@ -192,11 +252,11 @@ const generateAPIFrame = (relPath, dirName) => {
     const templateRC = fs.readFileSync(srcPath.concat('client/dist/.gutenRCTemplate.json'));
     const mergedRC = Object.assign(JSON.parse(templateRC), {
       apiDir: dirName,
+      absPath,
     });
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC, null, 2));
-    updateConfig(absPath.concat(dirName));
   } else {
-    console.log('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
+    throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
 };
 
@@ -205,4 +265,4 @@ module.exports.refreshAPI = refreshAPI;
 module.exports.refreshFile = refreshFile;
 module.exports.updateConfig = updateConfig;
 module.exports.generateFilesaveArray = generateFilesaveArray;
-module.exports.findRC = findRC;
+module.exports.getRC = getRC;
