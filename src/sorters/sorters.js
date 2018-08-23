@@ -59,10 +59,13 @@ const catchAll = (data) => {
 const sortByFileName = (data) => {
   /* Function implementation goes here */
   const commentBlocks = data[0];
+  const extension = data[2].fileTag;
+
   commentBlocks.forEach((block) => {
     if (block.header === undefined && block.priority === undefined) {
       /* eslint-disable */
-      block.header = path.basename(block.pathName);
+      const ext = path.extname(block.pathName);
+      block.header = extension ? path.basename(block.pathName) : path.basename(block.pathName, ext);
       block.priority = data[1];
       /* eslint-enable */
     }
