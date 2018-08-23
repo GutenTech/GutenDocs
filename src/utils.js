@@ -143,7 +143,7 @@ const getRC = () => {
     }
     const RCTemplatePath = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
     const missingValuesFilled = fillBlanksWithDefaults(RCTemplatePath, gutenrc);
-    return Object.assign({ absPath: targetPath }, missingValuesFilled);
+    return Object.assign({ absPath: targetPath.concat('/') }, missingValuesFilled);
   }
   throw new Error('You have not initialized gutendocs.  Call "gutendocs init"');
 };
@@ -289,6 +289,8 @@ const setVerbosity = (level, gutenrc, globally) => {
       let newSettings = gutenrc;
       newSettings.verbosity = level;
       newSettings = JSON.stringify(newSettings, null, 2);
+      delete newSettings.absPath;
+      console.log(newSettings);
       fs.writeFileSync(gutenrc.absPath.concat('.gutenrc.json'), newSettings);
     }
     if (globally) {
