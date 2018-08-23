@@ -289,8 +289,6 @@ const setVerbosity = (level, gutenrc, globally) => {
       let newSettings = gutenrc;
       newSettings.verbosity = level;
       newSettings = JSON.stringify(newSettings, null, 2);
-      delete newSettings.absPath;
-      console.log(newSettings);
       fs.writeFileSync(gutenrc.absPath.concat('.gutenrc.json'), newSettings);
     }
     if (globally) {
