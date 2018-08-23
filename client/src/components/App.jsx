@@ -47,10 +47,10 @@ export default class App extends Component {
   render() {
     const { parsedData, configData } = this.state;
     if (parsedData === undefined || parsedData.length === 0) {
-      return (<div>{'<div>Problem Loading Data, did you run "gutendocs parse [<filename>, --all]"'}</div>);
+      return (<div>{'Problem Loading Data, did you run "gutendocs parse [<filename>, --all]"'}</div>);
     }
     if (configData === undefined || configData.length === 0) {
-      return (<div>{'<div>Problem Loading Data, did you run "gutendocs config"'}</div>);
+      return (<div>Problem Loading Data, did you run "gutendocs config"</div>);
     }
     const prioritySortedUniqueHeaders = uniqueHeaders(parsedData);
     return (
