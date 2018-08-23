@@ -11,9 +11,9 @@ const BodyFunctionDesc = ({ funcComment }) => {
     .filter(tag => (tag.title === targetTag));
   return (
     <div className="body" key={funcComment.id}>
-      <h2 id={funcComment.id}>
+      <h5 id={funcComment.id}>
         {`${funcComment.name} function`}
-      </h2>
+      </h5>
       <div>
         {funcComment.description}
       </div>

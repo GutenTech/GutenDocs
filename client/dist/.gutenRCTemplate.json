@@ -2,7 +2,7 @@
   "apiDir": "GutenApi/",
   "skeleton": {
     "sortByOrder": [
-      "sortBySection",
+      "sortByFileName",
       "catchAll"
     ],
     "sortBySection": {
