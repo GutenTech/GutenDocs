@@ -9,16 +9,24 @@ class SideBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // search: ""
+      parsedData: props.parsedData,
     };
   }
 
-  // updateSearch = (event) => {
-  //   this.setState({search: event.target.value.substr(0,25)});
-  // };
+  updateSearch() {
+    const { parsedData } = this.props;
+    const result = [];
+    for (let i = 0; i < parsedData.length; i += 1) {
+      if (parsedData[i].name.includes(this.search.value)) {
+        result.push(parsedData[i]);
+      }
+    }
+    this.setState({ parsedData: result });
+  }
 
   render() {
-    const { parsedData, sortedHeaders } = this.props;
+    const { sortedHeaders } = this.props;
+    const { parsedData } = this.state;
     return (
       <div className="wrapper">
         <nav id="sidebar">
@@ -26,14 +34,14 @@ class SideBar extends React.Component {
             <h5>GutenDocs</h5>
             <br />
           </div>
-          <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch} />
+          <input type="text" id="myInput" placeholder="Search..." ref={(input) => { this.search = input; }} onChange={this.updateSearch.bind(this)} />
           <ul className="list-unstyled components">
             <li id="home">
               {/* eslint-disable-next-line */}
               <a href="#">
                 <i className="fa fa-home" />
                 {' '}
-                  Top
+                Top
                 {' '}
                 {' '}
               </a>
