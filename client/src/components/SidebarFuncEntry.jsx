@@ -7,16 +7,16 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 const SidebarFuncEntry = ({ comment }) => {
   console.log(comment.id, 'commentId');
   return (
-  <li id="nameComment">
-    <AnchorLink
-      offset={() => 100}
-      href={`#${comment.id}`}
-    >
-      {comment.name}
-      <br />
-    </AnchorLink>
-  </li>
-  )
+    <li id="nameComment">
+      <AnchorLink
+        offset={() => 100}
+        href={`#${comment.id}`}
+      >
+        {comment.name}
+        <br />
+      </AnchorLink>
+    </li>
+  );
 };
 
 export default SidebarFuncEntry;
