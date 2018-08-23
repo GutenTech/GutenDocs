@@ -18,5 +18,9 @@
       "section": "Miscellaneous"
     }
   },
+  "acornSettings": {
+    "allowImportExportEverywhere": true,
+    "allowHashBang": true
+  },
   "verbosity": 1
 }
