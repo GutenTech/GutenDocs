@@ -28,17 +28,19 @@ class SideBar extends React.Component {
           </div>
           <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch} />
           <ul className="list-unstyled components">
-            <li>
+            <li id="home">
               {/* eslint-disable-next-line */}
               <a href="#">
                 <i className="fa fa-home" />
                 {' '}
                   Top
+                {' '}
+                {' '}
               </a>
             </li>
-            <li>
+            {/* <li>
               <AnchorLink offset={() => 100} href="#things">Things</AnchorLink>
-            </li>
+            </li> */}
             <HeaderComment parsedData={parsedData} />
           </ul>
         </nav>
@@ -73,10 +75,12 @@ export default SideBar;
 //                     <div id="header">
 //                         <h5>GutenDocs</h5><br/>
 //                     </div>
-//                     <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch.bind(this)} ></input>
+//                     <input type="text" id="myInput" placeholder="Search..."
+// onChange={this.updateSearch.bind(this)} ></input>
 //                     <ul className="list-unstyled components">
 //                         <li className="active">
-//                             {/* <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Getting Started</a> */}
+//                             {/* <a href="#homeSubmenu" data-toggle="collapse"
+// aria-expanded="false" className="dropdown-toggle">Getting Started</a> */}
 //                             <ul className="collapse list-unstyled" id="homeSubmenu">
 //                                 <li>
 //                                     <a href="#">Installation</a>
