@@ -13,7 +13,7 @@ const inquirerOptions = require('./inquirerOptions.js');
 
 const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
   const defaultConfig = fs.readFileSync(defaultSettingsPath);
-  const mergedSettings = Object.assign(JSON.parse(defaultConfig), JSON.parse(assignedSettings));
+  const mergedSettings = Object.assign(JSON.parse(assignedSettings), JSON.parse(defaultConfig));
   return mergedSettings;
 };
 

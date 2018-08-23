@@ -22,7 +22,7 @@ const execSorts = (ast) => {
   gutenRC.skeleton.sortByOrder.forEach((fxn) => {
     if (sortFxnsObj[fxn] !== undefined) sortFxns.push(sortFxnsObj[fxn]);
     else {
-      /* eslint-ignore-next-line */
+      /* eslint-disable-next-line no-console */
       console.log('\nComment Sorting Error:\n'
       + '******************\n'
       + `${fxn} is not a function.\nRemove it from .gutenrc.skelete.sortBtOrder array.`
