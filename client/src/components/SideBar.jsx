@@ -29,8 +29,12 @@ class SideBar extends React.Component {
           <input type="text" id="myInput" placeholder="Search..." onChange={this.updateSearch} />
           <ul className="list-unstyled components">
             <li>
-              {/* just leaving ahref here as a # to reference top of page for the time being */}
-              <a href="#">Home</a>
+              {/* eslint-disable-next-line */}
+              <a href="#">
+                <i className="fa fa-home" />
+                {' '}
+                  Top
+              </a>
             </li>
             <li>
               <AnchorLink offset={() => 100} href="#things">Things</AnchorLink>

@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
 import SideBar from './SideBar.jsx';
 import Test1 from './Test1';
+import SideBarFuncEntry from './SidebarFuncEntry.jsx';
 // import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
@@ -48,7 +49,7 @@ export default class App extends Component {
           {
             parsedData.map(comment => (
               <div className="body" key={comment.id}>
-                <h2 id="atName">
+                <h2 id={`#${comment.id}`}>
                   {`${comment.name} function`}
                 </h2>
                 <p>

@@ -21,13 +21,15 @@ const HeaderComment = ({ parsedData }) => {
       {
         uniqueHeaders(parsedData).map(header => (
           <div key={header}>
-            <h5>
+            <h5 id="headerComment">
               {header}
             </h5>
             {
               filterHeaders(header, parsedData)
                 .map(funcComment => <SidebarFuncEntry comment={funcComment} key={funcComment.id} />)
             }
+            <br />
+            <br />
           </div>
         ))
       }
