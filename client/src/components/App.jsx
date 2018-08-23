@@ -44,12 +44,12 @@ export default class App extends Component {
           <SideBar parsedData={parsedData} />
           <div className="starter">
             <Intro text={configData.introTxt} />
-            <Test1 />
+            {/* <Test1 /> */}
           </div>
           {
             parsedData.map(comment => (
               <div className="body" key={comment.id}>
-                <h2 id={`#${comment.id}`}>
+                <h2 id={comment.id}>
                   {`${comment.name} function`}
                 </h2>
                 <p>
