@@ -18,7 +18,7 @@ class SideBar extends React.Component {
   // };
 
   render() {
-    const { parsedData } = this.props;
+    const { parsedData, sortedHeaders } = this.props;
     return (
       <div className="wrapper">
         <nav id="sidebar">
@@ -41,7 +41,7 @@ class SideBar extends React.Component {
             {/* <li>
               <AnchorLink offset={() => 100} href="#things">Things</AnchorLink>
             </li> */}
-            <HeaderComment parsedData={parsedData} />
+            <HeaderComment parsedData={parsedData} sortedHeaders={sortedHeaders} />
           </ul>
         </nav>
       </div>
@@ -52,6 +52,8 @@ class SideBar extends React.Component {
 SideBar.propTypes = {
   /* eslint-disable-next-line */
   parsedData: PropTypes.array.isRequired,
+  /* eslint-disable-next-line */
+  sortedHeaders: PropTypes.array.isRequired,
 };
 
 export default SideBar;

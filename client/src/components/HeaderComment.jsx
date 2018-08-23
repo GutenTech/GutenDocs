@@ -5,27 +5,13 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import SidebarFuncEntry from './SidebarFuncEntry';
 /* eslint-enable */
 
-const HeaderComment = ({ parsedData }) => {
-  const uniqueHeaders = (arrayOfComments) => {
-    const headerPriorities = [];
-    arrayOfComments.forEach((comment) => {
-      headerPriorities[comment.header] = comment.priority;
-    });
-    let headers = Object.keys(headerPriorities);
-    headers = headers.sort((a, b) => {
-      if (headerPriorities[a] < headerPriorities[b]) return -1;
-      if (headerPriorities[a] > headerPriorities[b]) return 1;
-      return 0;
-    });
-    return headers;
-  };
-
+const HeaderComment = ({ parsedData, sortedHeaders }) => {
   const filterHeaders = (header, commentsArray) => commentsArray
     .filter(entry => header === entry.header);
   return (
     <ul>
       {
-        uniqueHeaders(parsedData).map(header => (
+        sortedHeaders.map(header => (
           <div key={header}>
             <h5 id="headerComment">
               {header}
@@ -45,6 +31,8 @@ const HeaderComment = ({ parsedData }) => {
 HeaderComment.propTypes = {
   /* eslint-disable-next-line */
   parsedData: PropTypes.array.isRequired,
+  /* eslint-disable-next-line */
+  sortedHeaders: PropTypes.array.isRequired,
 };
 
 export default HeaderComment;
