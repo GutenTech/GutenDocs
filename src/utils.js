@@ -286,15 +286,17 @@ const generateAPIFrame = (relPath, apiDir) => {
 const setVerbosity = (level, gutenrc, globally) => {
   if (typeof level === 'number' && level >= 0 && level <= 5) {
     if (gutenrc) {
-      let newSettings = gutenrc;
+      let newSettings = Object.assign({}, gutenrc);
       newSettings.verbosity = level;
+      delete newSettings.absPath;
       newSettings = JSON.stringify(newSettings, null, 2);
       fs.writeFileSync(gutenrc.absPath.concat('.gutenrc.json'), newSettings);
     }
     if (globally) {
       const pathToGlobal = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
-      let globalSettings = JSON.parse(fs.readFileSync(pathToGlobal));
+      let globalSettings = Object.assign({}, JSON.parse(fs.readFileSync(pathToGlobal)));
       globalSettings.verbosity = level;
+      delete globalSettings.absPath;
       globalSettings = JSON.stringify(globalSettings, null, 2);
       fs.writeFileSync(pathToGlobal, globalSettings);
     }
