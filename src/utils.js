@@ -4,16 +4,32 @@ const inquirer = require('inquirer');
 const inquirerOptions = require('./inquirerOptions.js');
 
 /**
+ * Resursively searches an object to take any default values for values missing
+ * from the assigned values.
+ * @param { {} } defaultConfig default object
+ * @param { {} } assignedSettings settings imported from the users settings
+ */
+const recurseOverKeys = (defaultConfig, assignedSettings) => {
+  const tempObj = Object.assign({}, assignedSettings);
+  Object.keys(defaultConfig).forEach((key) => {
+    if (assignedSettings[key] === undefined) tempObj[key] = defaultConfig[key];
+    else if (assignedSettings[key] instanceof Object && !(assignedSettings[key] instanceof Array)) {
+      tempObj[key] = recurseOverKeys(defaultConfig[key], assignedSettings[key]);
+    }
+  });
+  return Object.assign({}, tempObj);
+};
+/**
  * Returns a object with the defaults added to the assigned settings.
  * Userful for making sure that whenever the user has deleted settings from their
  * copy that the defaults are still available.
  * @param { string } defaultSettingsPath path to orignal file with defaults
  * @param { {} } assignedSettings settings imported from the users settings
  */
-
 const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
-  const defaultConfig = fs.readFileSync(defaultSettingsPath);
-  const mergedSettings = Object.assign(JSON.parse(defaultConfig, JSON.parse(assignedSettings)));
+  const defaultConfig = JSON.parse(fs.readFileSync(defaultSettingsPath));
+  let mergedSettings = Object.assign({}, JSON.parse(assignedSettings));
+  mergedSettings = recurseOverKeys(defaultConfig, mergedSettings);
   return mergedSettings;
 };
 
@@ -119,22 +135,15 @@ const getRC = () => {
       gutenfolder = JSON.parse(gutenrc).apiDir;
     } catch (error) {
       refreshFile(targetPath.concat('/.gutenrc.json'),
-        'client/dist/.gutenRCTemplate.json',
-        file => JSON.stringify(
-          Object.assign(
-            { absPath: targetPath.concat('/') },
-            JSON.parse(file),
-          ),
-          null,
-          2,
-        ));
+        'client/dist/.gutenRCTemplate.json');
       return false;
     }
     if (gutenfolder === undefined) {
       throw new Error('Your gutenrc folder seems to be missing a apiDir key indicating where the folder should be. Either add a key of apiDir with a value of the name of your api folder or delete the RC file and reinitialize.  A backup of your Api Folder will be created as [folderName].backup#.');
     }
     const RCTemplatePath = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
-    return fillBlanksWithDefaults(RCTemplatePath, gutenrc);
+    const missingValuesFilled = fillBlanksWithDefaults(RCTemplatePath, gutenrc);
+    return Object.assign({ absPath: targetPath }, missingValuesFilled);
   }
   throw new Error('You have not initialized gutendocs.  Call "gutendocs init"');
 };
@@ -260,7 +269,6 @@ const generateAPIFrame = (relPath, apiDir) => {
     const templateRC = fs.readFileSync(srcPath.concat('client/dist/.gutenRCTemplate.json'));
     const mergedRC = Object.assign(JSON.parse(templateRC), {
       apiDir,
-      absPath,
     });
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC, null, 2));
   } else {
