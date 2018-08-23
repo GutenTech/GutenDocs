@@ -4,6 +4,7 @@ const errors = require('./utils/errors.js');
 /**
  * @description catchAll descritpiton
  * @param tagArray {[]} catchall param
+ * @section parsing function
  * @return catchall return
  */
 const processFile = (tagArray) => {
