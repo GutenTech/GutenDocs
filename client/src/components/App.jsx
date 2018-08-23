@@ -13,6 +13,23 @@ import SideBarFuncEntry from './SidebarFuncEntry.jsx';
 const getData = () => import('./parsedData.json');
 const getConfig = () => import('./configData.json');
 
+const filterByHeaders = (header, commentsArray) => commentsArray
+  .filter(entry => header === entry.header);
+
+const uniqueHeaders = (arrayOfComments) => {
+  const headerPriorities = [];
+  arrayOfComments.forEach((comment) => {
+    headerPriorities[comment.header] = comment.priority;
+  });
+  let headers = Object.keys(headerPriorities);
+  headers = headers.sort((a, b) => {
+    if (headerPriorities[a] < headerPriorities[b]) return -1;
+    if (headerPriorities[a] > headerPriorities[b]) return 1;
+    return 0;
+  });
+  return headers;
+};
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +49,10 @@ export default class App extends Component {
     if (parsedData === undefined || configData === undefined) {
       return (<div>Loading</div>);
     }
+    if (parsedData.length === 0 || configData.length === 0) {
+      return (<div>Loading</div>);
+    }
+    const prioritySortedUniqueHeaders = uniqueHeaders(parsedData);
     return (
       <Router>
         <div className="App">
@@ -41,22 +62,23 @@ export default class App extends Component {
             {/* eslint-enable */}
           </h1>
           <Header />
-          <SideBar parsedData={parsedData} />
+          <SideBar parsedData={parsedData} sortedHeaders={prioritySortedUniqueHeaders} />
           <div className="starter">
             <Intro text={configData.introTxt} />
             {/* <Test1 /> */}
           </div>
           {
-            parsedData.map(comment => (
-              <div className="body" key={comment.id}>
-                <h2 id={comment.id}>
-                  {`${comment.name} function`}
-                </h2>
-                <p>
-                  {comment.description}
-                </p>
-              </div>
-            ))
+            prioritySortedUniqueHeaders.map(header => filterByHeaders(header, parsedData)
+              .map(funcComment => (
+                <div className="body" key={funcComment.id}>
+                  <h2 id={funcComment.id}>
+                    {`${funcComment.name} function`}
+                  </h2>
+                  <p>
+                    {funcComment.description}
+                  </p>
+                </div>
+              )))
           }
         </div>
       </Router>
