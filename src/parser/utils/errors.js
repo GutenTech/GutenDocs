@@ -6,7 +6,7 @@ const parseCommentsArrayErr = (filesArray) => {
 
 /**
  * @description error test description
- * @param someparam {[]} some ereror tst param
+ * @section parsing function
  */
 
 const parseCommentsFileErr = (file) => {
