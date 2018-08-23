@@ -1,1 +1,7 @@
 node_modules
+.*
+GutenApi
+__tests__
+__mocks__
+*.bundle.js
+bundle.js
