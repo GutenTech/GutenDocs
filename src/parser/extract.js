@@ -31,12 +31,12 @@ const exclude = (arr) => {
   });
 };
 
-const acornParse = (content, tagContent) => {
+const acornParse = (content, tagContent, gutenrc) => {
   parse(content, {
     plugins: {
       jsx: true,
     },
-    allowImportExportEverywhere: true,
+    ...gutenrc.acornSettings,
     onComment: (b, t, s, d) => {
       if (b && t[0] === '*') {
         const a = {
@@ -66,7 +66,7 @@ const extract = arr => exclude(arr).then((list) => {
     };
     const content = fs.readFileSync(`${path.dirname(gutenrc.absPath)}/${file}`, 'utf8');
     try {
-      acornParse(content, tag.content);
+      acornParse(content, tag.content, gutenrc);
     } catch (e) {
       badFiles.push(file);
       if (gutenrc.verbosity >= 4) {
