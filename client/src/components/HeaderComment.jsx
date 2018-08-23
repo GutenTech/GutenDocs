@@ -13,9 +13,14 @@ const HeaderComment = ({ parsedData, sortedHeaders }) => {
       {
         sortedHeaders.map(header => (
           <div key={header}>
-            <h5 id="headerComment">
-              {header}
-            </h5>
+            <AnchorLink
+              offset={() => 100}
+              href={`#${header}`}
+            >
+              <h5 id="headerComment">
+                {header}
+              </h5>
+            </AnchorLink>
             {
               filterHeaders(header, parsedData)
                 .map(funcComment => <SidebarFuncEntry comment={funcComment} key={funcComment.id} />)
