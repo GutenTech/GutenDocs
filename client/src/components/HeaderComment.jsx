@@ -9,9 +9,15 @@ const HeaderComment = ({ parsedData }) => {
   const uniqueHeaders = (arrayOfComments) => {
     const headerPriorities = [];
     arrayOfComments.forEach((comment) => {
-      headerPriorities[comment.priority] = comment.header;
+      headerPriorities[comment.header] = comment.priority;
     });
-    return headerPriorities;
+    let headers = Object.keys(headerPriorities);
+    headers = headers.sort((a, b) => {
+      if (headerPriorities[a] < headerPriorities[b]) return -1;
+      if (headerPriorities[a] > headerPriorities[b]) return 1;
+      return 0;
+    });
+    return headers;
   };
 
   const filterHeaders = (header, commentsArray) => commentsArray
