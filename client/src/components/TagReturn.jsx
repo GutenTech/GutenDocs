@@ -5,9 +5,16 @@ import PropTypes from 'prop-types';
 
 const TagReturn = ({ tags, commentId }) => tags.map((tag, index) => (
   <div key={commentId.toString().concat(tag.title).concat(index)}>
-    {
-      `Return value: ${tag.description}`
-    }
+    <div>
+      {
+        `Return value: ${tag.description}`
+      }
+    </div>
+    <div>
+      {
+        `- Type: ${tag.type ? tag.type.name : 'undefined'} Desc: ${tag.description}`
+      }
+    </div>
   </div>
 ));
 
