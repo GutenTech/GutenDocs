@@ -11,7 +11,7 @@ const BodyFunctionDesc = ({ funcComment }) => {
     .filter(tag => (tag.title === targetTag));
   return (
     <div className="body" key={funcComment.id}>
-      <h5 id={funcComment.id}>
+      <h5 id={funcComment.name.concat(funcComment.id)}>
         {`${funcComment.name} function`}
       </h5>
       <div>

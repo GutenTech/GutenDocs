@@ -25,7 +25,7 @@ class SideBar extends React.Component {
   }
 
   render() {
-    const { sortedHeaders } = this.props;
+    const { sortedHeaders, configData } = this.props;
     const { parsedData } = this.state;
     return (
       <div className="wrapper">
@@ -34,11 +34,16 @@ class SideBar extends React.Component {
             <h5>GutenDocs</h5>
             <br />
           </div>
-          <input type="text" id="myInput" placeholder="Search..." ref={(input) => { this.search = input; }} onChange={this.updateSearch.bind(this)} />
+          <input
+            type="text"
+            id="myInput"
+            placeholder="Search..."
+            ref={(input) => { this.search = input; }}
+            onChange={this.updateSearch.bind(this)}
+          />
           <ul className="list-unstyled components">
             <li id="home">
-              {/* eslint-disable-next-line */}
-              <a href="#">
+              <a href="#Top">
                 <i className="fa fa-home" />
                 {' '}
                 Top
@@ -46,10 +51,11 @@ class SideBar extends React.Component {
                 {' '}
               </a>
             </li>
-            {/* <li>
-              <AnchorLink offset={() => 100} href="#things">Things</AnchorLink>
-            </li> */}
-            <HeaderComment parsedData={parsedData} sortedHeaders={sortedHeaders} />
+            <HeaderComment
+              parsedData={parsedData}
+              sortedHeaders={sortedHeaders}
+              configData={configData}
+            />
           </ul>
         </nav>
       </div>
@@ -62,6 +68,8 @@ SideBar.propTypes = {
   parsedData: PropTypes.array.isRequired,
   /* eslint-disable-next-line */
   sortedHeaders: PropTypes.array.isRequired,
+  /* eslint-disable-next-line */
+  configData: PropTypes.object.isRequired,
 };
 
 export default SideBar;

@@ -66,7 +66,11 @@ export default class App extends Component {
             {/* eslint-enable */}
           </h1>
           <Header />
-          <SideBar parsedData={parsedData} sortedHeaders={prioritySortedUniqueHeaders} />
+          <SideBar
+            parsedData={parsedData}
+            sortedHeaders={prioritySortedUniqueHeaders}
+            configData={configData}
+          />
           <div className="starter">
             <Intro text={configData.introTxt} />
             {/* <Test1 /> */}
