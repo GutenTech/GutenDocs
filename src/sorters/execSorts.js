@@ -14,6 +14,7 @@ const execSorts = (ast) => {
   // options will contain sorting options for particular functions.  In this case: sectionSort
   const options = {
     sectionTag: gutenRC.skeleton.sortBySection.section,
+    fileTag: gutenRC.skeleton.sortByFileName.includeExtension,
     catchAllTag: gutenRC.skeleton.catchAll.section,
     sortByParentDirectoryName: gutenRC.skeleton.sortByParentDirectoryName.targetDepth,
   };
