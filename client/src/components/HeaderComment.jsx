@@ -7,9 +7,11 @@ import SidebarFuncEntry from './SidebarFuncEntry';
 
 const HeaderComment = ({ parsedData }) => {
   const uniqueHeaders = (arrayOfComments) => {
-    const allHeaders = [];
-    arrayOfComments.forEach(comment => allHeaders.push(comment.header));
-    return Array.from(new Set(allHeaders));
+    const headerPriorities = [];
+    arrayOfComments.forEach((comment) => {
+      headerPriorities[comment.priority] = comment.header;
+    });
+    return headerPriorities;
   };
 
   const filterHeaders = (header, commentsArray) => commentsArray
