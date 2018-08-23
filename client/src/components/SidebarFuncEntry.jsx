@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 /* eslint-enable */
 
-const SidebarFuncEntry = ({ comment }) => (
+const SidebarFuncEntry = ({ comment }) => {
+  console.log(comment.id, 'commentId');
+  return (
   <li id="nameComment">
     <AnchorLink
       offset={() => 100}
@@ -14,7 +16,8 @@ const SidebarFuncEntry = ({ comment }) => (
       <br />
     </AnchorLink>
   </li>
-);
+  )
+};
 
 export default SidebarFuncEntry;
 
