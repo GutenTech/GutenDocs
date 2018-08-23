@@ -6,8 +6,8 @@ import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
 import SideBar from './SideBar.jsx';
-import Test1 from './Test1';
-import SideBarFuncEntry from './SidebarFuncEntry.jsx';
+import BodyFunctionDesc from './BodyFunctionDesc';
+
 // import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
 /* eslint-enable */
 const getData = () => import('./parsedData.json');
@@ -17,7 +17,7 @@ const filterByHeaders = (header, commentsArray) => commentsArray
   .filter(entry => header === entry.header);
 
 const uniqueHeaders = (arrayOfComments) => {
-  const headerPriorities = [];
+  const headerPriorities = {};
   arrayOfComments.forEach((comment) => {
     headerPriorities[comment.header] = comment.priority;
   });
@@ -68,17 +68,18 @@ export default class App extends Component {
             {/* <Test1 /> */}
           </div>
           {
-            prioritySortedUniqueHeaders.map(header => filterByHeaders(header, parsedData)
-              .map(funcComment => (
-                <div className="body" key={funcComment.id}>
-                  <h2 id={funcComment.id}>
-                    {`${funcComment.name} function`}
-                  </h2>
-                  <p>
-                    {funcComment.description}
-                  </p>
-                </div>
-              )))
+            prioritySortedUniqueHeaders.map(header => (
+              <div>
+                <h2 className="body" id={header}>
+                  {header}
+                </h2>
+                {filterByHeaders(header, parsedData)
+                  .map(funcComment => (
+                    <BodyFunctionDesc funcComment={funcComment} key={funcComment.id} />
+                  ))
+                }
+              </div>
+            ))
           }
         </div>
       </Router>
