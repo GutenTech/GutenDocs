@@ -5,12 +5,13 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 /* eslint-enable */
 
 const SidebarFuncEntry = ({ comment }) => (
-  <li>
+  <li id="nameComment">
     <AnchorLink
       offset={() => 100}
       href={`#${comment.id}`}
     >
       {comment.name}
+      <br />
     </AnchorLink>
   </li>
 );
