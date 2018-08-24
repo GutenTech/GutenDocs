@@ -22,5 +22,10 @@
     "allowImportExportEverywhere": true,
     "allowHashBang": true
   },
+  "doctrineSettings": {
+    "unwrap": true,
+    "recoverable": true,
+    "sloppy": true
+  },
   "verbosity": 1
 }

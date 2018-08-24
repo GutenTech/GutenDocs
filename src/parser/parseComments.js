@@ -1,5 +1,6 @@
 const doctrine = require('doctrine');
 const errors = require('./utils/errors.js');
+const { getRC } = require('./../utils.js');
 
 /**
  * @description catchAll descritpiton
@@ -11,10 +12,10 @@ const processFile = (tagArray) => {
   const tags = {
     content: [],
   };
-
+  const gutenRC = getRC();
   tagArray.forEach((x) => {
     const fileObj = doctrine.parse(x.comment, {
-      unwrap: true,
+      ...gutenRC.doctrineSettings,
     });
     fileObj.name = x.name;
     tags.content.push(fileObj);
