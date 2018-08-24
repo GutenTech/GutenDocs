@@ -3,7 +3,7 @@ const errors = require('./utils/errors.js');
 
 /**
  * @description catchAll descritpiton
- * @param { [] } tagArray catchall param
+ * @param tagArray {[]} catchall param
  * @section parsing function1
  * @return catchall return
  */
@@ -25,8 +25,8 @@ const processFile = (tagArray) => {
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
- * @param { [] } commentsArray An array of JSDoc Comment Blocks structured in AST.
- * @param { string= } filesArray The path that the file should be saved to.
+ * @param commentsArray {[]} An array of JSDoc Comment Blocks structured in AST.
+ * @param address {string} The path that the file should be saved to.
  * @section section name 2
  * @return n/a
  */
