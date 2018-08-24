@@ -1,7 +1,6 @@
-const {
-  parse,
-  Parser,
-} = require('acorn-jsx');
+const acorn = require('acorn');
+const injectAcornJsx = require('acorn-jsx/inject');
+const injectAcornObjectRestSpread = require('acorn-object-rest-spread/inject');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -10,6 +9,13 @@ const {
 const {
   getRC,
 } = require('../utils.js');
+
+injectAcornJsx(acorn);
+injectAcornObjectRestSpread(acorn);
+const {
+  parse,
+  Parser,
+} = acorn;
 
 const exclude = (arr) => {
   const ROOT = path.dirname(getRC().absPath.slice(0, -1));
@@ -35,6 +41,7 @@ const acornParse = (content, tagContent, gutenrc) => {
   parse(content, {
     plugins: {
       jsx: true,
+      objectRestSpread: true,
     },
     ...gutenrc.acornSettings,
     onComment: (b, t, s, d) => {
@@ -45,6 +52,7 @@ const acornParse = (content, tagContent, gutenrc) => {
         const p = new Parser({
           plugins: {
             jsx: true,
+            objectRestSpread: true,
           },
         }, content, d);
         p.nextToken();
