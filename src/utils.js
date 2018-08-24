@@ -71,6 +71,7 @@ const refreshFile = (oldFile, source, additionsToTemplate, error) => {
   inquirer
     .prompt(corruptFilePrompt)
     .then((answer) => {
+      /* eslint-disable-next-line no-console */
       if (answer.delete === false) console.error(error.message);
       if (answer.delete === true) {
         inquirer
