@@ -7,7 +7,7 @@ const GeneratedFunc = ({ funcComment }) => `      ${funcComment.name}(`
   .concat(
     funcComment.tags.filter(tag => tag.title === 'param').map((tag, index, allParams) => {
       const param = [];
-      if (tag.type === 'OptionalType') param.push(` [${tag.name}]`);
+      if (tag.type !== null && tag.type.type !== null && tag.type.type === 'OptionalType') param.push(` [${tag.name}]`);
       else param.push(` ${tag.name}`);
       if (allParams.length === index + 1) param.push(' ');
       return param.join('');
