@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TagDesc from './TagDesc';
 import TagParam from './TagParam';
 import TagReturn from './TagReturn';
+import GeneratedFunc from './GeneratedFunc';
 /* eslint-enable */
 
 const BodyFunctionDesc = ({ funcComment }) => {
@@ -12,7 +13,8 @@ const BodyFunctionDesc = ({ funcComment }) => {
   return (
     <div className="body" key={funcComment.id}>
       <h5 id={funcComment.name.concat(funcComment.id)}>
-        {`${funcComment.name} function`}
+        {`${funcComment.name}`}
+        <GeneratedFunc funcComment={funcComment} />
       </h5>
       <div>
         {funcComment.description}
