@@ -3,7 +3,8 @@ const corruptFilePrompt = fileName => [
     type: 'confirm',
     name: 'delete',
     message: `Your ${fileName} file seems to no longer be a valid file.\n`
-    + 'Can I erase the existing file and replace it with the default?',
+    + 'Can I erase the existing file and replace it with the default?\n'
+    + 'If not I\'ll just throw an error and tell you why its an invalid JSON',
     default: false,
   },
 ];

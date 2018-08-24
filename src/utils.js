@@ -66,7 +66,7 @@ const copyFile = (source, destination, modifier, cb) => fs.readFile(source, (err
   if (typeof modifier === 'function') fileToWrite = modifier(original);
   return fs.writeFile(destination, fileToWrite, (writeErr) => {
     if (writeErr) throw writeErr;
-    if (cb !== undefined) {
+    if (cb) {
       cb();
     }
   });
@@ -79,7 +79,7 @@ const copyFile = (source, destination, modifier, cb) => fs.readFile(source, (err
  * @param { string } pathData path to file to overwrite
  * @param { string } source path to source file to copy to pathData
  */
-const refreshFile = (oldFile, source, additionsToTemplate) => {
+const refreshFile = (oldFile, source, additionsToTemplate, error) => {
   const fileName = path.basename(oldFile);
   const pathData = path.dirname(oldFile).concat('/');
   const corruptFilePrompt = inquirerOptions.corruptFilePrompt(fileName);
@@ -88,6 +88,7 @@ const refreshFile = (oldFile, source, additionsToTemplate) => {
   inquirer
     .prompt(corruptFilePrompt)
     .then((answer) => {
+      if (answer.delete === false) console.error(error.message);
       if (answer.delete === true) {
         inquirer
           .prompt(confirmDeletePrompt.questions)
@@ -135,7 +136,7 @@ const getRC = () => {
       gutenfolder = JSON.parse(gutenrc).apiDir;
     } catch (error) {
       refreshFile(targetPath.concat('/.gutenrc.json'),
-        'client/dist/.gutenRCTemplate.json');
+        'client/dist/.gutenRCTemplate.json', null, error);
       return false;
     }
     if (gutenfolder === undefined) {
