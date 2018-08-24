@@ -4,22 +4,6 @@ const inquirer = require('inquirer');
 const inquirerOptions = require('./inquirerOptions.js');
 
 /**
- * Resursively searches an object to take any default values for values missing
- * from the assigned values.
- * @param { {} } defaultConfig default object
- * @param { {} } assignedSettings settings imported from the users settings
- */
-const recurseOverKeys = (defaultConfig, assignedSettings) => {
-  const tempObj = Object.assign({}, assignedSettings);
-  Object.keys(defaultConfig).forEach((key) => {
-    if (assignedSettings[key] === undefined) tempObj[key] = defaultConfig[key];
-    else if (assignedSettings[key] instanceof Object && !(assignedSettings[key] instanceof Array)) {
-      tempObj[key] = recurseOverKeys(defaultConfig[key], assignedSettings[key]);
-    }
-  });
-  return Object.assign({}, tempObj);
-};
-/**
  * Returns a object with the defaults added to the assigned settings.
  * Userful for making sure that whenever the user has deleted settings from their
  * copy that the defaults are still available.
@@ -28,8 +12,7 @@ const recurseOverKeys = (defaultConfig, assignedSettings) => {
  */
 const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
   const defaultConfig = JSON.parse(fs.readFileSync(defaultSettingsPath));
-  let mergedSettings = Object.assign({}, JSON.parse(assignedSettings));
-  mergedSettings = recurseOverKeys(defaultConfig, mergedSettings);
+  const mergedSettings = Object.assign(defaultConfig, JSON.parse(assignedSettings));
   return mergedSettings;
 };
 
@@ -143,6 +126,7 @@ const getRC = () => {
     }
     const RCTemplatePath = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
     const missingValuesFilled = fillBlanksWithDefaults(RCTemplatePath, gutenrc);
+    console.log(missingValuesFilled);
     return Object.assign({ absPath: targetPath.concat('/') }, missingValuesFilled);
   }
   throw new Error('You have not initialized gutendocs.  Call "gutendocs init"');
