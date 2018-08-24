@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 /* eslint-enable */
 
-const BodyFunctionDesc = ({ funcComment }) => `      ${funcComment.name}(`
+const GeneratedFunc = ({ funcComment }) => `      ${funcComment.name}(`
   .concat(
     funcComment.tags.filter(tag => tag.title === 'param').map((tag, index, allParams) => {
       const param = [];
@@ -14,9 +14,9 @@ const BodyFunctionDesc = ({ funcComment }) => `      ${funcComment.name}(`
     }),
   ).concat(')');
 
-export default BodyFunctionDesc;
+export default GeneratedFunc;
 
-BodyFunctionDesc.propTypes = {
+GeneratedFunc.propTypes = {
   /* eslint-disable-next-line */
   funcComment: PropTypes.object.isRequired,
 };
