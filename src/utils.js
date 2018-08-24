@@ -126,7 +126,6 @@ const getRC = () => {
     }
     const RCTemplatePath = path.dirname(__dirname).concat('/client/dist/.gutenRCTemplate.json');
     const missingValuesFilled = fillBlanksWithDefaults(RCTemplatePath, gutenrc);
-    console.log(missingValuesFilled);
     return Object.assign({ absPath: targetPath.concat('/') }, missingValuesFilled);
   }
   throw new Error('You have not initialized gutendocs.  Call "gutendocs init"');
