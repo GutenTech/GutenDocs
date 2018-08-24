@@ -10,11 +10,24 @@ html, body {
 }
 
 .body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: FontAwesome;
     margin-left: 265px;
     margin-top: 8px;
-    margin-bottom: 75px;
+    margin-bottom: 10px;
+    color: transparent;
+    -webkit-text-stroke-width: 1.25px;
+    -webkit-text-stroke-color: black;
     /* overflow: auto; */
+}
+
+.bodyTags {
+  font-family: FontAwesome;
+  font-size: 1em;
+  font-weight: 1;
+  text-decoration: none;
+  margin-left: 265px;
+  margin-top: 8px;
+  margin-bottom: 10px;
 }
 
 .starter {
@@ -56,7 +69,7 @@ html, body {
     border: 0px solid #fff;
     box-shadow: 10px 0px 10px #B2B2FF90;
     background:linear-gradient(142deg, rgb(251, 251, 253), rgb(214, 214, 240));
-    width: 15%;
+    width: 200px;
     position: fixed;
     top: 0;
     left: 0;
@@ -81,6 +94,10 @@ a[data-toggle="collapse"] {
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+}
+
+.sidebarHeader {
+  margin-bottom: -30px
 }
 
 /* @media (max-width: 768px) {
@@ -168,8 +185,9 @@ a {
     width: 765px;
     margin: 0 auto;
     margin-top: -240px;
-    margin-right: 110px;
-    padding-bottom: 150px;
+    margin-right: 5px;
+    margin-bottom:15px;
+    padding-bottom: 5px;
   }
   
   #gutendocs {
@@ -208,6 +226,7 @@ a {
   /* header and name for sidebar */
   #headerComment {
     margin-left: -35px;
+    margin-bottom: -25px;
     font-size: 18px;
     font-family: FontAwesome;
     font-weight: bold;
@@ -221,5 +240,16 @@ a {
 
   /* home icon */
   #home {
-    margin-bottom: 40px;
+    margin-bottom: 14px;
+  }
+
+  .tagSection {
+    padding-bottom: 32px;
+    font-weight: 700;
+    text-decoration: blue;
+  }
+
+  .functionName {
+    padding-top: 12px;
+    font-weight: bold;
   }

@@ -11,8 +11,8 @@ const BodyFunctionDesc = ({ funcComment }) => {
   const getByTag = (tags, targetTag) => tags
     .filter(tag => (tag.title === targetTag));
   return (
-    <div className="body" key={funcComment.id}>
-      <h5 id={funcComment.name.concat(funcComment.id)}>
+    <div className="bodyTags" key={funcComment.id}>
+      <h5 className="functionName" id={funcComment.name.concat(funcComment.id)}>
         {`${funcComment.name}`}
         <GeneratedFunc funcComment={funcComment} />
       </h5>

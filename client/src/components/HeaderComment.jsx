@@ -12,7 +12,7 @@ const HeaderComment = ({ parsedData, sortedHeaders, configData }) => {
     <ul>
       {
         sortedHeaders.map(header => (
-          <div key={header}>
+          <div className="sidebarHeader" key={header}>
             <AnchorLink
               offset={() => configData.anchorHashJump}
               href={`#${header}`}
