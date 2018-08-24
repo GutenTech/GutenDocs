@@ -66,7 +66,7 @@ const copyFile = (source, destination, modifier, cb) => fs.readFile(source, (err
   if (typeof modifier === 'function') fileToWrite = modifier(original);
   return fs.writeFile(destination, fileToWrite, (writeErr) => {
     if (writeErr) throw writeErr;
-    if (cb) {
+    if (typeof cb === 'function') {
       cb();
     }
   });
