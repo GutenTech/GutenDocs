@@ -77,7 +77,7 @@ export default class App extends Component {
           </div>
           {
             prioritySortedUniqueHeaders.map((header, index) => (
-              <div key={header.concat(index)}>
+              <div className="tagSection" key={header.concat(index)}>
                 <h2 className="body" id={header}>
                   {header}
                 </h2>
