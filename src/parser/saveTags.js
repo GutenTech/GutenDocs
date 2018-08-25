@@ -17,7 +17,7 @@ const saveTags = (data, writePath) => {
     + `\n\nwindow.${variableName} = ${variableName};`,
     (err) => {
       if (err) {
-        console.log(err); /* eslint-disable-line no-console */
+        throw err;
       }
     });
 };
