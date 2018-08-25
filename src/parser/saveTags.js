@@ -1,24 +1,25 @@
 const fs = require('fs');
-const { parseCommentsTemplate } = require('./utils/webpackTemplates.js');
-
+const path = require('path');
 
 /**
- * @description Will write the cleaned and sorted AST tree to a bundle.js file
+ * @description Will write the cleaned and sorted AST tree to a js file exporting it
  * @param {[]} data the ast cleaned tree
  * @param {string} path the path to write the data too
  * @return n/a
  */
-const saveTags = (data, path) => {
-  const dataToSave = JSON.stringify(data)
-    .replace(/(?<!\\)(?:\\\\)*\\n/g, '\\\\n') // replaces \n where there is odd number of \ with a \\n
-    .replace(/(?<!\\)(?:\\\\)*`/g, '\\`') //  replaces ` and any ` preceded by an odd number of \ with a \`
-    .replace(/(?<!\\)(?:\\)*\\"/g, '\\\\"') //  replaces \" and any \" preceded by an odd number of \ with a \\"
-    .replace(/\$\{/g, '\\$\\{'); //  replaces ${ with an escaped \$\{ so we dont have accidental string literals
-  fs.writeFile(path, parseCommentsTemplate(dataToSave), (err) => {
-    if (err) {
-      console.log(err); /* eslint-disable-line no-console */
-    }
-  });
+const saveTags = (data, writePath) => {
+  const variableName = path.basename(writePath, path.extname(writePath));
+  fs.writeFile(writePath,
+    '/* eslint-disable quote-props */\n'
+    + '/* eslint-disable quotes */\n'
+    + '/* eslint-disable comma-dangle */\n'
+    + `const ${variableName} = ${JSON.stringify(data, null, 2)};`
+    + `\n\nwindow.${variableName} = ${variableName};`,
+    (err) => {
+      if (err) {
+        console.log(err); /* eslint-disable-line no-console */
+      }
+    });
 };
 
 module.exports.saveTags = saveTags;

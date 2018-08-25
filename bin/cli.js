@@ -10,7 +10,6 @@ const extract = require('../src/parser/extract.js');
 const parseComments = require('../src/parser/parseComments.js');
 const {
   getRC,
-  updateConfig,
   refreshAPI,
   generateAPIFrame,
   setVerbosity,
@@ -74,7 +73,7 @@ yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subd
 }, (argv) => {
   const gutenrc = getRC();
   if (gutenrc) {
-    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
+    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}parsedData.js` : undefined;
     const input = argv.all ? ['./'] : argv._;
     extract(input).then((data) => {
       const rawAST = parseComments(data, address);
@@ -84,14 +83,6 @@ yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subd
     });
   }
 });
-
-yargs.command(['config', 'c'], 'update rendered API with gutenConfig settings', {},
-  () => {
-    const gutenrc = getRC();
-    if (gutenrc) {
-      updateConfig(gutenrc);
-    }
-  });
 
 yargs.command(['verbosity [level]', 'verbose [level]'], 'Set verbosity level [0-5]', {
   global: {
@@ -158,7 +149,7 @@ yargs.command('$0', 'Parse all file in dir and subdir', {
 }, (argv) => {
   const gutenrc = getRC();
   if (gutenrc) {
-    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}0.bundle.js` : undefined;
+    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}parsedData.js` : undefined;
     const input = argv.all ? ['./'] : argv._;
     extract(input).then((data) => {
       const rawAST = parseComments(data, address);

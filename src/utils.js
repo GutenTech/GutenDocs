@@ -192,53 +192,12 @@ const generateFilesaveArray = (destination, dirName, backup) => {
 };
 
 /**
- * Updates the config guten api to have all the config settings from gutenCofig.json
- * @param { {} } gutenrc the rc file for gutendocs
- */
-const updateConfig = (gutenrc) => {
-  const GutenAPIDir = gutenrc.absPath.concat(gutenrc.apiDir);
-  const pathToConfigBundle = GutenAPIDir.concat('1.bundle.js');
-  const pathToConfigJSON = GutenAPIDir.concat('gutenConfig.json');
-  if (!fs.existsSync(GutenAPIDir)) {
-    throw new Error('Write Error:'
-    + 'The folder specified in the .gutenrc.json file seems to be missing.'
-    + 'Update .gutenrc.json to match your API folder if you have changed the folder name,'
-    + 'or call "gutendocs reset" if and only if you have accidentally deleted it'
-    + 'and would like it to be reset to the original state.');
-  } else {
-    let configSettings = fs.readFileSync(pathToConfigJSON);
-    const defaultFileLoc = path.dirname(__dirname).concat('/client/dist/gutenConfig.json');
-    configSettings = fillBlanksWithDefaults(defaultFileLoc, configSettings);
-
-    /* eslint-disable */
-    const fileToWrite = `(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
-
-      /***/ "./client/src/components/configData.json":
-      /*!***********************************************!*\
-        !*** ./client/src/components/configData.json ***!
-        \***********************************************/
-      /*! no static exports found */
-      /***/ (function(module, exports, __webpack_require__) {
-      
-      "use strict";
-      eval(\`\n\nmodule.exports = ${JSON.stringify(configSettings)};\n\n//# sourceURL=webpack:///./client/src/components/configData.json?\`);
-      
-      /***/ })
-      
-      }]);`;
-    /* eslint-enable */
-    fs.writeFileSync(pathToConfigBundle, fileToWrite);
-  }
-};
-
-/**
  * refreshes the API with all the settings to the defauts
  * @param { {} } gutenrc the gutenrc object the defines the users settings
  * @param { boolean } backup whether or not to make a backup folder
  */
 const refreshAPI = (gutenrc, backup) => {
   generateFilesaveArray(gutenrc.absPath, gutenrc.apiDir, backup);
-  updateConfig(gutenrc);
 };
 
 /**
@@ -259,7 +218,6 @@ const generateAPIFrame = (relPath, apiDir) => {
   } else {
     throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
-  updateConfig({ absPath, apiDir });
 };
 
 /**
@@ -293,6 +251,5 @@ module.exports.setVerbosity = setVerbosity;
 module.exports.generateAPIFrame = generateAPIFrame;
 module.exports.refreshAPI = refreshAPI;
 module.exports.refreshFile = refreshFile;
-module.exports.updateConfig = updateConfig;
 module.exports.generateFilesaveArray = generateFilesaveArray;
 module.exports.getRC = getRC;

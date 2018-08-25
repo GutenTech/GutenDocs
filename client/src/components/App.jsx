@@ -8,11 +8,6 @@ import Header from './Header';
 import SideBar from './SideBar.jsx';
 import BodyFunctionDesc from './BodyFunctionDesc';
 
-// import gutenDocsLogo from '../../dist/resources/gutendocslogo.png';
-/* eslint-enable */
-const getData = () => import('./parsedData.json');
-const getConfig = () => import('./configData.json');
-
 const filterByHeaders = (header, commentsArray) => commentsArray
   .filter(entry => header === entry.header);
 
@@ -34,22 +29,14 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      parsedData: undefined,
-      configData: undefined,
     };
   }
 
-  componentDidMount() {
-    getData().then(data => this.setState({ parsedData: data.default }));
-    getConfig().then(data => this.setState({ configData: data.default }));
-  }
-
   render() {
-    const { parsedData, configData } = this.state;
-    if (parsedData === undefined || parsedData.length === 0) {
+    if (window.parsedData === undefined || window.parsedData.length === 0) {
       return (<div>{'Problem Loading Data, did you run "gutendocs parse [<filename>, --all]"'}</div>);
     }
-    if (configData === undefined || configData.length === 0) {
+    if (window.configData === undefined || window.configData === 0) {
       return (
         <div>
           {'Problem Loading Data, did you run "gutendocs config"'}
@@ -67,12 +54,12 @@ export default class App extends Component {
           </h1>
           <Header />
           <SideBar
-            parsedData={parsedData}
+            parsedData={window.parsedData}
             sortedHeaders={prioritySortedUniqueHeaders}
-            configData={configData}
+            configData={window.configData}
           />
           <div className="starter">
-            <Intro text={configData.introTxt} />
+            <Intro text={window.configData.introTxt} />
             {/* <Test1 /> */}
           </div>
           {
@@ -81,7 +68,7 @@ export default class App extends Component {
                 <h2 className="body" id={header}>
                   {header}
                 </h2>
-                {filterByHeaders(header, parsedData)
+                {filterByHeaders(header, window.parsedData)
                   .map(funcComment => (
                     <BodyFunctionDesc funcComment={funcComment} key={funcComment.id} />
                   ))
