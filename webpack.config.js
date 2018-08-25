@@ -47,11 +47,6 @@ module.exports = {
         test: /\.css$/, loader: 'style-loader!css-loader',
       },
       {
-        test: /\.json/,
-        type: 'javascript/auto',
-        use: [require.resolve('json-loader')],
-      },
-      {
         test: /\.png$/,
         use: 'file-loader',
       },
