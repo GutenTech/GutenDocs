@@ -8,6 +8,5 @@ GutenApi/
 #additional folders and files to ignore
 __tests__
 __mocks__
-*.bundle.js
-bundle.js
+bundles.js
 mockData
