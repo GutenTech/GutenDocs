@@ -1,6 +1,11 @@
+#ignore your dependancies
 node_modules
+#ignore hidden folders like .git
 .*
-GutenApi
+#ignore your generated API folder
+GutenApi/
+
+#additional folders and files to ignore
 __tests__
 __mocks__
 *.bundle.js

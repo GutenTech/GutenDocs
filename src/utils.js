@@ -203,7 +203,7 @@ const refreshAPI = (gutenrc, backup) => {
 /**
  * Generates a API folder as well as a gutenRC file
  * @param { string } relPath the directory that the user wants to make the APIDir
- * @param { string } dirName the desired name of the APIDir
+ * @param { string } apiDir the desired name of the APIDir
  */
 const generateAPIFrame = (relPath, apiDir) => {
   const srcPath = path.dirname(__dirname).concat('/');
@@ -215,6 +215,17 @@ const generateAPIFrame = (relPath, apiDir) => {
       apiDir,
     });
     fs.writeFileSync(absPath.concat('.gutenrc.json'), JSON.stringify(mergedRC, null, 2));
+
+    const gutenIgnoreContents = '#ignore your dependancies\n'
+    + 'node_modules\n'
+    + '#ignore hidden folders like .git\n'
+    + '.*\n'
+    + '#ignore your generated API folder\n'
+    + `${apiDir}\n\n`
+    + '#additional folders and files to ignore\n';
+    if (!fs.existsSync(relPath.concat('.gutenignore'))) {
+      fs.writeFileSync(relPath.concat('.gutenignore'), gutenIgnoreContents);
+    }
   } else {
     throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
