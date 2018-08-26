@@ -1,5 +1,14 @@
 const path = require('path');
 
+
+/**
+ * @description A wrapper function that iterates over every comment block
+ * and executes a sort of blocks that haven't been sorted yet
+ * @param { {} } data Receive {ast, priority, options}
+ * @param { function } cb sorting function to execute on block
+ * @param { boolean } isCatchAll Receive {ast-array, priority-number, options-object}
+ * @return { {} } updatedData {ast, priority, options}
+ */
 const sortWrapper = (data, cb, isCatchAll) => {
   const { ast, priority, options } = data;
   const alteredBlockArray = [];
@@ -20,10 +29,9 @@ const sortWrapper = (data, cb, isCatchAll) => {
 
 /**
  * @description A function that will assign the classification headings based upon
- * whether or not end-user has specified a custom tag.  catchAllSection is option
- * see params below.
- * @param {[]} data Receive [ast-array, priority-number, options-object]
- * @return {[]} updatedData [ast-array, priority-number, options-object]
+ * whether or not end-user has specified a custom tag.
+ * @param { {} } data Receive {ast, priority, options}
+ * @return { {} } updatedData {ast, priority, options}
  */
 const sortBySection = (data) => {
   const sectionName = data.options.sectionTag.replace('@', '');
@@ -41,13 +49,11 @@ const sortBySection = (data) => {
 };
 
 /**
-  * @description A function that will assign a general header name to unclassified
-  * comment blocks
-  * @param {[]} data Receive [ast-array, priority-number, options-object]
-  * @return {[]} ast Return the AST formatted to have priority and headers according to sections
-  */
-
-
+ * @description A function that will assign a general header name to unclassified
+ * comment blocks
+ * @param { {} } data Receive {ast, priority, options}
+ * @return { {} } updatedData {ast, priority, options}
+ */
 const catchAll = (data) => {
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
@@ -59,10 +65,10 @@ const catchAll = (data) => {
 };
 
 /**
-  * @description A function that will assign a general header name based on fileName
-  * @param {[]} data Receive [ast-array, priority-number, options-object]
-  * @return {[]} ast Return the AST formatted to have priority and headers according to sections
-  */
+ * @description A function that will assign a general header name based on fileName
+ * @param { {} } data Receive {ast, priority, options}
+ * @return { {} } updatedData {ast, priority, options}
+ */
 const sortByFileName = (data) => {
   /* Function implementation goes here */
   const extension = data.options.fileTag;
@@ -79,10 +85,10 @@ const sortByFileName = (data) => {
 };
 
 /**
-  * @description A function that will assign a general header name based on parentDirectory
-  * @param {[]} data Receive [ast-array, priority-number, options-object]
-  * @return {[]} ast Return the AST formatted to have priority and headers according to sections
-  */
+ * @description A function that will assign a general header name based on parentDirectory
+ * @param { {} } data Receive {ast, priority, options}
+ * @return { {} } updatedData {ast, priority, options}
+ */
 const sortByParentDirectoryName = (data) => {
   const targetdepth = data.options.sortByParentDirectoryName;
   const assignHeader = (block, priority) => {
