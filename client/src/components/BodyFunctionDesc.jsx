@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TagDesc from './TagDesc';
 import TagParam from './TagParam';
 import TagReturn from './TagReturn';
+import TagExample from './TagExample';
 import GeneratedFunc from './GeneratedFunc';
 /* eslint-enable */
 
@@ -23,6 +24,7 @@ const BodyFunctionDesc = ({ funcComment }) => {
       <TagDesc tags={getByTag(funcComment.tags, 'description')} commentId={funcComment.id} />
       <TagParam tags={getByTag(funcComment.tags, 'param')} commentId={funcComment.id} />
       <TagReturn tags={getByTag(funcComment.tags, 'return')} commentId={funcComment.id} />
+      <TagExample tags={getByTag(funcComment.tags, 'example')} commentId={funcComment.id} />
     </div>
   );
 };

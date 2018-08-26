@@ -6,6 +6,8 @@ const { getRC } = require('./../utils.js');
  * @description catchAll descritpiton
  * @param tagArray {[]} catchall param
  * @section parsing function1
+ * @example var greeting = "hello world"
+ * testing 123 abc lalalalala
  * @return catchall return
  */
 const processFile = (tagArray) => {
