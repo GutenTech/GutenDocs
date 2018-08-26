@@ -1,8 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
-import HeaderComment from './HeaderComment.jsx';
-import Header from './Header';
+import SideBarSections from './SideBarSections.jsx';
 import PropTypes from 'prop-types';
 /* eslint-enable */
 class SideBar extends React.Component {
@@ -51,7 +49,7 @@ class SideBar extends React.Component {
                 {' '}
               </a>
             </li>
-            <HeaderComment
+            <SideBarSections
               parsedData={parsedData}
               sortedHeaders={sortedHeaders}
               configData={configData}
