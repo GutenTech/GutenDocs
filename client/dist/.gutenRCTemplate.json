@@ -3,7 +3,8 @@
   "skeleton": {
     "sortByOrder": [
       "sortByFileName",
-      "catchAll"
+      "sortBySection",
+      "sortByParentDirectoryName"
     ],
     "sortBySection": {
       "section": "@section"
