@@ -1,11 +1,9 @@
-/* eslint-disable */
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-// import Sidebarr from './SideBar.jsx';
-import Intro from './Intro.jsx';
-import '../../dist/styles.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-import SideBar from './SideBar.jsx';
+import Intro from './Intro';
+import SideBar from './SideBar';
 import BodyFunctionDesc from './BodyFunctionDesc';
+import '../../dist/styles.css';
 
 const filterByHeaders = (header, commentsArray) => commentsArray
   .filter(entry => header === entry.header);
@@ -42,45 +40,44 @@ export default class App extends Component {
         </div>
       );
     }
+    /* eslint-disable-next-line no-undef */ // imported onto window from index.html
     const prioritySortedUniqueHeaders = uniqueHeaders(parsedData);
     return (
-      <Router>
-        <div className="App">
-          <h1 className="logo">
-            {/*eslint-disable*/}
-            <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
-            {/* eslint-enable */}
+      <div className="App">
+        <h1 className="logo">
+          {/*eslint-disable*/}
+          <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
+          {/* eslint-enable */}
+        </h1>
+        <div className="headerlogo">
+          <h1 id="gutendocs" data="GutenDocs">
+          GutenDocs
           </h1>
-          <div className="headerlogo">
-            <h1 id="gutendocs" data="GutenDocs">
-            GutenDocs
-            </h1>
-          </div>
-          <SideBar
-            parsedData={window.parsedData}
-            sortedHeaders={prioritySortedUniqueHeaders}
-            configData={window.configData}
-          />
-          <div className="starter">
-            <Intro text={window.configData.introTxt} />
-            {/* <Test1 /> */}
-          </div>
-          {
-            prioritySortedUniqueHeaders.map((header, index) => (
-              <div className="tagSection" key={header.concat(index)}>
-                <h2 className="body" id={header}>
-                  {header}
-                </h2>
-                {filterByHeaders(header, window.parsedData)
-                  .map(funcComment => (
-                    <BodyFunctionDesc funcComment={funcComment} key={funcComment.id} />
-                  ))
-                }
-              </div>
-            ))
-          }
         </div>
-      </Router>
+        <SideBar
+          parsedData={window.parsedData}
+          sortedHeaders={prioritySortedUniqueHeaders}
+          configData={window.configData}
+        />
+        <div className="starter">
+          <Intro text={window.configData.introTxt} />
+          {/* <Test1 /> */}
+        </div>
+        {
+          prioritySortedUniqueHeaders.map((header, index) => (
+            <div className="tagSection" key={header.concat(index)}>
+              <h2 className="body" id={header}>
+                {header}
+              </h2>
+              {filterByHeaders(header, window.parsedData)
+                .map(funcComment => (
+                  <BodyFunctionDesc funcComment={funcComment} key={funcComment.id} />
+                ))
+              }
+            </div>
+          ))
+        }
+      </div>
     );
   }
 }

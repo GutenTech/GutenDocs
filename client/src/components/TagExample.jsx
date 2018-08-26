@@ -1,7 +1,8 @@
-/* eslint-disable */
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import React from 'react';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
-/* eslint-enable */
+
 const styles = {
   lineHeight: '15px',
   display: 'block',
