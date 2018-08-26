@@ -1,5 +1,23 @@
 const path = require('path');
 
+const sortWrapper = (data, cb, isCatchAll) => {
+  const { ast, priority, options } = data;
+  const alteredBlockArray = [];
+  let reactMapKey = 0;
+  ast.forEach((block) => {
+    let alteredBlock = Object.assign({}, block);
+    if (alteredBlock.header === undefined && block.priority === undefined) {
+      alteredBlock = cb(alteredBlock, priority);
+    }
+    if (isCatchAll) {
+      reactMapKey += 1;
+      alteredBlock.id = reactMapKey;
+    }
+    alteredBlockArray.push(alteredBlock);
+  });
+  return { ast: alteredBlockArray, priority: priority + 1, options };
+};
+
 /**
  * @description A function that will assign the classification headings based upon
  * whether or not end-user has specified a custom tag.  catchAllSection is option
@@ -8,22 +26,18 @@ const path = require('path');
  * @return {[]} updatedData [ast-array, priority-number, options-object]
  */
 const sortBySection = (data) => {
-  const commentBlocks = data[0];
-  const sectionName = data[2].sectionTag.slice(1);
-
-  commentBlocks.forEach((block) => {
-    if (block.header === undefined && block.priority === undefined) {
-      block.tags.forEach((tag) => {
-        if (tag.title === sectionName) {
-          /* eslint-disable */
-          block.header = tag.description;
-          block.priority = data[1];
-          /* eslint-enable */
-        }
-      });
-    }
-  });
-  return [commentBlocks, data[1] + 1, data[2]];
+  const sectionName = data.options.sectionTag.replace('@', '');
+  const assignHeader = (block, priority) => {
+    const alteredBlock = Object.assign({}, block);
+    alteredBlock.tags.forEach((tag) => {
+      if (tag.title === sectionName) {
+        alteredBlock.header = tag.description;
+        alteredBlock.priority = priority;
+      }
+    });
+    return alteredBlock;
+  };
+  return sortWrapper(data, assignHeader);
 };
 
 /**
@@ -32,23 +46,16 @@ const sortBySection = (data) => {
   * @param {[]} data Receive [ast-array, priority-number, options-object]
   * @return {[]} ast Return the AST formatted to have priority and headers according to sections
   */
+
+
 const catchAll = (data) => {
-  const commentBlocks = data[0];
-  let reactMapKey = 0;
-
-  commentBlocks.forEach((block) => {
-    if (block.header === undefined && block.priority === undefined) {
-      /* eslint-disable */
-      block.header = data[2].catchAllTag;
-      block.priority = data[1];
-    }
-    // Assign a unique ID key for reactMapping
-    reactMapKey += 1;
-    block.id = reactMapKey;
-    /* eslint-enable */
-  });
-
-  return [commentBlocks, data[1] + 1, data[2]];
+  const assignHeader = (block, priority) => {
+    const alteredBlock = Object.assign({}, block);
+    alteredBlock.header = data.options.catchAllTag;
+    alteredBlock.priority = priority;
+    return alteredBlock;
+  };
+  return sortWrapper(data, assignHeader, true);
 };
 
 /**
@@ -58,40 +65,37 @@ const catchAll = (data) => {
   */
 const sortByFileName = (data) => {
   /* Function implementation goes here */
-  const commentBlocks = data[0];
-  const extension = data[2].fileTag;
-
-  commentBlocks.forEach((block) => {
-    if (block.header === undefined && block.priority === undefined) {
-      /* eslint-disable */
-      const ext = path.extname(block.pathName);
-      block.header = extension ? path.basename(block.pathName) : path.basename(block.pathName, ext);
-      block.priority = data[1];
-      /* eslint-enable */
-    }
-  });
-  return [commentBlocks, data[1] + 1, data[2]];
+  const extension = data.options.fileTag;
+  const assignHeader = (block, priority) => {
+    const alteredBlock = Object.assign({}, block);
+    const ext = path.extname(block.pathName);
+    alteredBlock.header = extension
+      ? path.basename(block.pathName)
+      : path.basename(block.pathName, ext);
+    alteredBlock.priority = priority;
+    return alteredBlock;
+  };
+  return sortWrapper(data, assignHeader);
 };
 
-
+/**
+  * @description A function that will assign a general header name based on parentDirectory
+  * @param {[]} data Receive [ast-array, priority-number, options-object]
+  * @return {[]} ast Return the AST formatted to have priority and headers according to sections
+  */
 const sortByParentDirectoryName = (data) => {
-  const [commentBlocks, priority, options] = data;
-  const targetdepth = options.sortByParentDirectoryName;
-  const alteredCommentsArray = [];
-  commentBlocks.forEach((block) => {
+  const targetdepth = data.options.sortByParentDirectoryName;
+  const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
-    if (block.header === undefined && block.priority === undefined) {
-      let targetFolder = block.pathName;
-      for (let depth = targetdepth; depth > 0; depth -= 1) {
-        targetFolder = path.dirname(targetFolder);
-      }
-      alteredBlock.header = path.basename(targetFolder);
-      alteredBlock.priority = priority;
+    let targetFolder = block.pathName;
+    for (let depth = targetdepth; depth > 0; depth -= 1) {
+      targetFolder = path.dirname(targetFolder);
     }
-    alteredCommentsArray.push(alteredBlock);
-  });
-
-  return [alteredCommentsArray, data[1] + 1, data[2]];
+    alteredBlock.header = path.basename(targetFolder);
+    alteredBlock.priority = priority;
+    return alteredBlock;
+  };
+  return sortWrapper(data, assignHeader);
 };
 
 module.exports.sortByParentDirectoryName = sortByParentDirectoryName;
