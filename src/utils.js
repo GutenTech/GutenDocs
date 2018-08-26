@@ -248,8 +248,8 @@ const generateAPIFrame = (relPath, apiDir) => {
     + '#ignore your generated API folder\n'
     + `${apiDir}\n\n`
     + '#additional folders and files to ignore\n';
-    if (!fs.existsSync(relPath.concat('.gutenignore'))) {
-      fs.writeFileSync(relPath.concat('.gutenignore'), gutenIgnoreContents);
+    if (!fs.existsSync(absPath.concat('.gutenignore'))) {
+      fs.writeFileSync(absPath.concat('.gutenignore'), gutenIgnoreContents);
     }
     addIgnoreToLangSettings(absPath);
   } else {
