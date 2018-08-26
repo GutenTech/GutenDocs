@@ -45,9 +45,8 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1 className="logo">
-          {/*eslint-disable*/}
-          <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
-          {/* eslint-enable */}
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <img {...window.configData.banner} style={window.configData.banner ? {} : { display: 'none' }} />
         </h1>
         <div className="headerlogo">
           <h1 id="gutendocs" data="GutenDocs">
@@ -61,7 +60,6 @@ export default class App extends Component {
         />
         <div className="starter">
           <Intro text={window.configData.introTxt} />
-          {/* <Test1 /> */}
         </div>
         {
           prioritySortedUniqueHeaders.map((header, index) => (
