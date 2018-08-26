@@ -13,13 +13,15 @@
     "documentaion",
     "generator"
   ],
+  
   "scripts": {
     "lint": "eslint --ext .jsx --ext .js .",
     "watchTest": "jest --watch",
     "test": "jest --maxWorkers=4 --detectOpenHandles",
     "build-dev": "webpack --mode development && gutendocs reset",
     "build-all": "webpack --mode development && gutendocs reset && gutendocs --all",
-    "react-dev": "webpack --mode development --watch"
+    "react-dev": "webpack --mode development --watch",
+    "pre-push": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
