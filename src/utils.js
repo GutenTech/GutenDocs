@@ -201,6 +201,29 @@ const refreshAPI = (gutenrc, backup) => {
 };
 
 /**
+ * adds .gutenignore to the ignore language is vscodes autodetect language settings
+ */
+const addIgnoreToLangSettings = (absPath) => {
+  const vscodePath = absPath.concat('.vscode/');
+  if (fs.existsSync(vscodePath)) {
+    const gutenignoreLangSetting = { 'files.associations': { '.gutenignore': 'ignore' } };
+    let currentSettings = {};
+    let readErr = false;
+    if (fs.existsSync(vscodePath.concat('settings.json'))) {
+      try {
+        currentSettings = JSON.parse(fs.readFileSync(vscodePath.concat('settings.json')));
+      } catch (err) {
+        readErr = err;
+      }
+    }
+    if (!readErr) {
+      const newSettings = Object.assign(currentSettings, gutenignoreLangSetting);
+      fs.writeFileSync(vscodePath.concat('settings.json'), JSON.stringify(newSettings, null, 2));
+    }
+  }
+};
+
+/**
  * Generates a API folder as well as a gutenRC file
  * @param { string } relPath the directory that the user wants to make the APIDir
  * @param { string } apiDir the desired name of the APIDir
@@ -226,6 +249,7 @@ const generateAPIFrame = (relPath, apiDir) => {
     if (!fs.existsSync(relPath.concat('.gutenignore'))) {
       fs.writeFileSync(relPath.concat('.gutenignore'), gutenIgnoreContents);
     }
+    addIgnoreToLangSettings(absPath);
   } else {
     throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
   }
