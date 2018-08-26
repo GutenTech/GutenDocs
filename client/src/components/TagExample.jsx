@@ -11,9 +11,9 @@ const TagExample = ({ tags, commentId }) => tags.map((tag, exampleNum) => (
   <div
     id="exampleTag"
     key={
-      commentId.toString()
-        .concat(tag.title)
-        .concat(exampleNum)
+          commentId.toString()
+            .concat(tag.title)
+            .concat(exampleNum)
         }
   >
     {tag.description.split('\n')
@@ -21,10 +21,10 @@ const TagExample = ({ tags, commentId }) => tags.map((tag, exampleNum) => (
         <p
           style={styles}
           key={
-            commentId.toString()
-              .concat(tag.title)
-              .concat(exampleNum)
-              .concat(exampleLineNum)
+                commentId.toString()
+                  .concat(tag.title)
+                  .concat(exampleNum)
+                  .concat(exampleLineNum)
               }
         >
           {
