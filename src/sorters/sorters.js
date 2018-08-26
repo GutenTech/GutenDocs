@@ -1,6 +1,5 @@
 const path = require('path');
 
-
 /**
  * @description A wrapper function that iterates over every comment block
  * and executes a sort of blocks that haven't been sorted yet
@@ -70,7 +69,6 @@ const catchAll = (data) => {
  * @return { {} } updatedData {ast, priority, options}
  */
 const sortByFileName = (data) => {
-  /* Function implementation goes here */
   const extension = data.options.fileTag;
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);

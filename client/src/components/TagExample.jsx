@@ -16,22 +16,24 @@ const TagExample = ({ tags, commentId }) => tags.map((tag, exampleNum) => (
             .concat(exampleNum)
         }
   >
-    {tag.description.split('\n')
-      .map((line, exampleLineNum) => (
-        <p
-          style={styles}
-          key={
-                commentId.toString()
-                  .concat(tag.title)
-                  .concat(exampleNum)
-                  .concat(exampleLineNum)
-              }
-        >
-          {
-            line
-          }
-        </p>
-      ))}
+    {
+      tag.description.split('\n')
+        .map((line, exampleLineNum) => (
+          <p
+            style={styles}
+            key={
+                  commentId.toString()
+                    .concat(tag.title)
+                    .concat(exampleNum)
+                    .concat(exampleLineNum)
+                }
+          >
+            {
+              line
+            }
+          </p>
+        ))
+    }
   </div>
 ));
 
