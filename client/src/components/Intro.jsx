@@ -1,9 +1,8 @@
-/* eslint-disable */
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import React from 'react';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
-/* eslint-enable */
-// import example from '../../dist/imgs/example.png';
-// ideally we would have separate components for each h2
+
 const Intro = ({ text }) => {
   const headers = Object.keys(text);
   return (

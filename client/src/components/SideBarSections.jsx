@@ -1,9 +1,10 @@
-/* eslint-disable */
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import React from 'react';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import SidebarFuncEntry from './SidebarFuncEntry';
-/* eslint-enable */
 
 const SideBarSections = ({ parsedData, sortedHeaders, configData }) => {
   const filterHeaders = (header, commentsArray) => commentsArray

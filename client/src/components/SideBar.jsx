@@ -1,7 +1,8 @@
-/* eslint-disable */
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import React from 'react';
-import SideBarSections from './SideBarSections.jsx';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
+import SideBarSections from './SideBarSections';
 /* eslint-enable */
 class SideBar extends React.Component {
   constructor(props) {

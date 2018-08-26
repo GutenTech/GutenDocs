@@ -1,7 +1,5 @@
-/* eslint-disable */
-import React from 'react';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
-/* eslint-enable */
 
 const GeneratedFunc = ({ funcComment }) => `      ${funcComment.name}(`
   .concat(

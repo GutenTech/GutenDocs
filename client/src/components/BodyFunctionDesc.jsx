@@ -1,12 +1,12 @@
-/* eslint-disable */
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import React from 'react';
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 import TagDesc from './TagDesc';
 import TagParam from './TagParam';
 import TagReturn from './TagReturn';
 import TagExample from './TagExample';
 import GeneratedFunc from './GeneratedFunc';
-/* eslint-enable */
 
 const BodyFunctionDesc = ({ funcComment }) => {
   const getByTag = (tags, targetTag) => tags
