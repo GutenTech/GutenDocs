@@ -201,7 +201,7 @@ const refreshAPI = (gutenrc, backup) => {
 };
 
 /**
- * adds .gutenignore to the ignore language is vscodes autodetect language settings
+ * adds .gutenignore to the ignore language in vscodes autodetect language settings
  * only implimented for vscode
  * @param { string } absPath path to the root directory gutendocs is being created in
  */
