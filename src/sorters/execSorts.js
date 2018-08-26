@@ -30,6 +30,7 @@ const execSorts = (ast) => {
       + '******************');
     }
   });
+  sortFxns.push(sortFxnsObj.catchAll);
   const sortPipe = R.pipe(...sortFxns);
   // results will be in the format [ast, priority number, and options]. Only need ast.
   return (sortPipe([ast, 1, options])[0]);
