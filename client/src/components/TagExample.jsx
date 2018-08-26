@@ -7,9 +7,31 @@ const styles = {
   lineHeight: '15px',
   display: 'block',
 };
-const TagExample = ({ tags, commentId }) => tags.map((tag, index) => (
-  <div id="exampleTag" key={commentId.toString().concat(tag.title).concat(index)}>
-    {tag.description.split('\n').map(line => <p style={styles}>{line}</p>)}
+const TagExample = ({ tags, commentId }) => tags.map((tag, exampleNum) => (
+  <div
+    id="exampleTag"
+    key={
+      commentId.toString()
+        .concat(tag.title)
+        .concat(exampleNum)
+        }
+  >
+    {tag.description.split('\n')
+      .map((line, exampleLineNum) => (
+        <p
+          style={styles}
+          key={
+            commentId.toString()
+              .concat(tag.title)
+              .concat(exampleNum)
+              .concat(exampleLineNum)
+              }
+        >
+          {
+            line
+          }
+        </p>
+      ))}
   </div>
 ));
 
