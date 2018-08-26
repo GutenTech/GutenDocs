@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import Intro from './Intro.jsx';
 import '../../dist/styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Header from './Header';
 import SideBar from './SideBar.jsx';
 import BodyFunctionDesc from './BodyFunctionDesc';
 
@@ -52,7 +51,11 @@ export default class App extends Component {
             <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
             {/* eslint-enable */}
           </h1>
-          <Header />
+          <div className="headerlogo">
+            <h1 id="gutendocs" data="GutenDocs">
+            GutenDocs
+            </h1>
+          </div>
           <SideBar
             parsedData={window.parsedData}
             sortedHeaders={prioritySortedUniqueHeaders}

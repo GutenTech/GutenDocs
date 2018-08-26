@@ -5,7 +5,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import SidebarFuncEntry from './SidebarFuncEntry';
 /* eslint-enable */
 
-const HeaderComment = ({ parsedData, sortedHeaders, configData }) => {
+const SideBarSections = ({ parsedData, sortedHeaders, configData }) => {
   const filterHeaders = (header, commentsArray) => commentsArray
     .filter(entry => header === entry.header);
   return (
@@ -17,7 +17,7 @@ const HeaderComment = ({ parsedData, sortedHeaders, configData }) => {
               offset={() => configData.anchorHashJump}
               href={`#${header}`}
             >
-              <h5 id="headerComment">
+              <h5 id="SideBarSections">
                 {header}
               </h5>
             </AnchorLink>
@@ -39,7 +39,7 @@ const HeaderComment = ({ parsedData, sortedHeaders, configData }) => {
     </ul>);
 };
 
-HeaderComment.propTypes = {
+SideBarSections.propTypes = {
   /* eslint-disable-next-line */
   parsedData: PropTypes.array.isRequired,
   /* eslint-disable-next-line */
@@ -48,4 +48,4 @@ HeaderComment.propTypes = {
   configData: PropTypes.object.isRequired,
 };
 
-export default HeaderComment;
+export default SideBarSections;
