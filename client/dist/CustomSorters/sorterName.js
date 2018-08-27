@@ -6,14 +6,12 @@
  * @return { {} } updatedData {ast, priority, options}
  */
 module.exports = (data) => {
-  /* eslint-disable-next-line */
-  // ! This variable will contain any specifications you added to the GutenRC for the sorter
+  // TODO Change "sorterName to match the name indicated in the gutenRC folder"
   const customOptionsFromGutenRC = data.options.sorterName;
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
 
     // TODO This is where you will want to impliment the conditions of your sort
-    // TODO the assignment of alterBlock.header is the only thing you should change
     alteredBlock.header = customOptionsFromGutenRC.someSpecOne;
 
     alteredBlock.priority = priority;
