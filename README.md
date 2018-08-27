@@ -22,58 +22,40 @@
 
 ## Usage
 
-> From anywhere:
+> From anywhere: call `npm install -g gutendocs`.  This will give you access to the gutendocs shell command.
+Now from any location, preferably the root of a repo you can call `gutendocs init [foldername]` which will initialize a API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.sjon` and a `.gutenignore` that will allow you to customize your usage of gutendocs.  your gutenignore works just like a `.gitignore` file and will ignore folders and files you specify and allow for the use of * as a wild card.  `.gutenrc.json` is a file that contains all the settings you can customize for for your API.
 
-```sh
-npm install -g gutendocs
-```
-
-> From within the root directory of the repo you want to generate an API for:
-
-```sh
-gutendocs init
-```
-
-> To generate an API from JSDocs of a single .js/.jsx file:
-```sh
-gutendocs <filename>
-```
-
-> To generate an API from JSDocs of a multiple .js/.jsx files:
-```sh
-gutendocs <filename> <filename> <filename> <filename>
-```
-
-> To generate an API from JSDocs of a all .js/.jsx files in current directory and subdirectories:
-```sh
-gutendocs --all
-```
-
-> To restore the API to the original state run this at the same level or subdirectory of init location:
-```sh
-gutendocs reset
-```
-
-> To restore the API to the original state run this at the same level or subdirectory of init location:
-```sh
-gutendocs --help
-```
-
-> To update API with settings from gutenConfig.json:
-```sh
-gutendocs config
-```
-
-> To get latest version information:
-```sh
-gutendocs --info
-```
-
-> Customize the theme of the API:
-```sh
-edit styles.css or the gutenConfig.json and run:
-gutendocs config
-```
+> "apiDir" - this is the folder that your API has been created in.  This is GutenAPI by default, or whatever you specified with gutendocs init [foldername]
+> *"skeleton"*: {  - this outlines the structure of how your API will be organize
+    "sortByOrder": [  - the order the sort methods in this array will define in what order things are categorized
+      "sortByFileName",
+      "sortBySection",
+      "sortByParentDirectoryName"
+    ],
+    "sortBySection": {  - sort by section allows you to define what tag you want to use as a grouping tool
+      "section": "@section" - here we have specified that @section is the grouping tag.  So anything with @section group1 would be organized into group1 on the API.  @section group2 would create another section
+    },
+    "sortByFileName": { - this sorting method would group things by the file they are written in
+      "includeExtension": false  
+    },
+    "sortByParentDirectoryName": { - this sorting method will group things based on the folder the file is in
+      "targetDepth": 1 - defined how many folders above you wish to go.
+    },
+    "catchAll": {  - this will always run at the end and group anything not caught in another sorter into the group defined by the "section" key value
+      "section": "Miscellaneous"
+    }
+  },
+  "acornSettings": { - it is suggested you leave all these on, if false then the parser will crash on corresponding issues
+    "allowImportExportEverywhere": true,
+    "allowHashBang": true
+  },
+  "doctrineSettings": { - it is suggested you leave all these on, if false then the parser will crash on corresponding issues
+    "unwrap": true,
+    "recoverable": true,
+    "sloppy": true
+  },
+  "verbosity": 1 - this defines how much information you will see from errors.  The higher the number the more information
+}
 
 ## Requirements
 
