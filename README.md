@@ -24,9 +24,11 @@
 
 > From anywhere: call `npm install -g gutendocs`.  This will give you access to the gutendocs shell command.
 Now from any location, preferably the root of a repo you can call `gutendocs init [foldername]` which will initialize a API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.sjon` and a `.gutenignore` that will allow you to customize your usage of gutendocs.  your gutenignore works just like a `.gitignore` file and will ignore folders and files you specify and allow for the use of * as a wild card.  `.gutenrc.json` is a file that contains all the settings you can customize for for your API.
-<pre>
-> "apiDir" - this is the folder that your API has been created in.  This is GutenAPI by default, or whatever you specified with gutendocs init [foldername]
-> *"skeleton"*: {  - this outlines the structure of how your API will be organize
+
+>.gutenrc explanation
+<pre width="100">
+"apiDir" - this is the folder that your API has been created in.  This is GutenAPI by default, or whatever you specified with gutendocs init [foldername]
+"skeleton": {  - this outlines the structure of how your API will be organize
     "sortByOrder": [  - the order the sort methods in this array will define in what order things are categorized
       "sortByFileName",
       "sortBySection",
@@ -58,6 +60,20 @@ Now from any location, preferably the root of a repo you can call `gutendocs ini
 }
 </pre>
 
+>gutenconfig.js explanation
+<pre>
+  banner: {  - image logo to use
+    src: './imgs/newLogo.png',  
+    alt: 'Guten Docs',
+    height: '185',
+    width: '175',
+  },
+  anchorHashJump: 10,  - how far above the linked hashtag to jump to
+  introTxt: { - for every key in this object 1 section with be rendered with the title of the key and the content of the value of that key
+    example: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+  },
+};
+</pre>
 ## Requirements
 
 - Node 8.11.3+
