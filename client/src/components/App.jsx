@@ -36,7 +36,7 @@ export default class App extends Component {
     if (window.configData === undefined || window.configData === 0) {
       return (
         <div>
-          {'Problem Loading Data, did you run "gutendocs config"'}
+          {'Problem Loading Configuration Data, make sure your gutenConfig is exporting a valid json.'}
         </div>
       );
     }
