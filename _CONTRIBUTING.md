@@ -146,10 +146,10 @@ Thanks for contributing!
 ### Guidelines
 
 1. Uphold the current code standard:
-   - Keep your code [DRY][].
-   - Apply the [boy scout rule][].
-   - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
-1. Run the [tests][] before submitting a pull request.
+   - Keep your code [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+   - Apply the [boy scout rule](https://deviq.com/boy-scout-rule/).
+   - Follow [AirBnb Style Guide](https://github.com/airbnb/javascript)
+1. Run the [tests](__tests__/.) before submitting a pull request.
 1. Tests are very, very important. Submit tests if your pull request contains
    new, testable behavior.
 1. Your pull request is comprised of a single ([squashed][]) commit.
