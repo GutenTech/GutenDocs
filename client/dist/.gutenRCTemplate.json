@@ -10,7 +10,7 @@
       "section": "@section"
     },
     "sortByFileName": {
-      "includeExtension": false
+      "includeExtension": true
     },
     "sortByParentDirectoryName": {
       "targetDepth": 1
