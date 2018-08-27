@@ -56,7 +56,7 @@ const sortBySection = (data) => {
 const catchAll = (data) => {
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
-    alteredBlock.header = data.options.catchAll.catchAllTag;
+    alteredBlock.header = data.options.catchAll.section;
     alteredBlock.priority = priority;
     return alteredBlock;
   };
@@ -88,11 +88,11 @@ const sortByFileName = (data) => {
  * @return { {} } updatedData {ast, priority, options}
  */
 const sortByParentDirectoryName = (data) => {
-  const targetdepth = data.options.sortByParentDirectoryName;
+  const { targetDepth } = data.options.sortByParentDirectoryName;
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
     let targetFolder = block.pathName;
-    for (let depth = targetdepth; depth > 0; depth -= 1) {
+    for (let depth = targetDepth; depth > 0; depth -= 1) {
       targetFolder = path.dirname(targetFolder);
     }
     alteredBlock.header = path.basename(targetFolder);
