@@ -19,6 +19,20 @@
       "section": "Miscellaneous"
     }
   },
+  "customSorters": {
+    "sorterName": {
+      "sorterRelPath": "CustomSorters/sorterName.js",
+      "sorterSpecs": {
+        "someSpecOne": "fred"
+      }
+    },
+    "sorterNameTwo": {
+      "sorterRelPath": "CustomSorters/sorterNameTwo.js",
+      "sorterSpecs": {
+        "someSpecOne": "bob"
+      }
+    }
+  },
   "acornSettings": {
     "allowImportExportEverywhere": true,
     "allowHashBang": true

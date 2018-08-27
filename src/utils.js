@@ -166,6 +166,17 @@ const generateFilesaveArray = (destination, dirName, backup) => {
     },
   ));
 
+  const sortersPath = srcPath.concat('CustomSorters/');
+  const sorters = fs.readdirSync(sortersPath).filter(file => filterFiles(file, sortersPath));
+  const customPathToSortWrapper = '/* eslint-disable-next-line import/no-absolute-path */\n'
+  + `const { sortWrapper } = require('${__dirname}/sorters/sorters.js');\n`;
+  sorters.forEach(sorter => filesToWrite.push(
+    {
+      content: customPathToSortWrapper.concat(fs.readFileSync(sortersPath.concat(sorter))),
+      writePath: 'CustomSorters/'.concat(sorter),
+    },
+  ));
+
   const imgPath = srcPath.concat('imgs/');
   const images = fs.readdirSync(imgPath).filter(file => filterFiles(file, imgPath));
   images.forEach(img => filesToWrite.push(
@@ -184,6 +195,9 @@ const generateFilesaveArray = (destination, dirName, backup) => {
   if (!fs.existsSync(APIdir)) {
     fs.mkdirSync(APIdir);
   }
+
+  const sortersDir = APIdir.concat('CustomSorters/');
+  if (!fs.existsSync(sortersDir)) fs.mkdirSync(sortersDir);
 
   const imgDir = APIdir.concat('imgs/');
   if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);

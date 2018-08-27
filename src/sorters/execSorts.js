@@ -1,6 +1,45 @@
+const fs = require('fs');
 const R = require('ramda');
 const { getRC } = require('../utils.js');
-const { ...sortFxnsObj } = require('./sorters.js');
+const { sorts } = require('./sorters.js');
+
+/**
+ * loads all the custom function definitions defined in gutenRC
+ * @param { object } gutenRC the settings file retrieved by getRC()
+ * @return {} { CustomSorters, CustomOptions }
+ * @example
+ * returns {
+ *  {
+ *    sorterName: [Function],
+ *    sorterNameTwo: [Function]
+ *  },
+ *  {
+ *    sorterName: {
+ *      "someSpecOne": "fred"
+ *    },
+ *    sorterNameTwo: {
+ *      "someSpecOne": "bob"
+ *    }
+ *  }
+ * }
+ */
+const getCustomFunctions = (gutenRC) => {
+  const { customSorters } = gutenRC;
+  const loadedCustomSorters = {};
+  const loadedCustomOptions = {};
+  Object.keys(customSorters).forEach((sorter) => {
+    const pathToSorter = gutenRC.absPath
+      .concat(gutenRC.apiDir)
+      .concat(customSorters[sorter].sorterRelPath);
+    if (fs.existsSync(pathToSorter)) {
+      /* eslint-disable-next-line */
+      const customFuntion = require(pathToSorter);
+      loadedCustomSorters[sorter] = customFuntion;
+      loadedCustomOptions[sorter] = customSorters[sorter].sorterSpecs;
+    }
+  });
+  return { loadedCustomSorters, loadedCustomOptions };
+};
 
 /**
  * @description Execute various sorting functions
@@ -11,13 +50,12 @@ const { ...sortFxnsObj } = require('./sorters.js');
 
 const execSorts = (ast) => {
   const gutenRC = getRC();
-  // options will contain sorting options for particular functions.  In this case: sectionSort
-  const options = {
-    sectionTag: gutenRC.skeleton.sortBySection.section,
-    fileTag: gutenRC.skeleton.sortByFileName.includeExtension,
-    catchAllTag: gutenRC.skeleton.catchAll.section,
-    sortByParentDirectoryName: gutenRC.skeleton.sortByParentDirectoryName.targetDepth,
-  };
+
+  const { loadedCustomSorters, loadedCustomOptions } = getCustomFunctions(gutenRC);
+  let options = gutenRC.skeleton;
+  options = Object.assign(loadedCustomOptions, options);
+  options = Object.assign(loadedCustomOptions, options);
+  const { ...sortFxnsObj } = Object.assign(loadedCustomSorters, sorts);
   const sortFxns = [];
   gutenRC.skeleton.sortByOrder.forEach((fxn) => {
     if (sortFxnsObj[fxn] !== undefined) sortFxns.push(sortFxnsObj[fxn]);
