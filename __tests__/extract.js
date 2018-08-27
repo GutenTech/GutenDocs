@@ -2,6 +2,9 @@ const extract = require('../src/parser/extract.js');
 
 jest.mock('../src/utils.js');
 
+/* eslint-disable-next-line no-console */
+console.log = jest.fn();
+
 test('Single comment test', () => {
   const address = ['./mockData/singleComment.js'];
   const expected = [{
