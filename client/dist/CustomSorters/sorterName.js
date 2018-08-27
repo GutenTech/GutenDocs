@@ -29,11 +29,11 @@ module.exports = (data) => {
   const customOptionsFromGutenRC = data.options.sorterName;
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
+    alteredBlock.priority = priority;
 
     // TODO This is where you will want to impliment the conditions of your sort
     alteredBlock.header = customOptionsFromGutenRC.someSpecOne;
 
-    alteredBlock.priority = priority;
     return alteredBlock;
   };
   /* eslint-disable-next-line no-undef */
