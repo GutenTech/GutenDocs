@@ -69,7 +69,7 @@ Now from any location, preferably the root of a repo you can call `gutendocs ini
 #### gutenconfig.js explanation
 
 gutenconfig.json is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
-<pre width=100>
+``
   banner: {  - image logo to use
     src: './imgs/newLogo.png',  
     alt: 'Guten Docs',
@@ -81,7 +81,7 @@ gutenconfig.json is a file that allows you to manage the design of the API.  It 
     example: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
   },
 };
-</pre>
+``
 
 #### Setting up your .gutenignore
 
@@ -101,19 +101,19 @@ Now you can open the index.html file inside your API folder in your web browser 
 
 ### Trouble Shooting
 
-> Help! I've forgotten how to use gutendocs!
+> Help! I've forgotten how to use gutendocs! <br />
 ```No worries, just run `gutendocs help` or `gutendocs <command> --help` for more information.```
 
-> Help! I've made a mess of my API folder. And I am missing files or don't know what it should look like.
+> Help! I've made a mess of my API folder. And I am missing files or don't know what it should look like. <br />
 No worries,  If you want to start from scratch you can call `gutendocs reset` to overwrite your whole folder to be the way it was when you initialized.  If you want to retain a copy of the way it was before you can run `gutendocs reset --backup` and it will back up a copy of your current version of the folder as [foldername].backup.
 
-> Help! I've made a mess of my .gutenrc.json and its missing things I need or is now invalid.
+> Help! I've made a mess of my .gutenrc.json and its missing things I need or is now invalid. <br />
 No worries,If your gutenrc.json is an invalid JSON objet and you try to run ang gutendocs commands it will ask you if you would like to restore the .gutenrc.json to it's original state.  If you choose to do that it will also ask if you want to save a backup file.  The backup will be saved in the same location as the .gutenrc.json as .gutenrc.backup.json so you can use it as a reference while you are rebuilding on the newly created gutenrc.json.
 
-> Help! I just want to start over from scratch.
+> Help! I just want to start over from scratch. <br />
 No worries.  Just delete your .gutenrc, .gutenignore and the API folder and rerun `gutendocs init`
 
-> Help! I've found a problem that I don't know what to do with that isn't covered above!
+> Help! I've found a problem that I don't know what to do with that isn't covered above! <br />
 Sorry to hear that.  Please send an email to gutentechdevs@gmail.com and we will look into this issue for you.
 
 ## Requirements
