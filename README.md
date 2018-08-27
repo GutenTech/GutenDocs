@@ -122,6 +122,9 @@ Now you can open the index.html file inside your API folder in your web browser 
 **Help! I just want to start over from scratch.**<br />
 ```No worries.  Just delete your .gutenrc, .gutenignore and the API folder and rerun `gutendocs init```
 
+**Help! I deleted a ton of settings in gutenrc.json.**<br />
+```No worries.  For any setting not present in gutenrc.json the defaults will be loaded```
+
 **Help! I've found a problem that I don't know what to do with that isn't covered above!**<br />
 ```Sorry to hear that.  Please send an email to gutentechdevs@gmail.com and we will look into this issue for you.```
 
