@@ -85,7 +85,10 @@ banner: {  // image logo to use
 anchorHashJump: 10,  // how far above the linked hashtag to jump to
 introTxt: { // for every key in this object 1 section with be rendered with the title of the key and
             // the content of the value of that key
-  example: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  heading1: 'paragraph1 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  heading2: 'paragraph2 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  heading3: 'paragraph3 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  heading4: 'paragraph4 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 },
 ```
 
