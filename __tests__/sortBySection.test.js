@@ -1,8 +1,8 @@
-const { sortBySection } = require('../src/sorters/sorters.js');
+const { sorts: { sortBySection } } = require('../src/sorters/sorters.js');
 
 jest.mock('../src/utils.js');
 
-describe('sortBySection.js foundational tests', () => {
+describe('sortBySection foundational tests', () => {
   it('should be a function', () => expect(sortBySection).toBeInstanceOf(Function));
 
   it('should throw an error on receiving a non-array as AST', () => {
