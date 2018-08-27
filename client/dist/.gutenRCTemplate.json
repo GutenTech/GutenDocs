@@ -23,13 +23,13 @@
     "sorterName": {
       "sorterRelPath": "CustomSorters/sorterName.js",
       "sorterSpecs": {
-        "someSpecOne": "fred"
+        "someSpecOne": "foo"
       }
     },
     "sorterNameTwo": {
       "sorterRelPath": "CustomSorters/sorterNameTwo.js",
       "sorterSpecs": {
-        "someSpecOne": "bob"
+        "someSpecOne": "bar"
       }
     }
   },
