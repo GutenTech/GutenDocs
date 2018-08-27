@@ -69,11 +69,11 @@ const catchAll = (data) => {
  * @return { {} } updatedData {ast, priority, options}
  */
 const sortByFileName = (data) => {
-  const extension = data.options.sortByFileName.fileTag;
+  const { includeExtension } = data.options.sortByFileName;
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
     const ext = path.extname(block.pathName);
-    alteredBlock.header = extension
+    alteredBlock.header = includeExtension
       ? path.basename(block.pathName)
       : path.basename(block.pathName, ext);
     alteredBlock.priority = priority;
