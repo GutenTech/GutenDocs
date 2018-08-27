@@ -1,12 +1,12 @@
-const { sorts: { sortBySection } } = require('../src/sorters/sorters.js');
+const { sorts: { sortByTag } } = require('../src/sorters/sorters.js');
 
 jest.mock('../src/utils.js');
 
-describe('sortBySection foundational tests', () => {
-  it('should be a function', () => expect(sortBySection).toBeInstanceOf(Function));
+describe('sortByTag foundational tests', () => {
+  it('should be a function', () => expect(sortByTag).toBeInstanceOf(Function));
 
   it('should throw an error on receiving a non-array as AST', () => {
-    expect(() => sortBySection('hello world', '@section', 1)).toThrowError();
+    expect(() => sortByTag('hello world', '@section', 1)).toThrowError();
   });
 });
 

@@ -32,12 +32,12 @@ const sortWrapper = (data, cb, isCatchAll) => {
  * @param { {} } data Receive {ast, priority, options}
  * @return { {} } updatedData {ast, priority, options}
  */
-const sortBySection = (data) => {
-  const sectionName = data.options.sortBySection.section.replace('@', '');
+const sortByTag = (data) => {
+  const tagName = data.options.sortByTag.tag.replace('@', '');
   const assignHeader = (block, priority) => {
     const alteredBlock = Object.assign({}, block);
     alteredBlock.tags.forEach((tag) => {
-      if (tag.title === sectionName) {
+      if (tag.title === tagName) {
         alteredBlock.header = tag.description;
         alteredBlock.priority = priority;
       }
@@ -104,6 +104,6 @@ const sortByParentDirectoryName = (data) => {
 module.exports.sortWrapper = sortWrapper;
 module.exports.sorts = {};
 module.exports.sorts.sortByParentDirectoryName = sortByParentDirectoryName;
-module.exports.sorts.sortBySection = sortBySection;
+module.exports.sorts.sortByTag = sortByTag;
 module.exports.sorts.catchAll = catchAll;
 module.exports.sorts.sortByFileName = sortByFileName;
