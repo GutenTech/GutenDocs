@@ -69,7 +69,7 @@ Now from any location, preferably the root of a repo you can call `gutendocs ini
 #### gutenconfig.js explanation
 
 gutenconfig.json is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
-<pre>
+<pre width=100>
   banner: {  - image logo to use
     src: './imgs/newLogo.png',  
     alt: 'Guten Docs',
@@ -99,10 +99,10 @@ Now that you have set all your settings like you wanted and parsed the files you
 
 Now you can open the index.html file inside your API folder in your web browser of choice, et voila.  An API has been created for you.  Congradulations!
 
-###Trouble Shooting
+### Trouble Shooting
 
 > Help! I've forgotten how to use gutendocs!
-No worries, just run `gutendocs help` or `gutendocs <command> --help` for more information.
+```No worries, just run `gutendocs help` or `gutendocs <command> --help` for more information.```
 
 > Help! I've made a mess of my API folder. And I am missing files or don't know what it should look like.
 No worries,  If you want to start from scratch you can call `gutendocs reset` to overwrite your whole folder to be the way it was when you initialized.  If you want to retain a copy of the way it was before you can run `gutendocs reset --backup` and it will back up a copy of your current version of the folder as [foldername].backup.
