@@ -267,7 +267,7 @@ const generateAPIFrame = (relPath, apiDir) => {
     }
     addIgnoreToLangSettings(absPath);
   } else {
-    throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs --reset"');
+    throw Error('You have already initialized gutendocs in this Repo.  If you want to refresh the files call "gutendocs reset [--backup, -b]"');
   }
 };
 
