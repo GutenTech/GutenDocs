@@ -3,11 +3,11 @@
   "skeleton": {
     "sortByOrder": [
       "sortByFileName",
-      "sortBySection",
+      "sortByTag",
       "sortByParentDirectoryName"
     ],
-    "sortBySection": {
-      "section": "@section"
+    "sortByTag": {
+      "tag": "@section"
     },
     "sortByFileName": {
       "includeExtension": true
