@@ -13,11 +13,8 @@
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Trouble Shooting](#Trouble Shooting)
+1. [Trouble Shooting](#trouble-shooting)
 1. [Requirements](#requirements)
-1. [Development](#development)
-   1. [Installing Dependencies](#installing-dependencies)
-   1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
