@@ -61,7 +61,7 @@ yargs.command(['reset', 'r'], 'overwrite api folder with initial values', {
   }
 });
 
-yargs.command(['parse', 'document', 'doc', 'd'], 'Parse all file in dir and subdir', {
+yargs.command(['parse', 'document', 'doc', 'd'], 'Parse JSDoc comments into an API', {
   all: {
     alias: 'a',
     describe: 'parse all js/jsx files in target path',
@@ -137,7 +137,7 @@ yargs.command(['version'], 'See version information', {},
 
 // TODO left this in for development purposes so people could still use it the way they have been
 // TODO should be removed when the above is uncommented.
-yargs.command('$0', 'Parse all file in dir and subdir', {
+yargs.command('$0', 'Parse JSDoc comments into an API', {
   all: {
     alias: 'a',
     describe: 'parse all js/jsx files in target path',
