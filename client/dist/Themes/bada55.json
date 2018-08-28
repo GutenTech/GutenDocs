@@ -1,0 +1,10 @@
+{
+  "description": "A theme based on #bada55",
+  "colors": {
+    "primaryColorOne": "#bada55",
+    "primaryColorTwo": "#c6e26c",
+    "primaryColorThree": "#dbf58a",
+    "primaryColorFour": "#b1e216",
+    "primaryColorFive": "badda55"
+  }
+}

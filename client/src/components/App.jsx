@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Intro from './Intro';
 import SideBar from './SideBar';
+import Ribbon from './Ribbon';
 import BodyFunctionDesc from './BodyFunctionDesc';
 import '../../dist/styles.css';
 
@@ -29,11 +30,16 @@ export default class App extends Component {
     };
   }
 
+  componentDidMount() {
+    document.title = window.configData.projectName;
+  }
+
   render() {
-    if (window.parsedData === undefined || window.parsedData.length === 0) {
+    const { parsedData, configData } = window;
+    if (parsedData === undefined || parsedData.length === 0) {
       return (<div>{'Problem Loading Data, did you run "gutendocs parse [<filename>, --all]"'}</div>);
     }
-    if (window.configData === undefined || window.configData === 0) {
+    if (configData === undefined || configData === 0) {
       return (
         <div>
           {'Problem Loading Configuration Data, make sure your gutenConfig is exporting a valid json.'}
@@ -44,22 +50,25 @@ export default class App extends Component {
     const prioritySortedUniqueHeaders = uniqueHeaders(parsedData);
     return (
       <div className="App">
+        <Ribbon show={configData.showGitForkRibbon} />
         <h1 className="logo">
           {/* eslint-disable-next-line jsx-a11y/alt-text */}
-          <img {...window.configData.banner} style={window.configData.banner ? {} : { display: 'none' }} />
+          <img {...configData.banner} style={configData.banner ? {} : { display: 'none' }} />
         </h1>
         <div className="headerlogo">
           <h1 id="gutendocs" data="GutenDocs">
-          GutenDocs
+            {
+              configData.projectName
+            }
           </h1>
         </div>
         <SideBar
-          parsedData={window.parsedData}
+          parsedData={parsedData}
           sortedHeaders={prioritySortedUniqueHeaders}
-          configData={window.configData}
+          configData={configData}
         />
         <div className="starter">
-          <Intro text={window.configData.introTxt} />
+          <Intro text={configData.introTxt} />
         </div>
         {
           prioritySortedUniqueHeaders.map((header, index) => (
@@ -67,9 +76,13 @@ export default class App extends Component {
               <h2 className="body" id={header}>
                 {header}
               </h2>
-              {filterByHeaders(header, window.parsedData)
+              {filterByHeaders(header, parsedData)
                 .map(funcComment => (
-                  <BodyFunctionDesc funcComment={funcComment} key={funcComment.id} />
+                  <BodyFunctionDesc
+                    funcComment={funcComment}
+                    configData={configData}
+                    key={funcComment.id}
+                  />
                 ))
               }
             </div>
