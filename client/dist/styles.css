@@ -102,6 +102,15 @@ html, body {
     margin-left: -250px;
 }
 
+#sidebarSections {
+  margin-left: -35px;
+  margin-bottom: -25px;
+  font-size: 18px;
+  font-family: 'Lora';
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 a[data-toggle="collapse"] {
     position: relative;
 }
