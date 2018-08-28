@@ -13,15 +13,16 @@ const SideBarSections = ({ parsedData, sortedHeaders, configData }) => {
     <ul>
       {
         sortedHeaders.map(header => (
-          <div className="sidebarHeader" key={header}>
+          <div
+            className="sidebarHeader"
+            key={header}
+            style={filterHeaders(header, parsedData).length > 0 ? {} : { display: 'none' }}
+          >
             <AnchorLink
               offset={() => configData.anchorHashJump}
               href={`#${header}`}
             >
-              <h5
-                id="sidebarSections"
-                style={filterHeaders(header, parsedData).length > 0 ? {} : { display: 'none' }}
-              >
+              <h5 id="sidebarSections" >
                 {header}
               </h5>
             </AnchorLink>
