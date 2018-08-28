@@ -332,28 +332,28 @@ const listThemes = (gutenrc) => {
 };
 
 /**
- * Create the a string format of the config file with the passed
+ * Create the a string format of the design settings file with the passed
  * in object as the export value of configData
- * @param { string } newConfig stringified JSON of the desired config settings
+ * @param { string } newDesign stringified JSON of the desired config settings
  */
-const addConfigTemplate = newConfig => 'const configData = '
-  + `${newConfig}`
+const addDesignSettingsTemplate = newDesign => 'const configData = '
+  + `${newDesign}`
   + ';\ntry {\n  window.configData = configData;\n} catch (error) {\n  module.exports = configData;\n}';
 
 /**
- * Sets the configfile to the desired theme
+ * Sets the design settings to the desired theme
  * @param { object } gutenrc the gutenrc settings
  * @param { string } themeName the name of the theme you want to set
  */
 const setTheme = (gutenrc, themeName) => {
-  const pathToGutenConfig = gutenrc.absPath.concat(gutenrc.apiDir).concat('gutenConfig.js');
+  const pathToDesignSettings = gutenrc.absPath.concat(gutenrc.apiDir).concat('designSettings.js');
   /* eslint-disable-next-line */
-  const configData = require(pathToGutenConfig);
+  const designSettings = require(pathToDesignSettings);
   const pathToTheme = gutenrc.absPath.concat(`${gutenrc.apiDir}Themes/${themeName}.json`);
   const themeToLoad = JSON.parse(fs.readFileSync(pathToTheme));
   delete themeToLoad.description;
-  const newConfig = JSON.stringify(Object.assign(configData, themeToLoad), null, 2);
-  fs.writeFileSync(pathToGutenConfig, addConfigTemplate(newConfig));
+  const newDesignSettings = JSON.stringify(Object.assign(designSettings, themeToLoad), null, 2);
+  fs.writeFileSync(pathToDesignSettings, addDesignSettingsTemplate(newDesignSettings));
 };
 
 module.exports.setTheme = setTheme;

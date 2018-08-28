@@ -3,5 +3,5 @@ node_modules
 .gitignore
 mockData
 outputFromTest.js
-guntenConfig.js
+designSettings.js
 parsedData.js

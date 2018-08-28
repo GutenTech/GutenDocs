@@ -42,7 +42,7 @@ export default class App extends Component {
     if (configData === undefined || configData === 0) {
       return (
         <div>
-          {'Problem Loading Configuration Data, make sure your gutenConfig is exporting a valid json.'}
+          {'Problem Loading Configuration Data, make sure your designSettings.js is exporting a valid json.'}
         </div>
       );
     }
