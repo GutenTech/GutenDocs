@@ -20,11 +20,13 @@ const BodyFunctionDesc = ({ funcComment }) => {
       <div>
         {funcComment.description}
       </div>
-      <TagDesc tags={getByTag(funcComment.tags, 'desc')} commentId={funcComment.id} />
-      <TagDesc tags={getByTag(funcComment.tags, 'description')} commentId={funcComment.id} />
-      <TagParam tags={getByTag(funcComment.tags, 'param')} commentId={funcComment.id} />
-      <TagReturn tags={getByTag(funcComment.tags, 'return')} commentId={funcComment.id} />
-      <TagExample tags={getByTag(funcComment.tags, 'example')} commentId={funcComment.id} />
+      <div className="tags">
+        <div id="tagDescription"><TagDesc tags={getByTag(funcComment.tags, 'desc')} commentId={funcComment.id} /></div>
+        <TagDesc tags={getByTag(funcComment.tags, 'description')} commentId={funcComment.id} />
+        <TagParam tags={getByTag(funcComment.tags, 'param')} commentId={funcComment.id} />
+        <TagReturn tags={getByTag(funcComment.tags, 'return')} commentId={funcComment.id} />
+        <TagExample tags={getByTag(funcComment.tags, 'example')} commentId={funcComment.id} />
+      </div>
     </div>
   );
 };
