@@ -302,7 +302,7 @@ a {
   color: red;
 } */
 
-#exampleTag {
+.exampleTag {
   font-family: 'Titillium Web';
   font-size: 13px;
   margin-top: 25px;
@@ -312,6 +312,7 @@ a {
   padding-left: 10px;
   padding-bottom: 3px;
   display: list-item;
+  list-style: none;
 }
 
 /* all tags */
@@ -329,14 +330,15 @@ a {
 }
 
 /* param tags */
-#tagParam {
+.tagParam {
   font-weight: bold;
+  padding: 3px;
   color: rgb(155, 120, 153);
-  padding: 10px;
 }
 
 /* type tags */
 .tagType {
+  margin-left: 15px;
   color: black;
   margin-left: 50px;
   padding: 3px;
@@ -344,7 +346,7 @@ a {
 
 /* return tags */
 .tagReturn {
-  margin-left: 80px;
+  font-weight: bold;
   padding: 3px;
   color: rgb(128, 128, 177);
 }
