@@ -1,6 +1,6 @@
 const configData = {
   banner: {
-    src: './imgs/newLogo.png',
+    src: './imgs/finalLogo.png',
     alt: 'Guten Docs',
     height: '185',
     width: '175',

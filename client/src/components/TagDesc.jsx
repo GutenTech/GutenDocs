@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TagDesc = ({ tags, commentId }) => tags.map((tag, index) => (
-  <div key={commentId.toString().concat(tag.title).concat(index)}>
+  <div id="tagDescription" key={commentId.toString().concat(tag.title).concat(index)}>
     {tag.description}
   </div>
 ));
