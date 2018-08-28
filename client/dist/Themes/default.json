@@ -1,0 +1,10 @@
+{
+  "description": "The default theme",
+  "colors": {
+    "primaryColorOne": null,
+    "primaryColorTwo": null,
+    "primaryColorThree": null,
+    "primaryColorFour": null,
+    "primaryColorFive": null
+  }
+}

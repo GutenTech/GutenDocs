@@ -8,12 +8,18 @@ import TagReturn from './TagReturn';
 import TagExample from './TagExample';
 import GeneratedFunc from './GeneratedFunc';
 
-const BodyFunctionDesc = ({ funcComment }) => {
+const BodyFunctionDesc = ({ funcComment, configData }) => {
   const getByTag = (tags, targetTag) => tags
     .filter(tag => (tag.title === targetTag));
   return (
     <div className="bodyTags" key={funcComment.id}>
-      <h5 className="functionName" id={funcComment.name.concat(funcComment.id)}>
+      <h5
+        className="functionName"
+        id={funcComment.name.concat(funcComment.id)}
+        style={configData.colors.primaryColorFour
+          ? { background: configData.colors.primaryColorFour }
+          : {}}
+      >
         {`${funcComment.name}`}
         <GeneratedFunc funcComment={funcComment} />
       </h5>
@@ -36,4 +42,6 @@ export default BodyFunctionDesc;
 BodyFunctionDesc.propTypes = {
   /* eslint-disable-next-line */
   funcComment: PropTypes.object.isRequired,
+  /* eslint-disable-next-line */
+  configData: PropTypes.object.isRequired,
 };

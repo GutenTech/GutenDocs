@@ -186,12 +186,22 @@ const generateFilesaveArray = (destination, dirName, backup) => {
     },
   ));
 
+  const themePath = srcPath.concat('Themes/');
+  const themes = fs.readdirSync(themePath).filter(theme => filterFiles(theme, themePath));
+  themes.forEach(theme => filesToWrite.push(
+    {
+      content: fs.readFileSync(themePath.concat(theme)),
+      writePath: 'Themes/'.concat(theme),
+    },
+  ));
+
   const APIdir = destination.concat(dirName);
   if (fs.existsSync(APIdir) && backup) {
     const BackupDirName = findValidBackupName(destination, dirName);
     fs.renameSync(APIdir, destination.concat(BackupDirName));
     fs.mkdirSync(APIdir);
   }
+
   if (!fs.existsSync(APIdir)) {
     fs.mkdirSync(APIdir);
   }
@@ -201,6 +211,9 @@ const generateFilesaveArray = (destination, dirName, backup) => {
 
   const imgDir = APIdir.concat('imgs/');
   if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
+
+  const themeDir = APIdir.concat('Themes/');
+  if (!fs.existsSync(themeDir)) fs.mkdirSync(themeDir);
 
   filesToWrite.forEach(file => fs.writeFileSync(APIdir.concat(file.writePath), file.content));
 };
@@ -298,6 +311,56 @@ const setVerbosity = (level, gutenrc, globally) => {
   throw new Error('Verbosity level must be a number from 0 to 5');
 };
 
+/**
+ * Console.logs all the themes available.  If verbosity is above 3 also lists contents of theme
+ * @param { object } gutenrc gutenrc settings file
+ */
+const listThemes = (gutenrc) => {
+  const themeFolderPath = gutenrc.absPath.concat(gutenrc.apiDir).concat('Themes/');
+  const themes = fs.readdirSync(themeFolderPath).filter(file => path.extname(file) === '.json');
+  themes.forEach((themeName) => {
+    const theme = JSON.parse(fs.readFileSync(themeFolderPath.concat(themeName)));
+    process.stdout.write(`${path.basename(themeName, '.json')}:`);
+    process.stdout.cursorTo(10);
+    process.stdout.write(`${theme.description}\n`);
+    delete theme.description;
+    if (gutenrc.verbosity >= 3) {
+      /* eslint-disable-next-line no-console */
+      console.log(theme);
+    }
+  });
+};
+
+/**
+ * Create the a string format of the config file with the passed
+ * in object as the export value of configData
+ * @param { string } newConfig stringified JSON of the desired config settings
+ */
+const addConfigTemplate = newConfig => '/* eslint-disable quote-props */\n'
+  + '/* eslint-disable quotes */\n'
+  + '/* eslint-disable comma-dangle */\n'
+  + 'const configData = '
+  + `${newConfig}`
+  + ';\ntry {\n  window.configData = configData;\n} catch (error) {\n  module.exports = configData;\n}';
+
+/**
+ * Sets the configfile to the desired theme
+ * @param { object } gutenrc the gutenrc settings
+ * @param { string } themeName the name of the theme you want to set
+ */
+const setTheme = (gutenrc, themeName) => {
+  const pathToGutenConfig = gutenrc.absPath.concat(gutenrc.apiDir).concat('gutenConfig.js');
+  /* eslint-disable-next-line */
+  const configData = require(pathToGutenConfig);
+  const pathToTheme = gutenrc.absPath.concat(`${gutenrc.apiDir}Themes/${themeName}.json`);
+  const themeToLoad = JSON.parse(fs.readFileSync(pathToTheme));
+  delete themeToLoad.description;
+  const newConfig = JSON.stringify(Object.assign(configData, themeToLoad), null, 2);
+  fs.writeFileSync(pathToGutenConfig, addConfigTemplate(newConfig));
+};
+
+module.exports.setTheme = setTheme;
+module.exports.listThemes = listThemes;
 module.exports.setVerbosity = setVerbosity;
 module.exports.generateAPIFrame = generateAPIFrame;
 module.exports.refreshAPI = refreshAPI;

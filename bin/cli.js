@@ -13,6 +13,8 @@ const {
   refreshAPI,
   generateAPIFrame,
   setVerbosity,
+  setTheme,
+  listThemes,
 } = require('../src/utils.js');
 const {
   execSorts,
@@ -98,6 +100,20 @@ yargs.command(['verbosity [level]', 'verbose [level]'], 'Set verbosity level [0-
   if (gutenrc) {
     setVerbosity(argv.level, gutenrc);
   }
+});
+
+yargs.command(['theme [themeName]'], 'Load Themes', {
+  list: {
+    alias: 'l',
+    describe: 'get a list of available themes',
+  },
+}, (argv) => {
+  const gutenrc = getRC();
+  if (Object.prototype.hasOwnProperty.call(argv, 'list')) { // needed hasOwnProperty because 0 is falsy
+    listThemes(gutenrc);
+    return;
+  }
+  setTheme(gutenrc, argv.themeName);
 });
 
 yargs.command(['info'], 'Get info about the package', {},
