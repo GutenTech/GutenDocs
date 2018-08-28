@@ -225,6 +225,7 @@ a {
   color: black;
   font-family: 'Noto Serif';
   font-weight: 545;
+  text-decoration: underline;
 }
 
 /* #gutendocs:before {
