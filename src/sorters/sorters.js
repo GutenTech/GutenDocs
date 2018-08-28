@@ -3,10 +3,10 @@ const path = require('path');
 /**
  * @description A wrapper function that iterates over every comment block
  * and executes a sort of blocks that haven't been sorted yet
- * @param { {} } data Receive {ast, priority, options}
+ * @param { object } data Receive {ast, priority, options}
  * @param { function } cb sorting function to execute on block
  * @param { boolean } isCatchAll Receive {ast-array, priority-number, options-object}
- * @return { {} } updatedData {ast, priority, options}
+ * @return { object } updatedData {ast, priority, options}
  */
 const sortWrapper = (data, cb, isCatchAll) => {
   const { ast, priority, options } = data;
@@ -29,8 +29,8 @@ const sortWrapper = (data, cb, isCatchAll) => {
 /**
  * @description A function that will assign the classification headings based upon
  * whether or not end-user has specified a custom tag.
- * @param { {} } data Receive {ast, priority, options}
- * @return { {} } updatedData {ast, priority, options}
+ * @param { object } data Receive {ast, priority, options}
+ * @return { object } updatedData {ast, priority, options}
  */
 const sortByTag = (data) => {
   const tagName = data.options.sortByTag.tag.replace('@', '');
@@ -50,8 +50,8 @@ const sortByTag = (data) => {
 /**
  * @description A function that will assign a general header name to unclassified
  * comment blocks
- * @param { {} } data Receive {ast, priority, options}
- * @return { {} } updatedData {ast, priority, options}
+ * @param { object } data Receive {ast, priority, options}
+ * @return { object } updatedData {ast, priority, options}
  */
 const catchAll = (data) => {
   const assignHeader = (block, priority) => {
@@ -65,8 +65,8 @@ const catchAll = (data) => {
 
 /**
  * @description A function that will assign a general header name based on fileName
- * @param { {} } data Receive {ast, priority, options}
- * @return { {} } updatedData {ast, priority, options}
+ * @param { object } data Receive {ast, priority, options}
+ * @return { object } updatedData {ast, priority, options}
  */
 const sortByFileName = (data) => {
   const { includeExtension } = data.options.sortByFileName;
@@ -84,8 +84,8 @@ const sortByFileName = (data) => {
 
 /**
  * @description A function that will assign a general header name based on parentDirectory
- * @param { {} } data Receive {ast, priority, options}
- * @return { {} } updatedData {ast, priority, options}
+ * @param { object } data Receive {ast, priority, options}
+ * @return { ocject } updatedData {ast, priority, options}
  */
 const sortByParentDirectoryName = (data) => {
   const { targetDepth } = data.options.sortByParentDirectoryName;

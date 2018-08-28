@@ -3,9 +3,8 @@ const path = require('path');
 
 /**
  * @description Will write the cleaned and sorted AST tree to a js file exporting it
- * @param {[]} data the ast cleaned tree
- * @param {string} path the path to write the data too
- * @return n/a
+ * @param { array } data the ast cleaned tree
+ * @param { string } path the path to write the data too
  */
 const saveTags = (data, writePath) => {
   const variableName = path.basename(writePath, path.extname(writePath));
