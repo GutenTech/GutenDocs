@@ -334,7 +334,7 @@ const listThemes = (gutenrc) => {
 /**
  * Create the a string format of the config file with the passed
  * in object as the export value of configData
- * @param { object } newConfig a JON formatted object containing the theme adjusted settings
+ * @param { string } newConfig stringified JSON of the desired config settings
  */
 const addConfigTemplate = newConfig => '/* eslint-disable quote-props */\n'
   + '/* eslint-disable quotes */\n'
