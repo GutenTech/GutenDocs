@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Mono');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+@import url('https://fonts.googleapis.com/css?family=Lora');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 html, body {
   width: 100%;
   min-height: 10%;
@@ -13,25 +19,32 @@ html, body {
 
 /* the body*/
 .body {
-    font-family: FontAwesome;
-    margin-left: 265px;
-    margin-top: 8px;
-    margin-bottom: 10px;
-    padding-top: 55px;
-    color: transparent;
-    -webkit-text-stroke-width: 1.25px;
-    -webkit-text-stroke-color: black;
-    /* overflow: auto; */
+  font-family: 'Lora';
+  color: rgb(100, 98, 98);
+  font-weight: bold;
+  margin-left: 265px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  padding-top: 55px;
+  font-size: 2.0rem;
+  line-height: 4rem;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.13);
+  /* overflow: auto; */
 }
 
 .bodyTags {
-  font-family: FontAwesome;
+  margin-right: 50px;
   font-size: 1em;
   font-weight: 1;
   text-decoration: none;
   margin-left: 265px;
   margin-top: 8px;
   margin-bottom: 10px;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  margin-bottom: 3rem;
+  background-color: white;
+  padding-left: 20px;
+  padding-bottom: 20px;
 }
 
 .starter {
@@ -54,11 +67,12 @@ html, body {
     letter-spacing: 2px;
     text-decoration: none;
     text-align: center;
+    font-family: 'Lora';
     font-weight: -50;
     line-height: 1.2;
     color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    background: #B2B2FF;
+    text-shadow: 0px -1px 0 #000, 0px 2px 0 #000, -2px 1px 0 #000, 1px 1px 0 #000;
+    background: rgb(188, 188, 230);
     width:100%;
 }
 
@@ -71,7 +85,7 @@ html, body {
 #sidebar {
     border-radius: 0px;
     border: 0px solid #fff;
-    box-shadow: 10px 0px 10px #B2B2FF90;
+    box-shadow: 3px 0px 1px rgb(233, 223, 223);
     background:linear-gradient(142deg, rgb(251, 251, 253), rgb(214, 214, 240));
     width: 200px;
     position: fixed;
@@ -100,8 +114,11 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-.sidebarHeader {
-  margin-bottom: -30px
+.sidebarHeader a{
+  margin-bottom: -50px;
+  font-family: 'PT Mono';
+  font-size: 5px;
+  padding-bottom: 5px;
 }
 
 /* @media (max-width: 768px) {
@@ -112,9 +129,6 @@ a[data-toggle="collapse"] {
         margin-left: 0;
     }
 } */
-
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -159,7 +173,7 @@ a {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    padding-bottom: 45px;
     display: block;
 }
 #sidebar ul li a:hover {
@@ -171,7 +185,7 @@ a {
     background: #D3D3D3;
 }
 ul ul a {
-    font-size: 0.9em !important;
+    font-size: 0.68em !important;
     padding-left: 30px !important;
 }
 
@@ -195,83 +209,118 @@ a {
     position: relative;
   }
   
-  #gutendocs {
-    font-size: 8em;
-    font-family: FontAwesome;
-    margin-left: 525px;
-    position: relative;
-    color: black;
-  }
-
-  #gutendocs:before {
-    content: attr(data);
-    position: absolute;
-    left: -0.03em;
-    top: 0.03em;
-    color: black;
-    /* background: black url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAFUlEQVQIW2NkQAKMIPZ/IGAEAWQZAE5lBATogF4qAAAAAElFTkSuQmCC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-color: black;
-    -webkit-background-color: black;
-    z-index: -1;  */
-    text-shadow: 0 8px 0 #B2B2FF90, 
-    0 4px 0 #c9c9c9, 
-    0 2px 0 #bbb, 0 -2px 0 #b9b9b9, 
-    0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1),
-    0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 
-    0 3px 5px rgba(0,0,0,.2), 0 5px 19px rgba(0,0,0,.25), 
-    0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+#gutendocs {
+  font-size: 7.0em;
+  margin-left: 500px;
+  position: relative;
+  color: black;
+  font-family: 'Noto Serif';
+  font-weight: 545;
 }
 
+/* #gutendocs:before {
+  content: attr(data);
+  position: absolute;
+  left: -0.03em;
+  top: 0.03em;
+  color: black;
+  font-family: 'Titillium Web' */
+  /* background: black url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAFUlEQVQIW2NkQAKMIPZ/IGAEAWQZAE5lBATogF4qAAAAAElFTkSuQmCC);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-color: black;
+  -webkit-background-color: black;
+  z-index: -1;  */
+  /* text-shadow: 0 8px 0 rgb(188, 188, 230), 
+  0 4px 0 #c9c9c9, 
+  0 2px 0 #bbb, 0 -2px 0 #b9b9b9, 
+  0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1),
+  0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 
+  0 3px 5px rgba(0,0,0,.2), 0 5px 19px rgba(0,0,0,.25), 
+  0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15); */
+/* } */
+
   /* search bar */
-  #myInput {
-    background-image: url('https://www.w3schools.com/css/searchicon.png');
-    background-position: 10px 12px;
-    background-repeat: no-repeat;
-    width: 100%;
-    font-size: 12px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-bottom: -120px;
-  }
+#myInput {
+  background-image: url('https://www.w3schools.com/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 12px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: -120px;
+}
 
   /* header and name for sidebar */
-  #SideBarSections {
-    margin-left: -35px;
-    margin-bottom: -25px;
-    font-size: 18px;
-    font-family: FontAwesome;
-    font-weight: bold;
-    text-decoration: underline;
-  }
+#headerComment {
+  margin-left: -35px;
+  margin-bottom: -25px;
+  font-size: 18px;
+  font-family: 'Lora';
+  font-weight: bold;
+  text-decoration: underline;
+}
 
-  #nameComment {
-    margin-left: -37px;
-    font-family: FontAwesome;
-  }
+#nameComment {
+  margin-left: -37px;
+}
 
-  /* home icon */
-  #home {
-    margin-bottom: 14px;
-  }
+/* home icon */
+#home {
+  margin-bottom: -25px;
+  font-family: 'Lora';
+}
 
-  .tagSection {
-    padding-bottom: 32px;
-    font-weight: 700;
-  }
+.tagSection {
+  padding-bottom: 32px;
+  font-weight: 700;
+}
 
-  .functionName {
-    padding-top: 12px;
-    font-weight: bold;
-  }
+.functionName {
+  background-color: #efe9e9;
+  font-family: 'PT Mono';
+  margin-left: -20px;
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 0 1rem;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
 
-  #exampleTag {
-      margin-top: 25px;
-      background-color: rgba(206, 202, 202, 0.797);
-      width: 50%;
-      padding-top: 10px;
-      padding-left: 10px;
-      padding-bottom: 3px;
-      display: list-item;
-  }
+/* .functionName > *:first-child {
+  color: red;
+} */
+
+#exampleTag {
+  font-family: 'Titillium Web';
+  font-size: 13px;
+  margin-top: 25px;
+  background-color: rgba(206, 202, 202, 0.797);
+  width: 50%;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 3px;
+  display: list-item;
+}
+
+/* all tags */
+.tags {
+  font-family: 'Titillium Web';
+}
+
+/* description tags */
+#tagDescription {
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  -webkit-margin-after: 20px;
+}
+
+/* param tags */
+#tagParam {
+  font-weight: bold;
+  color: rgb(155, 120, 153);
+  padding: 10px;
+}

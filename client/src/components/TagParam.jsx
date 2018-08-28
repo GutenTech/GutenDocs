@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const TagParam = ({ tags, commentId }) => tags.map((tag, index) => (
   <div key={commentId.toString().concat(tag.title).concat(index)}>
-    <div>
+    <div id="tagParam">
       {
         `Param: ${tag.name}`
       }
