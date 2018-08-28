@@ -9,7 +9,7 @@ const styles = {
 };
 const TagExample = ({ tags, commentId }) => (
   <div>
-    <div className="returnTag" style={tags.length > 0 ? {} : {display: 'none'}}>
+    <div className="returnTag" style={tags.length > 0 ? {} : { display: 'none' }}>
       {
         'Examples'
       }
