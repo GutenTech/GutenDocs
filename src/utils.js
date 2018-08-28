@@ -24,9 +24,6 @@ const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
  * @example findValidBackupName('somePath', exam.js) returns exam.backup0.js
  * @example findValidBackupName('somePath', exam.js) returns exam.backup1.js
  * @return { string } a string taking the form of a unused backup name
- * @example findValidBackupName('./', '.gutenrc.json') return '.gutenrc.backup.json'
- * @example findValidBackupName('./', '.gutenrc.json') return '.gutenrc.backup0.json'
- * @example findValidBackupName('./', '.gutenrc.json') return '.gutenrc.backup1.json'
  */
 const findValidBackupName = (location, baseName) => {
   const backupExt = path.extname(baseName);
@@ -105,7 +102,7 @@ const refreshFile = (oldFile, source, additionsToTemplate, error) => {
  * Finds the closet gutenRC.json file at or above current directory and
  * returns the JSON Object containing the users settings merged with the defaults
  * @return { object } contents of .gutenRC.json with the absolute path
- * @return { false } false if no .gutenrc have being initiated
+ * @return { boolean } false if no .gutenrc have being initiated
  * added as a key or false
  */
 const getRC = () => {

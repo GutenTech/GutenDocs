@@ -7,7 +7,7 @@ const { getRC } = require('./../utils.js');
  * files as well as a unique id
  * @param { array } tagArray catchall param
  * @section parsing function1
- * @return catchall return
+ * @return { object } catchall return
  */
 const processFile = (tagArray) => {
   const tags = {

@@ -85,7 +85,7 @@ const sortByFileName = (data) => {
 /**
  * @description A function that will assign a general header name based on parentDirectory
  * @param { object } data Receive {ast, priority, options}
- * @return { ocject } updatedData {ast, priority, options}
+ * @return { object } updatedData {ast, priority, options}
  */
 const sortByParentDirectoryName = (data) => {
   const { targetDepth } = data.options.sortByParentDirectoryName;

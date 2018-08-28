@@ -7,12 +7,19 @@ const TagReturn = ({ tags, commentId }) => tags.map((tag, index) => (
   <div key={commentId.toString().concat(tag.title).concat(index)}>
     <div className="tagReturn">
       {
-        `Return value: ${tag.description}`
+        'Return'
       }
     </div>
     <div className="tagType">
+      {' '}
       {
-        `- Type: ${tag.type ? tag.type.name : 'undefined'} Desc: ${tag.description}`
+        `Type: ${tag.type ? tag.type.name : 'undefined'}`
+      }
+    </div>
+    <div className="tagType">
+      {' '}
+      {
+        `Desc: ${tag.description}`
       }
     </div>
   </div>
