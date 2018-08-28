@@ -18,7 +18,10 @@ const SideBarSections = ({ parsedData, sortedHeaders, configData }) => {
               offset={() => configData.anchorHashJump}
               href={`#${header}`}
             >
-              <h5 id="sidebarSections">
+              <h5
+                id="sidebarSections"
+                style={filterHeaders(header, parsedData).length > 0 ? {} : { display: 'none' }}
+              >
                 {header}
               </h5>
             </AnchorLink>
