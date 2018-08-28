@@ -37,6 +37,10 @@
     "acorn": "^5.7.1",
     "acorn-jsx": "^4.1.1",
     "acorn-object-rest-spread": "^1.1.0",
+<<<<<<< 595bbd8e39de9c3cd93d767089eed9c1dbcf4d95
+=======
+    "acorn-stage3": "^0.6.0",
+>>>>>>> Extract bugfixs
     "doctrine": "^2.1.0",
     "ignore-walk": "^3.0.1",
     "inject-js": "^0.5.6",
