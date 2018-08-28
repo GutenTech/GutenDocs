@@ -1,12 +1,12 @@
-/* eslint-disable-next-line import/no-extraneous-dependencies */
+/* eslint-disable */
 import React from 'react';
-/* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 import TagDesc from './TagDesc';
 import TagParam from './TagParam';
 import TagReturn from './TagReturn';
 import TagExample from './TagExample';
 import GeneratedFunc from './GeneratedFunc';
+/* eslint-enable */
 
 const BodyFunctionDesc = ({ funcComment, configData }) => {
   const getByTag = (tags, targetTag) => tags
@@ -20,14 +20,14 @@ const BodyFunctionDesc = ({ funcComment, configData }) => {
           ? { background: configData.colors.primaryColorFour }
           : {}}
       >
-        {`${funcComment.name}`}
+        {/* {`${funcComment.name}`} */}
         <GeneratedFunc funcComment={funcComment} />
       </h5>
       <div>
         {funcComment.description}
       </div>
       <div className="tags">
-        <div id="tagDescription"><TagDesc tags={getByTag(funcComment.tags, 'desc')} commentId={funcComment.id} /></div>
+        <TagDesc tags={getByTag(funcComment.tags, 'desc')} commentId={funcComment.id} />
         <TagDesc tags={getByTag(funcComment.tags, 'description')} commentId={funcComment.id} />
         <TagParam tags={getByTag(funcComment.tags, 'param')} commentId={funcComment.id} />
         <TagReturn tags={getByTag(funcComment.tags, 'return')} commentId={funcComment.id} />

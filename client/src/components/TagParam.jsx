@@ -10,7 +10,7 @@ const TagParam = ({ tags, commentId }) => tags.map((tag, index) => (
         `Param: ${tag.name}`
       }
     </div>
-    <div>
+    <div className="tagType">
       {
         ` - Type: ${tag.type ? tag.type.name : 'undefined'} Desc: ${tag.description}`
       }
