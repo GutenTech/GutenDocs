@@ -72,9 +72,9 @@ Now from any location, preferably the root of a repo you can call `gutendocs ini
 }
 ```
 
-#### gutenconfig.js explanation
+#### designSettings.js explanation
 
-gutenconfig.json is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
+designSettings.js is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
 ```javascript
 banner: {  // image logo to use
   src: './imgs/newLogo.png',  
