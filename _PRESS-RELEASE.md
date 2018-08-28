@@ -18,36 +18,32 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Heading
 
-> Name the product in a way the reader (i.e. your target customers) will understand.
+> Gutendocs - We build your API so you can get back to coding
 
 ## Sub-Heading
 
-> Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+> Whether you are a startup who can't commit the resources to write an API or a massive company with too much going on to make sure the API is up to date gutendocs is here for you.  Just make sure your JSDocs are up to date when you update code and your API will always be accurate.
 
 ## Summary
 
-> Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+> Having an out of data API, or needing to step away from coding to format something to be nice to read is not an ideal situation for anyone involved.  You have much better things to be doing than writing up an attractive format to explain how your code works.  So we have automated that process for you.
 
 ## Problem
 
-> Describe the problem your product solves.
+> APIs are an important part of any codebase, and it can be expensive to keep the API update, either financially or braincycles.
 
 ## Solution
 
-> Describe how your product elegantly solves the problem.
-
-## Quote from You
-
-> A quote from a spokesperson in your company.
+> Gutendocs will ask you to set up some basic design principals for how you want your API to look, and then as long as you are following good coding practice with your JDDoc comments you wil always have an API.
 
 ## How to Get Started
 
-> Describe how easy it is to get started.
+> Just run `gutendocs parse --all` in your repos root, and you are done.
 
 ## Customer Quote
 
-> Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+> "I never thought setting up an API for our company could be so easy"
 
 ## Closing and Call to Action
 
-> Wrap it up and give pointers where the reader should go next.
+> Install gutendocs today with `npm install -g gutendocs` and get started today!
