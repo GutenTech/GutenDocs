@@ -336,10 +336,7 @@ const listThemes = (gutenrc) => {
  * in object as the export value of configData
  * @param { string } newConfig stringified JSON of the desired config settings
  */
-const addConfigTemplate = newConfig => '/* eslint-disable quote-props */\n'
-  + '/* eslint-disable quotes */\n'
-  + '/* eslint-disable comma-dangle */\n'
-  + 'const configData = '
+const addConfigTemplate = newConfig => 'const configData = '
   + `${newConfig}`
   + ';\ntry {\n  window.configData = configData;\n} catch (error) {\n  module.exports = configData;\n}';
 

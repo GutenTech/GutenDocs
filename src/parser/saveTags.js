@@ -10,10 +10,7 @@ const path = require('path');
 const saveTags = (data, writePath) => {
   const variableName = path.basename(writePath, path.extname(writePath));
   fs.writeFile(writePath,
-    '/* eslint-disable quote-props */\n'
-    + '/* eslint-disable quotes */\n'
-    + '/* eslint-disable comma-dangle */\n'
-    + `const ${variableName} = ${JSON.stringify(data, null, 2)};`
+    `const ${variableName} = ${JSON.stringify(data, null, 2)};`
     + `\n\nwindow.${variableName} = ${variableName};`,
     (err) => {
       if (err) {
