@@ -1,31 +1,18 @@
-<<<<<<< 595bbd8e39de9c3cd93d767089eed9c1dbcf4d95
-const acorn = require('acorn');
-const injectAcornJsx = require('acorn-jsx/inject');
-const injectAcornObjectRestSpread = require('acorn-object-rest-spread/inject');
-=======
 // const {
 //   parse,
-//   Parser,
 // } = require('acorn-jsx');
-const util = require('util')
->>>>>>> Extract bugfixs
+const {
+  parse,
+} = require('acorn-jsx');
 const fs = require('fs');
 const path = require('path');
-const { parse, Parser } = require('acorn-object-rest-spread/inject')(require('acorn-jsx/inject')(require('acorn-stage3')));
-const walk = require("acorn/dist/walk")
+const acornWalk = require('acorn/dist/walk');
 const {
   Walker,
 } = require('ignore-walk');
 const {
   getRC,
 } = require('../utils.js');
-
-injectAcornJsx(acorn);
-injectAcornObjectRestSpread(acorn);
-const {
-  parse,
-  Parser,
-} = acorn;
 
 const exclude = (arr) => {
   const ROOT = path.dirname(getRC().absPath.slice(0, -1));
@@ -52,11 +39,8 @@ const acornParse = (content, tagContent) => {
   const tree = parse(content, {
     plugins: {
       jsx: true,
-<<<<<<< 595bbd8e39de9c3cd93d767089eed9c1dbcf4d95
-=======
-      stage3: true,
->>>>>>> Extract bugfixs
-      objectRestSpread: true,
+      // stage3: true,
+      // objectRestSpread: true,
     },
     ecmaVersion: 10,
     allowReserved: true,
@@ -68,28 +52,14 @@ const acornParse = (content, tagContent) => {
       if (b && t[0] === '*') {
         arr.push({
           comment: t,
-<<<<<<< 595bbd8e39de9c3cd93d767089eed9c1dbcf4d95
-        };
-        const p = new Parser({
-          plugins: {
-            jsx: true,
-            objectRestSpread: true,
-          },
-        }, content, d);
-        p.nextToken();
-        const node = p.parseStatement(true, true, exports);
-        a.name = node.id ? node.id.name : node.declarations[0].id.name;
-        tagContent.push(a);
-=======
           pos: d,
         });
->>>>>>> Extract bugfixs
       }
     },
   });
   // console.log('arr', arr);
   arr.forEach((x) => {
-    const node = walk.findNodeAfter(tree, x.pos).node;
+    const { node } = acornWalk.findNodeAfter(tree, x.pos);
     // console.log('node', node.type);
     switch (node.type) {
       case 'MethodDefinition':
@@ -113,59 +83,12 @@ const acornParse = (content, tagContent) => {
           comment: x.comment,
           name: node.id.name,
         });
+        /* eslint-disable-next-line no-useless-return */
         return;
       default:
     }
   }, []);
 };
-// const acornParse = (content, tagContent, gutenrc) => {
-//   const type = ['ClassDeclaration', 'FunctionDeclaration', 'VariableDeclaration'];
-//   parse(content, {
-//     plugins: {
-//       jsx: true,
-//       // stage3: true,
-//       // objectRestSpread: true,
-//     },
-//     ecmaVersion: 10,
-//     // allowReserved: true,
-//     allowReturnOutsideFunction: true,
-//     allowImportExportEverywhere: true,
-//     // allowAwaitOutsideFunction: true,
-//     allowHashBang: true,
-//     locations: true,
-//     onComment: (b, t, s, d, l) => {
-//       if (b && t[0] === '*') {
-//         const p = new Parser({
-//           plugins: {
-//             jsx: true,
-//             stage3: true,
-//             objectRestSpread: true,
-//           },
-//           ecmaVersion: 10,
-//           allowReserved: true,
-//           allowReturnOutsideFunction: true,
-//           allowImportExportEverywhere: true,
-//           allowAwaitOutsideFunction: true,
-//           allowHashBang: true,
-//         }, content, d);
-//         p.nextToken();
-//         const node = p.parseStatement(true, true);
-//         // console.log('node', node);
-//         if (type.includes(node.type)) {
-//           // console.log('location', l);
-//           // console.log('node', node);
-//           const a = {
-//             comment: t,
-//           };
-//           // console.log(node);
-//           // console.log(util.inspect(myObject, false, null))
-//           a.name = node.id ? node.id.name : node.declarations[0].id.name;
-//           tagContent.push(a);
-//         }
-//       }
-//     },
-//   });
-// };
 
 const extract = arr => exclude(arr).then((list) => {
   const gutenrc = getRC();
@@ -212,9 +135,9 @@ const extract = arr => exclude(arr).then((list) => {
     /* eslint-disable-next-line no-console */
     console.log(`${badFiles.length} files were unparsable`);
   }
-
+  // console.log('result', result);
   return new Promise(resolve => resolve(result));
 });
 
-extract(['parseComments.js'])
+// extract(['parseComments.js'])
 module.exports = extract;
