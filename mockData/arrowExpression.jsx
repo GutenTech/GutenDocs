@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 /**
  * @description displays the info about the field
- * @param { object } data about the field
+ * @param props.data.fieldName the name of the field
+ * @param props.data.notes the notes on the field
  */
 const FieldInfo = ({ data }) => (
   <div>
