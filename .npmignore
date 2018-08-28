@@ -8,11 +8,12 @@ client/src/
 package-lock.json
 .vscode
 .eslintignore
-.eslintrc.js
+.eslintrc.json
 .travis.yml
 webpack.config.js
 .gutenrc.json
 .gitignore
+.gutenignore
 
 #filetypes
 .DS_Store
