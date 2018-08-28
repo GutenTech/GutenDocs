@@ -6,7 +6,7 @@ const { sorts } = require('./sorters.js');
 /**
  * loads all the custom function definitions defined in gutenRC
  * @param { object } gutenRC the settings file retrieved by getRC()
- * @return {} { CustomSorters, CustomOptions }
+ * @return { object } { CustomSorters, CustomOptions }
  * @example
  * returns {
  *  {
@@ -43,8 +43,8 @@ const getCustomFunctions = (gutenRC) => {
 
 /**
  * @description Execute various sorting functions
- * @param {[]} ast The Cleaned AST with parsed information
- * @return {[]} ast The AST "sorted" with appropriate headers and priorities
+ * @param { array } ast The Cleaned AST with parsed information
+ * @return { array } ast The AST "sorted" with appropriate headers and priorities
  * assigned to it.
  */
 
@@ -77,8 +77,8 @@ const execSorts = (ast) => {
 
 /**
  * @description This will cleanup the incoming AST structure
- * @param {[]} ast The AST with parsed information
- * @return {[]} commentBlocks Return an array of commentBlock objects.
+ * @param { array } ast The AST with parsed information
+ * @return { array } commentBlocks Return an array of commentBlock objects.
  * @example return
  *  {
  *   header: (string or undefined),

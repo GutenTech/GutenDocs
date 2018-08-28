@@ -8,7 +8,7 @@ const inquirerOptions = require('./inquirerOptions.js');
  * Userful for making sure that whenever the user has deleted settings from their
  * copy that the defaults are still available.
  * @param { string } defaultSettingsPath path to orignal file with defaults
- * @param { {} } assignedSettings settings imported from the users settings
+ * @param { object } assignedSettings settings imported from the users settings
  */
 const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
   const defaultConfig = JSON.parse(fs.readFileSync(defaultSettingsPath));
@@ -23,7 +23,10 @@ const fillBlanksWithDefaults = (defaultSettingsPath, assignedSettings) => {
  * @example findValidBackupName('somePath', exam.js) returns exam.backup.js
  * @example findValidBackupName('somePath', exam.js) returns exam.backup0.js
  * @example findValidBackupName('somePath', exam.js) returns exam.backup1.js
- * @return string
+ * @return { string } a string taking the form of a unused backup name
+ * @example findValidBackupName('./', '.gutenrc.json') return '.gutenrc.backup.json'
+ * @example findValidBackupName('./', '.gutenrc.json') return '.gutenrc.backup0.json'
+ * @example findValidBackupName('./', '.gutenrc.json') return '.gutenrc.backup1.json'
  */
 const findValidBackupName = (location, baseName) => {
   const backupExt = path.extname(baseName);
@@ -101,7 +104,9 @@ const refreshFile = (oldFile, source, additionsToTemplate, error) => {
 /**
  * Finds the closet gutenRC.json file at or above current directory and
  * returns the JSON Object containing the users settings merged with the defaults
- * @return { {} } contents of .gutenRC.json
+ * @return { object } contents of .gutenRC.json with the absolute path
+ * @return { false } false if no .gutenrc have being initiated
+ * added as a key or false
  */
 const getRC = () => {
   let rcpath = false;
@@ -138,7 +143,7 @@ const getRC = () => {
  * Used when filtering a list of files that were read using fs.readDir
  * @param { string } file name of the file being checked
  * @param { string } dirPath directory of the files being checked
- * @param { [] } toIgnore array of filenames to ignore
+ * @param { array } toIgnore array of filenames to ignore
  * @return { boolean } indicates whether or not this is a file of interest
  */
 const filterFiles = (file, dirPath, toIgnore) => {
@@ -220,7 +225,7 @@ const generateFilesaveArray = (destination, dirName, backup) => {
 
 /**
  * refreshes the API with all the settings to the defauts
- * @param { {} } gutenrc the gutenrc object the defines the users settings
+ * @param { object } gutenrc the gutenrc object the defines the users settings
  * @param { boolean } backup whether or not to make a backup folder
  */
 const refreshAPI = (gutenrc, backup) => {
@@ -287,7 +292,7 @@ const generateAPIFrame = (relPath, apiDir) => {
 /**
  * Sets the verbosity level in the local and sometimes the global settings
  * @param { number } level the desired verbosity level
- * @param { {} } gutenrc the local gutenRC settings
+ * @param { object } gutenrc the local gutenRC settings
  * @param { boolean } globally whether or not the global settings should also be set
  */
 const setVerbosity = (level, gutenrc, globally) => {

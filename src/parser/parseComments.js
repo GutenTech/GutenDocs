@@ -3,11 +3,10 @@ const errors = require('./utils/errors.js');
 const { getRC } = require('./../utils.js');
 
 /**
- * @description catchAll descritpiton
- * @param tagArray {[]} catchall param
+ * @description catchAll method that added a header and a priority to all unassigned
+ * files as well as a unique id
+ * @param { array } tagArray catchall param
  * @section parsing function1
- * @example var greeting = "hello world"
- * testing 123 abc lalalalala
  * @return catchall return
  */
 const processFile = (tagArray) => {
@@ -28,10 +27,10 @@ const processFile = (tagArray) => {
 
 /**
  * @description A function that will parse a JSdoc Block of Comments using Doctrine
- * @param commentsArray {[]} An array of JSDoc Comment Blocks structured in AST.
- * @param address {string} The path that the file should be saved to.
+ * @param { array } commentsArray An array of JSDoc Comment Blocks structured in AST.
+ * @param { string } address The path that the file should be saved to.
  * @section section name 2
- * @return n/a
+ * @return { array } array of AST objects representing the comments extracted from comments
  */
 const parseComments = (filesArray) => {
   errors.parseCommentsArrayErr(filesArray);
