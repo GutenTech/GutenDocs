@@ -28,9 +28,29 @@ class SideBar extends React.Component {
     const { parsedData } = this.state;
     return (
       <div className="wrapper">
-        <nav id="sidebar">
-          <div id="header">
-            <h5>GutenDocs</h5>
+        <nav
+          id="sidebar"
+          style={configData.colors.primaryColorOne
+            ? {
+              background:
+                'linear-gradient(142deg, '
+                + `${configData.colors.primaryColorTwo}, `
+                + `${configData.colors.primaryColorThree}) `,
+            }
+            : {}
+          }
+        >
+          <div
+            id="header"
+            style={configData.colors.primaryColorOne
+              ? { background: configData.colors.primaryColorOne }
+              : {}}
+          >
+            <h5>
+              {
+                configData.projectName
+              }
+            </h5>
             <br />
           </div>
           <input
