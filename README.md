@@ -53,7 +53,7 @@ From anywhere call `npm install -g gutendocs`.  This will give you access to the
 Now from any location, preferably the root of a repo, you can call `gutendocs init [foldername]` which will initialize a API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.json` and a `.gutenignore` that will allow you to customize your usage of gutendocs.  Your `.gutenignore` works just like a `.gitignore` file and will ignore folders and files you specify and allow for the use of * as a wild card.  You can also place nested `.gutenignore` files inside of subfolders and it will add ignore criteria in that folder and its subfolder as indicated in that directories `.gutenignore`.  `.gutenrc.json` is a file that contains all the settings you can customize for for your API.  An explanation of those settings is below.
 
 #### .gutenrc explanation
-```js
+<pre lang="javascript" width="46em">
 "apiDir": // this is the folder that your API has been created in. [default = GutenAPI]
 "skeleton": { // this outlines the structure of how your API will be organized
     "sortByOrder": [ // the order the sort methods in this array will define in what order things are categorized
@@ -95,13 +95,13 @@ Now from any location, preferably the root of a repo, you can call `gutendocs in
   },
   "verbosity": 1 // this defines how much information you will see from errors.  The higher the number the more information
 }
-```
+</pre>
 
 #### designSettings.js explanation
 
 designSettings.js is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
 
-<pre lang="javascript" width=46em>
+<pre lang="javascript" width="46em">
 banner: {  // image logo to use
   src: './imgs/newLogo.png',  
   alt: 'Guten Docs',
