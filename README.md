@@ -21,7 +21,6 @@
 ## Breief overview
 
 JSDocs are a widely accepted standard for commenting code.  An example of what a JSDoc comment looks like is below:
-
 ```js
 /**
  * Finds the next unused name in the directory to save a backup file
