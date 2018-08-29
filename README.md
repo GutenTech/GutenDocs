@@ -123,7 +123,7 @@ introTxt: { // for every key in this object 1 section with be rendered with the 
   heading3: 'paragraph3 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
   heading4: 'paragraph4 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 },
-<pre>
+</pre>
 ##### Using themes
 At GutenTech we know style is important.  We have set up some default themes that you can quickly use to adjust the way your API is rendered.  You can see a list of the themes and their descriptions with `gutendocs theme --list` or `gutendocs theme -l`.  You can then set the theme of your choice by calling `gutendocs theme [themeName]`. You can add custom themes in the API theme folder following the existing structure to add your own.
 
