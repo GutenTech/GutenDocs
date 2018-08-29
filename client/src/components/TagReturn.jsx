@@ -21,7 +21,6 @@ const TagReturn = ({ tags, commentId }) => (
                 }
               </span>
               <span className="tagType">
-                {' '}
                 {
                   `${tag.description}`
                 }
