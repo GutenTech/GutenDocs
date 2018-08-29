@@ -33,12 +33,12 @@ JSDoc is a widely accepted markup language standard for annotating javascript co
  */
 const findValidBackupName = (location, baseName) => {...}
 ```
-GutenDocs would parse this code and format it into a webpage that you can easily read like this:
+GutenDocs will parse each JSDoc comment in your code base like this:
 
 <img src="./README_imgs/exampleComment.png" alt="drawing" width="400"/>
 
 
-It would find all the JSDoc comments in your codebase and generate a webpage like this:
+All of the comments will be put together into an webpage that can be viewed like in the image below:
 
 <img src="./README_imgs/gutenDocsExample.png" alt="drawing" width="400"/>
 
