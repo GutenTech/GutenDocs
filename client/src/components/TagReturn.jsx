@@ -14,14 +14,14 @@ const TagReturn = ({ tags, commentId }) => (
       {
         tags.map((tag, index) => (
           <div key={commentId.toString().concat(tag.title).concat(index)}>
-            <div>
-              <span className="tagParamType">
+            <div className="tagReturnAndType">
+              <span className="tagReturnType">
                 {
                   `${tag.type ? tag.type.name : 'undefined'} `
                 }
                 {':'}
               </span>
-              <span className="tagType">
+              <span className="tagReturnTypeResult">
                 {
                   `${tag.description}`
                 }
