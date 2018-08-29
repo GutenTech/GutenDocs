@@ -1,18 +1,9 @@
-// const {
-//   parse,
-// } = require('acorn-jsx');
-const {
-  parse,
-} = require('acorn-jsx');
+const { parse } = require('acorn-jsx');
 const fs = require('fs');
 const path = require('path');
 const acornWalk = require('acorn/dist/walk');
-const {
-  Walker,
-} = require('ignore-walk');
-const {
-  getRC,
-} = require('../utils.js');
+const { Walker } = require('ignore-walk');
+const { getRC } = require('../utils.js');
 
 const exclude = (arr) => {
   const ROOT = path.dirname(getRC().absPath.slice(0, -1));
@@ -39,14 +30,10 @@ const acornParse = (content, tagContent) => {
   const tree = parse(content, {
     plugins: {
       jsx: true,
-      // stage3: true,
-      // objectRestSpread: true,
     },
-    ecmaVersion: 10,
-    allowReserved: true,
+    ecmaVersion: 9,
     allowReturnOutsideFunction: true,
     allowImportExportEverywhere: true,
-    allowAwaitOutsideFunction: true,
     allowHashBang: true,
     onComment: (b, t, s, d) => {
       if (b && t[0] === '*') {
@@ -57,14 +44,16 @@ const acornParse = (content, tagContent) => {
       }
     },
   });
-  // console.log('arr', arr);
-  arr.forEach((x) => {
-    const { node } = acornWalk.findNodeAfter(tree, x.pos);
-    // console.log('node', node.type);
+  arr.forEach((comment) => {
+    const result = acornWalk.findNodeAfter(tree, comment.pos);
+    if (result === undefined) {
+      return;
+    }
+    const { node } = result;
     switch (node.type) {
       case 'MethodDefinition':
         tagContent.push({
-          comment: x.comment,
+          comment: comment.comment,
           name: node.key.name,
         });
         return;
@@ -72,7 +61,7 @@ const acornParse = (content, tagContent) => {
         node.declarations.forEach(
           declaration => tagContent.push(
             {
-              comment: x.comment,
+              comment: comment.comment,
               name: declaration.id.name,
             },
           ),
@@ -80,7 +69,7 @@ const acornParse = (content, tagContent) => {
         return;
       case 'FunctionDeclaration':
         tagContent.push({
-          comment: x.comment,
+          comment: comment.comment,
           name: node.id.name,
         });
         /* eslint-disable-next-line no-useless-return */
@@ -88,6 +77,20 @@ const acornParse = (content, tagContent) => {
       default:
     }
   }, []);
+};
+
+const errorHandler = (file, gutenrc, e, badFiles) => {
+  badFiles.push(file);
+  if (gutenrc.verbosity >= 4) {
+    /* eslint-disable */
+    console.log(`\n\nError processing ${file}\n**********`);
+    console.log(e);
+    console.log('**********\n');
+    /* eslint-enable */
+  } else if (gutenrc.verbosity >= 3) {
+    /* eslint-disable-next-line no-console */
+    console.log(`\n\nError processing ${file}\n**********\n${e.message}\n**********\n`);
+  }
 };
 
 const extract = arr => exclude(arr).then((list) => {
@@ -102,19 +105,8 @@ const extract = arr => exclude(arr).then((list) => {
     try {
       acornParse(content, tag.content, gutenrc);
     } catch (e) {
-      badFiles.push(file);
-      if (gutenrc.verbosity >= 4) {
-        /* eslint-disable */
-        console.log(`\n\nError processing ${file}\n**********`);
-        console.log(e);
-        console.log('**********\n');
-        /* eslint-enable */
-      } else if (gutenrc.verbosity >= 3) {
-        /* eslint-disable-next-line no-console */
-        console.log(`\n\nError processing ${file}\n**********\n${e.message}\n**********\n`);
-      }
+      errorHandler(file, gutenrc, e, badFiles);
     }
-    // console.log('content', tag.content);
     if (gutenrc.verbosity >= 2) {
       process.stdout.clearLine();
       process.stdout.cursorTo(0);
@@ -135,9 +127,7 @@ const extract = arr => exclude(arr).then((list) => {
     /* eslint-disable-next-line no-console */
     console.log(`${badFiles.length} files were unparsable`);
   }
-  // console.log('result', result);
   return new Promise(resolve => resolve(result));
 });
 
-// extract(['parseComments.js'])
 module.exports = extract;
