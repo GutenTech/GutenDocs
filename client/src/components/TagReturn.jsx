@@ -20,12 +20,12 @@ const TagReturn = ({ tags, commentId }) => (
                   `${tag.type ? tag.type.name : 'undefined'} `
                 }
               </span>
-            </div>
-            <div className="tagType">
-              {' '}
-              {
-                `${tag.description}`
-              }
+              <span className="tagType">
+                {' '}
+                {
+                  `${tag.description}`
+                }
+              </span>
             </div>
           </div>
         ))
