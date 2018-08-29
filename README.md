@@ -50,7 +50,7 @@ From anywhere call `npm install -g gutendocs`.  This will give you access to the
 
 ### Initializing gutendocs
 
-Now from any location, preferably the root of a repo, you can call `gutendocs init [foldername]` which will initialize a API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.json` and a `.gutenignore` that will allow you to customize your usage of GutenDocs.  
+Now from any location, preferably the root of a repo, you can call `gutendocs init [foldername]` which will initialize an API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.json` and a `.gutenignore` that will allow you to customize your usage of GutenDocs.  
 
 #### .gutenrc explanation
 
