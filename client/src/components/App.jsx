@@ -4,7 +4,7 @@ import Intro from './Intro';
 import SideBar from './SideBar';
 import Ribbon from './Ribbon';
 import BodyFunctionDesc from './BodyFunctionDesc';
-import '../../dist/styles.css';
+import '../styles.css';
 
 const filterByHeaders = (header, commentsArray) => commentsArray
   .filter(entry => header === entry.header);

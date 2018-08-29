@@ -133,44 +133,45 @@ yargs.command(['version'], 'See version information', {},
 
 // TODO this should be the default and should be uncommented
 // TODO could probably be written without exec but I couldn't figure out how
-// yargs.command('$0', 'See usage information', {},
-//   () => {
-//     exec('gutendocs help', (npmErr, results) => {
-//       if (npmErr) {
-//         throw new Error('Something went wrong running "gutendocs help",'
-//         + 'try it explicitly yourself');
-//       } else {
-//         /* eslint-disable-next-line no-console */
-//         console.log(results);
-//       }
-//     });
-//   });
-
-
-// TODO left this in for development purposes so people could still use it the way they have been
-// TODO should be removed when the above is uncommented.
-yargs.command('$0', 'Parse JSDoc comments into an API', {
-  all: {
-    alias: 'a',
-    describe: 'parse all js/jsx files in target path',
-  },
-  watch: {
-    alias: 'w',
-    describe: 'update GutenApi folder automatically',
-  },
-}, (argv) => {
-  const gutenrc = getRC();
-  if (gutenrc) {
-    const address = gutenrc ? `${gutenrc.absPath.concat(gutenrc.apiDir)}parsedData.js` : undefined;
-    const input = argv.all ? ['./'] : argv._;
-    extract(input).then((data) => {
-      const rawAST = parseComments(data, address);
-      const ast = cleanAST(rawAST);
-      const dataToWrite = execSorts(ast);
-      saveTags(dataToWrite, address);
+yargs.command('$0', 'See usage information', {},
+  () => {
+    exec('gutendocs help', (npmErr, results) => {
+      if (npmErr) {
+        throw new Error('Something went wrong running "gutendocs help",'
+        + 'try it explicitly yourself');
+      } else {
+        /* eslint-disable-next-line no-console */
+        console.log(results);
+      }
     });
-  }
-});
+  });
+
+
+// // TODO left this in for development purposes so people could still use it the way they have been
+// // TODO should be removed when the above is uncommented.
+// yargs.command('$0', 'Parse JSDoc comments into an API', {
+//   all: {
+//     alias: 'a',
+//     describe: 'parse all js/jsx files in target path',
+//   },
+//   watch: {
+//     alias: 'w',
+//     describe: 'update GutenApi folder automatically',
+//   },
+// }, (argv) => {
+//   const gutenrc = getRC();
+//   if (gutenrc) {
+//     const address = gutenrc ? `${gutenrc.absPath
+//      .concat(gutenrc.apiDir)}parsedData.js` : undefined;
+//     const input = argv.all ? ['./'] : argv._;
+//     extract(input).then((data) => {
+//       const rawAST = parseComments(data, address);
+//       const ast = cleanAST(rawAST);
+//       const dataToWrite = execSorts(ast);
+//       saveTags(dataToWrite, address);
+//     });
+//   }
+// });
 
 try {
   yargs.parse();
