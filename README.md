@@ -1,6 +1,6 @@
 # GutenDocs
 
-> CLI dev tool to generate APIs by parsing JSDoc comments from you .js and .jsx files
+Named for [Johannes Gutenberg](https://en.wikipedia.org/wiki/Johannes_Gutenberg), the inventor of movable type, GutenDocs is CLI dev tool that auto-generates API Documentation from your javascript code base by parsing JSDoc comments from your .js and .jsx files.
 
 ## Team
 
@@ -8,7 +8,7 @@
 - **Scrum Master**: Peter Gierke
 - **Development Team Members**: Yuqi Zhu, David Park
 
-> This product is currently in development.  We would love any feedback from anyone making use of GutenDocs while it is under development.  Email us at gutentechdevs@gmail.com.
+This product is currently in development.  We would love any feedback from anyone making use of GutenDocs while it is under development.  Email us at gutentechdevs@gmail.com.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@
 
 ## Brief overview
 
-JSDocs are a widely accepted standard for commenting javascript code.  An example of what a JSDoc comment looks like is below:
+JSDoc is a widely accepted markup language standard for annotating javascript code.  An example of what a JSDoc comment looks like is below:
 ```js
 /**
  * Finds the next unused name in the directory to save a backup file
@@ -33,7 +33,7 @@ JSDocs are a widely accepted standard for commenting javascript code.  An exampl
  */
 const findValidBackupName = (location, baseName) => {...}
 ```
-Gutendocs would parse this code and format it into a webpage that you can easily read like this:
+GutenDocs would parse this code and format it into a webpage that you can easily read like this:
 
 <img src="./README_imgs/exampleComment.png" alt="drawing" width="400"/>
 
@@ -44,17 +44,17 @@ It would find all the JSDoc comments in your codebase and generate a webpage lik
 
 ## Usage
 
-### Getting ready to use gutendocs
+### Getting ready to use GutenDocs
 
-From anywhere call `npm install -g gutendocs`.  This will give you access to the gutendocs shell command.
+From anywhere call `npm install -g gutendocs`.  This will give you access to the `gutendocs` shell command.
 
-### Initializing Gutendocs
+### Initializing gutendocs
 
-Now from any location, preferably the root of a repo, you can call `gutendocs init [foldername]` which will initialize a API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.json` and a `.gutenignore` that will allow you to customize your usage of gutendocs.  Your `.gutenignore` works just like a `.gitignore` file and will ignore folders and files you specify and allow for the use of * as a wild card.  You can also place nested `.gutenignore` files inside of subfolders and it will add ignore criteria in that folder and its subfolder as indicated in that directories `.gutenignore`.  `.gutenrc.json` is a file that contains all the settings you can customize for for your API.  An explanation of those settings is below.
+Now from any location, preferably the root of a repo, you can call `gutendocs init [foldername]` which will initialize a API folder directly in the directory you are currently working in.  It will also create a settings file called `.gutenrc.json` and a `.gutenignore` that will allow you to customize your usage of GutenDocs.  Your `.gutenignore` works just like a `.gitignore` file and will ignore folders and files you specify and allow for the use of * as a wild card.  You can also place nested `.gutenignore` files inside of subfolders and it will add ignore criteria in that folder and its subfolder as indicated in that directories `.gutenignore`.  `.gutenrc.json` is a file that contains all the settings you can customize for for your API.  An explanation of those settings is below:
 
 #### .gutenrc explanation
 <pre lang="javascript" width="46em">
-"apiDir": // this is the folder that your API has been created in. [default = GutenAPI]
+"apiDir": // this is the folder your API Documentation will be created in. [default = GutenAPI]
 "skeleton": { // this outlines the structure of how your API will be organized
     "sortByOrder": [ // the order the sort methods in this array will define in what order things are categorized
       "sortByFileName",
@@ -117,11 +117,10 @@ projectName: 'GutenDocs', // name of project, displayed on tab, header and above
     primaryColorFive: false, // use string format eg: "#bada55"
   },
 anchorHashJump: 10,  // how far above the linked hashtag to jump to
-introTxt: { // for every key in this object 1 section with be rendered with the title of the key and the content of the value of that key
-  heading1: 'paragraph1 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-  heading2: 'paragraph2 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-  heading3: 'paragraph3 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-  heading4: 'paragraph4 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+introTxt: { // for every key in this object one section will be rendered with the title of the key and the content of the value of that key
+  heading(1): 'paragraph(1) Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  ...
+  heading(n): 'paragraph(n) Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 },
 </pre>
 ##### Using themes
@@ -129,19 +128,19 @@ At GutenTech we know style is important.  We have set up some default themes tha
 
 #### Setting up your .gutenignore
 
-`.gutenignore` is generated for you with the `node_modules` folder, any files or folders starting with a `.` and the generated API folder ignored.  You most likely will want to add other folders to this such as test folders, mock folders or anything else that you might not want or need included in the API.
+`.gutenignore` is generated for you with the `node_modules` folder, any files or folders starting with a `.` and the generated API folder will be ignored.  You most likely will want to add other folders to this such as test folders, mock folders or anything else that you might not want or need included in the API.
 
 ### Adding your JSDoc string documented information to the API.
 
-Now that you have configured gutendocs and your styles the way you want it is time to extract all those well written comments from your code and organize them into a beautiful document. Go to whatever folder or file you want to generate an API for and run either `gutendocs parse [filename]` to parse a single file or `gutendocs parse --all` to parse the current directory or any subdirectories
+Now that you have configured gutendocs settings and your styles the way you want it, is time to extract all those well written comments from your code and organize them into a beautiful document. Go to whatever folder or file you want to generate an API for and run either `gutendocs parse [filename]` to parse a single file or `gutendocs parse --all` to parse the current directory and any subdirectories
 
-Depending on your verbosity level (which can be set with `gutendocs verbosity/verbose [0-5]`) you will then see an output with information about the parsing process.  If you want to know more, like which files may not have been parsed, or why they were not parsed, then turn up the verbosity.
+Depending on your verbosity level (which can be set with `gutendocs verbosity/verbose [0-5]`) you will then see an output with information about the parsing process.  If you want to know more, like which files have not been parsed, or why they were not parsed, then turn up the verbosity.
 
 ### Viewing your API
 
-Now that you have set all your settings like you wanted and parsed the files you wanted included in the API a file named parsed Data.  This is a JS file that exports a JSON object containing all your parsed comment information.  Feel free to look this over, but you do not need to do anything here.
+Now that you have set all your settings like you wanted, and parsed the files you wanted, lets open up your API Documentation.
 
-Now you can open the index.html file inside your API folder in your web browser of choice, et voila.  An API has been created for you.  Congratulations!
+Now you can open the index.html file inside your API folder in your web browser of choice, et voila.  Your API Documentation has been created for you.  Congratulations!
 
 ### Trouble Shooting
 
@@ -151,14 +150,14 @@ Now you can open the index.html file inside your API folder in your web browser 
 **Help! I've made a mess of my API folder. And I am missing files or don't know what it should look like.** <br />
 ```No worries,  If you want to start from scratch you can call `gutendocs reset` to overwrite your whole folder to be the way it was when you initialized.  If you want to retain a copy of the way it was before you can run `gutendocs reset --backup` and it will back up a copy of your current version of the folder as [foldername].backup.```
 
-**Help! I've made a mess of my .gutenrc.json and its missing things I need or is now invalid.**<br />
-```No worries,If your gutenrc.json is an invalid JSON object and you try to run ang gutendocs commands it will ask you if you would like to restore the .gutenrc.json to its original state.  If you choose to do that it will also ask if you want to save a backup file.  The backup will be saved in the same location as the .gutenrc.json as .gutenrc.backup.json so you can use it as a reference while you are rebuilding on the newly created gutenrc.json.```
+**Help! I've made a mess of my .gutenrc.json and it's missing things I need or is now invalid.**<br />
+```No worries,  If your gutenrc.json is an invalid JSON object and you try to run any gutendoc's commands it will ask you if you would like to restore the .gutenrc.json to its original state.  If you choose to do that it will also ask if you want to save a backup file.  The backup will be saved in the same location as the .gutenrc.json as .gutenrc.backup.json so you can use it as a reference while you are rebuilding on the newly created gutenrc.json.```
 
 **Help! I just want to start over from scratch.**<br />
-```No worries.  Just delete your .gutenrc, .gutenignore and the API folder and rerun `gutendocs init```
+```No worries.  Just delete your .gutenrc, .gutenignore and the API folder and rerun `gutendocs init`.```
 
 **Help! I deleted a ton of settings in gutenrc.json.**<br />
-```No worries.  For any setting not present in gutenrc.json the defaults will be loaded```
+```No worries.  For any setting not present in gutenrc.json the defaults will be loaded.```
 
 **Help! I've found a problem that I don't know what to do with that isn't covered above!**<br />
 ```Sorry to hear that.  Please send an email to gutentechdevs@gmail.com and we will look into this issue for you.```
