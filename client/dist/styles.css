@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif');
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans');
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 html, body {
@@ -38,8 +39,7 @@ html, body {
   font-weight: 1;
   text-decoration: none;
   margin-left: 265px;
-  margin-top: 8px;
-  margin-bottom: 10px;
+  /* margin-top: -12px; */
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   margin-bottom: 3rem;
   background-color: white;
@@ -64,15 +64,18 @@ html, body {
 
 /* sidebar */
 #header {
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-align: center;
-    font-family: 'Lora';
-    line-height: 1.2;
-    color: white;
-    text-shadow: 0px -1px 0 #000, 0px 2px 0 #000, -2px 1px 0 #000, 1px 1px 0 #000;
-    background: rgb(188, 188, 230);
-    width:100%;
+  background: rgb(188, 188, 230);
+  width: 100%;
+  font-family: 'Titillium Web';
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Titillium Web';
+  line-height: 1.2;
+  padding-top: 2px;
+  color: rgb(80, 71, 71);
+  font-weight: bold;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.13);
 }
 
 .wrapper {
@@ -313,21 +316,42 @@ a {
   padding-bottom: 3px;
   display: list-item;
   list-style: none;
+  box-shadow: 0 1.5px 27px rgba(160, 132, 175, 0.24), 0 1.5px 12px rgb(128, 128, 177);
 }
 
 /* all tags */
 .tags {
   font-family: 'Titillium Web';
   font-weight: bold;
+  color: dimgray;
+  margin-top: -12px;
 }
 
 /* description tags */
-#tagDescription {
+.tagDescription {
+  font-family: 'Merriweather Sans';
   color: black;
-  font-weight: bold;
   font-style: italic;
-  -webkit-margin-after: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+  margin-top: -42px;
+  padding-bottom: 29px;
 }
+
+.tagDescriptions {
+  font-family: 'Merriweather Sans';
+  color: black;
+  font-style: italic;
+  margin-right: 20px;
+  font-weight: bold;
+  margin-top: 14px;
+  padding-bottom: 36px;
+}
+
+/* border-bottom: 5px dotted black;
+line-height: 0px;
+margin-bottom: 30px; */
+
 
 /* param tags */
 .tagParam {
@@ -349,4 +373,13 @@ a {
   font-weight: bold;
   padding: 3px;
   color: rgb(128, 128, 177);
+}
+
+/* example tag above the examples */
+.returnTag {
+  border-style: inset;
+  width: 100px;
+  margin-bottom: -25px;
+  margin-top: 75px;
+  box-shadow: 0 1.5px 27px rgba(160, 132, 175, 0.24), 0 1.5px 12px rgb(128, 128, 177);
 }

@@ -23,7 +23,7 @@ const BodyFunctionDesc = ({ funcComment, configData }) => {
         {/* {`${funcComment.name}`} */}
         <GeneratedFunc funcComment={funcComment} />
       </h5>
-      <div>
+      <div className="tagDescriptions">
         {funcComment.description}
       </div>
       <div className="tags">
