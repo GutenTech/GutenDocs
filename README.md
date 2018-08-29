@@ -169,4 +169,4 @@ Now you can open the index.html file inside your API folder in your web browser 
 
 ## Contributing
 
-See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
