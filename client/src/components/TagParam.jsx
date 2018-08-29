@@ -14,11 +14,12 @@ const TagParam = ({ tags, commentId }) => (
       {
         tags.map((tag, index) => (
           <div key={commentId.toString().concat(tag.title).concat(index)}>
-            <div className="tagParam">
-              <span>
+            <div className="tagParamNameAndType">
+              <span className="tagParamName">
                 {
                   `${tag.name}`
                 }
+                {':'}
               </span>
               <span className="tagParamType">
                 {
@@ -28,6 +29,7 @@ const TagParam = ({ tags, commentId }) => (
             </div>
             <div className="tagType">
               {' '}
+              {'-'}
               {
                 `${tag.description}`
               }
