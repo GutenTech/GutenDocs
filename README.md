@@ -101,7 +101,7 @@ Now from any location, preferably the root of a repo, you can call `gutendocs in
 
 designSettings.js is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
 
-```js
+<pre lang="javascript" width=46em>
 banner: {  // image logo to use
   src: './imgs/newLogo.png',  
   alt: 'Guten Docs',
@@ -123,7 +123,7 @@ introTxt: { // for every key in this object 1 section with be rendered with the 
   heading3: 'paragraph3 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
   heading4: 'paragraph4 Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 },
-```
+<pre>
 ##### Using themes
 At GutenTech we know style is important.  We have set up some default themes that you can quickly use to adjust the way your API is rendered.  You can see a list of the themes and their descriptions with `gutendocs theme --list` or `gutendocs theme -l`.  You can then set the theme of your choice by calling `gutendocs theme [themeName]`. You can add custom themes in the API theme folder following the existing structure to add your own.
 
