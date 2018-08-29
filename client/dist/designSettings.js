@@ -5,7 +5,7 @@ const configData = {
     height: '185',
     width: '175',
   },
-  projectName: 'Gutendocs',
+  projectName: 'GutenDocs',
   colors: {
     primaryColorOne: false,
     primaryColorTwo: false,
