@@ -360,6 +360,11 @@ margin-bottom: 30px; */
   color: rgb(155, 120, 153);
 }
 
+.tagParamType {
+  padding-left: 20px;
+  font-weight: 100;
+  color: #7d7d7d
+}
 /* type tags */
 .tagType {
   margin-left: 15px;

@@ -3,27 +3,42 @@ import React from 'react';
 /* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 
-const TagParam = ({ tags, commentId }) => tags.map((tag, index) => (
-  <div key={commentId.toString().concat(tag.title).concat(index)}>
+const TagParam = ({ tags, commentId }) => (
+  <div style={tags.length ? {} : { display: 'none' }}>
     <div className="tagParam">
       {
-        `Param: ${tag.name}`
+        'Parameters'
       }
     </div>
-    <div className="tagType">
-      {' '}
+    <div>
       {
-        `Type: ${tag.type ? tag.type.name : 'undefined'}`
-      }
-    </div>
-    <div className="tagType">
-      {' '}
-      {
-        `Desc: ${tag.description}`
+        tags.map((tag, index) => (
+          <div key={commentId.toString().concat(tag.title).concat(index)}>
+            <div className="tagParam">
+              <span>
+                {
+                  `${tag.name}`
+                }
+              </span>
+              <span className="tagParamType">
+                {
+                  `${tag.type ? tag.type.name : 'undefined'} `
+                }
+              </span>
+            </div>
+            <div className="tagType">
+              {' '}
+              {
+                `${tag.description}`
+              }
+            </div>
+            <br />
+          </div>
+        ))
       }
     </div>
   </div>
-));
+);
 
 
 export default TagParam;
