@@ -68,10 +68,6 @@ yargs.command(['parse', 'document', 'doc', 'd'], 'Parse JSDoc comments into an A
     alias: 'a',
     describe: 'parse all js/jsx files in target path',
   },
-  watch: {
-    alias: 'w',
-    describe: 'update GutenApi folder automatically',
-  },
 }, (argv) => {
   const gutenrc = getRC();
   if (gutenrc) {

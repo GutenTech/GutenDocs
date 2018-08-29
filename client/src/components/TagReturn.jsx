@@ -3,27 +3,36 @@ import React from 'react';
 /* eslint-disable-next-line import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 
-const TagReturn = ({ tags, commentId }) => tags.map((tag, index) => (
-  <div key={commentId.toString().concat(tag.title).concat(index)}>
+const TagReturn = ({ tags, commentId }) => (
+  <div style={tags.length ? {} : { display: 'none' }}>
     <div className="tagReturn">
       {
         'Return'
       }
     </div>
-    <div className="tagType">
-      {' '}
+    <div>
       {
-        `Type: ${tag.type ? tag.type.name : 'undefined'}`
-      }
-    </div>
-    <div className="tagType">
-      {' '}
-      {
-        `Desc: ${tag.description}`
+        tags.map((tag, index) => (
+          <div key={commentId.toString().concat(tag.title).concat(index)}>
+            <div>
+              <span className="tagParamType">
+                {
+                  `${tag.type ? tag.type.name : 'undefined'} `
+                }
+              </span>
+            </div>
+            <div className="tagType">
+              {' '}
+              {
+                `${tag.description}`
+              }
+            </div>
+          </div>
+        ))
       }
     </div>
   </div>
-));
+);
 
 
 export default TagReturn;
