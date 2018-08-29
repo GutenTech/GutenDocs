@@ -18,7 +18,7 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Breief overview
+## Brief overview
 
 JSDocs are a widely accepted standard for commenting javascript code.  An example of what a JSDoc comment looks like is below:
 ```js
