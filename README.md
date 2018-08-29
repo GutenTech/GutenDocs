@@ -102,11 +102,13 @@ Now from any location, preferably the root of a repo, you can call `gutendocs in
 
 designSettings.js is a file that allows you to manage the design of the API.  It will be generated with defaults in your API folder.
 
-<style>
-  pre {
+(setq markdown-xhtml-header-content
+      "<style type='text/css'>
+a pre {
     width: 46em; /* Exactly 80 characters wide for given font */
   }
-</style>
+</style>")
+
 ```javascript
 banner: {  // image logo to use
   src: './imgs/newLogo.png',  
